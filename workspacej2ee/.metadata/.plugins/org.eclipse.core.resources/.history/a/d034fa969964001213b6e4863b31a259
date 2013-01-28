@@ -1,0 +1,42 @@
+import java.util.ArrayList;
+import java.util.Set;
+
+
+public interface VideoExtensionList extends Set {
+	String AAF = "AAF";
+	String THREEGP = "3GP";
+	String GIF = "GIF";
+	String ASF = "ASF";
+	String AVCHD = "AVCHD";
+	String AVI = "AVI";
+	String CAM = "CAM";
+	String DAT = "DAT";
+	String DSH = "DSH";
+	String FLV = "FLV";
+	String M1V = "M1V";
+	String MPEG_1 = "MPEG-1";
+	String M2V = "M2V";
+	String MPEG_2 = "MPEG-2";
+	String FLA = "FLA";
+	String FLR = "FLR";
+	String SOL = "SOL";
+	String M4V = "M4V";
+	String MKV = "MKV";
+	String WRAP = "WRAP";
+	String MNG = "MNG";
+	String MOV = "MOV";
+	String QTCH = "QTCH";
+	String MPEG = "MPEG";
+	String MPEG_4 = "MPEG-4";
+	String MP4 = "MP4";
+	String MXF = "MXF";
+	String ROQ = "ROQ";
+	String NSV = "NSV";
+	String OGG = "OGG";
+	String RM = "RM";
+	String SVI = "SVI";
+	String SMI = "SMI";
+	String SWF = "SWF";
+	String WMV = "WMV";
+	
+}

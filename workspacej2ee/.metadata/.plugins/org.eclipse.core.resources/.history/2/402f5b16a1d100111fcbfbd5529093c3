@@ -1,0 +1,50 @@
+<%@page import="controleurs.libelleServlet"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="parametrage.Libelle"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<FORM ID="Formulaire1" NAME="Formulaire1" ACTION="../libelleServlet" METHOD="get">
+	<H1>Get</H1>
+		<INPUT NAME="input1" TYPE="text"/>
+		<% ArrayList<Libelle> listeLibelle=(ArrayList<Libelle>)session.getAttribute("listeLibelle");%>
+			<%if(listeLibelle.size()>0){ %>
+		 <select name="liste_des_type">
+		 		<%for(int i=0;i<listeLibelle.size();i++){%>
+              <option value="<%=listeLibelle.get(i).getLibId()%>" 
+              		<% if(session.getAttribute("type")==null)%>
+              			<%{/*if(listeLibelle.get(i).getLibId()==(Integer)session.getAttribute("type")){%>
+              					selected 
+              			<%}*/
+              			}%>><%=listeLibelle.get(i).getLibLibelle()%>
+              </option>
+            
+           		 <%}%>           
+         </select>
+         		<%if(session.getAttribute("type")!=null){ %> 
+         			<TABLE>
+         			<% ArrayList<Libelle> listeTypeChoisie=Libelle.select((String)session.getAttribute("type_choisie"));%>
+         				<%for(int i=0;i<listeTypeChoisie.size();i++){ %>
+				         	<TR>
+				         		<TD><%= listeTypeChoisie.get(i).getLibeCode()%></TD>
+				       			<TD><%=listeTypeChoisie.get(i).getLibLibelle()%></TD>
+				         	</TR>
+				         <%} %>
+				    </TABLE>
+         		<%} %>
+      	   <%}%>
+		<INPUT VALUE="Soumettre" TYPE="submit"/>
+	</FORM>
+	<FORM ID="Formulaire2" NAME="Formulaire2" ACTION="../libelleServlet" METHOD="post">
+	<H1>Post</H1>
+		<INPUT NAME="input2" TYPE="text"/>
+		<INPUT VALUE="Soumettre" TYPE="submit"/>
+	</FORM>
+</body>
+</html>

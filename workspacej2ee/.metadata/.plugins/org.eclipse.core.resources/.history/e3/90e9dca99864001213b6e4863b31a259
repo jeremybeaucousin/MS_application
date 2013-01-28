@@ -1,0 +1,7 @@
+import java.util.ArrayList;
+
+
+public interface VideoExtensionList {
+	public static ArrayList VideoExtensionList = new ArrayList();
+	VideoExtensionList.add("AAF"); 
+}

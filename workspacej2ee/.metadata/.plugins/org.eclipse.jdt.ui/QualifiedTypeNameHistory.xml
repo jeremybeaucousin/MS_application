@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="gestioncomptes.Operation"/>
+<fullyQualifiedTypeName name="gestioncomptes.Banque"/>
+<fullyQualifiedTypeName name="essais.Formation"/>
+<fullyQualifiedTypeName name="essais.Centre"/>
+<fullyQualifiedTypeName name="election_jeremy.Election"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="test.Classtest"/>
+<fullyQualifiedTypeName name="base.Isql"/>
+<fullyQualifiedTypeName name="java.util.Hashtable"/>
+<fullyQualifiedTypeName name="java.util.Enumeration"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="base.TablePersonne"/>
+<fullyQualifiedTypeName name="vues.IEcranPersonne"/>
+<fullyQualifiedTypeName name="parametrage.Personne"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+<fullyQualifiedTypeName name="javax.swing.JFileChooser"/>
+<fullyQualifiedTypeName name="java.util.EnumSet"/>
+<fullyQualifiedTypeName name="java.util.SortedMap"/>
+<fullyQualifiedTypeName name="java.util.Set"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="Model.Video"/>
+<fullyQualifiedTypeName name="Model.Document"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="Model.TheMovieDB"/>
+<fullyQualifiedTypeName name="org.json.JSONArray"/>
+<fullyQualifiedTypeName name="org.json.JSONObject"/>
+<fullyQualifiedTypeName name="org.json.JSONTokener"/>
+<fullyQualifiedTypeName name="java.util.Iterator"/>
+<fullyQualifiedTypeName name="base.Connexion"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="java.sql.SQLException"/>
+<fullyQualifiedTypeName name="base.MediaTable"/>
+<fullyQualifiedTypeName name="Model.Media"/>
+</qualifiedTypeNameHistroy>

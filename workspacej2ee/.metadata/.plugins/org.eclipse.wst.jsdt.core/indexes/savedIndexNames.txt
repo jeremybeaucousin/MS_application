@@ -1,0 +1,6 @@
+INDEX VERSION 1.122+D:\workspacej2ee\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2424890307.index
+67947031.index
+1332956815.index
+2514856663.index
+787874534.index

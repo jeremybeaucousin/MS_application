@@ -1,0 +1,31 @@
+package Model;
+
+import javax.swing.JFileChooser;
+import java.io.File;
+
+public class Document {
+	
+	//Get the extension in the name of a file without the '.' (ex : 'Shrek.avi' become 'avi')
+	public static String getExtension(String fileName){
+		if(fileName.lastIndexOf(".") != -1) {
+			return fileName.substring(fileName.lastIndexOf(".") + 1);
+		} else {
+			return "";
+		}
+		
+	}
+	
+	private static void FolderDeepness(File folderChosen) {
+		File[] fileList = folderChosen.listFiles();
+		for (int ii = 0; ii < fileList.length; ii++) {
+			if(fileList[ii].isDirectory()) {
+				if (!fileList[ii].isHidden()) {
+					FolderDeepness(fileList[ii]);
+				}
+			} else {
+				if(Video.isVideoExtensionType(getExtension(fileList[ii].getName()))) {
+				}
+			}
+		}
+	}
+}

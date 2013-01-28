@@ -1,0 +1,51 @@
+package Model;
+
+import java.util.ArrayList;
+
+public class Video {
+	private static ArrayList<String> VideoExtensionList = new ArrayList<String>() {{
+		add("AAF"); 
+		add("3GP");
+		add("GIF");
+		add("ASF");
+		add("AVCHD");
+		add("AVI");
+		add("CAM");
+		add("DAT");
+		add("DSH");
+		add("FLV");
+		add("M1V");
+		add("MPEG-1");
+		add("M2V");
+		add("MPEG-2");
+		add("FLA");
+		add("FLR");
+		add("SOL");
+		add("M4V");
+		add("MKV");
+		add("WRAP");
+		add("MNG");
+		add("MOV");
+		add("QTCH");
+		add("MPEG");
+		add("MPEG-4");
+		add("MP4");
+		add("MXF");
+		add("ROQ");
+		add("NSV");
+		add("OGG");
+		add("RM");
+		add("SVI");
+		add("SMI");
+		add("SWF");
+	}};
+
+	public static ArrayList<String> getVideoExtensionList() {
+		return VideoExtensionList;
+	}
+	
+	public static boolean VideoTest(String Extension) {
+		
+		return true;
+	}
+}

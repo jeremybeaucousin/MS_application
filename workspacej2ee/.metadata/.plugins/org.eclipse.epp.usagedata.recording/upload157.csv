@@ -1,0 +1,301 @@
+what,kind,bundleId,bundleVersion,description,time
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342095875823
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342095875838
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342095876870
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342095895166
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342095896307
+error,log,,,"Internal Error",1342095902807
+error,log,,,"Internal Error",1342095903275
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342095904400
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342095904603
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342095955493
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342095958555
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342095958555
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342095958633
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342095974477
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342095975477
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342095999523
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096012319
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096013226
+error,log,,,"Internal Error",1342096063131
+error,log,,,"Internal Error",1342096064662
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096067318
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096068365
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096077380
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096078193
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096084755
+error,log,,,"Internal Error",1342096088880
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096122879
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096122879
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096123270
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096125754
+error,log,,,"Internal Error",1342096127207
+error,log,,,"Internal Error",1342096128691
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096130051
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096130238
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096137863
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096140925
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096151347
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096153456
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342096159972
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096159987
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096160753
+error,log,,,"Internal Error",1342096171847
+error,log,,,"Internal Error",1342096180456
+error,log,,,"Internal Error",1342096200596
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.undo",1342096201377
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.undo",1342096201752
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096204189
+error,log,,,"Internal Error",1342096213189
+error,log,,,"Internal Error",1342096213736
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.file.save",1342096220033
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342096220720
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096220736
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096221330
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342096227064
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096227079
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096227314
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096260250
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096262141
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096265703
+error,log,,,"Internal Error",1342096269438
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096320765
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096321811
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096360873
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096360889
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096361248
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096363092
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096364560
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096367670
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096407200
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096408122
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096415778
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096416903
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096417309
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096443058
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096445136
+error,log,,,"Internal Error",1342096446371
+error,log,,,"Internal Error",1342096446746
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096485338
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096486792
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096492245
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096494276
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096517447
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096518869
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096521681
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096523447
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096527994
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096530337
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096533618
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096536337
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096537290
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096543899
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096545384
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096553774
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096555149
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.undo",1342096556509
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096559149
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096563743
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096566586
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096567524
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.file.save",1342096568868
+error,log,,,"Internal Error",1342096621663
+error,log,,,"Internal Error",1342096635538
+error,log,,,"Internal Error",1342096660818
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096681318
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096699052
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096700911
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096705036
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096706880
+opened,editor,org.eclipse.jdt.ui,3.6.1.r361_v20100825-0800,"org.eclipse.jdt.ui.ClassFileEditor",1342096708005
+activated,editor,org.eclipse.jdt.ui,3.6.1.r361_v20100825-0800,"org.eclipse.jdt.ui.ClassFileEditor",1342096708161
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096710145
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096710755
+activated,editor,org.eclipse.jdt.ui,3.6.1.r361_v20100825-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1342096710911
+closed,editor,org.eclipse.jdt.ui,3.6.1.r361_v20100825-0800,"org.eclipse.jdt.ui.ClassFileEditor",1342096710911
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096712973
+error,log,,,"Internal Error",1342096716567
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096731582
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096731582
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096731692
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096765378
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342096771284
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096771300
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096772128
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096772222
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096774175
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096782737
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096785471
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.delete",1342096795471
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.delete",1342096795627
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.delete",1342096795737
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.delete",1342096795909
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.delete",1342096796081
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.delete",1342096796502
+error,log,,,"Internal Error",1342096802955
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.delete",1342096804315
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.delete",1342096804830
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.delete",1342096804877
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.delete",1342096804908
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.delete",1342096805533
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.delete",1342096805908
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.file.save",1342096819111
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342096821377
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096826923
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096826923
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096827002
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096837079
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096846439
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096847798
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096857595
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096858657
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096859891
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096860923
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096865282
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096866735
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096877110
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096878688
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096881156
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096887766
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096888734
+error,log,,,"Internal Error",1342096905453
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342096923827
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342096925015
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.file.save",1342096926265
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342096929405
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096939874
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342096941139
+error,log,,,"Internal Error",1342097048871
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342097052933
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342097056355
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.file.save",1342097058589
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342097059855
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097059855
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097059964
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342097126697
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097126713
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097129150
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097136603
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097138447
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342097182789
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097182805
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097183039
+error,log,,,"Internal Error",1342097200164
+error,log,,,"Internal Error",1342097201398
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097202820
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097204820
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097212742
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097212929
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342097216351
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097216351
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097216632
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342097230398
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342097232038
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342097233882
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097233897
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097234116
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342097246506
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342097247835
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342097261397
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342097262475
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342097263647
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097263662
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097263912
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342097298615
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342097299286
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342097301614
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342097302818
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342097303739
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097303739
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097303958
+activated,view,org.eclipse.ui.console,3.5.0.v20100526,"org.eclipse.ui.console.ConsoleView",1342097308317
+activated,editor,org.eclipse.jdt.ui,3.6.1.r361_v20100825-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1342097315739
+activated,view,org.eclipse.ui.console,3.5.0.v20100526,"org.eclipse.ui.console.ConsoleView",1342097318973
+activated,editor,org.eclipse.jdt.ui,3.6.1.r361_v20100825-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1342097321770
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342097323348
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097323348
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097323598
+error,log,,,"Internal Error",1342097325270
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342097326176
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097326176
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097326395
+error,log,,,"Internal Error",1342097327051
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342097364394
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342097368253
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342097377659
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342097379019
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.undo",1342097380175
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342097381691
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342097383347
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342097386800
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342097388737
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097388753
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097389003
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342097400378
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097400393
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097400596
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342097439423
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097439455
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097440361
+error,log,,,"Internal Error",1342097470923
+error,log,,,"Internal Error",1342097472141
+error,log,,,"Internal Error",1342097473469
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097475235
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097475391
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.undo",1342097478969
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.undo",1342097480516
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.delete",1342097488985
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.undo",1342097502609
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.undo",1342097502922
+error,log,,,"Internal Error",1342097545983
+error,log,,,"Internal Error",1342097547218
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097548577
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097548780
+error,log,,,"Internal Error",1342097551733
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342097569029
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342097570061
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342097578826
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342097580607
+error,log,,,"Internal Error",1342097591810
+error,log,,,"Internal Error",1342097596701
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342097611325
+activated,editor,org.eclipse.jdt.ui,3.6.1.r361_v20100825-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1342097613669
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342097613763
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.undo",1342097615044
+activated,editor,org.eclipse.jdt.ui,3.6.1.r361_v20100825-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1342097619434
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342097622669
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.file.save",1342097624387
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342097625794
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097625794
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097625903
+activated,view,org.eclipse.ui.console,3.5.0.v20100526,"org.eclipse.ui.console.ConsoleView",1342097628950
+activated,editor,org.eclipse.jdt.ui,3.6.1.r361_v20100825-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1342097673917
+error,log,,,"Internal Error",1342097674636
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342097677308
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097677308
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097677542
+activated,view,org.eclipse.ui.console,3.5.0.v20100526,"org.eclipse.ui.console.ConsoleView",1342097679683
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097679855
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097681277
+activated,editor,org.eclipse.jdt.ui,3.6.1.r361_v20100825-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1342097682511
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342097693714
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097693729
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097693979
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342097700885
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342097702042
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342097704729
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097704745
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097706588
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342097713916
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342097715385
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342097716916
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.copy",1342097721526
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.edit.paste",1342097722791
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342097727104
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097727104
+activated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097727338
+activated,view,org.eclipse.ui.console,3.5.0.v20100526,"org.eclipse.ui.console.ConsoleView",1342097729744
+activated,editor,org.eclipse.jdt.ui,3.6.1.r361_v20100825-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1342097729932
+executed,command,org.eclipse.ui,3.6.1.M20100826-1330,"org.eclipse.ui.file.save",1342097736885
+executed,command,org.eclipse.debug.ui,3.6.1.v20100901_r361,"org.eclipse.debug.ui.commands.RunLast",1342097737510
+deactivated,workbench,org.eclipse.ui.workbench,3.6.1.M20100826-1330,"",1342097737525

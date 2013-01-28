@@ -1,0 +1,25 @@
+package outils;
+import java.net.*;
+import java.io.*;
+public class SocketService extends Thread {
+	Socket soc;
+	public SocketService(Socket soc) { this.soc=soc; }
+	public void run()
+	{
+		try {
+		BufferedReader br = new BufferedReader(new
+	InputStreamReader(soc.getInputStream()));
+		PrintWriter pr = new PrintWriter( new BufferedWriter(
+		new OutputStreamWriter(soc.getOutputStream())), true);
+		while (true)
+		{
+			String question = br.readLine();
+			if (question.equals("FIN")) break;
+			pr.println("Vous avez demandé "+question);
+		}
+		br.close();
+		pr.close();
+		soc.close();
+		} catch (IOException e) { e.printStackTrace(); }
+	}
+}

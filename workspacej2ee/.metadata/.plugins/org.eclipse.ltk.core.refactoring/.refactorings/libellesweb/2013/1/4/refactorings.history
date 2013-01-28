@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Connexion.java&apos; to &apos;Media_Server_application_test/appClientModule/(default package)&apos;&#x0D;&#x0A;- Original project: &apos;libellesweb&apos;&#x0D;&#x0A;- Destination element: &apos;Media_Server_application_test/appClientModule/(default package)&apos;&#x0D;&#x0A;- Original element: &apos;base.Connexion.java&apos;" description="Copy compilation unit" destination="=Media_Server_application_test/appClientModule&lt;" element1="/src&lt;base{Connexion.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1358863991820" units="1" version="1.0"/>
+</session>

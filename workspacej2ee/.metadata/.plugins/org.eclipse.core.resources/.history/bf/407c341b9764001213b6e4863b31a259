@@ -1,0 +1,13 @@
+import java.util.ArrayList;
+
+
+public interface VideoExtensionList {
+	public static ArrayList VideoExtensionList = new ArrayList();
+	VideoExtensionList.add("AAF");
+	, "3GP", "GIF", "ASF", "AVCHD", "AVI",
+		"CAM", "DAT", "DSH", "FLV", "M1V", "MPEG-1",
+		"M2V", "MPEG-2", "FLA", "FLR", "SOL", "M4V",
+		"MKV", "WRAP", "MNG", "MOV", "QTCH", "MPEG",
+		"MPEG-4", "MP4", "MXF", "ROQ", "NSV", "OGG",
+		"RM", "SVI", "SMI", "SWF", "WMV"); 
+}
