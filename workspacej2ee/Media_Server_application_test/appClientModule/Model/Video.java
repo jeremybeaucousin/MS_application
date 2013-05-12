@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Video {
-	//Table of all the existing video file extension 
+	//Table of all the existing video file extensions 
 	private final static List<String> VideoExtensionList = Arrays.asList(
 			"AAF", "3GP", "GIF", "ASF", "AVCHD", "AVI", "CAM", "DAT",
 			"DSH", "FLV", "M1V", "MPEG-1", "M2V", "MPEG-2", "FLA", "FLR",
