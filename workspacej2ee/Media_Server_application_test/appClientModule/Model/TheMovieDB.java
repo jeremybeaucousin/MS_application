@@ -4,6 +4,7 @@ import java.net.URL;
 import java.net.URI;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,69 +13,54 @@ import java.io.InputStreamReader;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.json.JSONTokener;
+
+import util.JSONObject;
+import util.StringUtil;
 
 public class TheMovieDB {
 	private static String api_key = "api_key=1acc7c1593ee8145d2d390f1d419a573";
 	private static String theMovieDBURL = "http://api.themoviedb.org/3";
 	
-	public static int searchMovie(String movieName) {
+	public static int searchMovie(String movieName) throws JSONException, IOException {
+		
+        int movieId = -1; 
+        movieName = StringUtil.transformSpecialsHTTPCharacterToSpace(movieName);
+        
+        URL urlTheMovieDbSearching = buildURL("/search/movie", "&query=" + movieName);	
+		JSONObject searchMovieResult = new JSONObject(new JSONTokener(urlTheMovieDbSearching.openStream()));
 
-		URL urlTheMovieDbSearching = buildURL("/search/movie", "&query=" + movieName);
-        int movieId = -1;  	
-		try {
-			JSONObject searchMovieResult = new JSONObject(new JSONTokener(urlTheMovieDbSearching.openStream()));
+		if(searchMovieResult.getJSONArray("results").length() > 0) {
+			movieId = searchMovieResult.getJSONArray("results").getJSONObject(0).getInt("id");
+		}
+		
+		return movieId;
+	}
+	
+	public static int searchMovieStudying(String movieName) throws JSONException, IOException {
 
-			if(searchMovieResult.getJSONArray("results").length() > 0) {
-				movieId = searchMovieResult.getJSONArray("results").getJSONObject(0).getInt("id");
-			}
-			//see the response content 
-			/*JSONArray keySet = root.names();
-        	
-        	for(int ii=0; ii < keySet.length(); ii++) {
-        		System.out.println(keySet.getString(ii) + " " + root.get(keySet.getString(ii)));
+		System.out.println("nom Original :" + movieName);
 
-        		if(root.get(keySet.getString(ii)) instanceof JSONArray) {
-        			JSONArray tempTable = (JSONArray) root.get(keySet.getString(ii));
-            		for(int jj=0; jj < tempTable.length(); jj++) {
-            			JSONObject tempJSON = (JSONObject) tempTable.get(jj);
-            			JSONArray keySetTempJSON = tempJSON.names();
-            			
-            			for(int kk = 0; kk < keySetTempJSON.length(); kk++) {
-            				System.out.println(keySetTempJSON.get(kk) + " " + tempJSON.get((String) keySetTempJSON.get(kk)));
-            			}
-            		}
-        		}
-        	}   */   
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+        int movieId = searchMovie(movieName); 
+        
+		if(movieId == -1) {
+			movieName = StringUtil.transformSpecialsCharacterToSpace(movieName);
+			movieId = searchMovie(StringUtil.transformSpecialsCharacterToSpace(movieName));
+			System.out.println("nom Modifié :" + movieName);
+		}
+		if(movieId == -1) {
+			movieName = StringUtil.deleteSurroudParts(movieName);
+			System.out.println("nom Modifié :" + movieName);
+			movieId = searchMovie(StringUtil.deleteSurroudParts(movieName));
+		}
+		System.out.println(movieId);
 		return movieId;
 	}
 	
 	//en cours
-	public static void getMovie(int movieID) {
+	public static JSONObject getMovie(int movieID) throws JSONException, IOException {
 		URL urlTheMovieDbSearching = buildURL("/movie/" + movieID, "");
-
-		try {
-			JSONObject searchMovieResult = new JSONObject(new JSONTokener(urlTheMovieDbSearching.openStream()));			
-			JSONArray KeySet = searchMovieResult.names();
-			System.out.println(KeySet);
-			for(int ii = 0; ii < KeySet.length(); ii++) {
-				System.out.println(KeySet.getString(ii) + " " + searchMovieResult.get(KeySet.getString(ii)));
-			}			
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		return new JSONObject(new JSONTokener(urlTheMovieDbSearching.openStream()));			
 	}
 	
 	private static URL buildURL(String requestType, String request) {
@@ -84,11 +70,9 @@ public class TheMovieDB {
 			try {
 				urlTheMovieDbSearching = uri.toURL();
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
