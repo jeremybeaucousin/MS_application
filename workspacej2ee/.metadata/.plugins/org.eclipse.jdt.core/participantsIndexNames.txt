@@ -1,5 +1,0 @@
-INDEX VERSION 1.126
-D:\workspacej2ee\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2829100533.index
-\libellesweb
-D:\workspacej2ee\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3420083830.index
-\libellesweb
