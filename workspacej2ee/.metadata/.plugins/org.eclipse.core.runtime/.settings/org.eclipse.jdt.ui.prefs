@@ -1,4 +1,4 @@
-#Mon Jul 16 16:59:39 CEST 2012
+#Sun May 12 19:21:22 CEST 2013
 content_assist_proposals_foreground=0,0,0
 spelling_locale_initialized=true
 content_assist_disabled_computers=org.eclipse.jdt.ui.javaAllProposalCategory\u0000org.eclipse.jdt.ui.javaNoTypeProposalCategory\u0000org.eclipse.jdt.ui.textProposalCategory\u0000org.eclipse.jdt.ui.javaTypeProposalCategory\u0000
@@ -15,7 +15,7 @@ proposalOrderMigrated=true
 breadcrumb.org.eclipse.jdt.ui.JavaPerspective=true
 content_assist_proposals_background=255,255,255
 org.eclipse.jdt.ui.formatterprofiles.version=11
-org.eclipse.jdt.internal.ui.navigator.layout=2
+org.eclipse.jdt.internal.ui.navigator.layout=1
 content_assist_number_of_computers=19
 useQuickDiffPrefPage=true
 org.eclipse.jdt.ui.text.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>

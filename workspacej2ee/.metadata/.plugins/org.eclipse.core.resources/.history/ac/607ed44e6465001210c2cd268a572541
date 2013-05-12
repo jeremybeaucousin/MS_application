@@ -1,8 +1,0 @@
-package Model;
-
-public class File {
-	
-	public static String getExtension(String fileName){
-		return fileName.substring(fileName.lastIndexOf(".") + 1);
-	}
-}

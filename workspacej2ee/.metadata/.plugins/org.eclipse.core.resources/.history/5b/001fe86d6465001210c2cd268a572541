@@ -1,9 +1,0 @@
-package Model;
-
-public class File {
-	
-	//Get the extension in the name of a file
-	public static String getExtension(String fileName){
-		return fileName.substring(fileName.lastIndexOf(".") + 1);
-	}
-}
