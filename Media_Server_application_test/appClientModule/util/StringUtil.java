@@ -12,6 +12,12 @@ import java.util.regex.Pattern;
 import com.mysql.jdbc.StringUtils;
 
 public class StringUtil {
+	/**
+	 * Delete all the special character in the movie name include in (".", "-", "_")
+	 * @param name
+	 * 		original name of the movie
+	 * @return name of the movie without special caracter.
+	 */
 	public static String transformSpecialsCharacterToSpace(String name) {
 		String modifiedName = new String(name);
 		modifiedName = modifiedName.replace(ConstantString.DOT, ConstantString.SPACE);
