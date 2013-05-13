@@ -81,7 +81,7 @@ public class Main{
 			}
 			System.out.println("total de film : " + test.size());
 			System.out.println("total reconnus : " + (test.size() - cpt));
-			System.out.println("total reconnus : " + (cpt));
+			System.out.println("total non reconnus : " + (cpt));
 		}	
 		
 // FOR THE MOVIE DB		
@@ -98,7 +98,7 @@ public class Main{
 //			}
 //			System.out.println("total de film : " + test.size());
 //			System.out.println("total reconnus : " + (test.size() - cpt));
-//			System.out.println("total reconnus : " + (cpt));
+//			System.out.println("total non reconnus : " + (cpt));
 //		}
 		
 		
