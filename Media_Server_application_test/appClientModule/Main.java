@@ -1,23 +1,17 @@
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.swing.JFileChooser;
 
-import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONTokener;
 
-import util.ConstantString;
 import util.JSONObject;
-import util.StringUtil;
 
 import Model.Document;
-import Model.Media;
 import Model.TheMovieDB;
 
 public class Main{
@@ -32,7 +26,15 @@ public class Main{
 		chooser.setDialogTitle("Sélectionner votre dossier de vidéo");
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
+		//TheMovieDB.searchMovieStudying("test");
 		
+//		try {
+//			System.out.println(new JSONObject(new JSONTokener(new URI(null, null, "http://imdbapi.org/?title=die+hard&type=json&plot=simple&episode=1&limit=1&yg=0&mt=none&lang=en-US&offset=&aka=simple&release=simple&business=0&tech=0", null).toURL().openStream())));
+//		} catch (URISyntaxException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+
 //		String name = new String("test (t([]((ye({}s))))t) [test] ");
 //		String name2 = new String("Fr - Jay & Bob Contre-Attaquent (2002) - De Kevin Smith - (Film Dvd-Rip Divx-5.05 - 128 Ko Par La Li)");
 //		System.out.println(name);
