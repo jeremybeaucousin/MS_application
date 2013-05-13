@@ -23,7 +23,6 @@ import Model.TheMovieDB;
 public class Main{
 	
 	public static void main(String[] args) throws JSONException, IOException {
-		// TODO Auto-generated method stub
 		int cpt=0;
 		
 		JFileChooser chooser = new JFileChooser();
