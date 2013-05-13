@@ -22,7 +22,7 @@ public class TheMovieDB {
         movieName = StringUtil.transformSpecialsHTTPCharacterToSpace(movieName);
         
         URL urlTheMovieDbSearching = buildURL("/search/movie", "&query=" + movieName);	
-        System.out.println(urlTheMovieDbSearching);
+
         JSONObject searchMovieResult = new JSONObject(new JSONTokener(urlTheMovieDbSearching.openStream()));
 
 		if(searchMovieResult.getJSONArray("results").length() > 0) {
@@ -36,19 +36,21 @@ public class TheMovieDB {
 
 		System.out.println("nom Original :" + movieName);
 
-        int movieId = searchMovie(movieName); 
-        
-		if(movieId == -1) {
+        //int movieId = searchMovie(movieName); 
+		int movieId = -1;
+		//if(movieId == -1) {
 			movieName = StringUtil.transformSpecialsCharacterToSpace(movieName);
-			movieId = searchMovie(StringUtil.transformSpecialsCharacterToSpace(movieName));
-			System.out.println("nom Modifié :" + movieName);
-		}
-		if(movieId == -1) {
 			movieName = StringUtil.deleteSurroudParts(movieName);
 			movieName = StringUtil.supresseMutlipleSpace(movieName);
+			movieId = searchMovie(StringUtil.transformSpecialsCharacterToSpace(movieName));
 			System.out.println("nom Modifié :" + movieName);
-			movieId = searchMovie(StringUtil.deleteSurroudParts(movieName));
-		}
+		//}
+//		if(movieId == -1) {
+//			movieName = StringUtil.deleteSurroudParts(movieName);
+//			movieName = StringUtil.supresseMutlipleSpace(movieName);
+//			System.out.println("nom Modifié :" + movieName);
+//			movieId = searchMovie(StringUtil.deleteSurroudParts(movieName));
+//		}
 		System.out.println(movieId);
 		return movieId;
 	}
