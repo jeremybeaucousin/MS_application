@@ -1,20 +1,15 @@
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONTokener;
-
-import util.JSONObject;
 
 import Model.Document;
 import Model.ImdbApi;
-import Model.TheMovieDB;
 
 public class Main{
 	
@@ -29,7 +24,7 @@ public class Main{
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
 		ImdbApi.searchMovie("die hard");
-		
+
 
 
 //		String name = new String("test (t([]((ye({}s))))t) [test] ");
@@ -78,7 +73,8 @@ public class Main{
 		if(test != null) {
 			for(int ii = 0; ii < test.size(); ii++) {
 				JSONArray movie = ImdbApi.searchMovieStudying(Document.getDocumentName(test.get(ii).getName()));
-				System.out.println(movie);
+				
+				System.out.println(new DecimalFormat("###.##").format(new Double(ii)/test.size()*100) + "%");
 				if(movie == null ) {
 					cpt++;
 				}

@@ -35,6 +35,7 @@ public class ImdbApi {
             response.back();
 			if(fisrtChar == '[') {
 				movie = new JSONArray(response);
+				System.out.println("trouvé");
             } else if (fisrtChar == '{') {
             	System.out.println("non trouvé");
             }
@@ -65,7 +66,7 @@ public class ImdbApi {
 		URL urlTheMovieDbSearching = null;
 
 		try {
-			URI uri = new URI(null, null, IMDB_API, request + "&type=json", null);
+			URI uri = new URI(null, null, IMDB_API, request + "&type=json&plot=full&episode=0&limit=1&yg=0&mt=M&lang=en-US&offset=&aka=simple&release=simple&business=0&tech=0", null);
 			try {
 				urlTheMovieDbSearching = uri.toURL();
 			} catch (MalformedURLException e) {
