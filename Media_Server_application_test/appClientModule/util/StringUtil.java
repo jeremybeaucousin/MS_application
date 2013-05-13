@@ -127,7 +127,7 @@ public class StringUtil {
 			}
 		}
 		
-		System.out.println(IndexToExtract);
+		// System.out.println(IndexToExtract);
 		/* TODO  Filtrer la table pour ne garder que les parents.
 		for(Integer index : IndexToExtract.keySet()) {
 			System.out.println(IndexToExtract.get(index));
@@ -142,7 +142,7 @@ public class StringUtil {
 		}
 
 		for(ii = 0; ii < stringToExtract.length; ii++) {
-			System.out.println(stringToExtract[ii]);
+			//System.out.println(stringToExtract[ii]);
 			name = name.replace(stringToExtract[ii], ConstantString.EMPTY);
 		}
 		
