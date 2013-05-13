@@ -32,16 +32,42 @@ public class StringUtil {
 		return modifiedName;
 	}
 	
-//	public static String deleteSurroudParts(String name) {
-//		String modifiedName = new String(name);
-//		for(String container : ConstantString.SURROUDER_CHARACTER) {
-//			if(modifiedName.contains(container));
-//		}
-//		modifiedName = modifiedName.replace(ConstantString.DOT, ConstantString.SPACE);
-//		modifiedName = modifiedName.replace(ConstantString.DASH, ConstantString.SPACE);
-//		modifiedName = modifiedName.replace(ConstantString.UNDERSCORE, ConstantString.SPACE);
-//		return modifiedName;
-//	}
+	public static String supresseMutlipleSpace(String name) {
+		return name.replaceAll("(\\s+)", ConstantString.SPACE);
+	}
+	
+	private static String identifySurrondPart(String surroundPart) {
+		String partKind = new String();
+		Set<String> surroundCharacterKeys = ConstantString.SURROUDER_CHARACTER.keySet();
+		for(String key : surroundCharacterKeys){
+			if(ConstantString.SURROUDER_CHARACTER.get(key).contains(surroundPart)) {
+				partKind = key;
+			}
+		}
+		return partKind;
+	}
+	
+	private static Boolean isOpeningSurrondPart(String surroundPart) {
+		Boolean isOpeningPart = false;
+		Set<String> surroundCharacterKeys = ConstantString.SURROUDER_CHARACTER.keySet();
+		for(String key : surroundCharacterKeys){
+			if(ConstantString.SURROUDER_CHARACTER.get(key).contains(surroundPart) && ConstantString.SURROUDER_CHARACTER.get(key).get(0).equals(surroundPart)) {
+				isOpeningPart = true;
+			}
+		}
+		return isOpeningPart;
+	}
+	
+	private static Boolean isClosingSurrondPart(String surroundPart) {
+		Boolean isClosingPart = false;
+		Set<String> surroundCharacterKeys = ConstantString.SURROUDER_CHARACTER.keySet();
+		for(String key : surroundCharacterKeys){
+			if(ConstantString.SURROUDER_CHARACTER.get(key).contains(surroundPart) && ConstantString.SURROUDER_CHARACTER.get(key).get(1).equals(surroundPart)) {
+				isClosingPart = true;
+			}
+		}
+		return isClosingPart;
+	}
 	
 	private static Map<String, Map<Integer, String>> extractSurroudParts(String name) {
 		Map<String, Map<Integer, String>> containerMap = new TreeMap<String, Map<Integer,String>>();
@@ -70,7 +96,7 @@ public class StringUtil {
 		Map<Integer, Integer> IndexToExtract = new TreeMap<Integer, Integer>();
 		Object[] openingPartIndexKeys = openingPartIndex.keySet().toArray();
 		Object[] closingPartIndexKeys = closingPartIndex.keySet().toArray();
-		// TODO nom Original :Fr - Jay & Bob Contre-Attaquent (2002) - De Kevin Smith - (Film Dvd-Rip Divx-5.05 - 128 Ko Par La Li
+		
 		for(int ii=00; ii < openingPartIndexKeys.length; ii++) {
 			if(ii < closingPartIndexKeys.length) {
 				Integer firstClosedPart = (Integer) closingPartIndexKeys[ii];
@@ -100,6 +126,13 @@ public class StringUtil {
 				}
 			}
 		}
+		
+		System.out.println(IndexToExtract);
+		/* TODO  Filtrer la table pour ne garder que les parents.
+		for(Integer index : IndexToExtract.keySet()) {
+			System.out.println(IndexToExtract.get(index));
+		}
+		*/
 		String[] stringToExtract = new String[IndexToExtract.size()];
 		int ii = 0;
 		for(Integer openingPart : IndexToExtract.keySet()) {
@@ -107,7 +140,9 @@ public class StringUtil {
 			stringToExtract[ii] = name.substring(openingPart, closingPart);
 			ii++;
 		}
+
 		for(ii = 0; ii < stringToExtract.length; ii++) {
+			System.out.println(stringToExtract[ii]);
 			name = name.replace(stringToExtract[ii], ConstantString.EMPTY);
 		}
 		
@@ -116,38 +151,5 @@ public class StringUtil {
 		}
 
 		return name;
-	}
-	
-	public static String identifySurrondPart(String surroundPart) {
-		String partKind = new String();
-		Set<String> surroundCharacterKeys = ConstantString.SURROUDER_CHARACTER.keySet();
-		for(String key : surroundCharacterKeys){
-			if(ConstantString.SURROUDER_CHARACTER.get(key).contains(surroundPart)) {
-				partKind = key;
-			}
-		}
-		return partKind;
-	}
-	
-	public static Boolean isOpeningSurrondPart(String surroundPart) {
-		Boolean isOpeningPart = false;
-		Set<String> surroundCharacterKeys = ConstantString.SURROUDER_CHARACTER.keySet();
-		for(String key : surroundCharacterKeys){
-			if(ConstantString.SURROUDER_CHARACTER.get(key).contains(surroundPart) && ConstantString.SURROUDER_CHARACTER.get(key).get(0).equals(surroundPart)) {
-				isOpeningPart = true;
-			}
-		}
-		return isOpeningPart;
-	}
-	
-	public static Boolean isClosingSurrondPart(String surroundPart) {
-		Boolean isClosingPart = false;
-		Set<String> surroundCharacterKeys = ConstantString.SURROUDER_CHARACTER.keySet();
-		for(String key : surroundCharacterKeys){
-			if(ConstantString.SURROUDER_CHARACTER.get(key).contains(surroundPart) && ConstantString.SURROUDER_CHARACTER.get(key).get(1).equals(surroundPart)) {
-				isClosingPart = true;
-			}
-		}
-		return isClosingPart;
 	}
 }

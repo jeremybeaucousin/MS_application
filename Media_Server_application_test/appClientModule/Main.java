@@ -33,6 +33,10 @@ public class Main{
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
 		
+//		String name = new String("test (t([]((ye({}s))))t) [test] ");
+//		String name2 = new String("Fr - Jay & Bob Contre-Attaquent (2002) - De Kevin Smith - (Film Dvd-Rip Divx-5.05 - 128 Ko Par La Li)");
+//		System.out.println(name);
+//		System.out.println(StringUtil.deleteSurroudParts(name));
 		/* à coder
 		JSONObject film = TheMovieDB.getMovie(880);
 		JSONArray keyset = film.names();

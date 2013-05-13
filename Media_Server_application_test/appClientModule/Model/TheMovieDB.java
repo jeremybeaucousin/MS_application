@@ -51,6 +51,7 @@ public class TheMovieDB {
 		}
 		if(movieId == -1) {
 			movieName = StringUtil.deleteSurroudParts(movieName);
+			movieName = StringUtil.supresseMutlipleSpace(movieName);
 			System.out.println("nom Modifié :" + movieName);
 			movieId = searchMovie(StringUtil.deleteSurroudParts(movieName));
 		}
