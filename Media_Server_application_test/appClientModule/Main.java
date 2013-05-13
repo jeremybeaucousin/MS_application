@@ -1,18 +1,15 @@
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 
+import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONTokener;
-
-import util.JSONObject;
 
 import Model.Document;
-import Model.TheMovieDB;
+import Model.ImdbApi;
 
 public class Main{
 	
@@ -26,14 +23,9 @@ public class Main{
 		chooser.setDialogTitle("Sélectionner votre dossier de vidéo");
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
-		//TheMovieDB.searchMovieStudying("test");
-		
-//		try {
-//			System.out.println(new JSONObject(new JSONTokener(new URI(null, null, "http://imdbapi.org/?title=die+hard&type=json&plot=simple&episode=1&limit=1&yg=0&mt=none&lang=en-US&offset=&aka=simple&release=simple&business=0&tech=0", null).toURL().openStream())));
-//		} catch (URISyntaxException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		ImdbApi.searchMovie("die hard");
+
+
 
 //		String name = new String("test (t([]((ye({}s))))t) [test] ");
 //		String name2 = new String("Fr - Jay & Bob Contre-Attaquent (2002) - De Kevin Smith - (Film Dvd-Rip Divx-5.05 - 128 Ko Par La Li)");
@@ -72,21 +64,42 @@ public class Main{
 		
 		
 		// System.out.println(Media.getMediaID(Media.VIDEO));
+		
+		// FOR THE IMDBAPI	
 		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			chooser.setCurrentDirectory(chooser.getSelectedFile());
 			test = Document.FolderScannerVideo(chooser.getCurrentDirectory());
 		}
 		if(test != null) {
 			for(int ii = 0; ii < test.size(); ii++) {
-				Integer movieId = TheMovieDB.searchMovieStudying(Document.getDocumentName(test.get(ii).getName()));
-				if(movieId < 0 ) {
+				JSONArray movie = ImdbApi.searchMovieStudying(Document.getDocumentName(test.get(ii).getName()));
+				
+				System.out.println(new DecimalFormat("###.##").format(new Double(ii)/test.size()*100) + "%");
+				if(movie == null ) {
 					cpt++;
 				}
 			}
 			System.out.println("total de film : " + test.size());
 			System.out.println("total reconnus : " + (test.size() - cpt));
 			System.out.println("total reconnus : " + (cpt));
-		}
+		}	
+		
+// FOR THE MOVIE DB		
+//		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+//			chooser.setCurrentDirectory(chooser.getSelectedFile());
+//			test = Document.FolderScannerVideo(chooser.getCurrentDirectory());
+//		}
+//		if(test != null) {
+//			for(int ii = 0; ii < test.size(); ii++) {
+//				Integer movieId = TheMovieDB.searchMovieStudying(Document.getDocumentName(test.get(ii).getName()));
+//				if(movieId < 0 ) {
+//					cpt++;
+//				}
+//			}
+//			System.out.println("total de film : " + test.size());
+//			System.out.println("total reconnus : " + (test.size() - cpt));
+//			System.out.println("total reconnus : " + (cpt));
+//		}
 		
 		
 		//request exemple http://api.themoviedb.org/3/search/movie?api_key=1acc7c1593ee8145d2d390f1d419a573&query=shrek
