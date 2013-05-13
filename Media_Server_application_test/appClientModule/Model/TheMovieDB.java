@@ -28,7 +28,8 @@ public class TheMovieDB {
         movieName = StringUtil.transformSpecialsHTTPCharacterToSpace(movieName);
         
         URL urlTheMovieDbSearching = buildURL("/search/movie", "&query=" + movieName);	
-		JSONObject searchMovieResult = new JSONObject(new JSONTokener(urlTheMovieDbSearching.openStream()));
+        System.out.println(urlTheMovieDbSearching);
+        JSONObject searchMovieResult = new JSONObject(new JSONTokener(urlTheMovieDbSearching.openStream()));
 
 		if(searchMovieResult.getJSONArray("results").length() > 0) {
 			movieId = searchMovieResult.getJSONArray("results").getJSONObject(0).getInt("id");

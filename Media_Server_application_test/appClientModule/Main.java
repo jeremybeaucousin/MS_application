@@ -66,7 +66,7 @@ public class Main{
 		*/
 		
 		
-		System.out.println(Media.getMediaID(Media.VIDEO));
+		// System.out.println(Media.getMediaID(Media.VIDEO));
 		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			chooser.setCurrentDirectory(chooser.getSelectedFile());
 			test = Document.FolderScannerVideo(chooser.getCurrentDirectory());
