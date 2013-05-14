@@ -32,7 +32,7 @@ public class Main{
 		
 
 
-		String name = new String("test (t([](())))))ye({}s))))t) (t([](())))))ye({}s))))t) (test3)");
+		String name = new String("test (t)((((((([((te)t)] (t(te)t) [({})] (test3)");
 		String name2 = new String("Fr - Jay & Bob Contre-Attaquent (2002) - De Kevin Smith - (Film Dvd-Rip Divx-5.05 - 128 Ko Par La Li)");
 		System.out.println(name);
 		System.out.println(StringUtil.deleteSurroudParts(name));

@@ -97,98 +97,46 @@ public class StringUtil {
 		System.out.println(closingPartIndex);
 		
 		Map<Integer, Integer> IndexToExtract = new TreeMap<Integer, Integer>();
+		ArrayList<String> stringToExtract = new ArrayList<String>();
 		Object[] openingPartIndexKeys = openingPartIndex.keySet().toArray();
 		Object[] closingPartIndexKeys = closingPartIndex.keySet().toArray();
-		// TODO chercher la prochaine parentaise fermante avant l'ouvrante
-		if(closingPartIndexKeys.length > openingPartIndexKeys.length) {
-			Map<Integer, Integer> IndexOpeningPartToExtract = new TreeMap<Integer, Integer>();
-			int latestClosedPart = (Integer) closingPartIndexKeys[(closingPartIndexKeys.length-1)];
-			int latestOpenedParent = -1;
-			int latestClosedParent = -1;
-			for(int ii = (openingPartIndexKeys.length - 1); ii >= 0; ii--) {
-				
-				Boolean previousclosingPartNotFound = true;
-				Integer maxIndex = -1;
-				int jj = 0;
-				while (previousclosingPartNotFound) {
-					if((Integer) closingPartIndexKeys[jj] >= latestClosedPart) {
-						latestClosedPart = (Integer) closingPartIndexKeys[(jj-1)];
-						previousclosingPartNotFound = false;
-					} else {
-						maxIndex = (Integer) closingPartIndexKeys[jj];
-					}
-					jj++;
-				}
-				if(maxIndex > -1) {
-					for(int kk = (ii-1); kk < ii && ii > 0; kk++) {
-						System.out.println("max close part : " + maxIndex);
-						System.out.println("previous open part : " + openingPartIndexKeys[kk]);
-						System.out.println("open part : " + openingPartIndexKeys[ii]);
-						if(latestOpenedParent == -1 || maxIndex < latestOpenedParent) {
-							IndexOpeningPartToExtract.put(maxIndex, (Integer) openingPartIndexKeys[kk]);
-							latestOpenedParent = (Integer) openingPartIndexKeys[kk];
-						} else if(!IndexOpeningPartToExtract.containsKey(latestClosedParent)/* || latestClosedParent > maxIndex*/) {
-							IndexOpeningPartToExtract.put(maxIndex, (Integer) openingPartIndexKeys[kk]);
-							latestOpenedParent = (Integer) openingPartIndexKeys[kk];
-							latestClosedParent = maxIndex;
-						} else if(IndexOpeningPartToExtract.containsKey(latestClosedParent)) {
-							IndexOpeningPartToExtract.put(latestClosedParent, (Integer) openingPartIndexKeys[kk]);
-							latestOpenedParent = (Integer) openingPartIndexKeys[kk];
-						}
-					}
-				}
-				System.out.println(IndexOpeningPartToExtract);
-			}
-			for(Integer indexes : IndexOpeningPartToExtract.keySet()) {
-				
-			}
-			System.out.println(IndexOpeningPartToExtract);
-			System.out.println(openingPartIndex);
-			System.out.println(closingPartIndex);
-			
-			closingPartIndexKeys = closingPartIndex.keySet().toArray();
-		}
 		for(int ii = 0; ii < openingPartIndexKeys.length; ii++) {
 			if(ii < closingPartIndexKeys.length) {
-				Integer firstClosedPart = (Integer) closingPartIndexKeys[ii];
+				Integer currentClosedPart = (Integer) closingPartIndexKeys[ii];
 				Boolean peerNotFound = true;
-				ArrayList<Integer> openPartsBeforeTheFirstClosedPart = new ArrayList<Integer>();
+				Integer maxClosedPartIndex = -1;
 				int jj = 0;
 				while(peerNotFound) {
-					if(jj >= openingPartIndexKeys.length || firstClosedPart < (Integer) openingPartIndexKeys[jj]) {
+					if(jj >= openingPartIndexKeys.length || currentClosedPart < (Integer) openingPartIndexKeys[jj]) {
 						peerNotFound = false;
-					} else if(openingPartIndex.containsKey(openingPartIndexKeys[jj]) && openingPartIndex.get(openingPartIndexKeys[jj]).equals(closingPartIndex.get(firstClosedPart)) && firstClosedPart > (Integer) openingPartIndexKeys[jj]) {
-						openPartsBeforeTheFirstClosedPart.add((Integer) openingPartIndexKeys[jj]);
+					} else {
+						Integer currentOpenPart = (Integer) openingPartIndexKeys[jj];
+						Boolean isSamePartKind = openingPartIndex.get(currentOpenPart).equals(closingPartIndex.get(currentClosedPart));
+						if(openingPartIndex.containsKey(currentOpenPart) && isSamePartKind && currentClosedPart > currentOpenPart) {
+							maxClosedPartIndex = currentOpenPart;
+						}
 					}
 					jj++;
 				}
 
-				if(openPartsBeforeTheFirstClosedPart.size() > 0) {
-					Integer maxIndex = -1;
-					
-					for(Integer partIndex : openPartsBeforeTheFirstClosedPart) {
-						if(partIndex > maxIndex) {
-							maxIndex = partIndex;
-						}
-					} 
-					IndexToExtract.put(maxIndex, firstClosedPart);
-					openingPartIndex.remove(maxIndex);
-					closingPartIndex.remove(firstClosedPart);
+				if(maxClosedPartIndex > -1) {
+					IndexToExtract.put(maxClosedPartIndex, currentClosedPart);
 				}
 			}
 		}
-		
-		ArrayList<String> stringToExtract = new ArrayList<String>();
-		Object[] openingParts = IndexToExtract.keySet().toArray();
-		Integer currentParrentClosedPart = IndexToExtract.get(openingParts[0]);
-		stringToExtract.add(name.substring((Integer) openingParts[0], currentParrentClosedPart));
-		for(int ii = 1; ii < openingParts.length; ii++) {
-			Integer closingPart = IndexToExtract.get(openingParts[ii]);
-			if(closingPart > currentParrentClosedPart) {
-				stringToExtract.add(name.substring((Integer) openingParts[ii], closingPart));
+		Object[] openingLinkedParts = IndexToExtract.keySet().toArray();
+		Integer currentChiParentPart = (Integer) openingLinkedParts[(openingLinkedParts.length -1)];
+		Integer currentPqrentClosingPart = IndexToExtract.get(currentChiParentPart);
+		for(int ii = (openingLinkedParts.length -2); ii > -1 ; ii--) {
+			Integer currentOpeningPart = (Integer) openingLinkedParts[ii];
+			Integer currentClosingPart = IndexToExtract.get(currentOpeningPart);
+			if(currentChiParentPart > currentOpeningPart && currentClosingPart < currentPqrentClosingPart) {
+				stringToExtract.add(name.substring(currentChiParentPart, currentPqrentClosingPart));
 			}
+			currentChiParentPart = currentOpeningPart;
+			currentPqrentClosingPart = currentClosingPart;
 		}
-
+		System.out.println(stringToExtract);
 		for(int ii = 0; ii < stringToExtract.size(); ii++) {
 			name = name.replace(stringToExtract.get(ii), ConstantString.EMPTY);
 		}
