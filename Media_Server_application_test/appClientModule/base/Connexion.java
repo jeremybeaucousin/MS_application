@@ -7,7 +7,7 @@ public class Connexion
 {
 	 /*** variable indiquant le nom de la base*/
 	String base="media_server";
-	String dbURL = "jdbc:mysql://localhost/"+base+"?user=root&password=";
+	String dbURL = "jdbc:mysql://192.168.1.34/"+base+"?user=root&password=";
 	String dbDriver = "com.mysql.jdbc.Driver";
 	private int lastInsertId=-1;
 	private Connection dbCon;

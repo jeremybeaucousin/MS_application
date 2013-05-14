@@ -6,7 +6,11 @@ import java.util.ArrayList;
 
 public class Document {
 	
-	//Get the extension in the name of a file without the '.' (ex : 'Shrek.avi' become 'avi')
+	/**
+	 * Get the extension in the name of a file without the '.' (ex : 'Shrek.avi' become 'avi')
+	 * @param fileName
+	 * @return
+	 */
 	public static String getExtension(String fileName){
 		if(fileName.lastIndexOf(".") != -1) {
 			return fileName.substring(fileName.lastIndexOf(".") + 1);
@@ -19,8 +23,13 @@ public class Document {
 		return fileName.substring(0, fileName.lastIndexOf("."));
 	}
 	
-	//scan the selected folder and all it subfolder, add all file (any kind) in a list 
-	//nb: we tought about add a filter in argument (ex : FolderScanner('folder',all) or FolderScanner('folder',video))
+
+	/**
+	 * can the selected folder and all it subfolder, add all file (any kind) in a list 
+	 * nb: we tought about add a filter in argument (ex : FolderScanner('folder',all) or FolderScanner('folder',video))
+	 * @param folderChosen
+	 * @return
+	 */
 	public static ArrayList<File> FolderScanner(File folderChosen) {
 		ArrayList<File> fileList = new ArrayList<File>();
 		File[] fileListInFolder = folderChosen.listFiles();
@@ -36,7 +45,11 @@ public class Document {
 		return(fileList);
 	}
 	
-	//scan the selected folder and all it subfolder, add all file (any kind) in a list 
+	/**
+	 * scan the selected folder and all it subfolder, add all file (any kind) in a list 
+	 * @param folderChosen
+	 * @return
+	 */
 	public static ArrayList<File> FolderScannerVideo(File folderChosen) {
 		ArrayList<File> fileList = new ArrayList<File>();
 		File[] fileListInFolder = folderChosen.listFiles();

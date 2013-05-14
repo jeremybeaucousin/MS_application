@@ -23,7 +23,7 @@ public interface ConstantString {
 	
 	final String SQUAREBRACKET = "SQUAREBRACKET";
 	
-	// special charachters //
+	/** special charachters **/
 	final String SPACE = " "; 
 	final String DOT = "."; 
 	final String UNDERSCORE = "_";
