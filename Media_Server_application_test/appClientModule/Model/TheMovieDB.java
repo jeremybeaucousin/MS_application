@@ -5,10 +5,14 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.json.JSONException;
 import org.json.JSONTokener;
 
+import util.ConstantString;
 import util.JSONObject;
 import util.StringUtil;
 
@@ -42,9 +46,16 @@ public class TheMovieDB {
 			movieName = StringUtil.transformSpecialsCharacterToSpace(movieName);
 			movieName = StringUtil.deleteSurroudParts(movieName);
 			movieName = StringUtil.supresseMutlipleSpace(movieName);
-			movieId = searchMovie(StringUtil.transformSpecialsCharacterToSpace(movieName));
+			movieName = StringUtil.insertSpaceBeforeCollapseUpperCaseOrInt(movieName);
 			System.out.println("nom Modifié :" + movieName);
+			movieId = searchMovie(StringUtil.transformSpecialsCharacterToSpace(movieName));
 		//}
+		if(movieId == -1) {
+			ArrayList<Integer> moviesFound = searchWordByWord(movieName);
+			if(!moviesFound.isEmpty()) {
+				movieId = moviesFound.get((moviesFound.size()-1));
+			}
+		}
 //		if(movieId == -1) {
 //			movieName = StringUtil.deleteSurroudParts(movieName);
 //			movieName = StringUtil.supresseMutlipleSpace(movieName);
@@ -76,4 +87,26 @@ public class TheMovieDB {
 
 		return urlTheMovieDbSearching;
 	}
+	
+	public static ArrayList<Integer> searchWordByWord(String movieName) throws JSONException, IOException {
+		// TODO attantion au mot avec des entier dedans
+		ArrayList<Integer> moviesFound = new ArrayList<Integer>();
+		Pattern pattern = Pattern.compile("(\\w+)");
+		Matcher matcher = pattern.matcher(movieName);
+		StringBuffer wordAddedFromThemovieName = new StringBuffer();
+		boolean MovieFound = true;
+		while (matcher.find() && MovieFound) {
+			wordAddedFromThemovieName.append(matcher.group() + ConstantString.SPACE);
+			int testid = TheMovieDB.searchMovie(wordAddedFromThemovieName.toString());
+			System.out.println("nom Modifié :" + wordAddedFromThemovieName.toString());
+			if(testid > -1) {
+				moviesFound.add(testid);
+			} else if(testid == -1 && !moviesFound.isEmpty()) {
+				MovieFound = false;
+			}
+			
+		}
+		return moviesFound;
+	}
+
 }

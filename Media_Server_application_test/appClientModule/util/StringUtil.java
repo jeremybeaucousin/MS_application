@@ -36,6 +36,16 @@ public class StringUtil {
 		return name.replaceAll("(\\s+)", ConstantString.SPACE);
 	}
 	
+	public static String insertSpaceBeforeCollapseUpperCaseOrInt(String name) {
+		// TODO attantion au mot su style "4Mot" entier suivi dun mot
+		Pattern pattern = Pattern.compile("[a-z][A-Z+0-9+]");
+		Matcher matcher = pattern.matcher(name);
+		while (matcher.find()) {
+			name = name.replace(matcher.group(), matcher.group().substring(0,1) + ConstantString.SPACE + matcher.group().substring(1));
+		}
+		return name;
+	}
+	
 	private static String identifySurrondPart(String surroundPart) {
 		String partKind = new String();
 		Set<String> surroundCharacterKeys = ConstantString.SURROUDER_CHARACTER.keySet();
@@ -93,8 +103,6 @@ public class StringUtil {
 
 		Map<Integer, String> openingPartIndex = extractResult.get(ConstantString.OPENING_PARTS);
 		Map<Integer, String> closingPartIndex = extractResult.get(ConstantString.CLOSING_PARTS);
-		System.out.println(openingPartIndex);
-		System.out.println(closingPartIndex);
 		
 		Map<Integer, Integer> IndexToExtract = new TreeMap<Integer, Integer>();
 		ArrayList<String> stringToExtract = new ArrayList<String>();
@@ -125,18 +133,19 @@ public class StringUtil {
 			}
 		}
 		Object[] openingLinkedParts = IndexToExtract.keySet().toArray();
-		Integer currentChiParentPart = (Integer) openingLinkedParts[(openingLinkedParts.length -1)];
-		Integer currentPqrentClosingPart = IndexToExtract.get(currentChiParentPart);
-		for(int ii = (openingLinkedParts.length -2); ii > -1 ; ii--) {
-			Integer currentOpeningPart = (Integer) openingLinkedParts[ii];
-			Integer currentClosingPart = IndexToExtract.get(currentOpeningPart);
-			if(currentChiParentPart > currentOpeningPart && currentClosingPart < currentPqrentClosingPart) {
-				stringToExtract.add(name.substring(currentChiParentPart, currentPqrentClosingPart));
+		if(openingLinkedParts.length > 0) {
+			Integer currentChiParentPart = (Integer) openingLinkedParts[(openingLinkedParts.length -1)];
+			Integer currentPqrentClosingPart = IndexToExtract.get(currentChiParentPart);
+			for(int ii = (openingLinkedParts.length -2); ii > -1 ; ii--) {
+				Integer currentOpeningPart = (Integer) openingLinkedParts[ii];
+				Integer currentClosingPart = IndexToExtract.get(currentOpeningPart);
+				if(currentChiParentPart > currentOpeningPart && currentClosingPart < currentPqrentClosingPart) {
+					stringToExtract.add(name.substring(currentChiParentPart, currentPqrentClosingPart));
+				}
+				currentChiParentPart = currentOpeningPart;
+				currentPqrentClosingPart = currentClosingPart;
 			}
-			currentChiParentPart = currentOpeningPart;
-			currentPqrentClosingPart = currentClosingPart;
 		}
-		System.out.println(stringToExtract);
 		for(int ii = 0; ii < stringToExtract.size(); ii++) {
 			name = name.replace(stringToExtract.get(ii), ConstantString.EMPTY);
 		}
