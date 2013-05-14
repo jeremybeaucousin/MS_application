@@ -93,11 +93,62 @@ public class StringUtil {
 
 		Map<Integer, String> openingPartIndex = extractResult.get(ConstantString.OPENING_PARTS);
 		Map<Integer, String> closingPartIndex = extractResult.get(ConstantString.CLOSING_PARTS);
+		System.out.println(openingPartIndex);
+		System.out.println(closingPartIndex);
+		
 		Map<Integer, Integer> IndexToExtract = new TreeMap<Integer, Integer>();
 		Object[] openingPartIndexKeys = openingPartIndex.keySet().toArray();
 		Object[] closingPartIndexKeys = closingPartIndex.keySet().toArray();
-		
-		for(int ii=00; ii < openingPartIndexKeys.length; ii++) {
+		// TODO chercher la prochaine parentaise fermante avant l'ouvrante
+		if(closingPartIndexKeys.length > openingPartIndexKeys.length) {
+			Map<Integer, Integer> IndexOpeningPartToExtract = new TreeMap<Integer, Integer>();
+			int latestClosedPart = (Integer) closingPartIndexKeys[(closingPartIndexKeys.length-1)];
+			int latestOpenedParent = -1;
+			int latestClosedParent = -1;
+			for(int ii = (openingPartIndexKeys.length - 1); ii >= 0; ii--) {
+				
+				Boolean previousclosingPartNotFound = true;
+				Integer maxIndex = -1;
+				int jj = 0;
+				while (previousclosingPartNotFound) {
+					if((Integer) closingPartIndexKeys[jj] >= latestClosedPart) {
+						latestClosedPart = (Integer) closingPartIndexKeys[(jj-1)];
+						previousclosingPartNotFound = false;
+					} else {
+						maxIndex = (Integer) closingPartIndexKeys[jj];
+					}
+					jj++;
+				}
+				if(maxIndex > -1) {
+					for(int kk = (ii-1); kk < ii && ii > 0; kk++) {
+						System.out.println("max close part : " + maxIndex);
+						System.out.println("previous open part : " + openingPartIndexKeys[kk]);
+						System.out.println("open part : " + openingPartIndexKeys[ii]);
+						if(latestOpenedParent == -1 || maxIndex < latestOpenedParent) {
+							IndexOpeningPartToExtract.put(maxIndex, (Integer) openingPartIndexKeys[kk]);
+							latestOpenedParent = (Integer) openingPartIndexKeys[kk];
+						} else if(!IndexOpeningPartToExtract.containsKey(latestClosedParent)/* || latestClosedParent > maxIndex*/) {
+							IndexOpeningPartToExtract.put(maxIndex, (Integer) openingPartIndexKeys[kk]);
+							latestOpenedParent = (Integer) openingPartIndexKeys[kk];
+							latestClosedParent = maxIndex;
+						} else if(IndexOpeningPartToExtract.containsKey(latestClosedParent)) {
+							IndexOpeningPartToExtract.put(latestClosedParent, (Integer) openingPartIndexKeys[kk]);
+							latestOpenedParent = (Integer) openingPartIndexKeys[kk];
+						}
+					}
+				}
+				System.out.println(IndexOpeningPartToExtract);
+			}
+			for(Integer indexes : IndexOpeningPartToExtract.keySet()) {
+				
+			}
+			System.out.println(IndexOpeningPartToExtract);
+			System.out.println(openingPartIndex);
+			System.out.println(closingPartIndex);
+			
+			closingPartIndexKeys = closingPartIndex.keySet().toArray();
+		}
+		for(int ii = 0; ii < openingPartIndexKeys.length; ii++) {
 			if(ii < closingPartIndexKeys.length) {
 				Integer firstClosedPart = (Integer) closingPartIndexKeys[ii];
 				Boolean peerNotFound = true;
@@ -111,7 +162,7 @@ public class StringUtil {
 					}
 					jj++;
 				}
-				
+
 				if(openPartsBeforeTheFirstClosedPart.size() > 0) {
 					Integer maxIndex = -1;
 					
@@ -127,23 +178,19 @@ public class StringUtil {
 			}
 		}
 		
-		// System.out.println(IndexToExtract);
-		/* TODO  Filtrer la table pour ne garder que les parents.
-		for(Integer index : IndexToExtract.keySet()) {
-			System.out.println(IndexToExtract.get(index));
-		}
-		*/
-		String[] stringToExtract = new String[IndexToExtract.size()];
-		int ii = 0;
-		for(Integer openingPart : IndexToExtract.keySet()) {
-			Integer closingPart = IndexToExtract.get(openingPart);
-			stringToExtract[ii] = name.substring(openingPart, closingPart);
-			ii++;
+		ArrayList<String> stringToExtract = new ArrayList<String>();
+		Object[] openingParts = IndexToExtract.keySet().toArray();
+		Integer currentParrentClosedPart = IndexToExtract.get(openingParts[0]);
+		stringToExtract.add(name.substring((Integer) openingParts[0], currentParrentClosedPart));
+		for(int ii = 1; ii < openingParts.length; ii++) {
+			Integer closingPart = IndexToExtract.get(openingParts[ii]);
+			if(closingPart > currentParrentClosedPart) {
+				stringToExtract.add(name.substring((Integer) openingParts[ii], closingPart));
+			}
 		}
 
-		for(ii = 0; ii < stringToExtract.length; ii++) {
-			//System.out.println(stringToExtract[ii]);
-			name = name.replace(stringToExtract[ii], ConstantString.EMPTY);
+		for(int ii = 0; ii < stringToExtract.size(); ii++) {
+			name = name.replace(stringToExtract.get(ii), ConstantString.EMPTY);
 		}
 		
 		if(!openingPartIndex.isEmpty() || !closingPartIndex.isEmpty()) {

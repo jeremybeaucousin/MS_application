@@ -18,9 +18,9 @@ import util.StringUtil;
 public class ImdbApi {
 	private final static String IMDB_API = "http://imdbapi.org/";
 	
-	public static JSONArray searchMovie(String movieName) throws JSONException, IOException {
+	public static Object searchMovie(String movieName) throws JSONException, IOException {
 		
-		JSONArray movie = null; 
+		Object movie = null; 
         movieName = StringUtil.transformSpecialsHTTPCharacterToSpace(movieName);
    
         URL urlImdbApiSearching = buildURL("title=" + movieName);	
@@ -35,22 +35,20 @@ public class ImdbApi {
             response.back();
 			if(fisrtChar == '[') {
 				movie = new JSONArray(response);
-				System.out.println("trouvé");
             } else if (fisrtChar == '{') {
-            	System.out.println("non trouvé");
+            	movie = new JSONObject(response);
             }
-            	
         }
 
 		return movie;
 	}         
 	 
-	public static JSONArray searchMovieStudying(String movieName) throws JSONException, IOException {
+	public static Object searchMovieStudying(String movieName) throws JSONException, IOException {
 
 		System.out.println("nom Original :" + movieName);
 
 		//JSONArray movie = searchMovie(movieName); 
-		JSONArray movie = null;
+		Object movie = null;
 		//if(movie == null) {
 			movieName = StringUtil.transformSpecialsCharacterToSpace(movieName);
 			movieName = StringUtil.deleteSurroudParts(movieName);
