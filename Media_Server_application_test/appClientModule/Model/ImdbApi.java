@@ -67,10 +67,11 @@ public class ImdbApi {
 				movie = moviesFound.get((moviesFound.size()-1));
 			}
 		}
-		if(movie == null) {
+		if(movie instanceof JSONObject) {
 			System.out.println(movie);
 		} else {
-			System.out.println(((org.json.JSONObject) ((JSONArray) movie).get(0)).get("title"));
+			JSONArray responseMovie = (JSONArray) movie;
+			System.out.println(movie);
 		}
 
 		return movie;

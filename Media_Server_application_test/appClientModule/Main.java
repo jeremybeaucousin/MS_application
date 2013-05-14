@@ -91,25 +91,25 @@ public class Main{
 		}	
 		
 		// FOR THE MOVIE DB		
-		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-			chooser.setCurrentDirectory(chooser.getSelectedFile());
-			test = Document.FolderScannerVideo(chooser.getCurrentDirectory());
-		}
-		if(test != null) {
-			for(int ii = 0; ii < test.size(); ii++) {
-				Integer movieId = TheMovieDB.searchMovieStudying(Document.getDocumentName(test.get(ii).getName()));
-				System.out.println(new DecimalFormat("###.##").format(new Double(ii)/test.size()*100) + "%");
-				if(movieId < 0 ) {
-					cpt++;
-				} else {
-					System.out.println(TheMovieDB.getMovie(movieId).get("original_title"));
-				}
-			}
-			System.out.println("total de film : " + test.size());
-			System.out.println("total reconnus : " + (test.size() - cpt));
-			System.out.println("total non reconnus : " + (cpt));
-			System.out.println("Ratio de réussite : " + (new DecimalFormat("###.##").format(new Double((test.size() - cpt))/test.size()*100) + "%"));
-		}
+//		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+//			chooser.setCurrentDirectory(chooser.getSelectedFile());
+//			test = Document.FolderScannerVideo(chooser.getCurrentDirectory());
+//		}
+//		if(test != null) {
+//			for(int ii = 0; ii < test.size(); ii++) {
+//				Integer movieId = TheMovieDB.searchMovieStudying(Document.getDocumentName(test.get(ii).getName()));
+//				System.out.println(new DecimalFormat("###.##").format(new Double(ii)/test.size()*100) + "%");
+//				if(movieId < 0 ) {
+//					cpt++;
+//				} else {
+//					System.out.println(TheMovieDB.getMovie(movieId).get("original_title"));
+//				}
+//			}
+//			System.out.println("total de film : " + test.size());
+//			System.out.println("total reconnus : " + (test.size() - cpt));
+//			System.out.println("total non reconnus : " + (cpt));
+//			System.out.println("Ratio de réussite : " + (new DecimalFormat("###.##").format(new Double((test.size() - cpt))/test.size()*100) + "%"));
+//		}
 		
 		
 		//request exemple http://api.themoviedb.org/3/search/movie?api_key=1acc7c1593ee8145d2d390f1d419a573&query=shrek
