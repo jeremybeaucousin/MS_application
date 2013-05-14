@@ -57,10 +57,22 @@ public class ImdbApi {
 			movieName = StringUtil.transformSpecialsCharacterToSpace(movieName);
 			movieName = StringUtil.deleteSurroudParts(movieName);
 			movieName = StringUtil.supresseMutlipleSpace(movieName);
+			movieName = StringUtil.insertSpaceBeforeCollapseUpperCaseOrInt(movieName);
 			movie = searchMovie(StringUtil.transformSpecialsCharacterToSpace(movieName));
 			System.out.println("nom Modifié :" + movieName);
 		//}
-		
+		if(movie == null) {
+			ArrayList<JSONArray> moviesFound = searchWordByWord(movieName);
+			if(!moviesFound.isEmpty()) {
+				movie = moviesFound.get((moviesFound.size()-1));
+			}
+		}
+		if(movie == null) {
+			System.out.println(movie);
+		} else {
+			System.out.println(((org.json.JSONObject) ((JSONArray) movie).get(0)).get("title"));
+		}
+
 		return movie;
 	}
 	
@@ -82,24 +94,24 @@ public class ImdbApi {
 	}
 	
 	//TODO 
-//	public static ArrayList<Integer> searchWordByWord(String movieName) throws JSONException, IOException {
-//		// TODO attantion au mot avec des entier dedans
-//		ArrayList<Integer> moviesFound = new ArrayList<Integer>();
-//		Pattern pattern = Pattern.compile("(\\w+)");
-//		Matcher matcher = pattern.matcher(movieName);
-//		StringBuffer wordAddedFromThemovieName = new StringBuffer();
-//		boolean MovieFound = true;
-//		while (matcher.find() && MovieFound) {
-//			wordAddedFromThemovieName.append(matcher.group() + ConstantString.SPACE);
-//			int testid = TheMovieDB.searchMovie(wordAddedFromThemovieName.toString());
-//			System.out.println("nom Modifié :" + wordAddedFromThemovieName.toString());
-//			if(testid > -1) {
-//				moviesFound.add(testid);
-//			} else if(testid == -1 && !moviesFound.isEmpty()) {
-//				MovieFound = false;
-//			}
-//			
-//		}
-//		return moviesFound;
-//	}
+	public static ArrayList<JSONArray> searchWordByWord(String movieName) throws JSONException, IOException {
+		// TODO attantion au mot avec des entier dedans
+		ArrayList<JSONArray> moviesFound = new ArrayList<JSONArray>();
+		Pattern pattern = Pattern.compile("(\\w+)");
+		Matcher matcher = pattern.matcher(movieName);
+		StringBuffer wordAddedFromThemovieName = new StringBuffer();
+		boolean MovieFound = true;
+		while (matcher.find() && MovieFound) {
+			wordAddedFromThemovieName.append(matcher.group() + ConstantString.SPACE);
+			Object movie = searchMovie(wordAddedFromThemovieName.toString());
+			System.out.println("nom Modifié :" + wordAddedFromThemovieName.toString());
+			if(movie instanceof JSONArray) {
+				moviesFound.add((JSONArray) movie);
+			} else if(movie instanceof JSONObject && !moviesFound.isEmpty()) {
+				MovieFound = false;
+			}
+			
+		}
+		return moviesFound;
+	}
 }

@@ -97,11 +97,11 @@ public class TheMovieDB {
 		boolean MovieFound = true;
 		while (matcher.find() && MovieFound) {
 			wordAddedFromThemovieName.append(matcher.group() + ConstantString.SPACE);
-			int testid = TheMovieDB.searchMovie(wordAddedFromThemovieName.toString());
+			int movieId = TheMovieDB.searchMovie(wordAddedFromThemovieName.toString());
 			System.out.println("nom Modifié :" + wordAddedFromThemovieName.toString());
-			if(testid > -1) {
-				moviesFound.add(testid);
-			} else if(testid == -1 && !moviesFound.isEmpty()) {
+			if(movieId > -1) {
+				moviesFound.add(movieId);
+			} else if(movieId == -1 && !moviesFound.isEmpty()) {
 				MovieFound = false;
 			}
 			

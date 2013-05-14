@@ -31,10 +31,6 @@ public class Main{
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
 	
-		//	ImdbApi.searchMovie("die hard");
-
-		String name = new String("jurassic");
-		TheMovieDB.searchWordByWord("die hard 4");
 		/* à coder
 		JSONObject film = TheMovieDB.getMovie(880);
 		JSONArray keyset = film.names();
@@ -70,29 +66,29 @@ public class Main{
 		// System.out.println(Media.getMediaID(Media.VIDEO));
 		
 		// FOR THE IMDBAPI	
-//		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-//			chooser.setCurrentDirectory(chooser.getSelectedFile());
-//			test = Document.FolderScannerVideo(chooser.getCurrentDirectory());
-//		}
-//		
-//		if(test != null) {
-//			for(int ii = 0; ii < test.size(); ii++) {
-//				Object movie = ImdbApi.searchMovieStudying(Document.getDocumentName(test.get(ii).getName()));
-//				if(movie instanceof JSONArray) {
-//					System.out.println(movie);
-//				} else if(movie instanceof JSONObject) {
-//					System.out.println(movie);
-//				}
-//				System.out.println(new DecimalFormat("###.##").format(new Double(ii)/test.size()*100) + "%");
-//				if(movie == null ) {
-//					cpt++;
-//				}
-//			}
-//			System.out.println("total de film : " + test.size());
-//			System.out.println("total reconnus : " + (test.size() - cpt));
-//			System.out.println("total non reconnus : " + (cpt));
-//			System.out.println("Ratio de réussite : " + (new DecimalFormat("###.##").format(new Double((test.size() - cpt))/test.size()*100) + "%"));
-//		}	
+		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+			chooser.setCurrentDirectory(chooser.getSelectedFile());
+			test = Document.FolderScannerVideo(chooser.getCurrentDirectory());
+		}
+		
+		if(test != null) {
+			for(int ii = 0; ii < test.size(); ii++) {
+				Object movie = ImdbApi.searchMovieStudying(Document.getDocumentName(test.get(ii).getName()));
+				if(movie instanceof JSONArray) {
+					System.out.println(movie);
+				} else if(movie instanceof JSONObject) {
+					System.out.println(movie);
+				}
+				System.out.println(new DecimalFormat("###.##").format(new Double(ii)/test.size()*100) + "%");
+				if(movie == null ) {
+					cpt++;
+				}
+			}
+			System.out.println("total de film : " + test.size());
+			System.out.println("total reconnus : " + (test.size() - cpt));
+			System.out.println("total non reconnus : " + (cpt));
+			System.out.println("Ratio de réussite : " + (new DecimalFormat("###.##").format(new Double((test.size() - cpt))/test.size()*100) + "%"));
+		}	
 		
 		// FOR THE MOVIE DB		
 		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
