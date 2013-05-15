@@ -17,15 +17,15 @@ import org.json.JSONTokener;
 
 import util.ConstantString;
 import util.JSONObject;
-import util.StringUtil;
+import util.StringUtils;
 
 public class ImdbApi {
 	private final static String IMDB_API = "http://imdbapi.org/";
 	
-	public static Object searchMovie(String movieName) throws JSONException, IOException {
+public static Object searchMovie(String movieName) throws JSONException, IOException {
 		
 		Object movie = null; 
-        movieName = StringUtil.transformSpecialsHTTPCharacterToSpace(movieName);
+        movieName = StringUtils.transformSpecialsHTTPCharacterToSpace(movieName);
    
         URL urlImdbApiSearching = buildURL("title=" + movieName);	
         
@@ -45,32 +45,31 @@ public class ImdbApi {
         }
 
 		return movie;
-	}         
+	}               
 	 
-	public static Object searchMovieStudying(String movieName) throws JSONException, IOException {
+	public static Object searchMovieStudying(Document movie) throws JSONException, IOException {
 
-		System.out.println("nom Original :" + movieName);
+		System.out.println("nom Original :" + movie);
 
 		//JSONArray movie = searchMovie(movieName); 
-		Object movie = null;
+		Object returnMovie = null;
 		//if(movie == null) {
-			movieName = StringUtil.transformSpecialsCharacterToSpace(movieName);
-			movieName = StringUtil.deleteSurroudParts(movieName);
-			movieName = StringUtil.supresseMutlipleSpace(movieName);
-			movieName = StringUtil.insertSpaceBeforeCollapseUpperCaseOrInt(movieName);
-			movie = searchMovie(StringUtil.transformSpecialsCharacterToSpace(movieName));
-			System.out.println("nom Modifié :" + movieName);
+			movie.deleteSpecialsCaracters();
+//			movie = StringUtils.deleteSurroudParts(movie);
+//			movie = StringUtils.supresseMutlipleSpace(movie);
+			movie.insertSpaceBeforeCollapseUpperCaseOrInt();
+			System.out.println("nom Modifié :" + movie);
 		//}
-		if(movie == null) {
-			ArrayList<JSONArray> moviesFound = searchWordByWord(movieName);
+		if(returnMovie == null) {
+			ArrayList<JSONArray> moviesFound = searchWordByWord(movie);
 			if(!moviesFound.isEmpty()) {
-				movie = moviesFound.get((moviesFound.size()-1));
+				returnMovie = moviesFound.get((moviesFound.size()-1));
 			}
 		}
-		if(movie instanceof JSONObject) {
+		if(returnMovie instanceof JSONObject) {
 			System.out.println(movie);
 		} else {
-			JSONArray responseMovie = (JSONArray) movie;
+			JSONArray responseMovie = (JSONArray) returnMovie;
 			System.out.println(movie);
 		}
 
@@ -95,20 +94,20 @@ public class ImdbApi {
 	}
 	
 	//TODO 
-	public static ArrayList<JSONArray> searchWordByWord(String movieName) throws JSONException, IOException {
+	public static ArrayList<JSONArray> searchWordByWord(Document movie) throws JSONException, IOException {
 		// TODO attantion au mot avec des entier dedans
 		ArrayList<JSONArray> moviesFound = new ArrayList<JSONArray>();
 		Pattern pattern = Pattern.compile("(\\w+)");
-		Matcher matcher = pattern.matcher(movieName);
+		Matcher matcher = pattern.matcher(movie.getDocumentName());
 		StringBuffer wordAddedFromThemovieName = new StringBuffer();
 		boolean MovieFound = true;
 		while (matcher.find() && MovieFound) {
 			wordAddedFromThemovieName.append(matcher.group() + ConstantString.SPACE);
-			Object movie = searchMovie(wordAddedFromThemovieName.toString());
+			Object returnMovie = searchMovie(wordAddedFromThemovieName.toString());
 			System.out.println("nom Modifié :" + wordAddedFromThemovieName.toString());
-			if(movie instanceof JSONArray) {
-				moviesFound.add((JSONArray) movie);
-			} else if(movie instanceof JSONObject && !moviesFound.isEmpty()) {
+			if(returnMovie instanceof JSONArray) {
+				moviesFound.add((JSONArray) returnMovie);
+			} else if(returnMovie instanceof JSONObject && !moviesFound.isEmpty()) {
 				MovieFound = false;
 			}
 			

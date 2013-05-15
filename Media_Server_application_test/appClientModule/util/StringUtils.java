@@ -9,31 +9,12 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.mysql.jdbc.StringUtils;
-
-public class StringUtil {
-	/**
-	 * Delete all the special characters in the movie name include in (".", "-", "_")
-	 * @param name
-	 * 		original name of the movie
-	 * @return name of the movie without special caracters.
-	 */
-	public static String transformSpecialsCharacterToSpace(String name) {
-		String modifiedName = new String(name);
-		modifiedName = modifiedName.replace(ConstantString.DOT, ConstantString.SPACE);
-		modifiedName = modifiedName.replace(ConstantString.DASH, ConstantString.SPACE);
-		modifiedName = modifiedName.replace(ConstantString.UNDERSCORE, ConstantString.SPACE);
-		return modifiedName;
-	}
+public class StringUtils {
 	
 	public static String transformSpecialsHTTPCharacterToSpace(String name) {
 		String modifiedName = new String(name);
 		modifiedName = modifiedName.replace(ConstantString.AMPERSAND, ConstantString.SPACE);
 		return modifiedName;
-	}
-	
-	public static String supresseMutlipleSpace(String name) {
-		return name.replaceAll("(\\s+)", ConstantString.SPACE);
 	}
 	
 	public static String insertSpaceBeforeCollapseUpperCaseOrInt(String name) {

@@ -14,16 +14,15 @@ import org.json.JSONTokener;
 
 import util.ConstantString;
 import util.JSONObject;
-import util.StringUtil;
+import util.StringUtils;
 
 public class TheMovieDB {
 	private static String api_key = "api_key=1acc7c1593ee8145d2d390f1d419a573";
 	private static String theMovieDBURL = "http://api.themoviedb.org/3";
 	
 	public static int searchMovie(String movieName) throws JSONException, IOException {
-		
         int movieId = -1; 
-        movieName = StringUtil.transformSpecialsHTTPCharacterToSpace(movieName);
+        movieName = StringUtils.transformSpecialsHTTPCharacterToSpace(movieName);
         
         URL urlTheMovieDbSearching = buildURL("/search/movie", "&query=" + movieName);	
 
@@ -36,22 +35,22 @@ public class TheMovieDB {
 		return movieId;
 	}
 	
-	public static int searchMovieStudying(String movieName) throws JSONException, IOException {
+	public static int searchMovieStudying(Document movie) throws JSONException, IOException {
 
-		System.out.println("nom Original :" + movieName);
+		System.out.println("nom Original :" + movie);
 
         //int movieId = searchMovie(movieName); 
 		int movieId = -1;
 		//if(movieId == -1) {
-			movieName = StringUtil.transformSpecialsCharacterToSpace(movieName);
-			movieName = StringUtil.deleteSurroudParts(movieName);
-			movieName = StringUtil.supresseMutlipleSpace(movieName);
-			movieName = StringUtil.insertSpaceBeforeCollapseUpperCaseOrInt(movieName);
-			System.out.println("nom Modifié :" + movieName);
-			movieId = searchMovie(StringUtil.transformSpecialsCharacterToSpace(movieName));
+			movie.deleteSpecialsCaracters();
+//			movie = StringUtils.deleteSurroudParts(movie);
+//			movie = StringUtils.supresseMutlipleSpace(movie);
+			movie.insertSpaceBeforeCollapseUpperCaseOrInt();
+//			System.out.println("nom Modifié :" + movie);
+//			movieId = searchMovie(StringUtils.transformSpecialsCharacterToSpace(movie));
 		//}
 		if(movieId == -1) {
-			ArrayList<Integer> moviesFound = searchWordByWord(movieName);
+			ArrayList<Integer> moviesFound = searchWordByWord(movie);
 			if(!moviesFound.isEmpty()) {
 				movieId = moviesFound.get((moviesFound.size()-1));
 			}
@@ -88,11 +87,11 @@ public class TheMovieDB {
 		return urlTheMovieDbSearching;
 	}
 	
-	public static ArrayList<Integer> searchWordByWord(String movieName) throws JSONException, IOException {
+	public static ArrayList<Integer> searchWordByWord(Document movie) throws JSONException, IOException {
 		// TODO attantion au mot avec des entier dedans
 		ArrayList<Integer> moviesFound = new ArrayList<Integer>();
 		Pattern pattern = Pattern.compile("(\\w+)");
-		Matcher matcher = pattern.matcher(movieName);
+		Matcher matcher = pattern.matcher(movie.getDocumentName());
 		StringBuffer wordAddedFromThemovieName = new StringBuffer();
 		boolean MovieFound = true;
 		while (matcher.find() && MovieFound) {

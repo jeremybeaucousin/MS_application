@@ -4,15 +4,15 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.swing.JFileChooser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import com.mysql.jdbc.StringUtils;
+
 import util.ConstantString;
 import util.JSONObject;
-import util.StringUtil;
 
 import Model.Document;
 import Model.ImdbApi;
@@ -22,15 +22,18 @@ public class Main{
 	
 	public static void main(String[] args) throws JSONException, IOException {
 		int cpt=0;
-		
 		JFileChooser chooser = new JFileChooser();
-		
 		ArrayList<File> test = null;
-		
 		chooser.setDialogTitle("Sélectionner votre dossier de vidéo");
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
-	
+		
+		Document document = new Document("DieHard6a 5b - _ . /.avi");
+		System.out.println(document);
+		document.deleteSpecialsCaracters();
+		System.out.println(document);
+		document.insertSpaceBeforeCollapseUpperCaseOrInt();
+		System.out.println(document);
 		/* à coder
 		JSONObject film = TheMovieDB.getMovie(880);
 		JSONArray keyset = film.names();
@@ -66,29 +69,29 @@ public class Main{
 		// System.out.println(Media.getMediaID(Media.VIDEO));
 		
 		// FOR THE IMDBAPI	
-		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-			chooser.setCurrentDirectory(chooser.getSelectedFile());
-			test = Document.FolderScannerVideo(chooser.getCurrentDirectory());
-		}
-		
-		if(test != null) {
-			for(int ii = 0; ii < test.size(); ii++) {
-				Object movie = ImdbApi.searchMovieStudying(Document.getDocumentName(test.get(ii).getName()));
-				if(movie instanceof JSONArray) {
-					System.out.println(movie);
-				} else if(movie instanceof JSONObject) {
-					System.out.println(movie);
-				}
-				System.out.println(new DecimalFormat("###.##").format(new Double(ii)/test.size()*100) + "%");
-				if(movie == null ) {
-					cpt++;
-				}
-			}
-			System.out.println("total de film : " + test.size());
-			System.out.println("total reconnus : " + (test.size() - cpt));
-			System.out.println("total non reconnus : " + (cpt));
-			System.out.println("Ratio de réussite : " + (new DecimalFormat("###.##").format(new Double((test.size() - cpt))/test.size()*100) + "%"));
-		}	
+//		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+//			chooser.setCurrentDirectory(chooser.getSelectedFile());
+//			test = Document.FolderScannerVideo(chooser.getCurrentDirectory());
+//		}
+//		
+//		if(test != null) {
+//			for(int ii = 0; ii < test.size(); ii++) {
+//				Object movie = ImdbApi.searchMovieStudying(Document.getDocumentName(test.get(ii).getName()));
+//				if(movie instanceof JSONArray) {
+//					System.out.println(movie);
+//				} else if(movie instanceof JSONObject) {
+//					System.out.println(movie);
+//				}
+//				System.out.println(new DecimalFormat("###.##").format(new Double(ii)/test.size()*100) + "%");
+//				if(movie == null ) {
+//					cpt++;
+//				}
+//			}
+//			System.out.println("total de film : " + test.size());
+//			System.out.println("total reconnus : " + (test.size() - cpt));
+//			System.out.println("total non reconnus : " + (cpt));
+//			System.out.println("Ratio de réussite : " + (new DecimalFormat("###.##").format(new Double((test.size() - cpt))/test.size()*100) + "%"));
+//		}	
 		
 		// FOR THE MOVIE DB		
 //		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
