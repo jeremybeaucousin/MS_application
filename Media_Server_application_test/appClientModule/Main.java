@@ -2,20 +2,13 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 import javax.swing.JFileChooser;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 
-import com.mysql.jdbc.StringUtils;
-
-import util.ConstantString;
-import util.JSONObject;
-
 import Model.Document;
-import Model.ImdbApi;
+import Model.Movie;
 import Model.TheMovieDB;
 
 public class Main{
@@ -23,17 +16,41 @@ public class Main{
 	public static void main(String[] args) throws JSONException, IOException {
 		int cpt=0;
 		JFileChooser chooser = new JFileChooser();
-		ArrayList<File> test = null;
+		ArrayList<File> filesList = null;
 		chooser.setDialogTitle("Sélectionner votre dossier de vidéo");
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
 		
-		Document document = new Document("DieHard6a 5b - _ . /.avi");
-		System.out.println(document);
-		document.deleteSpecialsCaracters();
-		System.out.println(document);
-		document.insertSpaceBeforeCollapseUpperCaseOrInt();
-		System.out.println(document);
+//        //Create and set up the window.
+//        JFrame frame = new JFrame("TopLevelDemo");
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//        //Create the menu bar.  Make it have a green background.
+//        JMenuBar greenMenuBar = new JMenuBar();
+//        greenMenuBar.setOpaque(true);
+//        //greenMenuBar.setBackground(new Color(154, 165, 127));
+//        greenMenuBar.setPreferredSize(new Dimension(200, 20));
+//
+//        //Create a yellow label to put in the content pane.
+//        JLabel yellowLabel = new JLabel();
+//        yellowLabel.setOpaque(true);
+//        //yellowLabel.setBackground(new Color(248, 213, 131));
+//        yellowLabel.setPreferredSize(new Dimension(200, 180));
+//
+//        //Set the menu bar and add the label to the content pane.
+//        frame.setJMenuBar(greenMenuBar);
+//        frame.getContentPane().add(yellowLabel, BorderLayout.CENTER);
+//
+//        //adding progress bar
+//        JProgressBar progressBar = new JProgressBar(0, 100);
+//        progressBar.setValue(0);
+//        progressBar.setStringPainted(true);
+//        frame.add(progressBar);
+//		
+//        //Display the window.
+//        frame.pack();
+//        frame.setVisible(true);
+		
 		/* à coder
 		JSONObject film = TheMovieDB.getMovie(880);
 		JSONArray keyset = film.names();
@@ -71,48 +88,51 @@ public class Main{
 		// FOR THE IMDBAPI	
 //		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 //			chooser.setCurrentDirectory(chooser.getSelectedFile());
-//			test = Document.FolderScannerVideo(chooser.getCurrentDirectory());
+//			filesList = Document.FolderScannerVideo(chooser.getCurrentDirectory());
 //		}
 //		
-//		if(test != null) {
-//			for(int ii = 0; ii < test.size(); ii++) {
-//				Object movie = ImdbApi.searchMovieStudying(Document.getDocumentName(test.get(ii).getName()));
-//				if(movie instanceof JSONArray) {
+//		if(filesList != null) {
+//			for(int ii = 0; ii < filesList.size(); ii++) {
+//				Movie movie = new Movie(filesList.get(ii).getName(), filesList.get(ii).getAbsolutePath());
+//				Object responseMovie = ImdbApi.searchMovieStudying(movie);
+//				if(responseMovie instanceof JSONArray) {
 //					System.out.println(movie);
-//				} else if(movie instanceof JSONObject) {
+//				} else if(responseMovie instanceof JSONObject) {
 //					System.out.println(movie);
 //				}
-//				System.out.println(new DecimalFormat("###.##").format(new Double(ii)/test.size()*100) + "%");
+//				System.out.println(new DecimalFormat("###.##").format(new Double(ii)/filesList.size()*100) + "%");
 //				if(movie == null ) {
 //					cpt++;
 //				}
 //			}
-//			System.out.println("total de film : " + test.size());
-//			System.out.println("total reconnus : " + (test.size() - cpt));
+//			System.out.println("total de film : " + filesList.size());
+//			System.out.println("total reconnus : " + (filesList.size() - cpt));
 //			System.out.println("total non reconnus : " + (cpt));
-//			System.out.println("Ratio de réussite : " + (new DecimalFormat("###.##").format(new Double((test.size() - cpt))/test.size()*100) + "%"));
+//			System.out.println("Ratio de réussite : " + (new DecimalFormat("###.##").format(new Double((filesList.size() - cpt))/filesList.size()*100) + "%"));
 //		}	
 		
 		// FOR THE MOVIE DB		
-//		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-//			chooser.setCurrentDirectory(chooser.getSelectedFile());
-//			test = Document.FolderScannerVideo(chooser.getCurrentDirectory());
-//		}
-//		if(test != null) {
-//			for(int ii = 0; ii < test.size(); ii++) {
-//				Integer movieId = TheMovieDB.searchMovieStudying(Document.getDocumentName(test.get(ii).getName()));
-//				System.out.println(new DecimalFormat("###.##").format(new Double(ii)/test.size()*100) + "%");
-//				if(movieId < 0 ) {
-//					cpt++;
-//				} else {
-//					System.out.println(TheMovieDB.getMovie(movieId).get("original_title"));
-//				}
-//			}
-//			System.out.println("total de film : " + test.size());
-//			System.out.println("total reconnus : " + (test.size() - cpt));
-//			System.out.println("total non reconnus : " + (cpt));
-//			System.out.println("Ratio de réussite : " + (new DecimalFormat("###.##").format(new Double((test.size() - cpt))/test.size()*100) + "%"));
-//		}
+		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+			chooser.setCurrentDirectory(chooser.getSelectedFile());
+			filesList = Document.FolderScannerVideo(chooser.getCurrentDirectory());
+		}
+		if(filesList != null) {
+			for(int ii = 0; ii < filesList.size(); ii++) {
+				Movie movie = new Movie(filesList.get(ii).getName(), filesList.get(ii).getAbsolutePath());
+				Integer movieId = TheMovieDB.searchMovieStudying(movie);
+				System.out.println(new DecimalFormat("###.##").format(new Double(ii)/filesList.size()*100) + "%");
+				if(movieId < 0 ) {
+					cpt++;
+				} else {
+					System.out.println(TheMovieDB.getMovie(movieId).get("original_title"));
+				}
+			}
+			
+			System.out.println("total de film : " + filesList.size());
+			System.out.println("total reconnus : " + (filesList.size() - cpt));
+			System.out.println("total non reconnus : " + (cpt));
+			System.out.println("Ratio de réussite : " + (new DecimalFormat("###.##").format(new Double((filesList.size() - cpt))/filesList.size()*100) + "%"));
+		}
 		
 		
 		//request exemple http://api.themoviedb.org/3/search/movie?api_key=1acc7c1593ee8145d2d390f1d419a573&query=shrek

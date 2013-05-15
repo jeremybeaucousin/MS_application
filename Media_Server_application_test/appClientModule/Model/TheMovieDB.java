@@ -43,11 +43,10 @@ public class TheMovieDB {
 		int movieId = -1;
 		//if(movieId == -1) {
 			movie.deleteSpecialsCaracters();
-//			movie = StringUtils.deleteSurroudParts(movie);
-//			movie = StringUtils.supresseMutlipleSpace(movie);
+			movie.deleteSurroudParts();
 			movie.insertSpaceBeforeCollapseUpperCaseOrInt();
-//			System.out.println("nom Modifié :" + movie);
-//			movieId = searchMovie(StringUtils.transformSpecialsCharacterToSpace(movie));
+			System.out.println("nom Modifié :" + movie);
+			movieId = searchMovie(movie.getDocumentName());
 		//}
 		if(movieId == -1) {
 			ArrayList<Integer> moviesFound = searchWordByWord(movie);

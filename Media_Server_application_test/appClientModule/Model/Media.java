@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import base.Connexion;
-import base.MediaTable;
 
 public class Media implements base.MediaTable{
 	public static String VIDEO = "Video";
