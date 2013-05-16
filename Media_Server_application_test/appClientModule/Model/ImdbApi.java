@@ -23,6 +23,7 @@ public class ImdbApi {
 	
 public static Object searchMovie(String movieName) throws JSONException, IOException {
 		//
+		//
 		Object movie = null; 
         movieName = StringUtils.transformSpecialsHTTPCharacterToSpace(movieName);
    
