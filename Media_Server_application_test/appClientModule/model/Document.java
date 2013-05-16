@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public abstract class Document {
 		this.documentName = this.documentName.replaceAll("([\\.,\\-,\\_])", ConstantString.SPACE);
 		this.supresseMutlipleSpace();
 	}
-	
+
 	public void insertSpaceBeforeCollapseUpperCaseOrInt() {
 		Pattern pattern = Pattern.compile("[a-zA-Z][1-9][a-zA-Z]|[a-z][A-Z]|[a-zA-Z][1-9]|[1-9][a-zA-Z]");
 		Matcher matcher = pattern.matcher(this.documentName);
