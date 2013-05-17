@@ -5,7 +5,14 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Path2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.sound.midi.Patch;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JLabel;
@@ -13,7 +20,7 @@ import javax.swing.JPanel;
 
 public class FileKindSelection extends JPanel implements ActionListener {
 	MainWindow mainWindow;
-	public FileKindSelection(MainWindow mainWindow) {
+	public FileKindSelection(MainWindow mainWindow) throws IOException {
 		this.mainWindow = mainWindow;
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints gridBagConstraints = new GridBagConstraints();
@@ -77,7 +84,11 @@ public class FileKindSelection extends JPanel implements ActionListener {
 			boolean videoIsSelected = ((JCheckBoxMenuItem) this.getComponent(1)).isSelected();
 			boolean serieIsSelected = ((JCheckBoxMenuItem) this.getComponent(2)).isSelected();
 			boolean musicIsSelected = ((JCheckBoxMenuItem) this.getComponent(3)).isSelected();
-			this.mainWindow.getFileKindSelectionParam(videoIsSelected, serieIsSelected, musicIsSelected);
+			try {
+				this.mainWindow.getFileKindSelectionParam(videoIsSelected, serieIsSelected, musicIsSelected);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 

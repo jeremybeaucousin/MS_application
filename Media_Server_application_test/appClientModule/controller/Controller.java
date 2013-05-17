@@ -34,8 +34,9 @@ public class Controller {
 	}
 	/**
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		int cpt=0;
 		JFileChooser chooser = new JFileChooser();
 		ArrayList<File> filesList = null;
