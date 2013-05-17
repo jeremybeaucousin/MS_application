@@ -1,4 +1,4 @@
-package vue;
+package view;
 
 import java.awt.Component;
 import java.awt.GridBagConstraints;
@@ -18,7 +18,9 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class FileKindSelection extends JPanel implements ActionListener {
+import model.views.FileKindSelectionParameters;
+
+public final class FileKindSelection extends JPanel implements ActionListener {
 	MainWindow mainWindow;
 	public FileKindSelection(MainWindow mainWindow) throws IOException {
 		this.mainWindow = mainWindow;
@@ -84,8 +86,9 @@ public class FileKindSelection extends JPanel implements ActionListener {
 			boolean videoIsSelected = ((JCheckBoxMenuItem) this.getComponent(1)).isSelected();
 			boolean serieIsSelected = ((JCheckBoxMenuItem) this.getComponent(2)).isSelected();
 			boolean musicIsSelected = ((JCheckBoxMenuItem) this.getComponent(3)).isSelected();
+			FileKindSelectionParameters fileKindSelectionParameters = new FileKindSelectionParameters(videoIsSelected, serieIsSelected, musicIsSelected);
 			try {
-				this.mainWindow.getFileKindSelectionParam(videoIsSelected, serieIsSelected, musicIsSelected);
+				this.mainWindow.getFileKindSelectionParam(fileKindSelectionParameters);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}

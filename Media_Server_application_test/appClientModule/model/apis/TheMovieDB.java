@@ -1,4 +1,4 @@
-package model;
+package model.apis;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -8,6 +8,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import model.Document;
 
 import org.json.JSONException;
 import org.json.JSONTokener;

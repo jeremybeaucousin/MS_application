@@ -20,12 +20,12 @@ import javax.swing.JPanel;
 
 import model.Document;
 import model.Movie;
-import model.TheMovieDB;
+import model.apis.TheMovieDB;
 
 import org.json.JSONException;
 
-import vue.MainWindow;
-import vue.SwingTest;
+import view.MainWindow;
+import view.SwingTest;
 
 public class Controller {
 

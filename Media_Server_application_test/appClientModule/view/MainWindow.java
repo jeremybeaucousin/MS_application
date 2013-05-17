@@ -1,4 +1,4 @@
-package vue;
+package view;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
@@ -21,12 +22,14 @@ import javax.swing.JPanel;
 import javax.swing.JWindow;
 import javax.swing.border.BevelBorder;
 
-public class MainWindow extends JWindow {
+import model.views.FileKindSelectionParameters;
+
+public class MainWindow extends JFrame {
 	FileKindSelection fileKindSelection;
 	SearchingOnSelectedValues searchingOnSelectedValue;
 	public MainWindow() throws IOException {
 		//this.setTitle("Media Server Application"); //On donne un titre à l'application
-		this.setSize(300, 200);//On lui donne une taille pour qu'on puisse la voir
+		this.setSize(300, 300);//On lui donne une taille pour qu'on puisse la voir
 		this.setVisible(true);//On la rend visible
 		this.setLocationRelativeTo(null);//On centre la fenêtre sur l'écran
 		//this.setResizable(false); //On interdit la redimensionnement de la fenêtre
@@ -45,8 +48,8 @@ public class MainWindow extends JWindow {
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
 		gridBagConstraints.weightx = 0.5;
-		
-		BufferedImage frenchIcon = ImageIO.read(new File("./img/United-Kingdom-flag.png"));
+		System.out.println();
+		BufferedImage frenchIcon = ImageIO.read(getClass().getClassLoader().getResource("United-Kingdom-flag.png"));
 		JButton frenchButton = new JButton(new ImageIcon(frenchIcon));
 		frenchButton.setBorder(BorderFactory.createEtchedBorder(1));
 		frenchButton.setSize(32, 32);
@@ -57,7 +60,7 @@ public class MainWindow extends JWindow {
 		gridBagConstraints.gridy = 0;
 		gridBagConstraints.weightx = 0.5;
 		
-		BufferedImage englishIcon = ImageIO.read(new File("./img/france_flag_32.png"));
+		BufferedImage englishIcon = ImageIO.read(getClass().getClassLoader().getResource("france_flag_32.png"));
 		JButton englishButton = new JButton(new ImageIcon(englishIcon));
 		englishButton.setBorder(BorderFactory.createEtchedBorder(1));
 		englishButton.setSize(32, 32);
@@ -78,24 +81,17 @@ public class MainWindow extends JWindow {
 		this.setVisible(true);
 	}
 
-	public void getFileKindSelectionParam(Boolean videoIsSelected, Boolean serieIsSelected, Boolean musicIsSelected) throws IOException {
-		this.remove(fileKindSelection);
-		this.searchingOnSelectedValue = new SearchingOnSelectedValues(this, videoIsSelected, serieIsSelected, musicIsSelected);
-		
-		GridBagConstraints gridBagConstraints = new GridBagConstraints();
-		
-		gridBagConstraints.fill = GridBagConstraints.CENTER;
-		gridBagConstraints.gridx = 0;
-		gridBagConstraints.gridy = 1;
-
-		this.add(this.searchingOnSelectedValue, gridBagConstraints);
-	    this.invalidate(); 
-	    this.validate();
-	    this.repaint();
+	public void getFileKindSelectionParam(FileKindSelectionParameters fileKindSelectionParameters) throws IOException {
+		this.searchingOnSelectedValue = new SearchingOnSelectedValues(this, fileKindSelectionParameters);
+	    this.replaceContent(this.fileKindSelection, this.searchingOnSelectedValue);
 	}
 
-	public void getSearchingOnSelectedValues() {
-		this.remove(this.searchingOnSelectedValue);
+	public void getSearchingOnSelectedParam() {
+		this.replaceContent(this.searchingOnSelectedValue, this.fileKindSelection);
+	}
+	
+	private void replaceContent(JComponent oldContent, JComponent newContent) {
+		this.remove(oldContent);
 
 		GridBagConstraints gridBagConstraints = new GridBagConstraints();
 		
@@ -103,7 +99,7 @@ public class MainWindow extends JWindow {
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 1;
 		
-		this.add(this.fileKindSelection, gridBagConstraints);
+		this.add(newContent, gridBagConstraints);
 		this.invalidate(); 
 		this.validate();
 		this.repaint();
