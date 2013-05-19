@@ -92,7 +92,8 @@ public class TheMovieDB implements ConstantString {
 		// TODO attantion au mot avec des entier dedans
 		ArrayList<Integer> moviesFound = new ArrayList<Integer>();
 		String allCharacters = LOWER_CASE_CHARACTERS + UPPER_CASE_CHARACTERS;
-		Pattern pattern = Pattern.compile("(\\[" + allCharacters + "]+)");
+		System.out.println(allCharacters);
+		Pattern pattern = Pattern.compile("([" + allCharacters + "]+)");
 		Matcher matcher = pattern.matcher(movie.getDocumentName());
 		StringBuffer wordAddedFromThemovieName = new StringBuffer();
 		boolean MovieFound = true;
