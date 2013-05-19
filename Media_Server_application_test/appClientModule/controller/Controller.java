@@ -1,13 +1,21 @@
 package controller;
 
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
@@ -17,11 +25,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import model.Document;
 import model.Movie;
 import model.apis.TheMovieDB;
 
+import org.hsqldb.server.Server;
 import org.json.JSONException;
 
 import view.MainWindow;
@@ -35,8 +45,12 @@ public class Controller {
 	/**
 	 * @param args
 	 * @throws IOException 
+	 * @throws ClassNotFoundException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws SQLException 
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		int cpt=0;
 		JFileChooser chooser = new JFileChooser();
 		ArrayList<File> filesList = null;
@@ -44,9 +58,41 @@ public class Controller {
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
 		
-		final MainWindow mainWindow = new MainWindow();
+		Server hsqlServer = new Server();
+		
+		hsqlServer.setLogWriter(null);
+        hsqlServer.setSilent(true);
+        
+        hsqlServer.setDatabaseName(0, "media_server");
+        hsqlServer.setDatabasePath(0, "file:database/media_server");
+        hsqlServer.start();
+		//final MainWindow mainWindow = new MainWindow();
+		Class.forName("org.hsqldb.jdbcDriver").newInstance();
+		Connection connexion = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/media_server", "sa",  "");
+		Statement statement = connexion.createStatement() ;
+		//statement.executeUpdate("INSERT INTO PUBLIC.CONTENT_ADVISORY (ID_CONTENT_ADVISORY, CONTENT_ADVISORY_WORDING ) VALUES (2 , '-16');");
+		ResultSet result = statement.executeQuery("SELECT ID_CONTENT_ADVISORY, CONTENT_ADVISORY_WORDING FROM PUBLIC.CONTENT_ADVISORY;");
+		System.out.println(hsqlServer.getDatabasePath(0, true));
+		JFrame jframe = new JFrame();
+		jframe.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		jframe.setLocationRelativeTo(null);
+		jframe.setSize(300, 300);
+		jframe.setLayout(new FlowLayout());
+		JLabel jlabel = new JLabel(hsqlServer.getDatabasePath(0, true));
+		jlabel.setLayout(new FlowLayout());
+		jframe.add(jlabel);
+		while(result.next()) {
+			JLabel jlabel2 = new JLabel(result.getInt("ID_CONTENT_ADVISORY") + " " + result.getString("CONTENT_ADVISORY_WORDING"));
+			jlabel2.setLayout(new FlowLayout());
+			jframe.add(jlabel2);
+		}
+		
+		jframe.setVisible(true);
+		hsqlServer.stop();
+		
 
 
+	
 //        //Create and set up the window.
 //        JFrame frame = new JFrame("TopLevelDemo");
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
