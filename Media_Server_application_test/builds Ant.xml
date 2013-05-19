@@ -16,6 +16,7 @@
             <zipfileset excludes="META-INF/*.SF" src="C:/Users/Jeje/git/MS_application/Media_Server_application_test/ressources/lib/java-json.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="C:/Users/Jeje/git/MS_application/Media_Server_application_test/ressources/lib/mysql-connector-java-5.1.8-bin.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="C:/Users/Jeje/git/MS_application/Media_Server_application_test/ressources/lib/sqltool.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/Jeje/git/MS_application/Media_Server_application_test/ressources/lib/commons-io-1.2.jar"/>
         </jar>
     </target>
 </project>

@@ -51,7 +51,7 @@ public class Main {
 		Statement statement = hsqlDatase.getStatement();
 		ResultSet result = null;
 		//statement.executeUpdate("INSERT INTO PUBLIC.CONTENT_ADVISORY (ID_CONTENT_ADVISORY, CONTENT_ADVISORY_WORDING ) VALUES (2 , '-16');");
-		result = statement.executeQuery("SELECT ID_NATIONALITY, NATIONALITY_WORDING FROM MEDIA_SERVER.NATIONALITY;");
+		result = statement.executeQuery("SELECT ID_COUNTRY, COUNTRY_WORDING FROM MEDIA_SERVER.COUNTRY;");
 		JFrame jframe = new JFrame();
 		jframe.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		jframe.setLocationRelativeTo(null);
@@ -62,7 +62,7 @@ public class Main {
 		jframe.add(jlabel);
 		if(result != null) {
 			while(result.next()) {
-				JLabel jlabel2 = new JLabel(result.getInt("ID_NATIONALITY") + " " + result.getString("NATIONALITY_WORDING"));
+				JLabel jlabel2 = new JLabel(result.getInt("ID_COUNTRY") + " " + result.getString("COUNTRY_WORDING"));
 				jlabel2.setLayout(new FlowLayout());
 				jframe.add(jlabel2);
 			}

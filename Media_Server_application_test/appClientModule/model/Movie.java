@@ -2,8 +2,6 @@ package model;
 
 import java.util.Date;
 
-import model.base.DatabaseActionsImplemented;
-
 public class Movie extends Document implements model.base.DatabaseActions {
 	
 	/** Id of the movie **/
