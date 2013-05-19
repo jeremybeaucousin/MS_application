@@ -11,8 +11,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
+import java.awt.Toolkit;
 
-public class TestMaite {
+public class PrimaryWindow {
 
 	private JFrame frame;
 
@@ -23,7 +24,7 @@ public class TestMaite {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TestMaite window = new TestMaite();
+					PrimaryWindow window = new PrimaryWindow();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,7 +36,7 @@ public class TestMaite {
 	/**
 	 * Create the application.
 	 */
-	public TestMaite() {
+	public PrimaryWindow() {
 		initialize();
 	}
 
@@ -44,6 +45,7 @@ public class TestMaite {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Sett\u00E4n\\git\\MS_application\\Media_Server_application_test\\imgMaite\\multimedia-icone.png"));
 		frame.setEnabled(false);
 		frame.setBounds(100, 100, 594, 486);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -63,21 +65,21 @@ public class TestMaite {
 		lblFrench.setIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\git\\MS_application\\Media_Server_application_test\\imgMaite\\france_flag_32.png"));
 		panellanguages.add(lblFrench);
 		
-		JButton btnTerminer = new JButton("Terminer");
-		btnTerminer.setBounds(479, 414, 89, 23);
-		frame.getContentPane().add(btnTerminer);
+		JButton btnFinish = new JButton("Terminer");
+		btnFinish.setBounds(479, 414, 89, 23);
+		frame.getContentPane().add(btnFinish);
 		
-		JButton btnSuivant = new JButton("Suivant");
-		btnSuivant.setBounds(380, 414, 89, 23);
-		frame.getContentPane().add(btnSuivant);
+		JButton btnNext = new JButton("Suivant");
+		btnNext.setBounds(380, 414, 89, 23);
+		frame.getContentPane().add(btnNext);
 		
-		JButton btnPrcdent = new JButton("Pr\u00E9c\u00E9dent");
-		btnPrcdent.setBounds(281, 414, 89, 23);
-		frame.getContentPane().add(btnPrcdent);
+		JButton btnPrevious = new JButton("Pr\u00E9c\u00E9dent");
+		btnPrevious.setBounds(281, 414, 89, 23);
+		frame.getContentPane().add(btnPrevious);
 		
-		JButton btnAnnuler = new JButton("Annuler");
-		btnAnnuler.setBounds(10, 414, 89, 23);
-		frame.getContentPane().add(btnAnnuler);
+		JButton btnCancel = new JButton("Annuler");
+		btnCancel.setBounds(10, 414, 89, 23);
+		frame.getContentPane().add(btnCancel);
 		
 		JPanel panelbase = new JPanel();
 		panelbase.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
