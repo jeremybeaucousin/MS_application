@@ -1,33 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Media_Server_application_test" default="makejar" basedir=".">
-	<description>
-        simple example build file
-    </description>
-	<!-- set global properties for this build -->
-	<property name="build" location="build"/>
-	<property name="img"  location="img"/>
-
-	<target name="init">
-		<!-- Create the time stamp -->
-		<tstamp/>
-		<!-- Create the build directory structure used by compile -->
-		<mkdir dir="${build_Ant}"/>
-	</target>
-
-	<target name="compile" depends="init"
-        description="compile the source " >
-		<!-- Compile the java code from ${src} into ${build} -->
-		<javac srcdir="${build}" destdir="${build}"/>
-	</target>
-
-	<target name="makejar" depends="compile"
-        description="generate the distribution" >
-		<!-- Create the distribution directory -->
-		<mkdir dir="${dist}/lib"/>
-
-		<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
-		<jar jarfile="${dist}/lib/MyProject-${DSTAMP}.jar" basedir="${build}"/>
-		<jar jarfile="media_server.jar" includes="*.class" basedir="."/>
-	</target>
-	
+<project name="Media_Server_application_test.makejar" default="makejar">
+  <target name ="makejar" description="Create a jar for the Media_Server_application_test project">
+    <jar destfile="./build_Ant/media_server.jar">
+	    <manifest>
+	    	<attribute name="Main-Class" value="controller.Controller"/>
+	        <attribute name="Class-Path" value="."/>
+	    </manifest>
+		<fileset dir="./build/classes"/>
+    	<zipfileset excludes="META-INF/*.SF" src="./lib/java-json.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="./lib/mysql-connector-java-5.1.8-bin.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="./forms-1.3.0.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="./miglayout15-swing.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="./lib/hsqldb.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="./lib/sqltool.jar"/>
+    </jar>
+  </target>
 </project>

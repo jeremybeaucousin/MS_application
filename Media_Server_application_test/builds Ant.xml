@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project Media_Server_application_test">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="C:/Users/Jeje/Desktop/test/test.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="controller.Main"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="C:/Users/Jeje/git/MS_application/Media_Server_application_test/build/classes"/>
+            <fileset dir="E:/Developpement/Developpement/eclipse_jee_juno_SR2"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/Jeje/git/MS_application/Media_Server_application_test/forms-1.3.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/Jeje/git/MS_application/Media_Server_application_test/miglayout15-swing.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/Jeje/git/MS_application/Media_Server_application_test/ressources/lib/hsqldb.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/Jeje/git/MS_application/Media_Server_application_test/ressources/lib/java-json.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/Jeje/git/MS_application/Media_Server_application_test/ressources/lib/mysql-connector-java-5.1.8-bin.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/Jeje/git/MS_application/Media_Server_application_test/ressources/lib/sqltool.jar"/>
+        </jar>
+    </target>
+</project>

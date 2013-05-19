@@ -2,7 +2,7 @@
 <project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="Media_Server_application_test">
         <wb-resource deploy-path="/" source-path="/appClientModule"/>
-        <wb-resource deploy-path="/" source-path="/img"/>
+        <wb-resource deploy-path="/" source-path="/ressources"/>
         <property name="java-output-path" value="/Media_Server_application_test/build/classes"/>
     </wb-module>
 </project-modules>

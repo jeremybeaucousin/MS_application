@@ -1,99 +1,74 @@
 package controller;
 
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Enumeration;
 
-import javax.swing.JButton;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import model.Document;
-import model.Movie;
-import model.apis.TheMovieDB;
-
+import org.apache.commons.io.IOUtils;
 import org.hsqldb.server.Server;
-import org.json.JSONException;
 
-import view.MainWindow;
-import view.SwingTest;
+import base.HSQLInteraction;
 
-public class Controller {
+public class Main {
 
-	public Controller() {
+	public Main() {
 		// TODO Auto-generated constructor stub
 	}
 	/**
 	 * @param args
-	 * @throws IOException 
+	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
-	 * @throws SQLException 
-	 * @throws JSONException 
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, JSONException {
+	public static void main(String[] args) throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException, IOException{
 		int cpt=0;
 		JFileChooser chooser = new JFileChooser();
 		ArrayList<File> filesList = null;
 		chooser.setDialogTitle("Sélectionner votre dossier de vidéo");
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
-		
-//		Server hsqlServer = new Server();
-//		
-//		hsqlServer.setLogWriter(null);
-//        hsqlServer.setSilent(true);
-//        
-//        hsqlServer.setDatabaseName(0, "media_server");
-//        hsqlServer.setDatabasePath(0, "file:database/media_server");
-//        hsqlServer.start();
-//		//final MainWindow mainWindow = new MainWindow();
-//		Class.forName("org.hsqldb.jdbcDriver").newInstance();
-//		Connection connexion = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/media_server", "sa",  "");
-//		Statement statement = connexion.createStatement() ;
-//		//statement.executeUpdate("INSERT INTO PUBLIC.CONTENT_ADVISORY (ID_CONTENT_ADVISORY, CONTENT_ADVISORY_WORDING ) VALUES (2 , '-16');");
-//		ResultSet result = statement.executeQuery("SELECT ID_CONTENT_ADVISORY, CONTENT_ADVISORY_WORDING FROM PUBLIC.CONTENT_ADVISORY;");
-//		System.out.println(hsqlServer.getDatabasePath(0, true));
-//		JFrame jframe = new JFrame();
-//		jframe.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-//		jframe.setLocationRelativeTo(null);
-//		jframe.setSize(300, 300);
-//		jframe.setLayout(new FlowLayout());
-//		JLabel jlabel = new JLabel(hsqlServer.getDatabasePath(0, true));
-//		jlabel.setLayout(new FlowLayout());
-//		jframe.add(jlabel);
-//		while(result.next()) {
-//			JLabel jlabel2 = new JLabel(result.getInt("ID_CONTENT_ADVISORY") + " " + result.getString("CONTENT_ADVISORY_WORDING"));
-//			jlabel2.setLayout(new FlowLayout());
-//			jframe.add(jlabel2);
-//		}
-//		
-//		jframe.setVisible(true);
-//		hsqlServer.stop();
-		
 
-
-	
+		//final MainWindow mainWindow = new MainWindow();
+		
+		HSQLInteraction hsqlDatase = new HSQLInteraction();
+		hsqlDatase.start();
+		
+		
+		Statement statement = hsqlDatase.getStatement();
+		ResultSet result = null;
+		//statement.executeUpdate("INSERT INTO PUBLIC.CONTENT_ADVISORY (ID_CONTENT_ADVISORY, CONTENT_ADVISORY_WORDING ) VALUES (2 , '-16');");
+		result = statement.executeQuery("SELECT ID_NATIONALITY, NATIONALITY_WORDING FROM MEDIA_SERVER.NATIONALITY;");
+		JFrame jframe = new JFrame();
+		jframe.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		jframe.setLocationRelativeTo(null);
+		jframe.setSize(300, 300);
+		jframe.setLayout(new FlowLayout());
+		JLabel jlabel = new JLabel("test");
+		jlabel.setLayout(new FlowLayout());
+		jframe.add(jlabel);
+		if(result != null) {
+			while(result.next()) {
+				JLabel jlabel2 = new JLabel(result.getInt("ID_NATIONALITY") + " " + result.getString("NATIONALITY_WORDING"));
+				jlabel2.setLayout(new FlowLayout());
+				jframe.add(jlabel2);
+			}
+		}
+		jframe.setVisible(true);	
+		hsqlDatase.stop();
 //        //Create and set up the window.
 //        JFrame frame = new JFrame("TopLevelDemo");
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

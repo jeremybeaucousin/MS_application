@@ -136,19 +136,19 @@ public abstract class Document implements ConstantString {
 		
 		Map<Integer, Integer> IndexToExtract = new TreeMap<Integer, Integer>();
 		ArrayList<String> stringToExtract = new ArrayList<String>();
-		Object[] openingPartIndexKeys = openingPartIndex.keySet().toArray();
-		Object[] closingPartIndexKeys = closingPartIndex.keySet().toArray();
+		Integer[] openingPartIndexKeys = openingPartIndex.keySet().toArray(new Integer[openingPartIndex.size()]);
+		Integer[] closingPartIndexKeys = closingPartIndex.keySet().toArray(new Integer[closingPartIndex.size()]);
 		for(int ii = 0; ii < openingPartIndexKeys.length; ii++) {
 			if(ii < closingPartIndexKeys.length) {
-				Integer currentClosedPart = (Integer) closingPartIndexKeys[ii];
+				Integer currentClosedPart = closingPartIndexKeys[ii];
 				Boolean peerNotFound = true;
 				Integer maxClosedPartIndex = -1;
 				int jj = 0;
 				while(peerNotFound) {
-					if(jj >= openingPartIndexKeys.length || currentClosedPart < (Integer) openingPartIndexKeys[jj]) {
+					if(jj >= openingPartIndexKeys.length || currentClosedPart < openingPartIndexKeys[jj]) {
 						peerNotFound = false;
 					} else {
-						Integer currentOpenPart = (Integer) openingPartIndexKeys[jj];
+						Integer currentOpenPart = openingPartIndexKeys[jj];
 						Boolean isSamePartKind = openingPartIndex.get(currentOpenPart).equals(closingPartIndex.get(currentClosedPart));
 						if(openingPartIndex.containsKey(currentOpenPart) && isSamePartKind && currentClosedPart > currentOpenPart) {
 							maxClosedPartIndex = currentOpenPart;
@@ -162,12 +162,12 @@ public abstract class Document implements ConstantString {
 				}
 			}
 		}
-		Object[] openingLinkedParts = IndexToExtract.keySet().toArray();
+		Integer[] openingLinkedParts = IndexToExtract.keySet().toArray(new Integer[IndexToExtract.size()]);
 		if(openingLinkedParts.length > 0) {
-			Integer currentChiParentPart = (Integer) openingLinkedParts[(openingLinkedParts.length -1)];
+			Integer currentChiParentPart = openingLinkedParts[(openingLinkedParts.length -1)];
 			Integer currentPqrentClosingPart = IndexToExtract.get(currentChiParentPart);
 			for(int ii = (openingLinkedParts.length -2); ii > -1 ; ii--) {
-				Integer currentOpeningPart = (Integer) openingLinkedParts[ii];
+				Integer currentOpeningPart = openingLinkedParts[ii];
 				Integer currentClosingPart = IndexToExtract.get(currentOpeningPart);
 				if(currentChiParentPart > currentOpeningPart && currentClosingPart < currentPqrentClosingPart) {
 					stringToExtract.add(this.documentName.substring(currentChiParentPart, currentPqrentClosingPart));
