@@ -44,13 +44,13 @@ public abstract class Document implements ConstantString {
 
 	/* file name manipulation*/
 	/**
-	 * Delete all the special characters in the movie name include in (".", "-", "_")
+	 * Delete all the special characters in the movie name include in (".", "-", "_", "°")
 	 * @param name
 	 * 		original name of the movie
 	 * @return name of the movie without special caracters.
 	 */
 	public void deleteSpecialsCaracters() {
-		this.documentName = this.documentName.replaceAll("([\\.,\\-,\\_])", SPACE);
+		this.documentName = this.documentName.replaceAll("([\\.,-,_,°])", SPACE);
 		this.supresseMutlipleSpace();
 	}
 
