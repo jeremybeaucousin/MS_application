@@ -36,83 +36,91 @@ public class ScaningProgress extends JPanel {
 		add(panel);
 		panel.setLayout(null);
 		
-		JPanel panelFilmsProgress = new JPanel();
-		panelFilmsProgress.setBounds(0, 0, 558, 88);
-		panel.add(panelFilmsProgress);
-		panelFilmsProgress.setLayout(null);
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(null, "Films", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBounds(0, 0, 558, 90);
+		panel.add(panel_1);
+		panel_1.setLayout(null);
 		
-		JLabel lblScanDesFilms = new JLabel("Scan des films en cours...");
-		lblScanDesFilms.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblScanDesFilms.setBounds(10, 11, 154, 14);
-		panelFilmsProgress.add(lblScanDesFilms);
+		JProgressBar progressBar = new JProgressBar();
+		progressBar.setBounds(248, 37, 300, 14);
+		panel_1.add(progressBar);
 		
-		JProgressBar progressBarFilms = new JProgressBar();
-		progressBarFilms.setBounds(20, 36, 528, 14);
-		panelFilmsProgress.add(progressBarFilms);
+		JLabel lblScanEnCours = new JLabel("Scan en cours...");
+		lblScanEnCours.setBounds(248, 12, 104, 14);
+		panel_1.add(lblScanEnCours);
 		
-		JLabel lblResearchKindFilms = new JLabel("recherche avanc\u00E9e");
-		lblResearchKindFilms.setBounds(450, 63, 98, 14);
-		panelFilmsProgress.add(lblResearchKindFilms);
+		JLabel lblTempsRestant = new JLabel("Temps restant :");
+		lblTempsRestant.setBounds(10, 37, 104, 14);
+		panel_1.add(lblTempsRestant);
 		
-		JLabel lblTimeLeftFilms = new JLabel("Temps restant :");
-		lblTimeLeftFilms.setBounds(10, 63, 130, 14);
-		panelFilmsProgress.add(lblTimeLeftFilms);
+		JLabel lblNewLabel = new JLabel("Recherche avanc\u00E9e");
+		lblNewLabel.setBounds(444, 62, 104, 14);
+		panel_1.add(lblNewLabel);
 		
-		JPanel panelSeriesProgress = new JPanel();
-		panelSeriesProgress.setBounds(0, 88, 558, 88);
-		panel.add(panelSeriesProgress);
-		panelSeriesProgress.setLayout(null);
+		JPanel panel_2 = new JPanel();
+		panel_2.setBorder(new TitledBorder(null, "S\u00E9ries", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_2.setBounds(0, 90, 558, 90);
+		panel.add(panel_2);
+		panel_2.setLayout(null);
 		
-		JLabel lblScanDesSeries = new JLabel("Scan des s\u00E9ries en attente");
-		lblScanDesSeries.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblScanDesSeries.setBounds(10, 11, 154, 14);
-		panelSeriesProgress.add(lblScanDesSeries);
+		JLabel lblScanEnAttente = new JLabel("Scan en attente");
+		lblScanEnAttente.setBounds(248, 11, 104, 14);
+		panel_2.add(lblScanEnAttente);
 		
-		JProgressBar progressBarseries = new JProgressBar();
-		progressBarseries.setBounds(20, 36, 528, 14);
-		panelSeriesProgress.add(progressBarseries);
+		JProgressBar progressBar_1 = new JProgressBar();
+		progressBar_1.setBounds(248, 36, 300, 14);
+		panel_2.add(progressBar_1);
 		
-		JLabel lblReshearchkindSeries = new JLabel("recherche avanc\u00E9e");
-		lblReshearchkindSeries.setBounds(450, 63, 98, 14);
-		panelSeriesProgress.add(lblReshearchkindSeries);
+		JLabel label = new JLabel("Recherche avanc\u00E9e");
+		label.setBounds(444, 65, 104, 14);
+		panel_2.add(label);
 		
-		JLabel label_2 = new JLabel("Temps restant :");
-		label_2.setBounds(10, 63, 130, 14);
-		panelSeriesProgress.add(label_2);
+		JLabel label_1 = new JLabel("Temps restant :");
+		label_1.setBounds(10, 36, 104, 14);
+		panel_2.add(label_1);
 		
-		JPanel panelMusicProgress = new JPanel();
-		panelMusicProgress.setBounds(0, 176, 558, 88);
-		panel.add(panelMusicProgress);
-		panelMusicProgress.setLayout(null);
+		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(new TitledBorder(null, "Musique", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_3.setBounds(0, 180, 558, 90);
+		panel.add(panel_3);
+		panel_3.setLayout(null);
 		
-		JLabel lblScanDesMusiques = new JLabel("Scan des musiques en attente");
-		lblScanDesMusiques.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblScanDesMusiques.setBounds(10, 11, 176, 14);
-		panelMusicProgress.add(lblScanDesMusiques);
+		JLabel label_2 = new JLabel("Scan en attente");
+		label_2.setBounds(248, 11, 104, 14);
+		panel_3.add(label_2);
 		
 		JProgressBar progressBar_2 = new JProgressBar();
-		progressBar_2.setBounds(20, 36, 528, 14);
-		panelMusicProgress.add(progressBar_2);
+		progressBar_2.setBounds(248, 36, 300, 14);
+		panel_3.add(progressBar_2);
 		
-		JLabel label_1 = new JLabel("recherche avanc\u00E9e");
-		label_1.setBounds(450, 63, 98, 14);
-		panelMusicProgress.add(label_1);
-		
-		JLabel label_3 = new JLabel("Temps restant :");
-		label_3.setBounds(10, 63, 130, 14);
-		panelMusicProgress.add(label_3);
+		JLabel label_3 = new JLabel("Recherche avanc\u00E9e");
+		label_3.setBounds(444, 65, 104, 14);
+		panel_3.add(label_3);
 		
 		JLabel label_4 = new JLabel("Temps restant :");
-		label_4.setBounds(10, 331, 130, 14);
-		panel.add(label_4);
+		label_4.setBounds(10, 36, 104, 14);
+		panel_3.add(label_4);
 		
-		JLabel lblProgression = new JLabel("Progression :");
-		lblProgression.setBounds(10, 275, 83, 14);
-		panel.add(lblProgression);
+		JLabel lblTempsRestant_1 = new JLabel("Temps restant :");
+		lblTempsRestant_1.setBounds(198, 306, 86, 14);
+		panel.add(lblTempsRestant_1);
+		
+		JLabel lblTempscoul = new JLabel("Temps \u00E9coul\u00E9 :");
+		lblTempscoul.setBounds(10, 306, 93, 14);
+		panel.add(lblTempscoul);
+		
+		JLabel lblNombreDeFichiers = new JLabel("Nombre de fichiers scann\u00E9s :");
+		lblNombreDeFichiers.setBounds(10, 331, 155, 14);
+		panel.add(lblNombreDeFichiers);
 		
 		JProgressBar progressBar_3 = new JProgressBar();
-		progressBar_3.setBounds(20, 300, 528, 14);
+		progressBar_3.setBounds(198, 281, 350, 14);
 		panel.add(progressBar_3);
+		
+		JLabel lblProgression = new JLabel("Progression :");
+		lblProgression.setBounds(10, 281, 93, 14);
+		panel.add(lblProgression);
 
 	}
 }
