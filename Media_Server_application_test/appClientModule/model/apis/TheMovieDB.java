@@ -18,7 +18,7 @@ import util.ConstantString;
 import util.JSONObject;
 import util.StringUtils;
 
-public class TheMovieDB {
+public class TheMovieDB implements ConstantString {
 	private static String api_key = "api_key=1acc7c1593ee8145d2d390f1d419a573";
 	private static String theMovieDBURL = "http://api.themoviedb.org/3";
 	
@@ -91,7 +91,8 @@ public class TheMovieDB {
 	public static ArrayList<Integer> searchWordByWord(Document movie) throws JSONException, IOException {
 		// TODO attantion au mot avec des entier dedans
 		ArrayList<Integer> moviesFound = new ArrayList<Integer>();
-		Pattern pattern = Pattern.compile("(\\w+)");
+		String allCharacters = LOWER_CASE_CHARACTERS + UPPER_CASE_CHARACTERS;
+		Pattern pattern = Pattern.compile("(\\[" + allCharacters + "]+)");
 		Matcher matcher = pattern.matcher(movie.getDocumentName());
 		StringBuffer wordAddedFromThemovieName = new StringBuffer();
 		boolean MovieFound = true;

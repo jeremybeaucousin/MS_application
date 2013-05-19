@@ -11,6 +11,10 @@ public interface ConstantString {
 		put(SQUAREBRACKET,Arrays.asList(SQUAREBRACKET_OPENING, SQUAREBRACKET_CLOSING));
 	}};
 	
+	final String LOWER_CASE_CHARACTERS = "a-zабвгдезийклмнопртуфхцщъыьэясжњ";
+	
+	final String UPPER_CASE_CHARACTERS = "A-ZАБВГДЕЗИЙКЛМНОПРТУФХЦЩЪЫЬЭџСЖЊ";
+	
 	final String EMPTY = ""; 
 	
 	final String BRACE = "BRACE";
