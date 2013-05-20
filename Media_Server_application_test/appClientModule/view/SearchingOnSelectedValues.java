@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.TreeMap;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -13,12 +14,12 @@ import javax.swing.JPanel;
 
 import model.views.FileKindSelectionParameters;
 
-public final class SearchingOnSelectedValues extends JPanel implements ActionListener{
-	MainWindow mainWindow;
-	FileKindSelectionParameters fileKindSelectionParameters;
-	public SearchingOnSelectedValues(MainWindow mainWindow, FileKindSelectionParameters fileKindSelectionParameters) throws IOException {
-		this.mainWindow = mainWindow;
-		this.fileKindSelectionParameters = fileKindSelectionParameters;
+public final class SearchingOnSelectedValues extends WindowContent {
+	private TreeMap<String, JLabel> results;
+
+	public SearchingOnSelectedValues(MainWindow mainWindow, FileKindSelectionParameters fileKindSelectionParameters) {
+		super(mainWindow);
+		this.results = new TreeMap<String, JLabel>();
 		
 		this.setLayout(new GridBagLayout());
 
@@ -30,62 +31,61 @@ public final class SearchingOnSelectedValues extends JPanel implements ActionLis
 		gridBagConstraints.gridwidth = 2;
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
-		
-		JLabel videoParameter = new JLabel("Video Selected : " + this.fileKindSelectionParameters.isVideoSelected());
-		this.add(videoParameter, gridBagConstraints);
+
+		this.results.put("Video_Selected", new JLabel("Video Selected : " + fileKindSelectionParameters.isVideoSelected()));
+		this.add(this.results.get("Video_Selected"), gridBagConstraints);
 		
 		gridBagConstraints.fill = GridBagConstraints.CENTER;
 		gridBagConstraints.gridwidth = 2;
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 1;
 		
-		JLabel serieParameter = new JLabel("Serie Selected : " + this.fileKindSelectionParameters.isSerieSelected());
-		this.add(serieParameter, gridBagConstraints);
+		this.results.put("Serie_Selected", new JLabel("Serie Selected : " + fileKindSelectionParameters.isSerieSelected()));
+		this.add(this.results.get("Serie_Selected"), gridBagConstraints);
 		
 		gridBagConstraints.fill = GridBagConstraints.CENTER;
 		gridBagConstraints.gridwidth = 2;
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;
 		
-		JLabel musicParameter = new JLabel("Music Selected : " + this.fileKindSelectionParameters.isMusicSelected());
-		this.add(musicParameter, gridBagConstraints);
+		this.results.put("Music_Selected", new JLabel("Music Selected : " + fileKindSelectionParameters.isMusicSelected()));
+		this.add(this.results.get("Music_Selected"), gridBagConstraints);
 		
-		gridBagConstraints.fill = GridBagConstraints.CENTER;
-		gridBagConstraints.ipady = 0;
-		gridBagConstraints.gridwidth = 1;
-		gridBagConstraints.gridx = 0;
-		gridBagConstraints.gridy = 3;
-		JButton bouton1 = new JButton("Annuler");
-		bouton1.addActionListener(this);
-		this.add(bouton1, gridBagConstraints);
-		
-		gridBagConstraints.fill = GridBagConstraints.LAST_LINE_END;
-		gridBagConstraints.gridx = 1;
-		gridBagConstraints.gridy = 3;
-		JButton bouton2 = new JButton("Précédent");
-		bouton2.addActionListener(this);
-		this.add(bouton2, gridBagConstraints);
-		
-		gridBagConstraints.fill = GridBagConstraints.LAST_LINE_END;
-		gridBagConstraints.gridx = 2;
-		gridBagConstraints.gridy = 3;
-		JButton bouton3 = new JButton("Suivant");
-		bouton3.addActionListener(this);
-		this.add(bouton3, gridBagConstraints);
+	}
+	
+	public void setFileKindSelectionParameters(FileKindSelectionParameters fileKindSelectionParameters) {
+		this.results.get("Video_Selected").setText("Video Selected : " + fileKindSelectionParameters.isVideoSelected());
+		this.results.get("Serie_Selected").setText("Serie Selected : " + fileKindSelectionParameters.isSerieSelected());
+		this.results.get("Music_Selected").setText("Music Selected : " + fileKindSelectionParameters.isMusicSelected());
+		this.invalidate(); 
+		this.validate();
+		this.repaint();
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-Object source = e.getSource();
+		Object source = e.getSource();
 		
 		Component cancelButton = this.getComponent(3);
 		Component previousButton = this.getComponent(4);
 		Component nextStepButton = this.getComponent(5);
 		if(source == cancelButton){
-			this.mainWindow.dispose();
+			this.getMainWindow().dispose();
 		} else if(source == nextStepButton){
 			System.out.println("suivant");
 		} else if(source == previousButton){
-			this.mainWindow.getSearchingOnSelectedParam();
+			//this.mainWindow.getSearchingOnSelectedParam();
 		}
+	}
+
+	@Override
+	public void getNextScreen() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getPreviousScreen() {
+		// TODO Auto-generated method stub
+		
 	}
 }

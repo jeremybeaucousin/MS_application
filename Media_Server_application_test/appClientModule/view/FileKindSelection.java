@@ -20,10 +20,10 @@ import javax.swing.JPanel;
 
 import model.views.FileKindSelectionParameters;
 
-public final class FileKindSelection extends JPanel implements ActionListener {
-	MainWindow mainWindow;
+public final class FileKindSelection extends WindowContent {
+
 	public FileKindSelection(MainWindow mainWindow) throws IOException {
-		this.mainWindow = mainWindow;
+		super(mainWindow);
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints gridBagConstraints = new GridBagConstraints();
 		gridBagConstraints.ipadx = 10;
@@ -56,43 +56,36 @@ public final class FileKindSelection extends JPanel implements ActionListener {
 		JCheckBoxMenuItem checkbox3 = new JCheckBoxMenuItem();
 		checkbox3.setText("Musique");
 		this.add(checkbox3, gridBagConstraints);
-		
-		gridBagConstraints.fill = GridBagConstraints.LAST_LINE_START;
-		gridBagConstraints.ipady = 0;
-		gridBagConstraints.gridwidth = 1;
-		gridBagConstraints.gridx = 0;
-		gridBagConstraints.gridy = 4;
-		JButton bouton1 = new JButton("Annuler");
-		bouton1.addActionListener(this);
-		this.add(bouton1, gridBagConstraints);
-		
-		gridBagConstraints.fill = GridBagConstraints.LAST_LINE_END;
-		gridBagConstraints.gridx = 1;
-		gridBagConstraints.gridy = 4;
-		JButton bouton2 = new JButton("Suivant");
-		bouton2.addActionListener(this);
-		this.add(bouton2, gridBagConstraints);
+	}
+	
+	public FileKindSelectionParameters getFileKindSelectionParameters() {
+		boolean videoIsSelected = ((JCheckBoxMenuItem) this.getComponent(1)).isSelected();
+		boolean serieIsSelected = ((JCheckBoxMenuItem) this.getComponent(2)).isSelected();
+		boolean musicIsSelected = ((JCheckBoxMenuItem) this.getComponent(3)).isSelected();
+		FileKindSelectionParameters fileKindSelectionParameters = new FileKindSelectionParameters(videoIsSelected, serieIsSelected, musicIsSelected);
+		return fileKindSelectionParameters;
+	}
+	
+	@Override
+	public void getNextScreen() {
+		this.getMainWindow().getButtons().get("previous").setEnabled(true);
+		FileKindSelectionParameters fileKindSelectionParameters = this.getFileKindSelectionParameters();
+		if(this.getMainWindow().getSearchingOnSelectedValue() == null) {
+			SearchingOnSelectedValues searchingOnSelectedValues = new SearchingOnSelectedValues(this.getMainWindow(), fileKindSelectionParameters);
+			this.getMainWindow().setSearchingOnSelectedValue(searchingOnSelectedValues);
+			this.getMainWindow().getNavigator().add(searchingOnSelectedValues);
+		} else {
+			this.getMainWindow().getNavigator().next();
+			this.getMainWindow().getSearchingOnSelectedValue().setFileKindSelectionParameters(fileKindSelectionParameters);
+		}
+	    this.getMainWindow().replaceContent(this, this.getMainWindow().getSearchingOnSelectedValue());
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		Object source = e.getSource();
+	public void getPreviousScreen() {
+		this.getMainWindow().getButtons().get("previous").setEnabled(false);
+		this.getMainWindow().replaceContent(this.getMainWindow().getSearchingOnSelectedValue(), this);
 		
-		Component cancelButton = this.getComponent(4);
-		Component nextStepButton = this.getComponent(5);
-		if(source == cancelButton){
-			this.mainWindow.dispose();
-		} else if(source == nextStepButton){
-			boolean videoIsSelected = ((JCheckBoxMenuItem) this.getComponent(1)).isSelected();
-			boolean serieIsSelected = ((JCheckBoxMenuItem) this.getComponent(2)).isSelected();
-			boolean musicIsSelected = ((JCheckBoxMenuItem) this.getComponent(3)).isSelected();
-			FileKindSelectionParameters fileKindSelectionParameters = new FileKindSelectionParameters(videoIsSelected, serieIsSelected, musicIsSelected);
-			try {
-				this.mainWindow.getFileKindSelectionParam(fileKindSelectionParameters);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		}
 	}
 
 }
