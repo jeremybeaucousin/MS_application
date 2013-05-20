@@ -1,45 +1,28 @@
 package view;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.ListIterator;
-import java.util.NavigableSet;
-import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenuBar;
 import javax.swing.JPanel;
-import javax.swing.JWindow;
 import javax.swing.SwingConstants;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import model.views.FileKindSelectionParameters;
-
-public class MainWindow extends JFrame implements ActionListener, ChangeListener{
+public class MainWindow extends JFrame implements ActionListener {
 	private JPanel panelBase;
 	private TreeMap<String, JButton> buttons;
 	
@@ -49,14 +32,16 @@ public class MainWindow extends JFrame implements ActionListener, ChangeListener
 	private SearchingOnSelectedValues searchingOnSelectedValue;
 	
 	public MainWindow() throws IOException {
+		super();
 		this.buttons = new TreeMap<String, JButton>();
 		this.navigation = new ArrayList<WindowContent>();
 		this.navigator = navigation.listIterator();
-		
+
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("img/multimedia-icone.png")));
 		this.setBounds(100, 100, 594, 486);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.getContentPane().setLayout(null);
+		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		
 		JPanel panelLanguages = new JPanel();
@@ -78,15 +63,14 @@ public class MainWindow extends JFrame implements ActionListener, ChangeListener
 		lblSuperAplieServeur.setBounds(10, 12, 242, 14);
 		this.getContentPane().add(lblSuperAplieServeur);
 		
-		this.panelBase = new JPanel();
-		this.panelBase.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		this.panelBase.setBackground(Color.WHITE);
-		this.panelBase.setBounds(10, 37, 558, 356);
-		
 		this.fileKindSelection = new FileKindSelection(this);
 		this.navigator.add(this.fileKindSelection);
 		
-		this.panelBase.add(this.fileKindSelection);
+		this.panelBase = this.fileKindSelection;
+		this.panelBase.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		this.panelBase.setBackground(Color.WHITE);
+		this.panelBase.setBounds(10, 37, 558, 356);
+
 		this.getContentPane().add(panelBase);
 		
 		this.buttons.put("canceled", new JButton("Annuler"));
@@ -100,14 +84,12 @@ public class MainWindow extends JFrame implements ActionListener, ChangeListener
 		btnPrevious.setEnabled(false);
 		btnPrevious.setBounds(281, 414, 89, 23);
 		btnPrevious.addActionListener(this);
-		btnPrevious.addChangeListener(this);
 		this.getContentPane().add(btnPrevious);
 		
 		this.buttons.put("next", new JButton("Suivant"));
 		JButton btnNext = this.buttons.get("next");
 		btnNext.setBounds(380, 414, 89, 23);
 		btnNext.addActionListener(this);
-		btnNext.addChangeListener(this);
 		this.getContentPane().add(btnNext);
 		
 		this.buttons.put("finish", new JButton("Terminer"));
@@ -115,7 +97,6 @@ public class MainWindow extends JFrame implements ActionListener, ChangeListener
 		btnFinish.setEnabled(false);
 		btnFinish.setBounds(479, 414, 89, 23);
 		btnFinish.addActionListener(this);
-		btnFinish.addChangeListener(this);
 		this.getContentPane().add(btnFinish);
 		
 		this.setVisible(true);
@@ -165,9 +146,4 @@ public class MainWindow extends JFrame implements ActionListener, ChangeListener
 		} 
 	}
 
-	@Override
-	public void stateChanged(ChangeEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 }

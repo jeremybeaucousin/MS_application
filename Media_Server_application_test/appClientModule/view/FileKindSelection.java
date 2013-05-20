@@ -1,22 +1,21 @@
 package view;
 
-import java.awt.Component;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.geom.Path2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
+import java.awt.SystemColor;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.sound.midi.Patch;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 import model.views.FileKindSelectionParameters;
 
@@ -24,45 +23,170 @@ public final class FileKindSelection extends WindowContent {
 
 	public FileKindSelection(MainWindow mainWindow) throws IOException {
 		super(mainWindow);
-		this.setLayout(new GridBagLayout());
-		GridBagConstraints gridBagConstraints = new GridBagConstraints();
-		gridBagConstraints.ipadx = 10;
-		gridBagConstraints.ipady = 10;
 		
-		gridBagConstraints.fill = GridBagConstraints.PAGE_START;
-		gridBagConstraints.gridwidth = 2;
-		gridBagConstraints.gridx = 0;
-		gridBagConstraints.gridy = 0;
-		JLabel label = new JLabel("Quel média voulez-vous scannez : ");
-		this.add(label, gridBagConstraints);
+		this.setBackground(Color.WHITE);
+		this.setLayout(null);
 		
-		gridBagConstraints.fill = GridBagConstraints.CENTER;
-		gridBagConstraints.gridx = 0;
-		gridBagConstraints.gridy = 1;
-		JCheckBoxMenuItem checkbox1 = new JCheckBoxMenuItem();
-		checkbox1.setText("Film");
-		this.add(checkbox1, gridBagConstraints);
+		JPanel panelIntroducing = new JPanel();
+		panelIntroducing.setBackground(Color.WHITE);
+		panelIntroducing.setBorder(null);
+		panelIntroducing.setBounds(0, 0, 558, 57);
+		this.add(panelIntroducing);
+		panelIntroducing.setLayout(null);
 		
-		gridBagConstraints.fill = GridBagConstraints.CENTER;
-		gridBagConstraints.gridx = 0;
-		gridBagConstraints.gridy = 2;
-		JCheckBoxMenuItem checkbox2 = new JCheckBoxMenuItem();
-		checkbox2.setText("Série");
-		this.add(checkbox2, gridBagConstraints);
+		JEditorPane dtrpnExplainTexte = new JEditorPane();
+		dtrpnExplainTexte.setBackground(Color.WHITE);
+		dtrpnExplainTexte.setForeground(Color.BLACK);
+		dtrpnExplainTexte.setText("Sélectionez le type de média que vous voulez scaner ainsi que leur emplacement. Précisez le type de recherche que vous désirez pour chacun.");
+		dtrpnExplainTexte.setBounds(10, 11, 538, 37);
+		panelIntroducing.add(dtrpnExplainTexte);
 		
-		gridBagConstraints.fill = GridBagConstraints.CENTER;
-		gridBagConstraints.gridx = 0;
-		gridBagConstraints.gridy = 3;
-		JCheckBoxMenuItem checkbox3 = new JCheckBoxMenuItem();
-		checkbox3.setText("Musique");
-		this.add(checkbox3, gridBagConstraints);
+		// Main Panel
+		JPanel form = new JPanel();
+		form.setBorder(null);
+		form.setBounds(0, 57, 558, 299);
+		add(form);
+		form.setLayout(null);
+		
+		// Movie Panel
+		JPanel panelMovies = new JPanel();
+		panelMovies.setBorder(new TitledBorder(null, "Films", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelMovies.setBounds(10, 0, 538, 71);
+		form.add(panelMovies);
+		panelMovies.setLayout(null);
+		
+		JCheckBox checkboxScanMovies = new JCheckBox("scanner");
+		checkboxScanMovies.setSelected(true);
+		checkboxScanMovies.setBounds(10, 12, 97, 23);
+		panelMovies.add(checkboxScanMovies);
+		
+		JTextField textFieldMovies = new JTextField();
+		textFieldMovies.setText("emplacement du dossier");
+		textFieldMovies.setForeground(SystemColor.controlShadow);
+		textFieldMovies.setColumns(10);
+		textFieldMovies.setBounds(10, 42, 170, 20);
+		panelMovies.add(textFieldMovies);
+		
+		JButton buttonMoviesLocation = new JButton("...");
+		buttonMoviesLocation.setBounds(190, 41, 30, 23);
+		panelMovies.add(buttonMoviesLocation);
+		
+		JCheckBox checkboxDetailedShearchMovies = new JCheckBox("Recherche approfondie");
+		checkboxDetailedShearchMovies.setBounds(395, 41, 137, 23);
+		panelMovies.add(checkboxDetailedShearchMovies);
+		
+		// Serie Panel
+		JPanel panelSeries = new JPanel();
+		panelSeries.setBorder(new TitledBorder(null, "Séries", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelSeries.setBounds(10, 70, 538, 71);
+		form.add(panelSeries);
+		panelSeries.setLayout(null);
+		
+		JCheckBox checkBoxScanSeries = new JCheckBox("scanner");
+		checkBoxScanSeries.setSelected(true);
+		checkBoxScanSeries.setBounds(10, 12, 97, 23);
+		panelSeries.add(checkBoxScanSeries);
+		
+		JTextField textFieldSeries = new JTextField();
+		textFieldSeries.setText("emplacement du dossier");
+		textFieldSeries.setForeground(SystemColor.controlShadow);
+		textFieldSeries.setColumns(10);
+		textFieldSeries.setBounds(10, 42, 170, 20);
+		panelSeries.add(textFieldSeries);
+		
+		
+		JButton buttonSeriesLoc = new JButton("...");
+		buttonSeriesLoc.setBounds(190, 41, 30, 23);
+		panelSeries.add(buttonSeriesLoc);
+		
+		JCheckBox checkBoxDetailedShearchSeries = new JCheckBox("Recherche approfondie");
+		checkBoxDetailedShearchSeries.setBounds(395, 41, 137, 23);
+		panelSeries.add(checkBoxDetailedShearchSeries);
+		
+		// Music Panel
+		JPanel panelMusics = new JPanel();
+		panelMusics.setBorder(new TitledBorder(null, "Musiques", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelMusics.setBounds(10, 141, 538, 71);
+		form.add(panelMusics);
+		panelMusics.setLayout(null);
+		
+		JCheckBox checkBoxScanMusic = new JCheckBox("scanner");
+		checkBoxScanMusic.setSelected(true);
+		checkBoxScanMusic.setBounds(10, 12, 97, 23);
+		panelMusics.add(checkBoxScanMusic);
+		
+		JTextField textFieldMusic = new JTextField();
+		textFieldMusic.setText("emplacement du dossier");
+		textFieldMusic.setForeground(SystemColor.controlShadow);
+		textFieldMusic.setColumns(10);
+		textFieldMusic.setBounds(10, 42, 170, 20);
+		panelMusics.add(textFieldMusic);
+		
+		JButton buttonMusicLocation = new JButton("...");
+		buttonMusicLocation.setBounds(190, 41, 30, 23);
+		panelMusics.add(buttonMusicLocation);
+		
+		JCheckBox checkBoxDetailedShearchMusics = new JCheckBox("Recherche approfondie");
+		checkBoxDetailedShearchMusics.setBounds(395, 41, 137, 23);
+		panelMusics.add(checkBoxDetailedShearchMusics);
+		
+		// Unique location Panel
+		JPanel panelUniqueLocation = new JPanel();
+		panelUniqueLocation.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panelUniqueLocation.setBounds(10, 217, 538, 71);
+		form.add(panelUniqueLocation);
+		panelUniqueLocation.setLayout(null);
+		
+		JCheckBox checkboxUniqueLocation = new JCheckBox("Emplacement unique");
+		checkboxUniqueLocation.setBounds(6, 7, 131, 23);
+		panelUniqueLocation.add(checkboxUniqueLocation);
+		
+		JTextField textFieldUniqueLocation = new JTextField();
+		textFieldUniqueLocation.setEnabled(false);
+		textFieldUniqueLocation.setForeground(UIManager.getColor("Button.shadow"));
+		textFieldUniqueLocation.setText("emplacement du dossier");
+		textFieldUniqueLocation.setBounds(6, 42, 170, 20);
+		panelUniqueLocation.add(textFieldUniqueLocation);
+		textFieldUniqueLocation.setColumns(10);
+		
+		JButton buttonUniqueLocationLoc = new JButton("...");
+		buttonUniqueLocationLoc.setEnabled(false);
+		buttonUniqueLocationLoc.setBounds(186, 41, 30, 23);
+		panelUniqueLocation.add(buttonUniqueLocationLoc);
+		
+		JCheckBox checkBoxDetailedShearchUniqueLocation = new JCheckBox("Recherche approfondie");
+		checkBoxDetailedShearchUniqueLocation.setEnabled(false);
+		checkBoxDetailedShearchUniqueLocation.setBounds(395, 41, 137, 23);
+		panelUniqueLocation.add(checkBoxDetailedShearchUniqueLocation);
+		
+//		gridBagConstraints.fill = GridBagConstraints.CENTER;
+//		gridBagConstraints.gridx = 0;
+//		gridBagConstraints.gridy = 1;
+//		JCheckBoxMenuItem checkbox1 = new JCheckBoxMenuItem();
+//		checkbox1.setText("Film");
+//		this.add(checkbox1, gridBagConstraints);
+//		
+//		gridBagConstraints.fill = GridBagConstraints.CENTER;
+//		gridBagConstraints.gridx = 0;
+//		gridBagConstraints.gridy = 2;
+//		JCheckBoxMenuItem checkbox2 = new JCheckBoxMenuItem();
+//		checkbox2.setText("Série");
+//		this.add(checkbox2, gridBagConstraints);
+//		
+//		gridBagConstraints.fill = GridBagConstraints.CENTER;
+//		gridBagConstraints.gridx = 0;
+//		gridBagConstraints.gridy = 3;
+//		JCheckBoxMenuItem checkbox3 = new JCheckBoxMenuItem();
+//		checkbox3.setText("Musique");
+//		this.add(checkbox3, gridBagConstraints);
 	}
 	
 	public FileKindSelectionParameters getFileKindSelectionParameters() {
-		boolean videoIsSelected = ((JCheckBoxMenuItem) this.getComponent(1)).isSelected();
-		boolean serieIsSelected = ((JCheckBoxMenuItem) this.getComponent(2)).isSelected();
-		boolean musicIsSelected = ((JCheckBoxMenuItem) this.getComponent(3)).isSelected();
-		FileKindSelectionParameters fileKindSelectionParameters = new FileKindSelectionParameters(videoIsSelected, serieIsSelected, musicIsSelected);
+//		boolean videoIsSelected = ((JCheckBoxMenuItem) this.getComponent(1)).isSelected();
+//		boolean serieIsSelected = ((JCheckBoxMenuItem) this.getComponent(2)).isSelected();
+//		boolean musicIsSelected = ((JCheckBoxMenuItem) this.getComponent(3)).isSelected();
+//		FileKindSelectionParameters fileKindSelectionParameters = new FileKindSelectionParameters(videoIsSelected, serieIsSelected, musicIsSelected);
+		FileKindSelectionParameters fileKindSelectionParameters = null;
 		return fileKindSelectionParameters;
 	}
 	
