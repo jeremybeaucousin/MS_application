@@ -19,6 +19,10 @@ import java.awt.Font;
 import javax.swing.JFormattedTextField;
 import javax.swing.JEditorPane;
 import javax.swing.border.LineBorder;
+import javax.swing.JTextPane;
+import javax.swing.JSeparator;
+import javax.swing.JTextArea;
+import javax.swing.JTable;
 
 public class FileKindSelection extends JPanel {
 	private JTextField textFieldUniqueLocation;
@@ -41,12 +45,11 @@ public class FileKindSelection extends JPanel {
 		add(panelIntoducing);
 		panelIntoducing.setLayout(null);
 		
-		JEditorPane dtrpnExplainTexte = new JEditorPane();
-		dtrpnExplainTexte.setBackground(Color.WHITE);
-		dtrpnExplainTexte.setForeground(Color.BLACK);
-		dtrpnExplainTexte.setText("S\u00E9lectionez le type de m\u00E9dia que vous voulez scaner ainsi que leur emplacement. Pr\u00E9cisez le type de recherche que vous d\u00E9sirez pour chacun.");
-		dtrpnExplainTexte.setBounds(10, 11, 538, 37);
-		panelIntoducing.add(dtrpnExplainTexte);
+		JTextPane txtpnSlectionezLeType = new JTextPane();
+		txtpnSlectionezLeType.setEditable(false);
+		txtpnSlectionezLeType.setText("S\u00E9lectionez le type de m\u00E9dia que vous voulez scaner ainsi que leur emplacement. Pr\u00E9cisez le type de recherche que vous d\u00E9sirez pour chacun.");
+		txtpnSlectionezLeType.setBounds(10, 11, 538, 35);
+		panelIntoducing.add(txtpnSlectionezLeType);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(null);
@@ -75,7 +78,7 @@ public class FileKindSelection extends JPanel {
 		buttonMoviesLoc.setBounds(190, 41, 30, 23);
 		panelMovies.add(buttonMoviesLoc);
 		
-		JCheckBox checkboxScanMovies = new JCheckBox("scaner");
+		JCheckBox checkboxScanMovies = new JCheckBox("scanner");
 		checkboxScanMovies.setSelected(true);
 		checkboxScanMovies.setBounds(10, 12, 97, 23);
 		panelMovies.add(checkboxScanMovies);
@@ -101,7 +104,7 @@ public class FileKindSelection extends JPanel {
 		buttonSeriesLoc.setBounds(190, 41, 30, 23);
 		panelSeries.add(buttonSeriesLoc);
 		
-		JCheckBox checkBoxScanSeries = new JCheckBox("scaner");
+		JCheckBox checkBoxScanSeries = new JCheckBox("scanner");
 		checkBoxScanSeries.setSelected(true);
 		checkBoxScanSeries.setBounds(10, 12, 97, 23);
 		panelSeries.add(checkBoxScanSeries);
@@ -127,7 +130,7 @@ public class FileKindSelection extends JPanel {
 		buttonMusicLoc.setBounds(190, 41, 30, 23);
 		panelMusics.add(buttonMusicLoc);
 		
-		JCheckBox checkBoxScanMusic = new JCheckBox("scaner");
+		JCheckBox checkBoxScanMusic = new JCheckBox("scanner");
 		checkBoxScanMusic.setSelected(true);
 		checkBoxScanMusic.setBounds(10, 12, 97, 23);
 		panelMusics.add(checkBoxScanMusic);
