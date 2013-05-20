@@ -1,16 +1,12 @@
 package view;
 
 import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.SystemColor;
 import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JEditorPane;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -182,11 +178,14 @@ public final class FileKindSelection extends WindowContent {
 	}
 	
 	public FileKindSelectionParameters getFileKindSelectionParameters() {
-//		boolean videoIsSelected = ((JCheckBoxMenuItem) this.getComponent(1)).isSelected();
-//		boolean serieIsSelected = ((JCheckBoxMenuItem) this.getComponent(2)).isSelected();
-//		boolean musicIsSelected = ((JCheckBoxMenuItem) this.getComponent(3)).isSelected();
-//		FileKindSelectionParameters fileKindSelectionParameters = new FileKindSelectionParameters(videoIsSelected, serieIsSelected, musicIsSelected);
-		FileKindSelectionParameters fileKindSelectionParameters = null;
+		JPanel mainPanel = (JPanel) this.getComponentAt(0, 57);
+		JPanel videoPanel = (JPanel) mainPanel.getComponentAt(11, 1);
+		JPanel seriesPanel = (JPanel) mainPanel.getComponentAt(11, 71);
+		JPanel musicPanel = (JPanel) mainPanel.getComponentAt(11, 142);
+		boolean videoIsSelected = ((JCheckBox) videoPanel.getComponentAt(10, 12)).isSelected();
+		boolean serieIsSelected = ((JCheckBox) seriesPanel.getComponentAt(10, 12)).isSelected();
+		boolean musicIsSelected = ((JCheckBox) musicPanel.getComponentAt(10, 12)).isSelected();
+		FileKindSelectionParameters fileKindSelectionParameters = new FileKindSelectionParameters(videoIsSelected, serieIsSelected, musicIsSelected);
 		return fileKindSelectionParameters;
 	}
 	

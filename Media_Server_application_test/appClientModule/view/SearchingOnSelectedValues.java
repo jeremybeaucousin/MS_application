@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -20,37 +21,23 @@ public final class SearchingOnSelectedValues extends WindowContent {
 	public SearchingOnSelectedValues(MainWindow mainWindow, FileKindSelectionParameters fileKindSelectionParameters) {
 		super(mainWindow);
 		this.results = new TreeMap<String, JLabel>();
+		this.setBackground(Color.WHITE);
+		this.setLayout(null);
+		this.setBounds(0, 0, 558, 356);
+		this.setLayout(null);
 		
-		this.setLayout(new GridBagLayout());
-
-		GridBagConstraints gridBagConstraints = new GridBagConstraints();
-		gridBagConstraints.ipadx = 10;
-		gridBagConstraints.ipady = 10;
 		
-		gridBagConstraints.fill = GridBagConstraints.CENTER;
-		gridBagConstraints.gridwidth = 2;
-		gridBagConstraints.gridx = 0;
-		gridBagConstraints.gridy = 0;
-
 		this.results.put("Video_Selected", new JLabel("Video Selected : " + fileKindSelectionParameters.isVideoSelected()));
-		this.add(this.results.get("Video_Selected"), gridBagConstraints);
-		
-		gridBagConstraints.fill = GridBagConstraints.CENTER;
-		gridBagConstraints.gridwidth = 2;
-		gridBagConstraints.gridx = 0;
-		gridBagConstraints.gridy = 1;
+		this.results.get("Video_Selected").setBounds(10, 36, 200, 14);
+		this.add(this.results.get("Video_Selected"));
 		
 		this.results.put("Serie_Selected", new JLabel("Serie Selected : " + fileKindSelectionParameters.isSerieSelected()));
-		this.add(this.results.get("Serie_Selected"), gridBagConstraints);
-		
-		gridBagConstraints.fill = GridBagConstraints.CENTER;
-		gridBagConstraints.gridwidth = 2;
-		gridBagConstraints.gridx = 0;
-		gridBagConstraints.gridy = 2;
+		this.results.get("Serie_Selected").setBounds(10, 66, 200, 14);
+		this.add(this.results.get("Serie_Selected"));
 		
 		this.results.put("Music_Selected", new JLabel("Music Selected : " + fileKindSelectionParameters.isMusicSelected()));
-		this.add(this.results.get("Music_Selected"), gridBagConstraints);
-		
+		this.results.get("Music_Selected").setBounds(10, 96, 200, 14);
+		this.add(this.results.get("Music_Selected"));
 	}
 	
 	public void setFileKindSelectionParameters(FileKindSelectionParameters fileKindSelectionParameters) {

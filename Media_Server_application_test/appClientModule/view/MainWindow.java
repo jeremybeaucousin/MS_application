@@ -17,6 +17,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 import javax.swing.event.ChangeEvent;
@@ -36,42 +37,42 @@ public class MainWindow extends JFrame implements ActionListener {
 		this.buttons = new TreeMap<String, JButton>();
 		this.navigation = new ArrayList<WindowContent>();
 		this.navigator = navigation.listIterator();
-
+		
+		this.setResizable(false);
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("img/multimedia-icone.png")));
-		this.setBounds(100, 100, 594, 486);
+		this.setBounds(100, 100, 583, 486);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.getContentPane().setLayout(null);
-		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		
-		JPanel panelLanguages = new JPanel();
-		panelLanguages.setBorder(null);
-		panelLanguages.setBounds(515, 0, 63, 26);
-		this.getContentPane().add(panelLanguages);
-		
-		JLabel lblEnglish = new JLabel("");
-		lblEnglish.setIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResource("img/United-Kingdom-flag.png"))));
-		panelLanguages.add(lblEnglish);
-		
-		JLabel lblFrench = new JLabel("");
-		lblFrench.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFrench.setIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResource("img/france_flag_32.png"))));
-		panelLanguages.add(lblFrench);
-	
 		JLabel lblSuperAplieServeur = new JLabel("Super Aplie Serveur Multimédia");
 		lblSuperAplieServeur.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblSuperAplieServeur.setBounds(10, 12, 242, 14);
 		this.getContentPane().add(lblSuperAplieServeur);
 		
+		JToggleButton toggleButton_1 = new JToggleButton("");
+		toggleButton_1.setSelectedIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResource("img/france_flag_32.png"))));
+		toggleButton_1.setIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResource("img/france_flag_32.png"))));
+		toggleButton_1.setBounds(478, 9, 40, 23);
+		this.getContentPane().add(toggleButton_1);
+		
+		JToggleButton englishButton = new JToggleButton("");
+		englishButton.setSelected(true);
+		englishButton.setSelectedIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResource("img/United-Kingdom-flag.png"))));
+		englishButton.setIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResource("img/United-Kingdom-flag.png"))));
+		englishButton.setBounds(528, 9, 40, 23);
+		this.getContentPane().add(englishButton);
+		
 		this.fileKindSelection = new FileKindSelection(this);
 		this.navigator.add(this.fileKindSelection);
 		
+		// main panel
 		this.panelBase = this.fileKindSelection;
 		this.panelBase.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		this.panelBase.setBackground(Color.WHITE);
 		this.panelBase.setBounds(10, 37, 558, 356);
-
-		this.getContentPane().add(panelBase);
+		this.getContentPane().add(this.panelBase);
+		this.panelBase.setLayout(null);
 		
 		this.buttons.put("canceled", new JButton("Annuler"));
 		JButton btnCancel = this.buttons.get("canceled");
@@ -126,11 +127,11 @@ public class MainWindow extends JFrame implements ActionListener {
 	}
 
 	public void replaceContent(JComponent oldContent, JComponent newContent) {
-		this.panelBase.remove(oldContent);
-		this.panelBase.add(newContent);
-		this.panelBase.invalidate(); 
-		this.panelBase.validate();
-		this.panelBase.repaint();
+		this.getContentPane().remove(oldContent);
+		this.getContentPane().add(newContent);
+		this.getContentPane().invalidate(); 
+		this.getContentPane().validate();
+		this.getContentPane().repaint();
 	}
 
 	@Override
