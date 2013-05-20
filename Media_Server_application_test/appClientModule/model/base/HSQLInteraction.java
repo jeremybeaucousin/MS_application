@@ -1,4 +1,4 @@
-package base;
+package model.base;
 
 import java.awt.FlowLayout;
 import java.io.IOException;
