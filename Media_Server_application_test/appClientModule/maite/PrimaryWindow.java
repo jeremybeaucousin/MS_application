@@ -13,6 +13,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 import java.awt.Toolkit;
 import javax.swing.JToggleButton;
+import javax.swing.border.TitledBorder;
+import javax.swing.JCheckBox;
+import javax.swing.JTextField;
+import java.awt.SystemColor;
+import javax.swing.JTextPane;
+import javax.swing.border.EtchedBorder;
 
 public class PrimaryWindow {
 

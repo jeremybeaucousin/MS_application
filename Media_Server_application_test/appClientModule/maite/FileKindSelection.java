@@ -23,6 +23,7 @@ import javax.swing.JTextPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTable;
+import javax.swing.border.MatteBorder;
 
 public class FileKindSelection extends JPanel {
 	private JTextField textFieldUniqueLocation;
@@ -34,14 +35,14 @@ public class FileKindSelection extends JPanel {
 	 * Create the panel.
 	 */
 	public FileKindSelection() {
-		setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
+		setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		setBackground(Color.WHITE);
 		setLayout(null);
 		
 		JPanel panelIntoducing = new JPanel();
 		panelIntoducing.setBackground(Color.WHITE);
 		panelIntoducing.setBorder(null);
-		panelIntoducing.setBounds(0, 0, 558, 57);
+		panelIntoducing.setBounds(1, 1, 556, 58);
 		add(panelIntoducing);
 		panelIntoducing.setLayout(null);
 		
@@ -53,7 +54,7 @@ public class FileKindSelection extends JPanel {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(null);
-		panel.setBounds(0, 57, 558, 299);
+		panel.setBounds(1, 59, 556, 296);
 		add(panel);
 		panel.setLayout(null);
 		

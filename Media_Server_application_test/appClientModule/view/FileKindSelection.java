@@ -44,7 +44,7 @@ public final class FileKindSelection extends WindowContent {
 		// Main Panel
 		JPanel form = new JPanel();
 		form.setBorder(null);
-		form.setBounds(0, 57, 558, 299);
+		form.setBounds(0, 57, 556, 297);
 		add(form);
 		form.setLayout(null);
 		
