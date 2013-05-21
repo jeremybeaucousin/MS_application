@@ -16,7 +16,9 @@ import javax.swing.border.TitledBorder;
 import model.views.FileKindSelectionParameters;
 
 public final class FileKindSelection extends WindowContent {
-
+	private JCheckBox checkboxScanMovies;
+	private JCheckBox checkBoxScanSeries;
+	private JCheckBox checkBoxScanMusic;
 	public FileKindSelection(MainWindow mainWindow) throws IOException {
 		super(mainWindow);
 		
@@ -26,7 +28,7 @@ public final class FileKindSelection extends WindowContent {
 		JPanel panelIntroducing = new JPanel();
 		panelIntroducing.setBackground(Color.WHITE);
 		panelIntroducing.setBorder(null);
-		panelIntroducing.setBounds(0, 0, 558, 57);
+		panelIntroducing.setBounds(1, 1, 556, 58);
 		this.add(panelIntroducing);
 		panelIntroducing.setLayout(null);
 		
@@ -40,7 +42,7 @@ public final class FileKindSelection extends WindowContent {
 		// Main Panel
 		JPanel form = new JPanel();
 		form.setBorder(null);
-		form.setBounds(0, 57, 556, 297);
+		form.setBounds(1, 59, 556, 296);
 		add(form);
 		form.setLayout(null);
 		
@@ -51,10 +53,10 @@ public final class FileKindSelection extends WindowContent {
 		form.add(panelMovies);
 		panelMovies.setLayout(null);
 		
-		JCheckBox checkboxScanMovies = new JCheckBox("scanner");
-		checkboxScanMovies.setSelected(true);
-		checkboxScanMovies.setBounds(10, 12, 97, 23);
-		panelMovies.add(checkboxScanMovies);
+		this.checkboxScanMovies = new JCheckBox("scanner");
+		this.checkboxScanMovies.setSelected(true);
+		this.checkboxScanMovies.setBounds(10, 12, 97, 23);
+		panelMovies.add(this.checkboxScanMovies);
 		
 		JTextField textFieldMovies = new JTextField();
 		textFieldMovies.setText("emplacement du dossier");
@@ -78,10 +80,10 @@ public final class FileKindSelection extends WindowContent {
 		form.add(panelSeries);
 		panelSeries.setLayout(null);
 		
-		JCheckBox checkBoxScanSeries = new JCheckBox("scanner");
-		checkBoxScanSeries.setSelected(true);
-		checkBoxScanSeries.setBounds(10, 12, 97, 23);
-		panelSeries.add(checkBoxScanSeries);
+		this.checkBoxScanSeries = new JCheckBox("scanner");
+		this.checkBoxScanSeries.setSelected(true);
+		this.checkBoxScanSeries.setBounds(10, 12, 97, 23);
+		panelSeries.add(this.checkBoxScanSeries);
 		
 		JTextField textFieldSeries = new JTextField();
 		textFieldSeries.setText("emplacement du dossier");
@@ -106,10 +108,10 @@ public final class FileKindSelection extends WindowContent {
 		form.add(panelMusics);
 		panelMusics.setLayout(null);
 		
-		JCheckBox checkBoxScanMusic = new JCheckBox("scanner");
-		checkBoxScanMusic.setSelected(true);
-		checkBoxScanMusic.setBounds(10, 12, 97, 23);
-		panelMusics.add(checkBoxScanMusic);
+		this.checkBoxScanMusic = new JCheckBox("scanner");
+		this.checkBoxScanMusic.setSelected(true);
+		this.checkBoxScanMusic.setBounds(10, 12, 97, 23);
+		panelMusics.add(this.checkBoxScanMusic);
 		
 		JTextField textFieldMusic = new JTextField();
 		textFieldMusic.setText("emplacement du dossier");
@@ -178,20 +180,16 @@ public final class FileKindSelection extends WindowContent {
 	}
 	
 	public FileKindSelectionParameters getFileKindSelectionParameters() {
-		JPanel mainPanel = (JPanel) this.getComponentAt(0, 57);
-		JPanel videoPanel = (JPanel) mainPanel.getComponentAt(11, 1);
-		JPanel seriesPanel = (JPanel) mainPanel.getComponentAt(11, 71);
-		JPanel musicPanel = (JPanel) mainPanel.getComponentAt(11, 142);
-		boolean videoIsSelected = ((JCheckBox) videoPanel.getComponentAt(10, 12)).isSelected();
-		boolean serieIsSelected = ((JCheckBox) seriesPanel.getComponentAt(10, 12)).isSelected();
-		boolean musicIsSelected = ((JCheckBox) musicPanel.getComponentAt(10, 12)).isSelected();
+		boolean videoIsSelected = this.checkboxScanMovies.isSelected();
+		boolean serieIsSelected = this.checkBoxScanSeries.isSelected();
+		boolean musicIsSelected = this.checkBoxScanMusic.isSelected();
 		FileKindSelectionParameters fileKindSelectionParameters = new FileKindSelectionParameters(videoIsSelected, serieIsSelected, musicIsSelected);
 		return fileKindSelectionParameters;
 	}
 	
 	@Override
 	public void getNextScreen() {
-		this.getMainWindow().getButtons().get("previous").setEnabled(true);
+		this.getMainWindow().getPreviousButton().setEnabled(true);
 		FileKindSelectionParameters fileKindSelectionParameters = this.getFileKindSelectionParameters();
 		if(this.getMainWindow().getSearchingOnSelectedValue() == null) {
 			SearchingOnSelectedValues searchingOnSelectedValues = new SearchingOnSelectedValues(this.getMainWindow(), fileKindSelectionParameters);
@@ -206,9 +204,21 @@ public final class FileKindSelection extends WindowContent {
 
 	@Override
 	public void getPreviousScreen() {
-		this.getMainWindow().getButtons().get("previous").setEnabled(false);
+		this.getMainWindow().getPreviousButton().setEnabled(false);
 		this.getMainWindow().replaceContent(this.getMainWindow().getSearchingOnSelectedValue(), this);
 		
+	}
+
+	@Override
+	public void setToFrench() {
+		// TODO Auto-generated method stub
+		System.out.println("french");
+	}
+
+	@Override
+	public void setToEnglish() {
+		// TODO Auto-generated method stub
+		System.out.println("english");
 	}
 
 }

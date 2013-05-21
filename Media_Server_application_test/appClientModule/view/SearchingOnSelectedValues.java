@@ -75,4 +75,16 @@ public final class SearchingOnSelectedValues extends WindowContent {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void setToFrench() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setToEnglish() {
+		// TODO Auto-generated method stub
+		
+	}
 }

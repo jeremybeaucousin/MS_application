@@ -24,17 +24,45 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class MainWindow extends JFrame implements ActionListener {
-	private JPanel panelBase;
-	private TreeMap<String, JButton> buttons;
 	
+	// BUTTONS //
+	/** Button use to change Language in French **/
+	private JToggleButton frenchButton;
+	
+	/** Button use to change Language in English **/
+	private JToggleButton englishButton;
+	
+	/** Button use to quit the application **/
+	private JButton canceledButton;
+	
+	/** Button use to return to the previous screen **/
+	private JButton previousButton;
+	
+	/** Button use to go to the next screen **/
+	private JButton nextButton;
+	
+	/** Button use to when the database is fill **/
+	private JButton finishButton;
+	
+	// navigation //
+	/** Main content. Its this content which change while navigation between screens **/
+	private JPanel panelBase;
+	
+	/** Contain all the different screen, adding one by one during navigation **/
 	private ArrayList<WindowContent> navigation;
+	
+	/** Used to navigate between screen **/
 	private ListIterator<WindowContent> navigator;
+	
+	// screen //
+	/** screen : choose the kind of file that will be scann  **/
 	private FileKindSelection fileKindSelection;
+	
+	/** screen : scanning file depending on the selected value  **/
 	private SearchingOnSelectedValues searchingOnSelectedValue;
 	
 	public MainWindow() throws IOException {
 		super();
-		this.buttons = new TreeMap<String, JButton>();
 		this.navigation = new ArrayList<WindowContent>();
 		this.navigator = navigation.listIterator();
 		
@@ -50,18 +78,20 @@ public class MainWindow extends JFrame implements ActionListener {
 		lblSuperAplieServeur.setBounds(10, 12, 242, 14);
 		this.getContentPane().add(lblSuperAplieServeur);
 		
-		JToggleButton toggleButton_1 = new JToggleButton("");
-		toggleButton_1.setSelectedIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResource("img/france_flag_32.png"))));
-		toggleButton_1.setIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResource("img/france_flag_32.png"))));
-		toggleButton_1.setBounds(478, 9, 40, 23);
-		this.getContentPane().add(toggleButton_1);
+		this.frenchButton = new JToggleButton("");
+		this.frenchButton.setSelectedIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResource("img/france_flag_32.png"))));
+		this.frenchButton.setIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResource("img/france_flag_32.png"))));
+		this.frenchButton.setBounds(478, 9, 40, 23);
+		this.frenchButton.addActionListener(this);
+		this.getContentPane().add(this.frenchButton);
 		
-		JToggleButton englishButton = new JToggleButton("");
-		englishButton.setSelected(true);
-		englishButton.setSelectedIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResource("img/United-Kingdom-flag.png"))));
-		englishButton.setIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResource("img/United-Kingdom-flag.png"))));
-		englishButton.setBounds(528, 9, 40, 23);
-		this.getContentPane().add(englishButton);
+		this.englishButton = new JToggleButton("");
+		this.englishButton.setSelected(true);
+		this.englishButton.setSelectedIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResource("img/United-Kingdom-flag.png"))));
+		this.englishButton.setIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResource("img/United-Kingdom-flag.png"))));
+		this.englishButton.setBounds(528, 9, 40, 23);
+		this.englishButton.addActionListener(this);
+		this.getContentPane().add(this.englishButton);
 		
 		this.fileKindSelection = new FileKindSelection(this);
 		this.navigator.add(this.fileKindSelection);
@@ -74,31 +104,27 @@ public class MainWindow extends JFrame implements ActionListener {
 		this.getContentPane().add(this.panelBase);
 		this.panelBase.setLayout(null);
 		
-		this.buttons.put("canceled", new JButton("Annuler"));
-		JButton btnCancel = this.buttons.get("canceled");
-		btnCancel.setBounds(10, 414, 89, 23);
-		btnCancel.addActionListener(this);
-		this.getContentPane().add(btnCancel);
+		this.canceledButton =  new JButton("Annuler");
+		this.canceledButton.setBounds(10, 414, 89, 23);
+		this.canceledButton.addActionListener(this);
+		this.getContentPane().add(this.canceledButton);
 		
-		this.buttons.put("previous", new JButton("Précédent"));
-		JButton btnPrevious = this.buttons.get("previous");
-		btnPrevious.setEnabled(false);
-		btnPrevious.setBounds(281, 414, 89, 23);
-		btnPrevious.addActionListener(this);
-		this.getContentPane().add(btnPrevious);
+		this.previousButton = new JButton("Précédent");
+		this.previousButton.setEnabled(false);
+		this.previousButton.setBounds(281, 414, 89, 23);
+		this.previousButton.addActionListener(this);
+		this.getContentPane().add(this.previousButton);
 		
-		this.buttons.put("next", new JButton("Suivant"));
-		JButton btnNext = this.buttons.get("next");
-		btnNext.setBounds(380, 414, 89, 23);
-		btnNext.addActionListener(this);
-		this.getContentPane().add(btnNext);
+		this.nextButton =  new JButton("Suivant");
+		this.nextButton.setBounds(380, 414, 89, 23);
+		this.nextButton.addActionListener(this);
+		this.getContentPane().add(this.nextButton);
 		
-		this.buttons.put("finish", new JButton("Terminer"));
-		JButton btnFinish = this.buttons.get("finish");
-		btnFinish.setEnabled(false);
-		btnFinish.setBounds(479, 414, 89, 23);
-		btnFinish.addActionListener(this);
-		this.getContentPane().add(btnFinish);
+		this.finishButton = new JButton("Terminer");
+		this.finishButton.setEnabled(false);
+		this.finishButton.setBounds(479, 414, 89, 23);
+		this.finishButton.addActionListener(this);
+		this.getContentPane().add(this.finishButton);
 		
 		this.setVisible(true);
 		
@@ -112,6 +138,11 @@ public class MainWindow extends JFrame implements ActionListener {
 		return navigator;
 	}
 
+	public JButton getPreviousButton() {
+		return previousButton;
+	}
+
+	
 	public SearchingOnSelectedValues getSearchingOnSelectedValue() {
 		return searchingOnSelectedValue;
 	}
@@ -121,10 +152,6 @@ public class MainWindow extends JFrame implements ActionListener {
 		this.searchingOnSelectedValue = searchingOnSelectedValue;
 	}
 	
-
-	public TreeMap<String, JButton> getButtons() {
-		return buttons;
-	}
 
 	public void replaceContent(JComponent oldContent, JComponent newContent) {
 		this.getContentPane().remove(oldContent);
@@ -137,14 +164,19 @@ public class MainWindow extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-		if(source == this.buttons.get("canceled")) {
+		if(source.equals(this.canceledButton)) {
 			this.dispose();
-		} else if(source == this.buttons.get("next")) {
+		} else if(source.equals(this.nextButton)) {
 			this.navigation.get(this.navigator.previousIndex()).getNextScreen(); 
-		} else if(source == this.buttons.get("previous")) {
+		} else if(source.equals(this.previousButton)) {
 			this.navigator.previous();
 			this.navigation.get(this.navigator.previousIndex()).getPreviousScreen(); 
+		} else if(source.equals(this.frenchButton)) {
+			this.englishButton.setSelected(false);
+			this.navigation.get(this.navigator.previousIndex()).setToFrench();
+		} else if(source.equals(this.englishButton)) {
+			this.frenchButton.setSelected(false);
+			this.navigation.get(this.navigator.previousIndex()).setToEnglish();
 		} 
 	}
-
 }
