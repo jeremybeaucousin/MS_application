@@ -1,12 +1,15 @@
 package view;
 
 import java.awt.LayoutManager;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JPanel;
 
-public abstract class WindowContent extends JPanel implements WindowContentAction{
+import model.views.ConstantView;
+
+public abstract class WindowContent extends JPanel implements WindowContentAction, ConstantView {
 	private MainWindow mainWindow;
-	
 	public WindowContent(MainWindow mainWindow) {
 		super();
 		this.mainWindow = mainWindow;
@@ -30,5 +33,12 @@ public abstract class WindowContent extends JPanel implements WindowContentActio
 
 	public MainWindow getMainWindow() {
 		return mainWindow;
+	}
+	
+	public static HashMap<String, String> setComponentsTexts(String textInFrench, String TextInEnglish) {
+		HashMap<String, String> componentTexts = new HashMap<String, String>();
+		componentTexts.put(FR, textInFrench);
+		componentTexts.put(EN, TextInEnglish);
+		return componentTexts;
 	}
 }

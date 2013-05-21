@@ -7,10 +7,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.TreeMap;
 
 import javax.imageio.ImageIO;
+import javax.management.ImmutableDescriptor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -23,8 +28,9 @@ import javax.swing.border.MatteBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class MainWindow extends JFrame implements ActionListener {
-	
+import model.views.ConstantView;
+
+public class MainWindow extends JFrame implements ActionListener, ConstantView {
 	// BUTTONS //
 	/** Button use to change Language in French **/
 	private JToggleButton frenchButton;
@@ -43,6 +49,29 @@ public class MainWindow extends JFrame implements ActionListener {
 	
 	/** Button use to when the database is fill **/
 	private JButton finishButton;
+	
+	// textes //
+	private HashMap<JComponent, HashMap<String, String>> componentsWithText = new HashMap<JComponent, HashMap<String, String>>();
+	
+	private final String TitleFr = "Super Applie Serveur Multimédia";
+	
+	private final String TitleEn = "Super Multimedia  Server Apply";
+	
+	private final String canceledButtonFR = "Annuler";
+	
+	private final String canceledButtonEn = "Cancel";
+	
+	private final String previousButtonFR = "Précédent";
+	
+	private final String previousButtonEn = "Previous";
+	
+	private final String nextButtonFR = "Suivant";
+	
+	private final String nextButtonEn = "Next";
+	
+	private final String finishButtonFR = "Terminer";
+	
+	private final String finishButtonEn = "Finish";
 	
 	// navigation //
 	/** Main content. Its this content which change while navigation between screens **/
@@ -73,10 +102,11 @@ public class MainWindow extends JFrame implements ActionListener {
 		this.getContentPane().setLayout(null);
 		this.setLocationRelativeTo(null);
 		
-		JLabel lblSuperAplieServeur = new JLabel("Super Aplie Serveur Multimédia");
+		JLabel lblSuperAplieServeur = new JLabel(this.TitleEn);
+		this.componentsWithText.put(lblSuperAplieServeur, WindowContent.setComponentsTexts(this.TitleFr, this.TitleEn));
 		lblSuperAplieServeur.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblSuperAplieServeur.setBounds(10, 12, 242, 14);
-		this.getContentPane().add(lblSuperAplieServeur);
+		getContentPane().add(lblSuperAplieServeur);
 		
 		this.frenchButton = new JToggleButton("");
 		this.frenchButton.setSelectedIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResource("img/france_flag_32.png"))));
@@ -104,23 +134,23 @@ public class MainWindow extends JFrame implements ActionListener {
 		this.getContentPane().add(this.panelBase);
 		this.panelBase.setLayout(null);
 		
-		this.canceledButton =  new JButton("Annuler");
+		this.canceledButton =  new JButton(this.canceledButtonFR);
 		this.canceledButton.setBounds(10, 414, 89, 23);
 		this.canceledButton.addActionListener(this);
 		this.getContentPane().add(this.canceledButton);
 		
-		this.previousButton = new JButton("Précédent");
+		this.previousButton = new JButton(this.previousButtonFR);
 		this.previousButton.setEnabled(false);
 		this.previousButton.setBounds(281, 414, 89, 23);
 		this.previousButton.addActionListener(this);
 		this.getContentPane().add(this.previousButton);
 		
-		this.nextButton =  new JButton("Suivant");
+		this.nextButton =  new JButton(this.nextButtonFR);
 		this.nextButton.setBounds(380, 414, 89, 23);
 		this.nextButton.addActionListener(this);
 		this.getContentPane().add(this.nextButton);
 		
-		this.finishButton = new JButton("Terminer");
+		this.finishButton = new JButton(this.nextButtonFR);
 		this.finishButton.setEnabled(false);
 		this.finishButton.setBounds(479, 414, 89, 23);
 		this.finishButton.addActionListener(this);
@@ -173,9 +203,23 @@ public class MainWindow extends JFrame implements ActionListener {
 			this.navigation.get(this.navigator.previousIndex()).getPreviousScreen(); 
 		} else if(source.equals(this.frenchButton)) {
 			this.englishButton.setSelected(false);
+			for(JComponent component : this.componentsWithText.keySet()) {
+				if(component instanceof JLabel) {
+					((JLabel) component).setText(this.componentsWithText.get(component).get(this.FR));
+				} else if(component instanceof JButton) {
+					((JButton) component).setText(this.componentsWithText.get(component).get(this.FR));
+				}
+			}
 			this.navigation.get(this.navigator.previousIndex()).setToFrench();
 		} else if(source.equals(this.englishButton)) {
 			this.frenchButton.setSelected(false);
+			for(JComponent component : this.componentsWithText.keySet()) {
+				if(component instanceof JLabel) {
+					((JLabel) component).setText(this.componentsWithText.get(component).get(this.EN));
+				} else if(component instanceof JButton) {
+					((JButton) component).setText(this.componentsWithText.get(component).get(this.EN));
+				}
+			}
 			this.navigation.get(this.navigator.previousIndex()).setToEnglish();
 		} 
 	}

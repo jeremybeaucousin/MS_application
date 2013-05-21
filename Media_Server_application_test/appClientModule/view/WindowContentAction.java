@@ -1,5 +1,9 @@
 package view;
 
+import java.awt.Component;
+import java.util.HashMap;
+import java.util.Map;
+
 public interface WindowContentAction {
 	public void getNextScreen();
 	

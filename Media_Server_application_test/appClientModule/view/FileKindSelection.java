@@ -3,6 +3,7 @@ package view;
 import java.awt.Color;
 import java.awt.SystemColor;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
