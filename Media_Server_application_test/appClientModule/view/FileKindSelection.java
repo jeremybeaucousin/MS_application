@@ -1,12 +1,14 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.SystemColor;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -16,7 +18,22 @@ import javax.swing.border.TitledBorder;
 
 import model.views.FileKindSelectionParameters;
 
+
 public final class FileKindSelection extends WindowContent {
+	// textes //
+	private HashMap<Object, HashMap<String, String>> componentsWithText = new HashMap<Object, HashMap<String, String>>();
+	
+	private final String DescriptionFr = "Sélectionez le type de média que vous voulez scaner ainsi que leur emplacement. Précisez le type de recherche que vous désirez pour chacun.";
+	
+	private final String DescriptionEn = "Select The kind of media you want to scan and their location. Precise the kind of search for any of them.";
+	
+	private final String moviePanelTitleFr = "Films";
+	
+	private final String moviePanelTitleEn = "Movies";
+	
+	// Panel //
+	private JPanel panelMovies;
+	// Buttons //
 	private JCheckBox checkboxScanMovies;
 	private JCheckBox checkBoxScanSeries;
 	private JCheckBox checkBoxScanMusic;
@@ -34,9 +51,10 @@ public final class FileKindSelection extends WindowContent {
 		panelIntroducing.setLayout(null);
 		
 		JEditorPane dtrpnExplainTexte = new JEditorPane();
+		this.componentsWithText.put(dtrpnExplainTexte, WindowContent.setComponentsTexts(this.DescriptionFr, this.DescriptionEn));
 		dtrpnExplainTexte.setBackground(Color.WHITE);
 		dtrpnExplainTexte.setForeground(Color.BLACK);
-		dtrpnExplainTexte.setText("Sélectionez le type de média que vous voulez scaner ainsi que leur emplacement. Précisez le type de recherche que vous désirez pour chacun.");
+		dtrpnExplainTexte.setText(this.DescriptionEn);
 		dtrpnExplainTexte.setBounds(10, 11, 538, 37);
 		panelIntroducing.add(dtrpnExplainTexte);
 		
@@ -48,11 +66,14 @@ public final class FileKindSelection extends WindowContent {
 		form.setLayout(null);
 		
 		// Movie Panel
-		JPanel panelMovies = new JPanel();
-		panelMovies.setBorder(new TitledBorder(null, "Films", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelMovies.setBounds(10, 0, 538, 71);
-		form.add(panelMovies);
-		panelMovies.setLayout(null);
+		this.panelMovies = new JPanel();
+		TitledBorder moviePanelTitle = new TitledBorder(null, moviePanelTitleEn, TitledBorder.LEADING, TitledBorder.TOP, null, null);
+		// FIXME problems with update of the title
+		this.componentsWithText.put(moviePanelTitle, WindowContent.setComponentsTexts(this.moviePanelTitleFr, this.moviePanelTitleEn));
+		this.panelMovies.setBorder(moviePanelTitle);
+		this.panelMovies.setBounds(10, 0, 538, 71);
+		form.add(this.panelMovies);
+		this.panelMovies.setLayout(null);
 		
 		this.checkboxScanMovies = new JCheckBox("scanner");
 		this.checkboxScanMovies.setSelected(true);
@@ -212,14 +233,18 @@ public final class FileKindSelection extends WindowContent {
 
 	@Override
 	public void setToFrench() {
-		// TODO Auto-generated method stub
-		System.out.println("french");
+		WindowContent.changeTextInAnotherLanguage(this.componentsWithText, FR);
+		this.panelMovies.invalidate();
+		this.panelMovies.validate();
+		this.panelMovies.repaint();
 	}
 
 	@Override
 	public void setToEnglish() {
-		// TODO Auto-generated method stub
-		System.out.println("english");
+		WindowContent.changeTextInAnotherLanguage(this.componentsWithText, EN);
+		this.panelMovies.invalidate();
+		this.panelMovies.validate();
+		this.panelMovies.repaint();
 	}
 
 }

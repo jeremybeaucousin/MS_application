@@ -2,9 +2,12 @@ package view;
 
 import java.awt.LayoutManager;
 import java.util.HashMap;
-import java.util.Map;
 
+import javax.swing.JButton;
+import javax.swing.JEditorPane;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
 
 import model.views.ConstantView;
 
@@ -41,4 +44,19 @@ public abstract class WindowContent extends JPanel implements WindowContentActio
 		componentTexts.put(EN, TextInEnglish);
 		return componentTexts;
 	}
+	
+	public static void changeTextInAnotherLanguage(HashMap<Object, HashMap<String, String>> componentsWithText, String language) {
+		for(Object component : componentsWithText.keySet()) {
+			if(component instanceof JLabel) {
+				((JLabel) component).setText(componentsWithText.get(component).get(language));
+			} else if(component instanceof JButton) {
+				((JButton) component).setText(componentsWithText.get(component).get(language));
+			} else if(component instanceof JEditorPane) {
+				((JEditorPane) component).setText(componentsWithText.get(component).get(language));
+			} else if(component instanceof TitledBorder) {
+				((TitledBorder) component).setTitle(componentsWithText.get(component).get(language));
+			}
+		}
+	}
+
 }
