@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.SystemColor;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JButton;
@@ -21,18 +22,27 @@ import model.views.FileKindSelectionParameters;
 
 public final class FileKindSelection extends WindowContent {
 	// textes //
-	private HashMap<Object, HashMap<String, String>> componentsWithText = new HashMap<Object, HashMap<String, String>>();
+	/** Contains all components panel that have a title displayed on screen **/
+	private ArrayList<JPanel> panelWithTitle = new ArrayList<JPanel>();
 	
-	private final String DescriptionFr = "Sélectionez le type de média que vous voulez scaner ainsi que leur emplacement. Précisez le type de recherche que vous désirez pour chacun.";
+	private final HashMap<String, String> DescriptionTexts = new HashMap<String, String>() {
+		{
+			put(FR, "Sélectionez le type de média que vous voulez scaner ainsi que leur emplacement. Précisez le type de recherche que vous désirez pour chacun.");
+			put(EN, "Select The kind of media you want to scan and their location. Precise the kind of search for any of them.");
+		}			
+	};
 	
-	private final String DescriptionEn = "Select The kind of media you want to scan and their location. Precise the kind of search for any of them.";
+	private final HashMap<String, String> moviePanelTitleTexts = new HashMap<String, String>() {
+		{
+			put(FR, "Films");
+			put(EN, "Movies");
+		}			
+	};
 	
-	private final String moviePanelTitleFr = "Films";
+	private final HashMap<String, String> checkboxScanTexts = FileKindSelection.initiateScanCheckboxTexts();
 	
-	private final String moviePanelTitleEn = "Movies";
+	private final HashMap<String, String> checkboxDetailedShearchTexts = FileKindSelection.initiatecheckboxDetailedShearch();
 	
-	// Panel //
-	private JPanel panelMovies;
 	// Buttons //
 	private JCheckBox checkboxScanMovies;
 	private JCheckBox checkBoxScanSeries;
@@ -51,10 +61,10 @@ public final class FileKindSelection extends WindowContent {
 		panelIntroducing.setLayout(null);
 		
 		JEditorPane dtrpnExplainTexte = new JEditorPane();
-		this.componentsWithText.put(dtrpnExplainTexte, WindowContent.setComponentsTexts(this.DescriptionFr, this.DescriptionEn));
+		dtrpnExplainTexte.setText(this.DescriptionTexts.get(EN));
+		this.getComponentsWithText().put(dtrpnExplainTexte, this.DescriptionTexts);
 		dtrpnExplainTexte.setBackground(Color.WHITE);
 		dtrpnExplainTexte.setForeground(Color.BLACK);
-		dtrpnExplainTexte.setText(this.DescriptionEn);
 		dtrpnExplainTexte.setBounds(10, 11, 538, 37);
 		panelIntroducing.add(dtrpnExplainTexte);
 		
@@ -66,22 +76,24 @@ public final class FileKindSelection extends WindowContent {
 		form.setLayout(null);
 		
 		// Movie Panel
-		this.panelMovies = new JPanel();
-		TitledBorder moviePanelTitle = new TitledBorder(null, moviePanelTitleEn, TitledBorder.LEADING, TitledBorder.TOP, null, null);
-		// FIXME problems with update of the title
-		this.componentsWithText.put(moviePanelTitle, WindowContent.setComponentsTexts(this.moviePanelTitleFr, this.moviePanelTitleEn));
-		this.panelMovies.setBorder(moviePanelTitle);
-		this.panelMovies.setBounds(10, 0, 538, 71);
-		form.add(this.panelMovies);
-		this.panelMovies.setLayout(null);
+		JPanel panelMovies = new JPanel();
+		TitledBorder moviePanelTitle = new TitledBorder(null, this.moviePanelTitleTexts.get(EN), TitledBorder.LEADING, TitledBorder.TOP, null, null);
+		this.panelWithTitle.add(panelMovies);
+		this.getComponentsWithText().put(moviePanelTitle, this.moviePanelTitleTexts);
+		panelMovies.setBorder(moviePanelTitle);
+		panelMovies.setBounds(10, 0, 538, 71);
+		form.add(panelMovies);
+		panelMovies.setLayout(null);
 		
-		this.checkboxScanMovies = new JCheckBox("scanner");
+		this.checkboxScanMovies = new JCheckBox(this.checkboxScanTexts.get(EN));
+		this.getComponentsWithText().put(this.checkboxScanMovies, this.checkboxScanTexts);
 		this.checkboxScanMovies.setSelected(true);
 		this.checkboxScanMovies.setBounds(10, 12, 97, 23);
 		panelMovies.add(this.checkboxScanMovies);
 		
 		JTextField textFieldMovies = new JTextField();
-		textFieldMovies.setText("emplacement du dossier");
+		textFieldMovies.setText(this.checkboxDetailedShearchTexts.get(EN));
+		this.getComponentsWithText().put(textFieldMovies, this.checkboxDetailedShearchTexts);
 		textFieldMovies.setForeground(SystemColor.controlShadow);
 		textFieldMovies.setColumns(10);
 		textFieldMovies.setBounds(10, 42, 170, 20);
@@ -102,13 +114,15 @@ public final class FileKindSelection extends WindowContent {
 		form.add(panelSeries);
 		panelSeries.setLayout(null);
 		
-		this.checkBoxScanSeries = new JCheckBox("scanner");
+		this.checkBoxScanSeries = new JCheckBox(checkboxScanTexts.get(EN));
+		this.getComponentsWithText().put(this.checkBoxScanSeries, this.checkboxScanTexts);
 		this.checkBoxScanSeries.setSelected(true);
 		this.checkBoxScanSeries.setBounds(10, 12, 97, 23);
 		panelSeries.add(this.checkBoxScanSeries);
 		
 		JTextField textFieldSeries = new JTextField();
-		textFieldSeries.setText("emplacement du dossier");
+		textFieldSeries.setText(this.checkboxDetailedShearchTexts.get(EN));
+		this.getComponentsWithText().put(textFieldSeries, this.checkboxDetailedShearchTexts);
 		textFieldSeries.setForeground(SystemColor.controlShadow);
 		textFieldSeries.setColumns(10);
 		textFieldSeries.setBounds(10, 42, 170, 20);
@@ -130,13 +144,15 @@ public final class FileKindSelection extends WindowContent {
 		form.add(panelMusics);
 		panelMusics.setLayout(null);
 		
-		this.checkBoxScanMusic = new JCheckBox("scanner");
+		this.checkBoxScanMusic = new JCheckBox(checkboxScanTexts.get(EN));
+		this.getComponentsWithText().put(this.checkBoxScanMusic, this.checkboxScanTexts);
 		this.checkBoxScanMusic.setSelected(true);
 		this.checkBoxScanMusic.setBounds(10, 12, 97, 23);
 		panelMusics.add(this.checkBoxScanMusic);
 		
 		JTextField textFieldMusic = new JTextField();
-		textFieldMusic.setText("emplacement du dossier");
+		textFieldMusic.setText(this.checkboxDetailedShearchTexts.get(EN));
+		this.getComponentsWithText().put(textFieldMusic, this.checkboxDetailedShearchTexts);
 		textFieldMusic.setForeground(SystemColor.controlShadow);
 		textFieldMusic.setColumns(10);
 		textFieldMusic.setBounds(10, 42, 170, 20);
@@ -164,7 +180,8 @@ public final class FileKindSelection extends WindowContent {
 		JTextField textFieldUniqueLocation = new JTextField();
 		textFieldUniqueLocation.setEnabled(false);
 		textFieldUniqueLocation.setForeground(UIManager.getColor("Button.shadow"));
-		textFieldUniqueLocation.setText("emplacement du dossier");
+		textFieldUniqueLocation.setText(this.checkboxDetailedShearchTexts.get(EN));
+		this.getComponentsWithText().put(textFieldUniqueLocation, this.checkboxDetailedShearchTexts);
 		textFieldUniqueLocation.setBounds(6, 42, 170, 20);
 		panelUniqueLocation.add(textFieldUniqueLocation);
 		textFieldUniqueLocation.setColumns(10);
@@ -201,6 +218,26 @@ public final class FileKindSelection extends WindowContent {
 //		this.add(checkbox3, gridBagConstraints);
 	}
 	
+	private void revalidatePanelWithTitle() {
+		for(JPanel panel : this.panelWithTitle) {
+			WindowContent.revalidateContent(panel);
+		}
+	}
+	
+	private static HashMap<String, String> initiateScanCheckboxTexts() {
+		HashMap<String, String> scanCheckboxTexts = new HashMap<String, String>();
+		scanCheckboxTexts.put(FR, "scanner");
+		scanCheckboxTexts.put(EN, "scan");
+		return scanCheckboxTexts;
+	}
+	
+	private static HashMap<String, String> initiatecheckboxDetailedShearch() {
+		HashMap<String, String> scanCheckboxTexts = new HashMap<String, String>();
+		scanCheckboxTexts.put(FR, "Emplacement du dossier");
+		scanCheckboxTexts.put(EN, "File Location");
+		return scanCheckboxTexts;
+	}
+	
 	public FileKindSelectionParameters getFileKindSelectionParameters() {
 		boolean videoIsSelected = this.checkboxScanMovies.isSelected();
 		boolean serieIsSelected = this.checkBoxScanSeries.isSelected();
@@ -233,18 +270,14 @@ public final class FileKindSelection extends WindowContent {
 
 	@Override
 	public void setToFrench() {
-		WindowContent.changeTextInAnotherLanguage(this.componentsWithText, FR);
-		this.panelMovies.invalidate();
-		this.panelMovies.validate();
-		this.panelMovies.repaint();
+		WindowContent.changeTextInAnotherLanguage(this.getComponentsWithText(), FR);
+		this.revalidatePanelWithTitle();
 	}
 
 	@Override
 	public void setToEnglish() {
-		WindowContent.changeTextInAnotherLanguage(this.componentsWithText, EN);
-		this.panelMovies.invalidate();
-		this.panelMovies.validate();
-		this.panelMovies.repaint();
+		WindowContent.changeTextInAnotherLanguage(this.getComponentsWithText(), EN);
+		this.revalidatePanelWithTitle();
 	}
 
 }

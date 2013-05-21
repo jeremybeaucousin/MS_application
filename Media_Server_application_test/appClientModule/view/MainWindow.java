@@ -44,27 +44,43 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 	private JButton finishButton;
 	
 	// textes //
+	/** Contains all components which have text displayed on screen **/
 	private HashMap<Object, HashMap<String, String>> componentsWithText = new HashMap<Object, HashMap<String, String>>();
 	
-	private final String TitleFr = "Super Applie Serveur Multimédia";
+	private final HashMap<String, String> TitleTexts = new HashMap<String, String>() {
+		{
+			put(FR, "Super Applie Serveur Multimédia");
+			put(EN, "Super Multimedia  Server Apply");
+		}			
+	};
+
+	private final HashMap<String, String> canceledButtonTexts = new HashMap<String, String>() {
+		{
+			put(FR, "Annuler");
+			put(EN, "Cancel");
+		}			
+	};
 	
-	private final String TitleEn = "Super Multimedia  Server Apply";
+	private final HashMap<String, String> previousButtonTexts = new HashMap<String, String>() {
+		{
+			put(FR, "Précédent");
+			put(EN, "Previous");
+		}			
+	};
 	
-	private final String canceledButtonFr = "Annuler";
+	private final HashMap<String, String> nextButtonTexts = new HashMap<String, String>() {
+		{
+			put(FR, "Suivant");
+			put(EN, "Next");
+		}			
+	};
 	
-	private final String canceledButtonEn = "Cancel";
-	
-	private final String previousButtonFr = "Précédent";
-	
-	private final String previousButtonEn = "Previous";
-	
-	private final String nextButtonFr = "Suivant";
-	
-	private final String nextButtonEn = "Next";
-	
-	private final String finishButtonFr = "Terminer";
-	
-	private final String finishButtonEn = "Finish";
+	private final HashMap<String, String> finishButtonTexts = new HashMap<String, String>() {
+		{
+			put(FR, "Terminer");
+			put(EN, "Finish");
+		}			
+	};
 	
 	// navigation //
 	/** Main content. Its this content which change while navigation between screens **/
@@ -88,6 +104,9 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 		this.navigation = new ArrayList<WindowContent>();
 		this.navigator = navigation.listIterator();
 		
+//		Double screenWidth = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+//		Double screenHeight = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+		
 		this.setResizable(false);
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("img/multimedia-icone.png")));
 		this.setBounds(100, 100, 583, 486);
@@ -95,8 +114,8 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 		this.getContentPane().setLayout(null);
 		this.setLocationRelativeTo(null);
 		
-		JLabel lblSuperAplieServeur = new JLabel(this.TitleEn);
-		this.componentsWithText.put(lblSuperAplieServeur, WindowContent.setComponentsTexts(this.TitleFr, this.TitleEn));
+		JLabel lblSuperAplieServeur = new JLabel(this.TitleTexts.get(EN));
+		this.componentsWithText.put(lblSuperAplieServeur, this.TitleTexts);
 		lblSuperAplieServeur.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblSuperAplieServeur.setBounds(10, 12, 242, 14);
 		getContentPane().add(lblSuperAplieServeur);
@@ -127,27 +146,27 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 		this.getContentPane().add(this.panelBase);
 		this.panelBase.setLayout(null);
 		
-		this.canceledButton =  new JButton(this.canceledButtonEn);
-		this.componentsWithText.put(this.canceledButton, WindowContent.setComponentsTexts(this.canceledButtonFr, this.canceledButtonEn));
+		this.canceledButton =  new JButton(this.canceledButtonTexts.get(EN));
+		this.componentsWithText.put(this.canceledButton, this.canceledButtonTexts);
 		this.canceledButton.setBounds(10, 414, 89, 23);
 		this.canceledButton.addActionListener(this);
 		this.getContentPane().add(this.canceledButton);
 		
-		this.previousButton = new JButton(this.previousButtonEn);
-		this.componentsWithText.put(this.previousButton, WindowContent.setComponentsTexts(this.previousButtonFr, this.previousButtonEn));
+		this.previousButton = new JButton(this.previousButtonTexts.get(EN));
+		this.componentsWithText.put(this.previousButton, this.previousButtonTexts);
 		this.previousButton.setEnabled(false);
 		this.previousButton.setBounds(281, 414, 89, 23);
 		this.previousButton.addActionListener(this);
 		this.getContentPane().add(this.previousButton);
 		
-		this.nextButton =  new JButton(this.nextButtonEn);
-		this.componentsWithText.put(this.nextButton, WindowContent.setComponentsTexts(this.nextButtonFr, this.nextButtonEn));
+		this.nextButton =  new JButton(this.nextButtonTexts.get(EN));
+		this.componentsWithText.put(this.nextButton, this.nextButtonTexts);
 		this.nextButton.setBounds(380, 414, 89, 23);
 		this.nextButton.addActionListener(this);
 		this.getContentPane().add(this.nextButton);
 		
-		this.finishButton = new JButton(this.finishButtonEn);
-		this.componentsWithText.put(this.finishButton, WindowContent.setComponentsTexts(this.finishButtonFr, this.finishButtonEn));
+		this.finishButton = new JButton(this.finishButtonTexts.get(EN));
+		this.componentsWithText.put(this.finishButton, this.finishButtonTexts);
 		this.finishButton.setEnabled(false);
 		this.finishButton.setBounds(479, 414, 89, 23);
 		this.finishButton.addActionListener(this);
@@ -184,9 +203,7 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 		// TODO create Méthode
 		this.getContentPane().remove(oldContent);
 		this.getContentPane().add(newContent);
-		this.getContentPane().invalidate(); 
-		this.getContentPane().validate();
-		this.getContentPane().repaint();
+		WindowContent.revalidateContent(this.getContentPane());
 	}
 
 	@Override
