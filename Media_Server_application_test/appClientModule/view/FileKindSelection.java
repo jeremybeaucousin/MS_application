@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -363,6 +364,9 @@ public final class FileKindSelection extends WindowContent implements ActionList
 			if(((JTextField) source).getText().equals(ConstantString.EMPTY)) {
 				((JTextField) source).setText(this.getComponentsWithText().get(source).get(WindowContent.getCurrentLanguage()));
 				((JTextField) source).setForeground(SystemColor.controlShadow);
+			} else {
+				// TODO check if path exist
+				System.out.println(new File(((JTextField) source).getText()));
 			}
 		}
 		
