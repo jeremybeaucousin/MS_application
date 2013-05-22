@@ -12,12 +12,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import util.ConstantString;
+
 
 public abstract class WindowContent extends JPanel implements WindowContentAction, ConstantView {
 	private MainWindow mainWindow;
 	
 	/** Is the default language of the application **/
 	private final static String defaultLanguage = EN;
+	
+	/** Is the current language of the application **/
+	private static String currentLanguage = defaultLanguage;
 	
 	public void setComponentsWithText(
 			HashMap<Object, HashMap<String, String>> componentsWithText) {
@@ -56,6 +61,14 @@ public abstract class WindowContent extends JPanel implements WindowContentActio
 		return defaultLanguage;
 	}
 
+	public static String getCurrentLanguage() {
+		return currentLanguage;
+	}
+
+	public static void setCurrentLanguage(String currentLanguage) {
+		WindowContent.currentLanguage = currentLanguage;
+	}
+	
 	public HashMap<Object, HashMap<String, String>> getComponentsWithText() {
 		return componentsWithText;
 	}
@@ -73,7 +86,9 @@ public abstract class WindowContent extends JPanel implements WindowContentActio
 			} else if(component instanceof TitledBorder) {
 				((TitledBorder) component).setTitle(componentsWithText.get(component).get(language));
 			} else if(component instanceof JTextField) {
-				((JTextField) component).setText(componentsWithText.get(component).get(language));
+				if(componentsWithText.get(component).containsValue(((JTextField) component).getText()) || ((JTextField) component).getText().equals(ConstantString.EMPTY)) {
+					((JTextField) component).setText(componentsWithText.get(component).get(language));
+				}
 			}
 		}
 	}

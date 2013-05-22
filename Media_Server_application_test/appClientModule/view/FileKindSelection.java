@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,9 +22,11 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import util.ConstantString;
 
 
-public final class FileKindSelection extends WindowContent implements ActionListener {
+
+public final class FileKindSelection extends WindowContent implements ActionListener, FocusListener {
 	// Buttons AND Checkboxes and TextField//
 	private JCheckBox checkboxScanMovies, checkBoxScanSeries, checkBoxScanMusic, checkboxUniqueLocation;
 	
@@ -137,22 +141,23 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.checkboxScanMovies.setBounds(10, 12, 97, 23);
 		panelMovies.add(this.checkboxScanMovies);
 		
-		moviesLocation = new JTextField();
-		moviesLocation.setText(this.locationsTexts.get(WindowContent.getDefaultlanguage()));
-		this.getComponentsWithText().put(moviesLocation, this.locationsTexts);
-		moviesLocation.setForeground(SystemColor.controlShadow);
-		moviesLocation.setColumns(10);
-		moviesLocation.setBounds(10, 42, 170, 20);
-		panelMovies.add(moviesLocation);
+		this.moviesLocation = new JTextField();
+		this.moviesLocation.setText(this.locationsTexts.get(WindowContent.getDefaultlanguage()));
+		this.getComponentsWithText().put(this.moviesLocation, this.locationsTexts);
+		this.moviesLocation.setForeground(SystemColor.controlShadow);
+		this.moviesLocation.setColumns(10);
+		this.moviesLocation.setBounds(10, 42, 170, 20);
+		this.moviesLocation.addFocusListener(this);
+		panelMovies.add(this.moviesLocation);
 		
-		buttonMoviesFolderSelection = new JButton("...");
-		buttonMoviesFolderSelection.setBounds(190, 41, 30, 23);
-		panelMovies.add(buttonMoviesFolderSelection);
+		this.buttonMoviesFolderSelection = new JButton("...");
+		this.buttonMoviesFolderSelection.setBounds(190, 41, 30, 23);
+		panelMovies.add(this.buttonMoviesFolderSelection);
 		
-		checkboxDetailedShearchMovies = new JCheckBox(this.checkboxDetailedShearchTexts.get(WindowContent.getDefaultlanguage()));
-		this.getComponentsWithText().put(checkboxDetailedShearchMovies, this.checkboxDetailedShearchTexts);
-		checkboxDetailedShearchMovies.setBounds(395, 41, 137, 23);
-		panelMovies.add(checkboxDetailedShearchMovies);
+		this.checkboxDetailedShearchMovies = new JCheckBox(this.checkboxDetailedShearchTexts.get(WindowContent.getDefaultlanguage()));
+		this.getComponentsWithText().put(this.checkboxDetailedShearchMovies, this.checkboxDetailedShearchTexts);
+		this.checkboxDetailedShearchMovies.setBounds(395, 41, 137, 23);
+		panelMovies.add(this.checkboxDetailedShearchMovies);
 		
 		// Serie Panel
 		JPanel panelSeries = new JPanel();
@@ -176,6 +181,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.seriesLocation.setForeground(SystemColor.controlShadow);
 		this.seriesLocation.setColumns(10);
 		this.seriesLocation.setBounds(10, 42, 170, 20);
+		this.seriesLocation.addFocusListener(this);
 		panelSeries.add(this.seriesLocation);
 		
 		
@@ -210,6 +216,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.musicLocation.setForeground(SystemColor.controlShadow);
 		this.musicLocation.setColumns(10);
 		this.musicLocation.setBounds(10, 42, 170, 20);
+		this.musicLocation.addFocusListener(this);
 		panelMusics.add(this.musicLocation);
 		
 		this.buttonMusicLocation = new JButton("...");
@@ -240,8 +247,9 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.UniqueLocation.setText(this.locationsTexts.get(WindowContent.getDefaultlanguage()));
 		this.getComponentsWithText().put(this.UniqueLocation, this.locationsTexts);
 		this.UniqueLocation.setBounds(6, 42, 170, 20);
-		panelUniqueLocation.add(this.UniqueLocation);
 		this.UniqueLocation.setColumns(10);
+		this.UniqueLocation.addFocusListener(this);
+		panelUniqueLocation.add(this.UniqueLocation);
 		
 		this.buttonUniqueLocationLoc = new JButton("...");
 		this.buttonUniqueLocationLoc.setEnabled(false);
@@ -335,5 +343,28 @@ public final class FileKindSelection extends WindowContent implements ActionList
 				checkBoxDetailedShearchUniqueLocation.setEnabled(false);
 			}
 		}
+	}
+
+	@Override
+	public void focusGained(FocusEvent e) {
+		Object source = e.getSource();
+		if(source instanceof JTextField) {
+			if(this.getComponentsWithText().get(source).containsValue(((JTextField) source).getText())) {
+				((JTextField) source).setText("");
+				((JTextField) source).setForeground(null);
+			}
+		}
+	}
+
+	@Override
+	public void focusLost(FocusEvent e) {
+		Object source = e.getSource();
+		if(source instanceof JTextField) {
+			if(((JTextField) source).getText().equals(ConstantString.EMPTY)) {
+				((JTextField) source).setText(this.getComponentsWithText().get(source).get(WindowContent.getCurrentLanguage()));
+				((JTextField) source).setForeground(SystemColor.controlShadow);
+			}
+		}
+		
 	}
 }

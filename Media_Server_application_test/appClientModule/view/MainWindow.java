@@ -217,10 +217,12 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 			this.navigation.get(this.navigator.previousIndex()).getPreviousScreen(); 
 		} else if(source.equals(this.frenchButton)) {
 			this.englishButton.setSelected(false);
+			WindowContent.setCurrentLanguage(FR);
 			WindowContent.changeTextInAnotherLanguage(this.componentsWithText, FR);
 			this.navigation.get(this.navigator.previousIndex()).setToFrench();
 		} else if(source.equals(this.englishButton)) {
 			this.frenchButton.setSelected(false);
+			WindowContent.setCurrentLanguage(EN);
 			WindowContent.changeTextInAnotherLanguage(this.componentsWithText, EN);
 			this.navigation.get(this.navigator.previousIndex()).setToEnglish();
 		} 
