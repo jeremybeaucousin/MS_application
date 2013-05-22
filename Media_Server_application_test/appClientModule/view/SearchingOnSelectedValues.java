@@ -13,7 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import model.views.FileKindSelectionParameters;
 
 public final class SearchingOnSelectedValues extends WindowContent {
 	private TreeMap<String, JLabel> results;

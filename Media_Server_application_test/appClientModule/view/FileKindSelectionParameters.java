@@ -1,4 +1,4 @@
-package model.views;
+package view;
 
 public final class FileKindSelectionParameters {
 	final private Boolean videoIsSelected;

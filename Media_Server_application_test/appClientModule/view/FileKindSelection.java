@@ -17,7 +17,6 @@ import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import model.views.FileKindSelectionParameters;
 
 
 public final class FileKindSelection extends WindowContent {
@@ -51,6 +50,13 @@ public final class FileKindSelection extends WindowContent {
 		{
 			put(FR, "Musique");
 			put(EN, "Music");
+		}			
+	};
+	
+	private final HashMap<String, String> checkboxUniqueLocationTexts = new HashMap<String, String>() {
+		{
+			put(FR, "Emplacement unique");
+			put(EN, "Unique location");
 		}			
 	};
 	
@@ -176,8 +182,8 @@ public final class FileKindSelection extends WindowContent {
 		
 		// Music Panel
 		JPanel panelMusics = new JPanel();
-		TitledBorder musicPanelTitle = new TitledBorder(null, "Musiques", TitledBorder.LEADING, TitledBorder.TOP, null, null);
-		panelSeries.setBorder(musicPanelTitle);
+		TitledBorder musicPanelTitle = new TitledBorder(null, this.musicPanelTitleTexts.get(WindowContent.getDefaultlanguage()), TitledBorder.LEADING, TitledBorder.TOP, null, null);
+		panelMusics.setBorder(musicPanelTitle);
 		this.panelWithTitle.add(panelMusics);
 		this.getComponentsWithText().put(musicPanelTitle, this.musicPanelTitleTexts);
 		
@@ -216,7 +222,12 @@ public final class FileKindSelection extends WindowContent {
 		form.add(panelUniqueLocation);
 		panelUniqueLocation.setLayout(null);
 		
-		JCheckBox checkboxUniqueLocation = new JCheckBox("Emplacement unique");
+		
+		this.checkBoxScanMusic = new JCheckBox(this.scanCheckboxTexts.get(WindowContent.getDefaultlanguage()));
+		this.getComponentsWithText().put(this.checkBoxScanMusic, this.scanCheckboxTexts);
+		
+		JCheckBox checkboxUniqueLocation = new JCheckBox(this.checkboxUniqueLocationTexts.get(WindowContent.getDefaultlanguage()));
+		this.getComponentsWithText().put(checkboxUniqueLocation, this.checkboxUniqueLocationTexts);
 		checkboxUniqueLocation.setBounds(6, 7, 131, 23);
 		panelUniqueLocation.add(checkboxUniqueLocation);
 		

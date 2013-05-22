@@ -12,13 +12,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import model.views.ConstantView;
 
 public abstract class WindowContent extends JPanel implements WindowContentAction, ConstantView {
 	private MainWindow mainWindow;
 	
 	/** Is the default language of the application **/
-	final static String defaultLanguage = EN;
+	private final static String defaultLanguage = EN;
 	
 	public void setComponentsWithText(
 			HashMap<Object, HashMap<String, String>> componentsWithText) {

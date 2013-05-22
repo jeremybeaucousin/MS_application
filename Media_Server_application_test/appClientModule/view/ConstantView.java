@@ -1,4 +1,4 @@
-package model.views;
+package view;
 
 public interface ConstantView {
 	public final String FR = "FR";

@@ -21,7 +21,6 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.border.MatteBorder;
 
-import model.views.ConstantView;
 
 public class MainWindow extends JFrame implements ActionListener, ConstantView {
 	// BUTTONS //
