@@ -39,9 +39,41 @@ public final class FileKindSelection extends WindowContent {
 		}			
 	};
 	
-	private final HashMap<String, String> checkboxScanTexts = FileKindSelection.initiateScanCheckboxTexts();
 	
-	private final HashMap<String, String> checkboxDetailedShearchTexts = FileKindSelection.initiatecheckboxDetailedShearch();
+	private final HashMap<String, String> seriesPanelTitleTexts = new HashMap<String, String>() {
+		{
+			put(FR, "Séries");
+			put(EN, "Series");
+		}			
+	};
+	
+	private final HashMap<String, String> musicPanelTitleTexts = new HashMap<String, String>() {
+		{
+			put(FR, "Musique");
+			put(EN, "Music");
+		}			
+	};
+	
+	private final HashMap<String, String> scanCheckboxTexts = new HashMap<String, String>() {
+		{
+			put(FR, "scanner");
+			put(EN, "scan");
+		}			
+	};
+	
+	private final HashMap<String, String> locationsTexts = new HashMap<String, String>() {
+		{
+			put(FR, "Emplacement du dossier");
+			put(EN, "File Location");
+		}			
+	};
+	
+	private final HashMap<String, String> checkboxDetailedShearchTexts = new HashMap<String, String>() {
+		{
+			put(FR, "Recherche approfondie");
+			put(EN, "Detailed search");
+		}			
+	};
 	
 	// Buttons //
 	private JCheckBox checkboxScanMovies;
@@ -53,20 +85,20 @@ public final class FileKindSelection extends WindowContent {
 		this.setBackground(Color.WHITE);
 		this.setLayout(null);
 		
-		JPanel panelIntroducing = new JPanel();
-		panelIntroducing.setBackground(Color.WHITE);
-		panelIntroducing.setBorder(null);
-		panelIntroducing.setBounds(1, 1, 556, 58);
-		this.add(panelIntroducing);
-		panelIntroducing.setLayout(null);
+		JPanel introducingPanel = new JPanel();
+		introducingPanel.setBackground(Color.WHITE);
+		introducingPanel.setBorder(null);
+		introducingPanel.setBounds(1, 1, 556, 58);
+		this.add(introducingPanel);
+		introducingPanel.setLayout(null);
 		
-		JEditorPane dtrpnExplainTexte = new JEditorPane();
-		dtrpnExplainTexte.setText(this.DescriptionTexts.get(EN));
-		this.getComponentsWithText().put(dtrpnExplainTexte, this.DescriptionTexts);
-		dtrpnExplainTexte.setBackground(Color.WHITE);
-		dtrpnExplainTexte.setForeground(Color.BLACK);
-		dtrpnExplainTexte.setBounds(10, 11, 538, 37);
-		panelIntroducing.add(dtrpnExplainTexte);
+		JEditorPane introducingText = new JEditorPane();
+		introducingText.setText(this.DescriptionTexts.get(WindowContent.getDefaultlanguage()));
+		this.getComponentsWithText().put(introducingText, this.DescriptionTexts);
+		introducingText.setBackground(Color.WHITE);
+		introducingText.setForeground(Color.BLACK);
+		introducingText.setBounds(10, 11, 538, 37);
+		introducingPanel.add(introducingText);
 		
 		// Main Panel
 		JPanel form = new JPanel();
@@ -77,52 +109,56 @@ public final class FileKindSelection extends WindowContent {
 		
 		// Movie Panel
 		JPanel panelMovies = new JPanel();
-		TitledBorder moviePanelTitle = new TitledBorder(null, this.moviePanelTitleTexts.get(EN), TitledBorder.LEADING, TitledBorder.TOP, null, null);
+		TitledBorder moviePanelTitle = new TitledBorder(null, this.moviePanelTitleTexts.get(WindowContent.getDefaultlanguage()), TitledBorder.LEADING, TitledBorder.TOP, null, null);
+		panelMovies.setBorder(moviePanelTitle);
 		this.panelWithTitle.add(panelMovies);
 		this.getComponentsWithText().put(moviePanelTitle, this.moviePanelTitleTexts);
-		panelMovies.setBorder(moviePanelTitle);
 		panelMovies.setBounds(10, 0, 538, 71);
 		form.add(panelMovies);
 		panelMovies.setLayout(null);
 		
-		this.checkboxScanMovies = new JCheckBox(this.checkboxScanTexts.get(EN));
-		this.getComponentsWithText().put(this.checkboxScanMovies, this.checkboxScanTexts);
+		this.checkboxScanMovies = new JCheckBox(this.scanCheckboxTexts.get(WindowContent.getDefaultlanguage()));
+		this.getComponentsWithText().put(this.checkboxScanMovies, this.scanCheckboxTexts);
 		this.checkboxScanMovies.setSelected(true);
 		this.checkboxScanMovies.setBounds(10, 12, 97, 23);
 		panelMovies.add(this.checkboxScanMovies);
 		
-		JTextField textFieldMovies = new JTextField();
-		textFieldMovies.setText(this.checkboxDetailedShearchTexts.get(EN));
-		this.getComponentsWithText().put(textFieldMovies, this.checkboxDetailedShearchTexts);
-		textFieldMovies.setForeground(SystemColor.controlShadow);
-		textFieldMovies.setColumns(10);
-		textFieldMovies.setBounds(10, 42, 170, 20);
-		panelMovies.add(textFieldMovies);
+		JTextField moviesLocation = new JTextField();
+		moviesLocation.setText(this.locationsTexts.get(WindowContent.getDefaultlanguage()));
+		this.getComponentsWithText().put(moviesLocation, this.locationsTexts);
+		moviesLocation.setForeground(SystemColor.controlShadow);
+		moviesLocation.setColumns(10);
+		moviesLocation.setBounds(10, 42, 170, 20);
+		panelMovies.add(moviesLocation);
 		
-		JButton buttonMoviesLocation = new JButton("...");
-		buttonMoviesLocation.setBounds(190, 41, 30, 23);
-		panelMovies.add(buttonMoviesLocation);
+		JButton buttonMoviesFolderSelection = new JButton("...");
+		buttonMoviesFolderSelection.setBounds(190, 41, 30, 23);
+		panelMovies.add(buttonMoviesFolderSelection);
 		
-		JCheckBox checkboxDetailedShearchMovies = new JCheckBox("Recherche approfondie");
+		JCheckBox checkboxDetailedShearchMovies = new JCheckBox(this.checkboxDetailedShearchTexts.get(WindowContent.getDefaultlanguage()));
+		this.getComponentsWithText().put(checkboxDetailedShearchMovies, this.checkboxDetailedShearchTexts);
 		checkboxDetailedShearchMovies.setBounds(395, 41, 137, 23);
 		panelMovies.add(checkboxDetailedShearchMovies);
 		
 		// Serie Panel
 		JPanel panelSeries = new JPanel();
-		panelSeries.setBorder(new TitledBorder(null, "Séries", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		TitledBorder seriesPanelTitle = new TitledBorder(null, seriesPanelTitleTexts.get(WindowContent.getDefaultlanguage()), TitledBorder.LEADING, TitledBorder.TOP, null, null);
+		panelSeries.setBorder(seriesPanelTitle);
+		this.panelWithTitle.add(panelSeries);
+		this.getComponentsWithText().put(seriesPanelTitle, this.seriesPanelTitleTexts);
 		panelSeries.setBounds(10, 70, 538, 71);
 		form.add(panelSeries);
 		panelSeries.setLayout(null);
 		
-		this.checkBoxScanSeries = new JCheckBox(checkboxScanTexts.get(EN));
-		this.getComponentsWithText().put(this.checkBoxScanSeries, this.checkboxScanTexts);
+		this.checkBoxScanSeries = new JCheckBox(this.scanCheckboxTexts.get(WindowContent.getDefaultlanguage()));
+		this.getComponentsWithText().put(this.checkBoxScanSeries, this.scanCheckboxTexts);
 		this.checkBoxScanSeries.setSelected(true);
 		this.checkBoxScanSeries.setBounds(10, 12, 97, 23);
 		panelSeries.add(this.checkBoxScanSeries);
 		
 		JTextField textFieldSeries = new JTextField();
-		textFieldSeries.setText(this.checkboxDetailedShearchTexts.get(EN));
-		this.getComponentsWithText().put(textFieldSeries, this.checkboxDetailedShearchTexts);
+		textFieldSeries.setText(this.locationsTexts.get(WindowContent.getDefaultlanguage()));
+		this.getComponentsWithText().put(textFieldSeries, this.locationsTexts);
 		textFieldSeries.setForeground(SystemColor.controlShadow);
 		textFieldSeries.setColumns(10);
 		textFieldSeries.setBounds(10, 42, 170, 20);
@@ -133,26 +169,32 @@ public final class FileKindSelection extends WindowContent {
 		buttonSeriesLoc.setBounds(190, 41, 30, 23);
 		panelSeries.add(buttonSeriesLoc);
 		
-		JCheckBox checkBoxDetailedShearchSeries = new JCheckBox("Recherche approfondie");
+		JCheckBox checkBoxDetailedShearchSeries = new JCheckBox(this.checkboxDetailedShearchTexts.get(WindowContent.getDefaultlanguage()));
+		this.getComponentsWithText().put(checkBoxDetailedShearchSeries, this.checkboxDetailedShearchTexts);
 		checkBoxDetailedShearchSeries.setBounds(395, 41, 137, 23);
 		panelSeries.add(checkBoxDetailedShearchSeries);
 		
 		// Music Panel
 		JPanel panelMusics = new JPanel();
-		panelMusics.setBorder(new TitledBorder(null, "Musiques", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		TitledBorder musicPanelTitle = new TitledBorder(null, "Musiques", TitledBorder.LEADING, TitledBorder.TOP, null, null);
+		panelSeries.setBorder(musicPanelTitle);
+		this.panelWithTitle.add(panelMusics);
+		this.getComponentsWithText().put(musicPanelTitle, this.musicPanelTitleTexts);
+		
+		
 		panelMusics.setBounds(10, 141, 538, 71);
 		form.add(panelMusics);
 		panelMusics.setLayout(null);
 		
-		this.checkBoxScanMusic = new JCheckBox(checkboxScanTexts.get(EN));
-		this.getComponentsWithText().put(this.checkBoxScanMusic, this.checkboxScanTexts);
+		this.checkBoxScanMusic = new JCheckBox(this.scanCheckboxTexts.get(WindowContent.getDefaultlanguage()));
+		this.getComponentsWithText().put(this.checkBoxScanMusic, this.scanCheckboxTexts);
 		this.checkBoxScanMusic.setSelected(true);
 		this.checkBoxScanMusic.setBounds(10, 12, 97, 23);
 		panelMusics.add(this.checkBoxScanMusic);
 		
 		JTextField textFieldMusic = new JTextField();
-		textFieldMusic.setText(this.checkboxDetailedShearchTexts.get(EN));
-		this.getComponentsWithText().put(textFieldMusic, this.checkboxDetailedShearchTexts);
+		textFieldMusic.setText(this.locationsTexts.get(WindowContent.getDefaultlanguage()));
+		this.getComponentsWithText().put(textFieldMusic, this.locationsTexts);
 		textFieldMusic.setForeground(SystemColor.controlShadow);
 		textFieldMusic.setColumns(10);
 		textFieldMusic.setBounds(10, 42, 170, 20);
@@ -162,7 +204,8 @@ public final class FileKindSelection extends WindowContent {
 		buttonMusicLocation.setBounds(190, 41, 30, 23);
 		panelMusics.add(buttonMusicLocation);
 		
-		JCheckBox checkBoxDetailedShearchMusics = new JCheckBox("Recherche approfondie");
+		JCheckBox checkBoxDetailedShearchMusics = new JCheckBox(this.checkboxDetailedShearchTexts.get(WindowContent.getDefaultlanguage()));
+		this.getComponentsWithText().put(checkBoxDetailedShearchMusics, this.checkboxDetailedShearchTexts);
 		checkBoxDetailedShearchMusics.setBounds(395, 41, 137, 23);
 		panelMusics.add(checkBoxDetailedShearchMusics);
 		
@@ -180,8 +223,8 @@ public final class FileKindSelection extends WindowContent {
 		JTextField textFieldUniqueLocation = new JTextField();
 		textFieldUniqueLocation.setEnabled(false);
 		textFieldUniqueLocation.setForeground(UIManager.getColor("Button.shadow"));
-		textFieldUniqueLocation.setText(this.checkboxDetailedShearchTexts.get(EN));
-		this.getComponentsWithText().put(textFieldUniqueLocation, this.checkboxDetailedShearchTexts);
+		textFieldUniqueLocation.setText(this.locationsTexts.get(WindowContent.getDefaultlanguage()));
+		this.getComponentsWithText().put(textFieldUniqueLocation, this.locationsTexts);
 		textFieldUniqueLocation.setBounds(6, 42, 170, 20);
 		panelUniqueLocation.add(textFieldUniqueLocation);
 		textFieldUniqueLocation.setColumns(10);
@@ -191,51 +234,17 @@ public final class FileKindSelection extends WindowContent {
 		buttonUniqueLocationLoc.setBounds(186, 41, 30, 23);
 		panelUniqueLocation.add(buttonUniqueLocationLoc);
 		
-		JCheckBox checkBoxDetailedShearchUniqueLocation = new JCheckBox("Recherche approfondie");
+		JCheckBox checkBoxDetailedShearchUniqueLocation = new JCheckBox(this.checkboxDetailedShearchTexts.get(WindowContent.getDefaultlanguage()));
+		this.getComponentsWithText().put(checkBoxDetailedShearchUniqueLocation, this.checkboxDetailedShearchTexts);
 		checkBoxDetailedShearchUniqueLocation.setEnabled(false);
 		checkBoxDetailedShearchUniqueLocation.setBounds(395, 41, 137, 23);
 		panelUniqueLocation.add(checkBoxDetailedShearchUniqueLocation);
-		
-//		gridBagConstraints.fill = GridBagConstraints.CENTER;
-//		gridBagConstraints.gridx = 0;
-//		gridBagConstraints.gridy = 1;
-//		JCheckBoxMenuItem checkbox1 = new JCheckBoxMenuItem();
-//		checkbox1.setText("Film");
-//		this.add(checkbox1, gridBagConstraints);
-//		
-//		gridBagConstraints.fill = GridBagConstraints.CENTER;
-//		gridBagConstraints.gridx = 0;
-//		gridBagConstraints.gridy = 2;
-//		JCheckBoxMenuItem checkbox2 = new JCheckBoxMenuItem();
-//		checkbox2.setText("Série");
-//		this.add(checkbox2, gridBagConstraints);
-//		
-//		gridBagConstraints.fill = GridBagConstraints.CENTER;
-//		gridBagConstraints.gridx = 0;
-//		gridBagConstraints.gridy = 3;
-//		JCheckBoxMenuItem checkbox3 = new JCheckBoxMenuItem();
-//		checkbox3.setText("Musique");
-//		this.add(checkbox3, gridBagConstraints);
 	}
 	
 	private void revalidatePanelWithTitle() {
 		for(JPanel panel : this.panelWithTitle) {
 			WindowContent.revalidateContent(panel);
 		}
-	}
-	
-	private static HashMap<String, String> initiateScanCheckboxTexts() {
-		HashMap<String, String> scanCheckboxTexts = new HashMap<String, String>();
-		scanCheckboxTexts.put(FR, "scanner");
-		scanCheckboxTexts.put(EN, "scan");
-		return scanCheckboxTexts;
-	}
-	
-	private static HashMap<String, String> initiatecheckboxDetailedShearch() {
-		HashMap<String, String> scanCheckboxTexts = new HashMap<String, String>();
-		scanCheckboxTexts.put(FR, "Emplacement du dossier");
-		scanCheckboxTexts.put(EN, "File Location");
-		return scanCheckboxTexts;
 	}
 	
 	public FileKindSelectionParameters getFileKindSelectionParameters() {

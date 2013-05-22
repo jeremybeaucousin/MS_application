@@ -49,8 +49,8 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 	
 	private final HashMap<String, String> TitleTexts = new HashMap<String, String>() {
 		{
-			put(FR, "Super Applie Serveur Multimédia");
-			put(EN, "Super Multimedia  Server Apply");
+			put(FR, "Super Application Serveur Multimédia");
+			put(EN, "Super Multimedia Server Application");
 		}			
 	};
 
@@ -114,7 +114,7 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 		this.getContentPane().setLayout(null);
 		this.setLocationRelativeTo(null);
 		
-		JLabel lblSuperAplieServeur = new JLabel(this.TitleTexts.get(EN));
+		JLabel lblSuperAplieServeur = new JLabel(this.TitleTexts.get(WindowContent.getDefaultlanguage()));
 		this.componentsWithText.put(lblSuperAplieServeur, this.TitleTexts);
 		lblSuperAplieServeur.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblSuperAplieServeur.setBounds(10, 12, 242, 14);
@@ -146,26 +146,26 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 		this.getContentPane().add(this.panelBase);
 		this.panelBase.setLayout(null);
 		
-		this.canceledButton =  new JButton(this.canceledButtonTexts.get(EN));
+		this.canceledButton =  new JButton(this.canceledButtonTexts.get(WindowContent.getDefaultlanguage()));
 		this.componentsWithText.put(this.canceledButton, this.canceledButtonTexts);
 		this.canceledButton.setBounds(10, 414, 89, 23);
 		this.canceledButton.addActionListener(this);
 		this.getContentPane().add(this.canceledButton);
 		
-		this.previousButton = new JButton(this.previousButtonTexts.get(EN));
+		this.previousButton = new JButton(this.previousButtonTexts.get(WindowContent.getDefaultlanguage()));
 		this.componentsWithText.put(this.previousButton, this.previousButtonTexts);
 		this.previousButton.setEnabled(false);
 		this.previousButton.setBounds(281, 414, 89, 23);
 		this.previousButton.addActionListener(this);
 		this.getContentPane().add(this.previousButton);
 		
-		this.nextButton =  new JButton(this.nextButtonTexts.get(EN));
+		this.nextButton =  new JButton(this.nextButtonTexts.get(WindowContent.getDefaultlanguage()));
 		this.componentsWithText.put(this.nextButton, this.nextButtonTexts);
 		this.nextButton.setBounds(380, 414, 89, 23);
 		this.nextButton.addActionListener(this);
 		this.getContentPane().add(this.nextButton);
 		
-		this.finishButton = new JButton(this.finishButtonTexts.get(EN));
+		this.finishButton = new JButton(this.finishButtonTexts.get(WindowContent.getDefaultlanguage()));
 		this.componentsWithText.put(this.finishButton, this.finishButtonTexts);
 		this.finishButton.setEnabled(false);
 		this.finishButton.setBounds(479, 414, 89, 23);

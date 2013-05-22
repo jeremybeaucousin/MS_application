@@ -17,6 +17,9 @@ import model.views.ConstantView;
 public abstract class WindowContent extends JPanel implements WindowContentAction, ConstantView {
 	private MainWindow mainWindow;
 	
+	/** Is the default language of the application **/
+	final static String defaultLanguage = EN;
+	
 	public void setComponentsWithText(
 			HashMap<Object, HashMap<String, String>> componentsWithText) {
 		this.componentsWithText = componentsWithText;
@@ -50,6 +53,10 @@ public abstract class WindowContent extends JPanel implements WindowContentActio
 		return mainWindow;
 	}
 	
+	public static String getDefaultlanguage() {
+		return defaultLanguage;
+	}
+
 	public HashMap<Object, HashMap<String, String>> getComponentsWithText() {
 		return componentsWithText;
 	}
