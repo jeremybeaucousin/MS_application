@@ -24,43 +24,13 @@ import javax.swing.event.ChangeListener;
 
 public final class FileKindSelection extends WindowContent implements ActionListener {
 	// Buttons AND Checkboxes and TextField//
+	private JCheckBox checkboxScanMovies, checkBoxScanSeries, checkBoxScanMusic, checkboxUniqueLocation;
 	
-	// MOVIE PANEL //
-	private JCheckBox checkboxScanMovies;
+	private JTextField moviesLocation, seriesLocation, musicLocation, UniqueLocation;
 	
-	private JTextField moviesLocation;
+	private JButton buttonMoviesFolderSelection, buttonSeriesLocation, buttonMusicLocation, buttonUniqueLocationLoc;
 	
-	private JButton buttonMoviesFolderSelection;
-	
-	private JCheckBox checkboxDetailedShearchMovies;
-	
-	// SERIES PANEL //
-	private JCheckBox checkBoxScanSeries;
-	
-	private JTextField textFieldSeries;
-	
-	private JButton buttonSeriesLocation;
-	
-	private JCheckBox checkBoxDetailedShearchSeries;
-	
-	// MUSIC PANEL //
-	private JCheckBox checkBoxScanMusic;
-	
-	private JTextField textFieldMusic;
-	
-	private JButton buttonMusicLocation;
-	
-	private JCheckBox checkBoxDetailedShearchMusics;
-	
-	// UNIQUE LOCATION PANEL //
-	/** Button use to select a unique location **/
-	private JCheckBox checkboxUniqueLocation;
-	
-	private JTextField textFieldUniqueLocation;
-	
-	private JButton buttonUniqueLocationLoc;
-	
-	private JCheckBox checkBoxDetailedShearchUniqueLocation;
+	private JCheckBox checkboxDetailedShearchMovies, checkBoxDetailedShearchSeries, checkBoxDetailedShearchMusics, checkBoxDetailedShearchUniqueLocation;
 	
 	// textes //
 	/** Contains all components panel that have a title displayed on screen **/
@@ -200,13 +170,13 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.checkBoxScanSeries.setBounds(10, 12, 97, 23);
 		panelSeries.add(this.checkBoxScanSeries);
 		
-		this.textFieldSeries = new JTextField();
-		this.textFieldSeries.setText(this.locationsTexts.get(WindowContent.getDefaultlanguage()));
-		this.getComponentsWithText().put(this.textFieldSeries, this.locationsTexts);
-		this.textFieldSeries.setForeground(SystemColor.controlShadow);
-		this.textFieldSeries.setColumns(10);
-		this.textFieldSeries.setBounds(10, 42, 170, 20);
-		panelSeries.add(this.textFieldSeries);
+		this.seriesLocation = new JTextField();
+		this.seriesLocation.setText(this.locationsTexts.get(WindowContent.getDefaultlanguage()));
+		this.getComponentsWithText().put(this.seriesLocation, this.locationsTexts);
+		this.seriesLocation.setForeground(SystemColor.controlShadow);
+		this.seriesLocation.setColumns(10);
+		this.seriesLocation.setBounds(10, 42, 170, 20);
+		panelSeries.add(this.seriesLocation);
 		
 		
 		this.buttonSeriesLocation = new JButton("...");
@@ -234,13 +204,13 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.checkBoxScanMusic.setBounds(10, 12, 97, 23);
 		panelMusics.add(this.checkBoxScanMusic);
 		
-		this.textFieldMusic = new JTextField();
-		this.textFieldMusic.setText(this.locationsTexts.get(WindowContent.getDefaultlanguage()));
-		this.getComponentsWithText().put(this.textFieldMusic, this.locationsTexts);
-		this.textFieldMusic.setForeground(SystemColor.controlShadow);
-		this.textFieldMusic.setColumns(10);
-		this.textFieldMusic.setBounds(10, 42, 170, 20);
-		panelMusics.add(this.textFieldMusic);
+		this.musicLocation = new JTextField();
+		this.musicLocation.setText(this.locationsTexts.get(WindowContent.getDefaultlanguage()));
+		this.getComponentsWithText().put(this.musicLocation, this.locationsTexts);
+		this.musicLocation.setForeground(SystemColor.controlShadow);
+		this.musicLocation.setColumns(10);
+		this.musicLocation.setBounds(10, 42, 170, 20);
+		panelMusics.add(this.musicLocation);
 		
 		this.buttonMusicLocation = new JButton("...");
 		this.buttonMusicLocation.setBounds(190, 41, 30, 23);
@@ -264,14 +234,14 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.checkboxUniqueLocation.addActionListener(this);
 		panelUniqueLocation.add(this.checkboxUniqueLocation);
 		
-		this.textFieldUniqueLocation = new JTextField();
-		this.textFieldUniqueLocation.setEnabled(false);
-		this.textFieldUniqueLocation.setForeground(UIManager.getColor("Button.shadow"));
-		this.textFieldUniqueLocation.setText(this.locationsTexts.get(WindowContent.getDefaultlanguage()));
-		this.getComponentsWithText().put(this.textFieldUniqueLocation, this.locationsTexts);
-		this.textFieldUniqueLocation.setBounds(6, 42, 170, 20);
-		panelUniqueLocation.add(this.textFieldUniqueLocation);
-		this.textFieldUniqueLocation.setColumns(10);
+		this.UniqueLocation = new JTextField();
+		this.UniqueLocation.setEnabled(false);
+		this.UniqueLocation.setForeground(UIManager.getColor("Button.shadow"));
+		this.UniqueLocation.setText(this.locationsTexts.get(WindowContent.getDefaultlanguage()));
+		this.getComponentsWithText().put(this.UniqueLocation, this.locationsTexts);
+		this.UniqueLocation.setBounds(6, 42, 170, 20);
+		panelUniqueLocation.add(this.UniqueLocation);
+		this.UniqueLocation.setColumns(10);
 		
 		this.buttonUniqueLocationLoc = new JButton("...");
 		this.buttonUniqueLocationLoc.setEnabled(false);
@@ -338,9 +308,31 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		Object source = e.getSource();
 		if(source.equals(this.checkboxUniqueLocation)) {
 			if(this.checkboxUniqueLocation.isSelected()) {
-				
+				moviesLocation.setEnabled(false);
+				buttonMoviesFolderSelection.setEnabled(false);
+				checkboxDetailedShearchMovies.setEnabled(false);
+				seriesLocation.setEnabled(false);
+				buttonSeriesLocation.setEnabled(false);
+				checkBoxDetailedShearchSeries.setEnabled(false);
+				musicLocation.setEnabled(false);
+				buttonMusicLocation.setEnabled(false);
+				checkBoxDetailedShearchMusics.setEnabled(false);
+				UniqueLocation.setEnabled(true);
+				buttonUniqueLocationLoc.setEnabled(true);
+				checkBoxDetailedShearchUniqueLocation.setEnabled(true);
 			} else {
-				
+				moviesLocation.setEnabled(true);
+				buttonMoviesFolderSelection.setEnabled(true);
+				checkboxDetailedShearchMovies.setEnabled(true);
+				seriesLocation.setEnabled(true);
+				buttonSeriesLocation.setEnabled(true);
+				checkBoxDetailedShearchSeries.setEnabled(true);
+				musicLocation.setEnabled(true);
+				buttonMusicLocation.setEnabled(true);
+				checkBoxDetailedShearchMusics.setEnabled(true);
+				UniqueLocation.setEnabled(false);
+				buttonUniqueLocationLoc.setEnabled(false);
+				checkBoxDetailedShearchUniqueLocation.setEnabled(false);
 			}
 		}
 	}
