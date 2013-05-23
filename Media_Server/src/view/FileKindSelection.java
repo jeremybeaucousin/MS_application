@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -41,9 +42,14 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	
 	private JCheckBox checkboxDetailedShearchMovies, checkBoxDetailedShearchSeries, checkBoxDetailedShearchMusics, checkBoxDetailedShearchUniqueLocation;
 	
+	// Parameters //
+	private File videoFileChosen;
+	
 	// Folder Chooser // 
 	private JFileChooser folderChooser = new JFileChooser();
 
+	// Parameters to Send //
+	FileKindSelectionParameters fileKindSelectionParameters;
 	// textes //
 	/** Contains all components panel that have a title displayed on screen **/
 	private ArrayList<JPanel> panelWithTitle = new ArrayList<JPanel>();
@@ -295,7 +301,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		boolean videoIsSelected = this.checkboxScanMovies.isSelected();
 		boolean serieIsSelected = this.checkBoxScanSeries.isSelected();
 		boolean musicIsSelected = this.checkBoxScanMusic.isSelected();
-		FileKindSelectionParameters fileKindSelectionParameters = new FileKindSelectionParameters(videoIsSelected, serieIsSelected, musicIsSelected);
+		this.fileKindSelectionParameters = new FileKindSelectionParameters(videoIsSelected, serieIsSelected, musicIsSelected);
 		return fileKindSelectionParameters;
 	}
 	
@@ -398,6 +404,8 @@ public final class FileKindSelection extends WindowContent implements ActionList
 			} else {
 				// TODO check if path exist
 				//System.out.println(this.moviesLocation.getText());
+				Path path = Paths.get(this.moviesLocation.getText());
+				System.out.println(this.videoFileChosen.exists());
 				System.out.println(FileSystems.getDefault().getPath(this.moviesLocation.getText()).isAbsolute());
 			}
 		}
