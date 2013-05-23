@@ -37,6 +37,8 @@ public class Main {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException, IOException{
+		// TODO Dynamic web project ryby on rails
+		
 		int cpt=0;
 		JFileChooser chooser = new JFileChooser();
 		ArrayList<File> filesList = null;

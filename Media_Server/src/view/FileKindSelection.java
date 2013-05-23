@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JEditorPane;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
@@ -31,15 +32,18 @@ import util.ConstantString;
 
 
 public final class FileKindSelection extends WindowContent implements ActionListener, FocusListener {
-	// Buttons AND Checkboxes and TextField//
+	// Buttons AND Checkboxes and TextField //
 	private JCheckBox checkboxScanMovies, checkBoxScanSeries, checkBoxScanMusic, checkboxUniqueLocation;
 	
-	private JTextField moviesLocation, seriesLocation, musicLocation, UniqueLocation;
+	private JTextField moviesLocation, seriesLocation, musicLocation, uniqueLocation;
 	
 	private JButton buttonMoviesFolderSelection, buttonSeriesFolderLocation, buttonMusicFolderLocation, buttonUniqueFolderLocationLocation;
 	
 	private JCheckBox checkboxDetailedShearchMovies, checkBoxDetailedShearchSeries, checkBoxDetailedShearchMusics, checkBoxDetailedShearchUniqueLocation;
 	
+	// Folder Chooser // 
+	private JFileChooser folderChooser = new JFileChooser();
+
 	// textes //
 	/** Contains all components panel that have a title displayed on screen **/
 	private ArrayList<JPanel> panelWithTitle = new ArrayList<JPanel>();
@@ -106,6 +110,10 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		
 		this.setBackground(Color.WHITE);
 		this.setLayout(null);
+		
+		this.folderChooser.setDialogTitle("Sélectionner votre dossier de vidéo");
+		this.folderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		this.folderChooser.setAcceptAllFileFilterUsed(false);
 		
 		JPanel introducingPanel = new JPanel();
 		introducingPanel.setBackground(Color.WHITE);
@@ -248,15 +256,15 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.checkboxUniqueLocation.addActionListener(this);
 		panelUniqueLocation.add(this.checkboxUniqueLocation);
 		
-		this.UniqueLocation = new JTextField();
-		this.UniqueLocation.setEnabled(false);
-		this.UniqueLocation.setForeground(UIManager.getColor("Button.shadow"));
-		this.UniqueLocation.setText(this.locationsTexts.get(WindowContent.getDefaultlanguage()));
-		this.getComponentsWithText().put(this.UniqueLocation, this.locationsTexts);
-		this.UniqueLocation.setBounds(6, 42, 170, 20);
-		this.UniqueLocation.setColumns(10);
-		this.UniqueLocation.addFocusListener(this);
-		panelUniqueLocation.add(this.UniqueLocation);
+		this.uniqueLocation = new JTextField();
+		this.uniqueLocation.setEnabled(false);
+		this.uniqueLocation.setForeground(UIManager.getColor("Button.shadow"));
+		this.uniqueLocation.setText(this.locationsTexts.get(WindowContent.getDefaultlanguage()));
+		this.getComponentsWithText().put(this.uniqueLocation, this.locationsTexts);
+		this.uniqueLocation.setBounds(6, 42, 170, 20);
+		this.uniqueLocation.setColumns(10);
+		this.uniqueLocation.addFocusListener(this);
+		panelUniqueLocation.add(this.uniqueLocation);
 		
 		this.buttonUniqueFolderLocationLocation = new JButton("...");
 		this.buttonUniqueFolderLocationLocation.setEnabled(false);
@@ -277,6 +285,12 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		}
 	}
 	
+	private void getPathSelected(JTextField locationField) {
+		if(this.folderChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+			locationField.setText(this.folderChooser.getSelectedFile().getPath());
+			locationField.setForeground(null);
+		} 
+	}
 	public FileKindSelectionParameters getFileKindSelectionParameters() {
 		boolean videoIsSelected = this.checkboxScanMovies.isSelected();
 		boolean serieIsSelected = this.checkBoxScanSeries.isSelected();
@@ -333,7 +347,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 				musicLocation.setEnabled(false);
 				buttonMusicFolderLocation.setEnabled(false);
 				checkBoxDetailedShearchMusics.setEnabled(false);
-				UniqueLocation.setEnabled(true);
+				uniqueLocation.setEnabled(true);
 				buttonUniqueFolderLocationLocation.setEnabled(true);
 				checkBoxDetailedShearchUniqueLocation.setEnabled(true);
 			} else {
@@ -346,21 +360,20 @@ public final class FileKindSelection extends WindowContent implements ActionList
 				musicLocation.setEnabled(true);
 				buttonMusicFolderLocation.setEnabled(true);
 				checkBoxDetailedShearchMusics.setEnabled(true);
-				UniqueLocation.setEnabled(false);
+				uniqueLocation.setEnabled(false);
 				buttonUniqueFolderLocationLocation.setEnabled(false);
 				checkBoxDetailedShearchUniqueLocation.setEnabled(false);
 			}
-		} else if(source.equals(this.buttonMoviesFolderSelection) || source.equals(this.buttonSeriesFolderLocation) || source.equals(this.buttonMusicFolderLocation) || source.equals(this.buttonUniqueFolderLocationLocation)) {
-			// TODO Rendre générique
-			JFileChooser chooser = new JFileChooser();
-			chooser.setDialogTitle("Sélectionner votre dossier de vidéo");
-			chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-			chooser.setAcceptAllFileFilterUsed(false);
-			if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-				System.out.println(chooser.getCurrentDirectory().getPath());
-				this.moviesLocation.setText(chooser.getCurrentDirectory().getPath());
-				this.moviesLocation.setForeground(null);
-			}
+		} else if(source instanceof JButton) {
+			if(source.equals(this.buttonMoviesFolderSelection)) {
+				this.getPathSelected(this.moviesLocation);
+			} else if(source.equals(this.buttonSeriesFolderLocation)) {
+				this.getPathSelected(this.seriesLocation);
+			} else if(source.equals(this.buttonMusicFolderLocation)) {
+				this.getPathSelected(this.musicLocation);
+			} else if(source.equals(this.buttonUniqueFolderLocationLocation)) {
+				this.getPathSelected(this.uniqueLocation);
+			} 
 		}
 	}
 
@@ -384,8 +397,8 @@ public final class FileKindSelection extends WindowContent implements ActionList
 				((JTextField) source).setForeground(SystemColor.controlShadow);
 			} else {
 				// TODO check if path exist
-				System.out.println(this.moviesLocation.getText());
-				System.out.println(FileSystems.getDefault().getPath(this.moviesLocation.getText()));
+				//System.out.println(this.moviesLocation.getText());
+				System.out.println(FileSystems.getDefault().getPath(this.moviesLocation.getText()).isAbsolute());
 			}
 		}
 		
