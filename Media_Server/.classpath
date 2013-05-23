@@ -8,11 +8,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="ressources/lib/commons-io-1.2.jar"/>
-	<classpathentry kind="lib" path="ressources/lib/google-collections-0.8.jar"/>
-	<classpathentry kind="lib" path="ressources/lib/hsqldb.jar"/>
-	<classpathentry kind="lib" path="ressources/lib/java-json.jar"/>
-	<classpathentry kind="lib" path="ressources/lib/mysql-connector-java-5.1.8-bin.jar"/>
-	<classpathentry kind="lib" path="ressources/lib/sqltool.jar"/>
+	<classpathentry exported="true" kind="lib" path="ressources/lib/commons-io-1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="ressources/lib/google-collections-0.8.jar"/>
+	<classpathentry exported="true" kind="lib" path="ressources/lib/hsqldb.jar"/>
+	<classpathentry exported="true" kind="lib" path="ressources/lib/java-json.jar"/>
+	<classpathentry exported="true" kind="lib" path="ressources/lib/mysql-connector-java-5.1.8-bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="ressources/lib/sqltool.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

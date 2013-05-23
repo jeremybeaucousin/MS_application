@@ -43,31 +43,34 @@ public class Main {
 		chooser.setDialogTitle("Sélectionner votre dossier de vidéo");
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
-		//final MainWindow mainWindow = new MainWindow();
+		
+		final MainWindow mainWindow = new MainWindow();
+	
+		
 		// TODO Exemple Select
-		HSQLInteraction hsqlDatase = new HSQLInteraction();
-		hsqlDatase.start();
-		Statement statement = hsqlDatase.getStatement();
-		ResultSet result = null;
-		//statement.executeUpdate("INSERT INTO PUBLIC.CONTENT_ADVISORY (ID_CONTENT_ADVISORY, CONTENT_ADVISORY_WORDING ) VALUES (2 , '-16');");
-		result = statement.executeQuery("SELECT ID_COUNTRY, COUNTRY_WORDING FROM MEDIA_SERVER.COUNTRY;");
-		JFrame jframe = new JFrame();
-		jframe.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		jframe.setLocationRelativeTo(null);
-		jframe.setSize(300, 300);
-		jframe.setLayout(new FlowLayout());
-		JLabel jlabel = new JLabel("test");
-		jlabel.setLayout(new FlowLayout());
-		jframe.add(jlabel);
-		if(result != null) {
-			while(result.next()) {
-				JLabel jlabel2 = new JLabel(result.getInt("ID_COUNTRY") + " " + result.getString("COUNTRY_WORDING"));
-				jlabel2.setLayout(new FlowLayout());
-				jframe.add(jlabel2);
-			}
-		}
-		jframe.setVisible(true);	
-		hsqlDatase.stop();
+//		HSQLInteraction hsqlDatase = new HSQLInteraction();
+//		hsqlDatase.start();
+//		Statement statement = hsqlDatase.getStatement();
+//		ResultSet result = null;
+//		//statement.executeUpdate("INSERT INTO PUBLIC.CONTENT_ADVISORY (ID_CONTENT_ADVISORY, CONTENT_ADVISORY_WORDING ) VALUES (2 , '-16');");
+//		result = statement.executeQuery("SELECT ID_COUNTRY, COUNTRY_WORDING FROM MEDIA_SERVER.COUNTRY;");
+//		JFrame jframe = new JFrame();
+//		jframe.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+//		jframe.setLocationRelativeTo(null);
+//		jframe.setSize(300, 300);
+//		jframe.setLayout(new FlowLayout());
+//		JLabel jlabel = new JLabel("test");
+//		jlabel.setLayout(new FlowLayout());
+//		jframe.add(jlabel);
+//		if(result != null) {
+//			while(result.next()) {
+//				JLabel jlabel2 = new JLabel(result.getInt("ID_COUNTRY") + " " + result.getString("COUNTRY_WORDING"));
+//				jlabel2.setLayout(new FlowLayout());
+//				jframe.add(jlabel2);
+//			}
+//		}
+//		jframe.setVisible(true);	
+//		hsqlDatase.stop();
 		
 //        //Create and set up the window.
 //        JFrame frame = new JFrame("TopLevelDemo");

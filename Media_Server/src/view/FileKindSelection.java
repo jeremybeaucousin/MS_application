@@ -8,12 +8,15 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JEditorPane;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
@@ -33,7 +36,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	
 	private JTextField moviesLocation, seriesLocation, musicLocation, UniqueLocation;
 	
-	private JButton buttonMoviesFolderSelection, buttonSeriesLocation, buttonMusicLocation, buttonUniqueLocationLoc;
+	private JButton buttonMoviesFolderSelection, buttonSeriesFolderLocation, buttonMusicFolderLocation, buttonUniqueFolderLocationLocation;
 	
 	private JCheckBox checkboxDetailedShearchMovies, checkBoxDetailedShearchSeries, checkBoxDetailedShearchMusics, checkBoxDetailedShearchUniqueLocation;
 	
@@ -153,6 +156,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		
 		this.buttonMoviesFolderSelection = new JButton("...");
 		this.buttonMoviesFolderSelection.setBounds(190, 41, 30, 23);
+		this.buttonMoviesFolderSelection.addActionListener(this);
 		panelMovies.add(this.buttonMoviesFolderSelection);
 		
 		this.checkboxDetailedShearchMovies = new JCheckBox(this.checkboxDetailedShearchTexts.get(WindowContent.getDefaultlanguage()));
@@ -186,9 +190,10 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		panelSeries.add(this.seriesLocation);
 		
 		
-		this.buttonSeriesLocation = new JButton("...");
-		this.buttonSeriesLocation.setBounds(190, 41, 30, 23);
-		panelSeries.add(this.buttonSeriesLocation);
+		this.buttonSeriesFolderLocation = new JButton("...");
+		this.buttonSeriesFolderLocation.setBounds(190, 41, 30, 23);
+		this.buttonSeriesFolderLocation.addActionListener(this);
+		panelSeries.add(this.buttonSeriesFolderLocation);
 		
 		 checkBoxDetailedShearchSeries = new JCheckBox(this.checkboxDetailedShearchTexts.get(WindowContent.getDefaultlanguage()));
 		this.getComponentsWithText().put(checkBoxDetailedShearchSeries, this.checkboxDetailedShearchTexts);
@@ -220,9 +225,10 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.musicLocation.addFocusListener(this);
 		panelMusics.add(this.musicLocation);
 		
-		this.buttonMusicLocation = new JButton("...");
-		this.buttonMusicLocation.setBounds(190, 41, 30, 23);
-		panelMusics.add(this.buttonMusicLocation);
+		this.buttonMusicFolderLocation = new JButton("...");
+		this.buttonMusicFolderLocation.setBounds(190, 41, 30, 23);
+		this.buttonMusicFolderLocation.addActionListener(this);
+		panelMusics.add(this.buttonMusicFolderLocation);
 		
 		this.checkBoxDetailedShearchMusics = new JCheckBox(this.checkboxDetailedShearchTexts.get(WindowContent.getDefaultlanguage()));
 		this.getComponentsWithText().put(this.checkBoxDetailedShearchMusics, this.checkboxDetailedShearchTexts);
@@ -252,10 +258,11 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.UniqueLocation.addFocusListener(this);
 		panelUniqueLocation.add(this.UniqueLocation);
 		
-		this.buttonUniqueLocationLoc = new JButton("...");
-		this.buttonUniqueLocationLoc.setEnabled(false);
-		this.buttonUniqueLocationLoc.setBounds(186, 41, 30, 23);
-		panelUniqueLocation.add(this.buttonUniqueLocationLoc);
+		this.buttonUniqueFolderLocationLocation = new JButton("...");
+		this.buttonUniqueFolderLocationLocation.setEnabled(false);
+		this.buttonUniqueFolderLocationLocation.setBounds(186, 41, 30, 23);
+		this.buttonUniqueFolderLocationLocation.addActionListener(this);
+		panelUniqueLocation.add(this.buttonUniqueFolderLocationLocation);
 		
 		this.checkBoxDetailedShearchUniqueLocation = new JCheckBox(this.checkboxDetailedShearchTexts.get(WindowContent.getDefaultlanguage()));
 		this.getComponentsWithText().put(this.checkBoxDetailedShearchUniqueLocation, this.checkboxDetailedShearchTexts);
@@ -321,27 +328,38 @@ public final class FileKindSelection extends WindowContent implements ActionList
 				buttonMoviesFolderSelection.setEnabled(false);
 				checkboxDetailedShearchMovies.setEnabled(false);
 				seriesLocation.setEnabled(false);
-				buttonSeriesLocation.setEnabled(false);
+				buttonSeriesFolderLocation.setEnabled(false);
 				checkBoxDetailedShearchSeries.setEnabled(false);
 				musicLocation.setEnabled(false);
-				buttonMusicLocation.setEnabled(false);
+				buttonMusicFolderLocation.setEnabled(false);
 				checkBoxDetailedShearchMusics.setEnabled(false);
 				UniqueLocation.setEnabled(true);
-				buttonUniqueLocationLoc.setEnabled(true);
+				buttonUniqueFolderLocationLocation.setEnabled(true);
 				checkBoxDetailedShearchUniqueLocation.setEnabled(true);
 			} else {
 				moviesLocation.setEnabled(true);
 				buttonMoviesFolderSelection.setEnabled(true);
 				checkboxDetailedShearchMovies.setEnabled(true);
 				seriesLocation.setEnabled(true);
-				buttonSeriesLocation.setEnabled(true);
+				buttonSeriesFolderLocation.setEnabled(true);
 				checkBoxDetailedShearchSeries.setEnabled(true);
 				musicLocation.setEnabled(true);
-				buttonMusicLocation.setEnabled(true);
+				buttonMusicFolderLocation.setEnabled(true);
 				checkBoxDetailedShearchMusics.setEnabled(true);
 				UniqueLocation.setEnabled(false);
-				buttonUniqueLocationLoc.setEnabled(false);
+				buttonUniqueFolderLocationLocation.setEnabled(false);
 				checkBoxDetailedShearchUniqueLocation.setEnabled(false);
+			}
+		} else if(source.equals(this.buttonMoviesFolderSelection) || source.equals(this.buttonSeriesFolderLocation) || source.equals(this.buttonMusicFolderLocation) || source.equals(this.buttonUniqueFolderLocationLocation)) {
+			// TODO Rendre générique
+			JFileChooser chooser = new JFileChooser();
+			chooser.setDialogTitle("Sélectionner votre dossier de vidéo");
+			chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			chooser.setAcceptAllFileFilterUsed(false);
+			if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+				System.out.println(chooser.getCurrentDirectory().getPath());
+				this.moviesLocation.setText(chooser.getCurrentDirectory().getPath());
+				this.moviesLocation.setForeground(null);
 			}
 		}
 	}
@@ -366,7 +384,8 @@ public final class FileKindSelection extends WindowContent implements ActionList
 				((JTextField) source).setForeground(SystemColor.controlShadow);
 			} else {
 				// TODO check if path exist
-				System.out.println(new File(((JTextField) source).getText()));
+				System.out.println(this.moviesLocation.getText());
+				System.out.println(FileSystems.getDefault().getPath(this.moviesLocation.getText()));
 			}
 		}
 		
