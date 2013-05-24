@@ -49,6 +49,12 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	// Parameters //
 	private File videoFileChosen;
 	
+	private File seriesFileChosen;
+	
+	private File musicFileChosen;
+	
+	private File uniqueFileChosen;
+	
 	// Folder Chooser // 
 	private JFileChooser folderChooser = new JFileChooser();
 
@@ -415,16 +421,26 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	public void focusLost(FocusEvent e) {
 		Object source = e.getSource();
 		if(source instanceof JTextField) {
-			if(((JTextField) source).getText().equals(ConstantString.EMPTY)) {
-				((JTextField) source).setText(this.getComponentsWithText().get(source).get(WindowContent.getCurrentLanguage()));
-				((JTextField) source).setForeground(SystemColor.controlShadow);
+			JTextField folderChosenField = (JTextField) source;
+			if(folderChosenField.getText().equals(ConstantString.EMPTY)) {
+				folderChosenField.setText(this.getComponentsWithText().get(source).get(WindowContent.getCurrentLanguage()));
+				folderChosenField.setForeground(SystemColor.controlShadow);
 			} else {
-				Path path = Paths.get(this.moviesLocation.getText());
+				Path path = Paths.get(folderChosenField.getText());
 				if(Files.exists(path)) {
-					this.videoFileChosen = path.toFile();
+					if(source.equals(this.moviesLocation)) {
+						this.videoFileChosen = path.toFile();
+					} else if(source.equals(this.seriesLocation)) {
+						this.seriesFileChosen = path.toFile();
+					} else if(source.equals(this.musicLocation)) {
+						this.musicFileChosen = path.toFile();
+					} else if(source.equals(this.uniqueLocation)) {
+						this.uniqueFileChosen = path.toFile();
+					}
 				} else {
 					JOptionPane.showMessageDialog(this, this.invalidPathError.get(WindowContent.getCurrentLanguage()), this.errorMessageTitle.get(WindowContent.getCurrentLanguage()), JOptionPane.ERROR_MESSAGE);
-					this.moviesLocation.requestFocusInWindow();
+					folderChosenField.requestFocusInWindow();
+					folderChosenField.setText(ConstantString.EMPTY);
 				}
 			}
 		}
