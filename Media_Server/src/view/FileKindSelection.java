@@ -365,34 +365,37 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-		if(source.equals(this.checkboxUniqueLocation)) {
-			if(this.checkboxUniqueLocation.isSelected()) {
-				moviesLocation.setEnabled(false);
-				buttonMoviesFolderSelection.setEnabled(false);
-				checkboxDetailedShearchMovies.setEnabled(false);
-				seriesLocation.setEnabled(false);
-				buttonSeriesFolderLocation.setEnabled(false);
-				checkBoxDetailedShearchSeries.setEnabled(false);
-				musicLocation.setEnabled(false);
-				buttonMusicFolderLocation.setEnabled(false);
-				checkBoxDetailedShearchMusics.setEnabled(false);
-				uniqueLocation.setEnabled(true);
-				buttonUniqueFolderLocationLocation.setEnabled(true);
-				checkBoxDetailedShearchUniqueLocation.setEnabled(true);
-			} else {
-				moviesLocation.setEnabled(true);
-				buttonMoviesFolderSelection.setEnabled(true);
-				checkboxDetailedShearchMovies.setEnabled(true);
-				seriesLocation.setEnabled(true);
-				buttonSeriesFolderLocation.setEnabled(true);
-				checkBoxDetailedShearchSeries.setEnabled(true);
-				musicLocation.setEnabled(true);
-				buttonMusicFolderLocation.setEnabled(true);
-				checkBoxDetailedShearchMusics.setEnabled(true);
-				uniqueLocation.setEnabled(false);
-				buttonUniqueFolderLocationLocation.setEnabled(false);
-				checkBoxDetailedShearchUniqueLocation.setEnabled(false);
+		if(source instanceof JCheckBox) {
+			if(source.equals(this.checkboxUniqueLocation)) {
+				if(this.checkboxUniqueLocation.isSelected()) {
+					moviesLocation.setEnabled(false);
+					buttonMoviesFolderSelection.setEnabled(false);
+					checkboxDetailedShearchMovies.setEnabled(false);
+					seriesLocation.setEnabled(false);
+					buttonSeriesFolderLocation.setEnabled(false);
+					checkBoxDetailedShearchSeries.setEnabled(false);
+					musicLocation.setEnabled(false);
+					buttonMusicFolderLocation.setEnabled(false);
+					checkBoxDetailedShearchMusics.setEnabled(false);
+					uniqueLocation.setEnabled(true);
+					buttonUniqueFolderLocationLocation.setEnabled(true);
+					checkBoxDetailedShearchUniqueLocation.setEnabled(true);
+				} else {
+					moviesLocation.setEnabled(true);
+					buttonMoviesFolderSelection.setEnabled(true);
+					checkboxDetailedShearchMovies.setEnabled(true);
+					seriesLocation.setEnabled(true);
+					buttonSeriesFolderLocation.setEnabled(true);
+					checkBoxDetailedShearchSeries.setEnabled(true);
+					musicLocation.setEnabled(true);
+					buttonMusicFolderLocation.setEnabled(true);
+					checkBoxDetailedShearchMusics.setEnabled(true);
+					uniqueLocation.setEnabled(false);
+					buttonUniqueFolderLocationLocation.setEnabled(false);
+					checkBoxDetailedShearchUniqueLocation.setEnabled(false);
+				}
 			}
+			// TODO if(source.equals(this.checkboxOtherLocation)) {
 		} else if(source instanceof JButton) {
 			if(source.equals(this.buttonMoviesFolderSelection)) {
 				this.getPathSelected(this.moviesLocation);
