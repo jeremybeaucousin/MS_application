@@ -9,6 +9,7 @@ import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -19,9 +20,12 @@ import javax.swing.JCheckBox;
 import javax.swing.JEditorPane;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.Popup;
+import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -110,7 +114,20 @@ public final class FileKindSelection extends WindowContent implements ActionList
 			put(EN, "Detailed search");
 		}			
 	};
+	// Errors Message //
+	private final HashMap<String, String> errorMessageTitle = new HashMap<String, String>() {
+		{
+			put(FR, "Erreur");
+			put(EN, "Error");
+		}			
+	};
 	
+	private final HashMap<String, String> invalidPathError = new HashMap<String, String>() {
+		{
+			put(FR, "Le chemin rentré n'éxiste pas.");
+			put(EN, "The entered path does not exist.");
+		}			
+	};
 	public FileKindSelection(MainWindow mainWindow) throws IOException {
 		super(mainWindow);
 		
@@ -292,7 +309,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	}
 	
 	private void getPathSelected(JTextField locationField) {
-		if(this.folderChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+		if(this.folderChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 			locationField.setText(this.folderChooser.getSelectedFile().getPath());
 			locationField.setForeground(null);
 		} 
@@ -402,11 +419,13 @@ public final class FileKindSelection extends WindowContent implements ActionList
 				((JTextField) source).setText(this.getComponentsWithText().get(source).get(WindowContent.getCurrentLanguage()));
 				((JTextField) source).setForeground(SystemColor.controlShadow);
 			} else {
-				// TODO check if path exist
-				//System.out.println(this.moviesLocation.getText());
 				Path path = Paths.get(this.moviesLocation.getText());
-				System.out.println(this.videoFileChosen.exists());
-				System.out.println(FileSystems.getDefault().getPath(this.moviesLocation.getText()).isAbsolute());
+				if(Files.exists(path)) {
+					this.videoFileChosen = path.toFile();
+				} else {
+					JOptionPane.showMessageDialog(this, this.invalidPathError.get(WindowContent.getCurrentLanguage()), this.errorMessageTitle.get(WindowContent.getCurrentLanguage()), JOptionPane.ERROR_MESSAGE);
+					this.moviesLocation.requestFocusInWindow();
+				}
 			}
 		}
 		
