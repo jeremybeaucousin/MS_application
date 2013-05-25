@@ -7,6 +7,7 @@ import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JEditorPane;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -89,6 +90,8 @@ public abstract class WindowContent extends JPanel implements WindowContentActio
 				if(componentsWithText.get(component).containsValue(((JTextField) component).getText()) || ((JTextField) component).getText().equals(ConstantString.EMPTY)) {
 					((JTextField) component).setText(componentsWithText.get(component).get(language));
 				}
+			} else if(component instanceof JFileChooser) {
+				((JFileChooser) component).setDialogTitle(componentsWithText.get(component).get(language));
 			}
 		}
 	}

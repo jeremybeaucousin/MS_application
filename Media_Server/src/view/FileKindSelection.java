@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -32,28 +33,21 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.hsqldb.lib.StringUtil;
+
+import com.mysql.jdbc.StringUtils;
+
 import util.ConstantString;
 
 
 
 public final class FileKindSelection extends WindowContent implements ActionListener, FocusListener {
 	// Buttons AND Checkboxes and TextField //
-	private JCheckBox checkboxScanMovies, checkBoxScanSeries, checkBoxScanMusic, checkboxUniqueLocation;
+	private JCheckBox checkboxScanMovies, checkBoxScanSeries, checkBoxScanMusic, checkboxUniqueLocation, checkboxDetailedShearchMovies, checkBoxDetailedShearchSeries, checkBoxDetailedShearchMusics, checkBoxDetailedShearchUniqueLocation;
 	
 	private JTextField moviesLocation, seriesLocation, musicLocation, uniqueLocation;
 	
 	private JButton buttonMoviesFolderSelection, buttonSeriesFolderLocation, buttonMusicFolderLocation, buttonUniqueFolderLocationLocation;
-	
-	private JCheckBox checkboxDetailedShearchMovies, checkBoxDetailedShearchSeries, checkBoxDetailedShearchMusics, checkBoxDetailedShearchUniqueLocation;
-	
-	// Parameters //
-	private File videoFileChosen;
-	
-	private File seriesFileChosen;
-	
-	private File musicFileChosen;
-	
-	private File uniqueFileChosen;
 	
 	// Folder Chooser // 
 	private JFileChooser folderChooser = new JFileChooser();
@@ -120,6 +114,15 @@ public final class FileKindSelection extends WindowContent implements ActionList
 			put(EN, "Detailed search");
 		}			
 	};
+	
+	// FolderChooser //
+	private final HashMap<String, String> folderChooserTexts = new HashMap<String, String>() {
+		{
+			put(FR, "Séléctionner le dossier à scanner");
+			put(EN, "Select the folder to scan");
+		}			
+	};
+	
 	// Errors Message //
 	private final HashMap<String, String> errorMessageTitle = new HashMap<String, String>() {
 		{
@@ -134,15 +137,33 @@ public final class FileKindSelection extends WindowContent implements ActionList
 			put(EN, "The entered path does not exist.");
 		}			
 	};
+	
+	private final HashMap<String, String> notAnyMediaCheckedError = new HashMap<String, String>() {
+		{
+			put(FR, "Vous n'avez selectionner aucun media.");
+			put(EN, "You haven't selected any media.");
+		}			
+	};
+	
+	private final HashMap<String, String> pathIsEmptyOrInvalidError = new HashMap<String, String>() {
+		{
+			put(FR, "Vous n'avez selectionner aucun dossier ou le chemin est invalide.");
+			put(EN, "You haven't selected any folder or the path does not exist.");
+		}			
+	};
+	
 	public FileKindSelection(MainWindow mainWindow) throws IOException {
 		super(mainWindow);
 		
 		this.setBackground(Color.WHITE);
 		this.setLayout(null);
 		
-		this.folderChooser.setDialogTitle("Sélectionner votre dossier de vidéo");
+		this.folderChooser.setDialogTitle(this.folderChooserTexts.get(EN));
+		this.getComponentsWithText().put(this.folderChooser, this.folderChooserTexts);
 		this.folderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		this.folderChooser.setAcceptAllFileFilterUsed(false);
+		this.folderChooser.setLocale(Locale.ENGLISH);
+		this.folderChooser.updateUI();
 		
 		JPanel introducingPanel = new JPanel();
 		introducingPanel.setBackground(Color.WHITE);
@@ -180,6 +201,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.getComponentsWithText().put(this.checkboxScanMovies, this.scanCheckboxTexts);
 		this.checkboxScanMovies.setSelected(true);
 		this.checkboxScanMovies.setBounds(10, 12, 97, 23);
+		this.checkboxScanMovies.addActionListener(this);
 		panelMovies.add(this.checkboxScanMovies);
 		
 		this.moviesLocation = new JTextField();
@@ -215,6 +237,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.getComponentsWithText().put(this.checkBoxScanSeries, this.scanCheckboxTexts);
 		this.checkBoxScanSeries.setSelected(true);
 		this.checkBoxScanSeries.setBounds(10, 12, 97, 23);
+		this.checkBoxScanSeries.addActionListener(this);
 		panelSeries.add(this.checkBoxScanSeries);
 		
 		this.seriesLocation = new JTextField();
@@ -251,6 +274,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.getComponentsWithText().put(this.checkBoxScanMusic, this.scanCheckboxTexts);
 		this.checkBoxScanMusic.setSelected(true);
 		this.checkBoxScanMusic.setBounds(10, 12, 97, 23);
+		this.checkBoxScanMusic.addActionListener(this);
 		panelMusics.add(this.checkBoxScanMusic);
 		
 		this.musicLocation = new JTextField();
@@ -307,40 +331,122 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.checkBoxDetailedShearchUniqueLocation.setBounds(395, 41, 137, 23);
 		panelUniqueLocation.add(this.checkBoxDetailedShearchUniqueLocation);
 	}
-	
+	/**
+	 * Revalid a panel with title wish just change for displaying the new one.  
+	 */
 	private void revalidatePanelWithTitle() {
 		for(JPanel panel : this.panelWithTitle) {
 			WindowContent.revalidateContent(panel);
 		}
 	}
 	
+	/**
+	 * Get the path selected by the user from the chooser window.  
+	 */
 	private void getPathSelected(JTextField locationField) {
 		if(this.folderChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 			locationField.setText(this.folderChooser.getSelectedFile().getPath());
 			locationField.setForeground(null);
 		} 
 	}
-	public FileKindSelectionParameters getFileKindSelectionParameters() {
+	
+	private void changeStateMoviePanel(Boolean state) {
+		moviesLocation.setEnabled(state);
+		buttonMoviesFolderSelection.setEnabled(state);
+		checkboxDetailedShearchMovies.setEnabled(state);
+	}
+	
+	private void changeStateSeriesPanel(Boolean state) {
+		seriesLocation.setEnabled(state);
+		buttonSeriesFolderLocation.setEnabled(state);
+		checkBoxDetailedShearchSeries.setEnabled(state);
+	}
+	
+	private void changeStateMusicPanel(Boolean state) {
+		musicLocation.setEnabled(state);
+		buttonMusicFolderLocation.setEnabled(state);
+		checkBoxDetailedShearchMusics.setEnabled(state);
+	}
+	
+	private void changeStateUniquePanel(Boolean state) {
+		uniqueLocation.setEnabled(state);
+		buttonUniqueFolderLocationLocation.setEnabled(state);
+		checkBoxDetailedShearchUniqueLocation.setEnabled(state);
+	}
+
+	/**
+	 * Send the parameters to the next screen.
+	 * 
+	 * @return the parameters entered by the user
+	 */
+	public FileKindSelectionParameters sendFileKindSelectionParameters() {
 		boolean videoIsSelected = this.checkboxScanMovies.isSelected();
 		boolean serieIsSelected = this.checkBoxScanSeries.isSelected();
 		boolean musicIsSelected = this.checkBoxScanMusic.isSelected();
-		this.fileKindSelectionParameters = new FileKindSelectionParameters(videoIsSelected, serieIsSelected, musicIsSelected);
+		boolean uniqueIsSelected = this.checkboxUniqueLocation.isSelected();
+		boolean detailedShearchMoviesSelected = this.checkboxDetailedShearchMovies.isSelected();
+		boolean detailedShearchSeriesSelected = this.checkBoxDetailedShearchSeries.isSelected();
+		boolean detailedShearchMusicsSelected = this.checkBoxDetailedShearchMusics.isSelected();
+		boolean detailedShearchUniqueLocationSelected = this.checkBoxDetailedShearchUniqueLocation.isSelected();
+		File seriesFileChosen = new File(this.moviesLocation.getText());
+		File videoFileChosen = new File(this.seriesLocation.getText());
+		File musicFileChosen = new File(this.musicLocation.getText());
+		File uniqueFileChosen = new File(this.uniqueLocation.getText());
+		this.fileKindSelectionParameters = new FileKindSelectionParameters(videoIsSelected, serieIsSelected, musicIsSelected, uniqueIsSelected, detailedShearchMoviesSelected, detailedShearchSeriesSelected, detailedShearchMusicsSelected, detailedShearchUniqueLocationSelected, videoFileChosen, seriesFileChosen, musicFileChosen, uniqueFileChosen);
 		return fileKindSelectionParameters;
+	}
+	
+	private String ValidateForm() {
+		String message = new String();
+		if(!this.checkboxScanMovies.isSelected() && !this.checkBoxScanSeries.isSelected() && !this.checkBoxScanMusic.isSelected()) {
+			message = this.notAnyMediaCheckedError.get(WindowContent.getCurrentLanguage());
+		} else if(this.checkboxUniqueLocation.isSelected()) {
+			message = this.ValidatePanel(this.uniqueLocation, message);
+		} else {
+			if(this.checkboxScanMovies.isSelected()) {
+				message = this.ValidatePanel(this.moviesLocation, message);
+			}
+			if(this.checkBoxScanSeries.isSelected() && StringUtils.isEmptyOrWhitespaceOnly(message)) {
+				message = this.ValidatePanel(this.seriesLocation, message);
+			}
+			if(this.checkBoxScanMusic.isSelected() && StringUtils.isEmptyOrWhitespaceOnly(message)) {
+				message = this.ValidatePanel(this.musicLocation, message);
+			}
+		}
+		return message;
+	}
+	
+	private String ValidatePanel(JTextField textField, String message) {
+		if(((locationsTexts.get(WindowContent.getCurrentLanguage()).equals(textField.getText()) || StringUtils.isEmptyOrWhitespaceOnly(textField.getText()))) || !Files.exists(Paths.get(textField.getText()))) {
+			message = this.pathIsEmptyOrInvalidError.get(WindowContent.getCurrentLanguage());
+			textField.requestFocusInWindow();
+			textField.setText(ConstantString.EMPTY);
+		}
+		return message;
+	}
+	
+	private void openErrorMessage(String errorMessage) {
+		JOptionPane.showMessageDialog(this, errorMessage, this.errorMessageTitle.get(WindowContent.getCurrentLanguage()), JOptionPane.ERROR_MESSAGE);
 	}
 	
 	@Override
 	public void getNextScreen() {
 		this.getMainWindow().getPreviousButton().setEnabled(true);
-		FileKindSelectionParameters fileKindSelectionParameters = this.getFileKindSelectionParameters();
-		if(this.getMainWindow().getSearchingOnSelectedValue() == null) {
-			SearchingOnSelectedValues searchingOnSelectedValues = new SearchingOnSelectedValues(this.getMainWindow(), fileKindSelectionParameters);
-			this.getMainWindow().setSearchingOnSelectedValue(searchingOnSelectedValues);
-			this.getMainWindow().getNavigator().add(searchingOnSelectedValues);
+		FileKindSelectionParameters fileKindSelectionParameters = this.sendFileKindSelectionParameters();
+		String errorMessage = this.ValidateForm();
+		if(StringUtil.isEmpty(errorMessage)) {
+			if(this.getMainWindow().getSearchingOnSelectedValue() == null) {
+				SearchingOnSelectedValues searchingOnSelectedValues = new SearchingOnSelectedValues(this.getMainWindow(), fileKindSelectionParameters);
+				this.getMainWindow().setSearchingOnSelectedValue(searchingOnSelectedValues);
+				this.getMainWindow().getNavigator().add(searchingOnSelectedValues);
+			} else {
+				this.getMainWindow().getNavigator().next();
+				this.getMainWindow().getSearchingOnSelectedValue().setFileKindSelectionParameters(fileKindSelectionParameters);
+			}
+			this.getMainWindow().replaceContent(this, this.getMainWindow().getSearchingOnSelectedValue());
 		} else {
-			this.getMainWindow().getNavigator().next();
-			this.getMainWindow().getSearchingOnSelectedValue().setFileKindSelectionParameters(fileKindSelectionParameters);
+			this.openErrorMessage(errorMessage);
 		}
-	    this.getMainWindow().replaceContent(this, this.getMainWindow().getSearchingOnSelectedValue());
 	}
 
 	@Override
@@ -353,12 +459,16 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	@Override
 	public void setToFrench() {
 		WindowContent.changeTextInAnotherLanguage(this.getComponentsWithText(), FR);
+		this.folderChooser.setLocale(Locale.FRENCH);
+		this.folderChooser.updateUI();
 		this.revalidatePanelWithTitle();
 	}
 
 	@Override
 	public void setToEnglish() {
 		WindowContent.changeTextInAnotherLanguage(this.getComponentsWithText(), EN);
+		this.folderChooser.setLocale(Locale.ENGLISH);
+		this.folderChooser.updateUI();
 		this.revalidatePanelWithTitle();
 	}
 
@@ -368,34 +478,43 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		if(source instanceof JCheckBox) {
 			if(source.equals(this.checkboxUniqueLocation)) {
 				if(this.checkboxUniqueLocation.isSelected()) {
-					moviesLocation.setEnabled(false);
-					buttonMoviesFolderSelection.setEnabled(false);
-					checkboxDetailedShearchMovies.setEnabled(false);
-					seriesLocation.setEnabled(false);
-					buttonSeriesFolderLocation.setEnabled(false);
-					checkBoxDetailedShearchSeries.setEnabled(false);
-					musicLocation.setEnabled(false);
-					buttonMusicFolderLocation.setEnabled(false);
-					checkBoxDetailedShearchMusics.setEnabled(false);
-					uniqueLocation.setEnabled(true);
-					buttonUniqueFolderLocationLocation.setEnabled(true);
-					checkBoxDetailedShearchUniqueLocation.setEnabled(true);
+					this.changeStateMoviePanel(false);
+					this.changeStateSeriesPanel(false);
+					this.changeStateMusicPanel(false);
+					this.changeStateUniquePanel(true);
 				} else {
-					moviesLocation.setEnabled(true);
-					buttonMoviesFolderSelection.setEnabled(true);
-					checkboxDetailedShearchMovies.setEnabled(true);
-					seriesLocation.setEnabled(true);
-					buttonSeriesFolderLocation.setEnabled(true);
-					checkBoxDetailedShearchSeries.setEnabled(true);
-					musicLocation.setEnabled(true);
-					buttonMusicFolderLocation.setEnabled(true);
-					checkBoxDetailedShearchMusics.setEnabled(true);
-					uniqueLocation.setEnabled(false);
-					buttonUniqueFolderLocationLocation.setEnabled(false);
-					checkBoxDetailedShearchUniqueLocation.setEnabled(false);
+					if(this.checkboxScanMovies.isSelected()) {
+						this.changeStateMoviePanel(true);
+					}
+					if(this.checkBoxScanSeries.isSelected()) {
+						this.changeStateSeriesPanel(true);
+					}
+					if(this.checkBoxScanMusic.isSelected()) {
+						this.changeStateMusicPanel(true);
+					}
+					this.changeStateUniquePanel(false);
+				}
+			} else if(!this.checkboxUniqueLocation.isSelected()) {
+				if(source.equals(this.checkboxScanMovies)) {
+					if(this.checkboxScanMovies.isSelected()) {
+						this.changeStateMoviePanel(true);
+					} else {
+						this.changeStateMoviePanel(false);
+					}
+				} else if(source.equals(this.checkBoxScanSeries)) {
+					if(this.checkBoxScanSeries.isSelected()) {
+						this.changeStateSeriesPanel(true);
+					} else {
+						this.changeStateSeriesPanel(false);
+					}
+				} else if(source.equals(this.checkBoxScanMusic)) {
+					if(this.checkBoxScanMusic.isSelected()) {
+						this.changeStateMusicPanel(true);
+					} else {
+						this.changeStateMusicPanel(false);
+					}
 				}
 			}
-			// TODO if(source.equals(this.checkboxOtherLocation)) {
 		} else if(source instanceof JButton) {
 			if(source.equals(this.buttonMoviesFolderSelection)) {
 				this.getPathSelected(this.moviesLocation);
@@ -430,21 +549,11 @@ public final class FileKindSelection extends WindowContent implements ActionList
 				folderChosenField.setForeground(SystemColor.controlShadow);
 			} else {
 				Path path = Paths.get(folderChosenField.getText());
-				if(Files.exists(path)) {
-					if(source.equals(this.moviesLocation)) {
-						this.videoFileChosen = path.toFile();
-					} else if(source.equals(this.seriesLocation)) {
-						this.seriesFileChosen = path.toFile();
-					} else if(source.equals(this.musicLocation)) {
-						this.musicFileChosen = path.toFile();
-					} else if(source.equals(this.uniqueLocation)) {
-						this.uniqueFileChosen = path.toFile();
-					}
-				} else {
-					JOptionPane.showMessageDialog(this, this.invalidPathError.get(WindowContent.getCurrentLanguage()), this.errorMessageTitle.get(WindowContent.getCurrentLanguage()), JOptionPane.ERROR_MESSAGE);
+				if(!Files.exists(path)) {
+					this.openErrorMessage(this.invalidPathError.get(WindowContent.getCurrentLanguage()));
 					folderChosenField.requestFocusInWindow();
 					folderChosenField.setText(ConstantString.EMPTY);
-				}
+				} 
 			}
 		}
 		

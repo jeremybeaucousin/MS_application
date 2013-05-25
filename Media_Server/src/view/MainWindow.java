@@ -109,7 +109,7 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 		this.setResizable(false);
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("img/multimedia-icone.png")));
 		this.setBounds(100, 100, 583, 486);
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(null);
 		this.setLocationRelativeTo(null);
 		
