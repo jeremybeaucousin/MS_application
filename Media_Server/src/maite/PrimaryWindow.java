@@ -88,15 +88,36 @@ public class PrimaryWindow {
 		
 		JToggleButton toggleButton = new JToggleButton("");
 		toggleButton.setSelected(true);
-		toggleButton.setSelectedIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\git\\MS_application\\Media_Server_application_test\\imgMaite\\United-Kingdom-flagselected.png"));
-		toggleButton.setIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\git\\MS_application\\Media_Server_application_test\\imgMaite\\United-Kingdom-flag.png"));
-		toggleButton.setBounds(528, 9, 40, 23);
+		toggleButton.setSelectedIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\Desktop\\flag\\United-Kingdom-flag-icon-selected.png"));
+		toggleButton.setIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\Desktop\\flag\\United-Kingdom-flag-icon.png"));
+		toggleButton.setBounds(538, 9, 30, 23);
 		frame.getContentPane().add(toggleButton);
 		
 		JToggleButton toggleButton_1 = new JToggleButton("");
-		toggleButton_1.setSelectedIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\git\\MS_application\\Media_Server_application_test\\imgMaite\\france_flag_32selected.png"));
-		toggleButton_1.setIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\git\\MS_application\\Media_Server_application_test\\imgMaite\\france_flag_32.png"));
-		toggleButton_1.setBounds(478, 9, 40, 23);
+		toggleButton_1.setSelectedIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\Desktop\\flag\\France-Flag-icon-selected.png"));
+		toggleButton_1.setIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\Desktop\\flag\\France-Flag-icon.png"));
+		toggleButton_1.setBounds(498, 9, 30, 23);
 		frame.getContentPane().add(toggleButton_1);
+		
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setEnabled(false);
+		btnNewButton.setSelectedIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\Desktop\\flag\\Germany-Flag-icon-selected.png"));
+		btnNewButton.setIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\Desktop\\flag\\Germany-Flag-icon.png"));
+		btnNewButton.setBounds(458, 9, 30, 23);
+		frame.getContentPane().add(btnNewButton);
+		
+		JButton button = new JButton("");
+		button.setEnabled(false);
+		button.setSelectedIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\Desktop\\flag\\Spain-Flag-icon-selected.png"));
+		button.setIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\Desktop\\flag\\Spain-Flag-icon.png"));
+		button.setBounds(418, 9, 30, 23);
+		frame.getContentPane().add(button);
+		
+		JButton button_1 = new JButton("");
+		button_1.setEnabled(false);
+		button_1.setSelectedIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\Desktop\\flag\\Italy-Flag-icon-selected.png"));
+		button_1.setIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\Desktop\\flag\\Italy-Flag-icon.png"));
+		button_1.setBounds(378, 9, 30, 23);
+		frame.getContentPane().add(button_1);
 	}
 }

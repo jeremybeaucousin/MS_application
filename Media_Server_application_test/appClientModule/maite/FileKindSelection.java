@@ -65,7 +65,7 @@ public class FileKindSelection extends JPanel {
 		panelMovies.setLayout(null);
 		
 		JCheckBox checkboxDetailedShearchMovies = new JCheckBox("Recherche approfondie");
-		checkboxDetailedShearchMovies.setBounds(395, 41, 137, 23);
+		checkboxDetailedShearchMovies.setBounds(312, 41, 220, 23);
 		panelMovies.add(checkboxDetailedShearchMovies);
 		
 		textFieldMovies = new JTextField();
@@ -81,7 +81,7 @@ public class FileKindSelection extends JPanel {
 		
 		JCheckBox checkboxScanMovies = new JCheckBox("scanner");
 		checkboxScanMovies.setSelected(true);
-		checkboxScanMovies.setBounds(10, 12, 97, 23);
+		checkboxScanMovies.setBounds(10, 17, 97, 23);
 		panelMovies.add(checkboxScanMovies);
 		
 		JPanel panelSeries = new JPanel();
@@ -91,7 +91,7 @@ public class FileKindSelection extends JPanel {
 		panelSeries.setLayout(null);
 		
 		JCheckBox checkBoxDetailedShearchSeries = new JCheckBox("Recherche approfondie");
-		checkBoxDetailedShearchSeries.setBounds(395, 41, 137, 23);
+		checkBoxDetailedShearchSeries.setBounds(312, 41, 220, 23);
 		panelSeries.add(checkBoxDetailedShearchSeries);
 		
 		textFieldSeries = new JTextField();
@@ -107,7 +107,7 @@ public class FileKindSelection extends JPanel {
 		
 		JCheckBox checkBoxScanSeries = new JCheckBox("scanner");
 		checkBoxScanSeries.setSelected(true);
-		checkBoxScanSeries.setBounds(10, 12, 97, 23);
+		checkBoxScanSeries.setBounds(10, 18, 97, 23);
 		panelSeries.add(checkBoxScanSeries);
 		
 		JPanel panelMusics = new JPanel();
@@ -117,7 +117,7 @@ public class FileKindSelection extends JPanel {
 		panelMusics.setLayout(null);
 		
 		JCheckBox checkBoxDetailedShearchMusics = new JCheckBox("Recherche approfondie");
-		checkBoxDetailedShearchMusics.setBounds(395, 41, 137, 23);
+		checkBoxDetailedShearchMusics.setBounds(312, 41, 220, 23);
 		panelMusics.add(checkBoxDetailedShearchMusics);
 		
 		textFieldMusic = new JTextField();
@@ -133,7 +133,7 @@ public class FileKindSelection extends JPanel {
 		
 		JCheckBox checkBoxScanMusic = new JCheckBox("scanner");
 		checkBoxScanMusic.setSelected(true);
-		checkBoxScanMusic.setBounds(10, 12, 97, 23);
+		checkBoxScanMusic.setBounds(10, 17, 97, 23);
 		panelMusics.add(checkBoxScanMusic);
 		
 		JPanel panelUniqueLocation = new JPanel();
@@ -143,12 +143,11 @@ public class FileKindSelection extends JPanel {
 		panelUniqueLocation.setLayout(null);
 		
 		JCheckBox checkboxUniqueLocation = new JCheckBox("Emplacement unique");
-		checkboxUniqueLocation.setBounds(6, 7, 131, 23);
+		checkboxUniqueLocation.setBounds(6, 12, 131, 23);
 		panelUniqueLocation.add(checkboxUniqueLocation);
 		
 		JCheckBox checkBoxDetailedShearchUniqueLocation = new JCheckBox("Recherche approfondie");
-		checkBoxDetailedShearchUniqueLocation.setEnabled(false);
-		checkBoxDetailedShearchUniqueLocation.setBounds(395, 41, 137, 23);
+		checkBoxDetailedShearchUniqueLocation.setBounds(312, 41, 220, 23);
 		panelUniqueLocation.add(checkBoxDetailedShearchUniqueLocation);
 		
 		textFieldUniqueLocation = new JTextField();
