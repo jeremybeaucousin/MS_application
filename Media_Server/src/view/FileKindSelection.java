@@ -436,9 +436,9 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		String errorMessage = this.ValidateForm();
 		if(StringUtil.isEmpty(errorMessage)) {
 			if(this.getMainWindow().getSearchingOnSelectedValue() == null) {
-				SearchingOnSelectedValues searchingOnSelectedValues = new SearchingOnSelectedValues(this.getMainWindow(), fileKindSelectionParameters);
-				this.getMainWindow().setSearchingOnSelectedValue(searchingOnSelectedValues);
-				this.getMainWindow().getNavigator().add(searchingOnSelectedValues);
+				ScanningProgress scanningProgress = new ScanningProgress(this.getMainWindow(), fileKindSelectionParameters);
+				this.getMainWindow().setSearchingOnSelectedValue(scanningProgress);
+				this.getMainWindow().getNavigator().add(scanningProgress);
 			} else {
 				this.getMainWindow().getNavigator().next();
 				this.getMainWindow().getSearchingOnSelectedValue().setFileKindSelectionParameters(fileKindSelectionParameters);

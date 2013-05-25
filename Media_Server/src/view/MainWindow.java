@@ -96,7 +96,7 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 	private FileKindSelection fileKindSelection;
 	
 	/** screen : scanning file depending on the selected value  **/
-	private SearchingOnSelectedValues searchingOnSelectedValue;
+	private ScanningProgress searchingOnSelectedValue;
 	
 	public MainWindow() throws IOException {
 		super();
@@ -188,12 +188,12 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 	}
 
 	
-	public SearchingOnSelectedValues getSearchingOnSelectedValue() {
+	public ScanningProgress getSearchingOnSelectedValue() {
 		return searchingOnSelectedValue;
 	}
 
 	public void setSearchingOnSelectedValue(
-			SearchingOnSelectedValues searchingOnSelectedValue) {
+			ScanningProgress searchingOnSelectedValue) {
 		this.searchingOnSelectedValue = searchingOnSelectedValue;
 	}
 	

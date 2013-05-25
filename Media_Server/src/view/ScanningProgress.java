@@ -14,10 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-public final class SearchingOnSelectedValues extends WindowContent {
+public final class ScanningProgress extends WindowContent {
 	private TreeMap<String, JLabel> results;
 
-	public SearchingOnSelectedValues(MainWindow mainWindow, FileKindSelectionParameters fileKindSelectionParameters) {
+	public ScanningProgress(MainWindow mainWindow, FileKindSelectionParameters fileKindSelectionParameters) {
 		super(mainWindow);
 		this.results = new TreeMap<String, JLabel>();
 		this.setBackground(Color.WHITE);
