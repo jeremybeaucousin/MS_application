@@ -48,13 +48,19 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 	
 	private final HashMap<String, String> TitleTexts = new HashMap<String, String>() {
 		{
-			put(FR, "Super Application Serveur Multimédia");
-			put(EN, "Super Multimedia Server Application");
+			put(IT, "Super applicazione di server multimedia");
+			put(DE, "TODO");
+			put(ES, "Súper aplicación de servidor multimedia");
+			put(FR, "Super application de serveur multimédia");
+			put(EN, "Super multimedia server application");
 		}			
 	};
 
 	private final HashMap<String, String> canceledButtonTexts = new HashMap<String, String>() {
 		{
+			put(IT, "Annula");
+			put(DE, "TODO");
+			put(ES, "Cancelar");
 			put(FR, "Annuler");
 			put(EN, "Cancel");
 		}			
@@ -62,6 +68,9 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 	
 	private final HashMap<String, String> previousButtonTexts = new HashMap<String, String>() {
 		{
+			put(IT, "Indietro");
+			put(DE, "TODO");
+			put(ES, "Atrás");
 			put(FR, "Précédent");
 			put(EN, "Previous");
 		}			
@@ -69,6 +78,9 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 	
 	private final HashMap<String, String> nextButtonTexts = new HashMap<String, String>() {
 		{
+			put(IT, "Avanti");
+			put(DE, "TODO");
+			put(ES, "Siguiente");
 			put(FR, "Suivant");
 			put(EN, "Next");
 		}			
@@ -76,6 +88,9 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 	
 	private final HashMap<String, String> finishButtonTexts = new HashMap<String, String>() {
 		{
+			put(IT, "Termina");
+			put(DE, "TODO");
+			put(ES, "Aceptar");
 			put(FR, "Terminer");
 			put(EN, "Finish");
 		}			

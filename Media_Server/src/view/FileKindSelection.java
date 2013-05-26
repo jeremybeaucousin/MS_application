@@ -61,6 +61,9 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	
 	private final HashMap<String, String> DescriptionTexts = new HashMap<String, String>() {
 		{
+			put(IT, "TODO");
+			put(DE, "TODO");
+			put(ES, "Selectiona el tipo de media que quieres escanear y su localisación. Precisa el tipo de busceda que deseas para cada uno");
 			put(FR, "Sélectionez le type de média que vous voulez scaner ainsi que leur emplacement. Précisez le type de recherche que vous désirez pour chacun.");
 			put(EN, "Select The kind of media you want to scan and their location. Precise the kind of search for any of them.");
 		}			
@@ -68,6 +71,9 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	
 	private final HashMap<String, String> moviePanelTitleTexts = new HashMap<String, String>() {
 		{
+			put(IT, "Filmi");
+			put(DE, "TODO");
+			put(ES, "Películas");
 			put(FR, "Films");
 			put(EN, "Movies");
 		}			
@@ -76,6 +82,9 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	
 	private final HashMap<String, String> seriesPanelTitleTexts = new HashMap<String, String>() {
 		{
+			put(IT, "Seri");
+			put(DE, "TODO");
+			put(ES, "Series");
 			put(FR, "Séries");
 			put(EN, "Series");
 		}			
@@ -83,6 +92,9 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	
 	private final HashMap<String, String> musicPanelTitleTexts = new HashMap<String, String>() {
 		{
+			put(IT, "Musiche");
+			put(DE, "TODO");
+			put(ES, "Músicas");
 			put(FR, "Musique");
 			put(EN, "Music");
 		}			
@@ -90,6 +102,9 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	
 	private final HashMap<String, String> checkboxUniqueLocationTexts = new HashMap<String, String>() {
 		{
+			put(IT, "TODO");
+			put(DE, "TODO");
+			put(ES, "Localisación única");
 			put(FR, "Emplacement unique");
 			put(EN, "Unique location");
 		}			
@@ -97,6 +112,9 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	
 	private final HashMap<String, String> scanCheckboxTexts = new HashMap<String, String>() {
 		{
+			put(IT, "TODO");
+			put(DE, "TODO");
+			put(ES, "Escanear");
 			put(FR, "scanner");
 			put(EN, "scan");
 		}			
@@ -104,6 +122,9 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	
 	private final HashMap<String, String> locationsTexts = new HashMap<String, String>() {
 		{
+			put(IT, "TODO");
+			put(DE, "TODO");
+			put(ES, "Localisación del dosier");
 			put(FR, "Emplacement du dossier");
 			put(EN, "File Location");
 		}			
@@ -111,6 +132,9 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	
 	private final HashMap<String, String> checkboxDetailedShearchTexts = new HashMap<String, String>() {
 		{
+			put(IT, "TODO");
+			put(DE, "TODO");
+			put(ES, "Busceda detallada");
 			put(FR, "Recherche approfondie");
 			put(EN, "Detailed search");
 		}			
@@ -119,7 +143,10 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	// FolderChooser //
 	private final HashMap<String, String> folderChooserTexts = new HashMap<String, String>() {
 		{
-			put(FR, "Séléctionner le dossier à scanner");
+			put(IT, "TODO");
+			put(DE, "TODO");
+			put(ES, "Selecciona el dosier que escanear");
+			put(FR, "Séléctionnez le dossier à scanner");
 			put(EN, "Select the folder to scan");
 		}			
 	};
@@ -127,6 +154,9 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	// Errors Message //
 	private final HashMap<String, String> errorMessageTitle = new HashMap<String, String>() {
 		{
+			put(IT, "Errore");
+			put(DE, "Irrtum");
+			put(ES, "Error");
 			put(FR, "Erreur");
 			put(EN, "Error");
 		}			
@@ -134,20 +164,29 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	
 	private final HashMap<String, String> invalidPathError = new HashMap<String, String>() {
 		{
-			put(FR, "Le chemin rentré n'éxiste pas.");
+			put(IT, "TODO");
+			put(DE, "TODO");
+			put(ES, "El camino instruido no existe");
+			put(FR, "Le chemin rentré n'existe pas.");
 			put(EN, "The entered path does not exist.");
 		}			
 	};
 	
 	private final HashMap<String, String> notAnyMediaCheckedError = new HashMap<String, String>() {
 		{
-			put(FR, "Vous n'avez selectionner aucun media.");
+			put(IT, "TODO");
+			put(DE, "TODO");
+			put(ES, "Ningún media está selectionado");
+			put(FR, "Vous n'avez selectionné aucun media.");
 			put(EN, "You haven't selected any media.");
 		}			
 	};
 	
 	private final HashMap<String, String> pathIsEmptyOrInvalidError = new HashMap<String, String>() {
 		{
+			put(IT, "TODO");
+			put(DE, "TODO");
+			put(ES, "Ningún dosier está selectionado o el camino está inválido");
 			put(FR, "Vous n'avez selectionner aucun dossier ou le chemin est invalide.");
 			put(EN, "You haven't selected any folder or the path does not exist.");
 		}			
@@ -391,8 +430,8 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		boolean detailedShearchSeriesSelected = this.checkBoxDetailedShearchSeries.isSelected();
 		boolean detailedShearchMusicsSelected = this.checkBoxDetailedShearchMusics.isSelected();
 		boolean detailedShearchUniqueLocationSelected = this.checkBoxDetailedShearchUniqueLocation.isSelected();
-		File seriesFileChosen = new File(this.moviesLocation.getText());
-		File videoFileChosen = new File(this.seriesLocation.getText());
+		File videoFileChosen = new File(this.moviesLocation.getText());
+		File seriesFileChosen = new File(this.seriesLocation.getText());
 		File musicFileChosen = new File(this.musicLocation.getText());
 		File uniqueFileChosen = new File(this.uniqueLocation.getText());
 		this.fileKindSelectionParameters = new FileKindSelectionParameters(videoIsSelected, serieIsSelected, musicIsSelected, uniqueIsSelected, detailedShearchMoviesSelected, detailedShearchSeriesSelected, detailedShearchMusicsSelected, detailedShearchUniqueLocationSelected, videoFileChosen, seriesFileChosen, musicFileChosen, uniqueFileChosen);
