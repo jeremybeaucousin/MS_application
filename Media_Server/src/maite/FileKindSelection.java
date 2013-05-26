@@ -65,18 +65,18 @@ public class FileKindSelection extends JPanel {
 		panelMovies.setLayout(null);
 		
 		JCheckBox checkboxDetailedShearchMovies = new JCheckBox("Recherche approfondie");
-		checkboxDetailedShearchMovies.setBounds(312, 41, 220, 23);
+		checkboxDetailedShearchMovies.setBounds(352, 41, 180, 23);
 		panelMovies.add(checkboxDetailedShearchMovies);
 		
 		textFieldMovies = new JTextField();
 		textFieldMovies.setText("emplacement du dossier");
 		textFieldMovies.setForeground(SystemColor.controlShadow);
 		textFieldMovies.setColumns(10);
-		textFieldMovies.setBounds(10, 42, 170, 20);
+		textFieldMovies.setBounds(10, 42, 220, 20);
 		panelMovies.add(textFieldMovies);
 		
 		JButton buttonMoviesLoc = new JButton("...");
-		buttonMoviesLoc.setBounds(190, 41, 30, 23);
+		buttonMoviesLoc.setBounds(240, 41, 30, 23);
 		panelMovies.add(buttonMoviesLoc);
 		
 		JCheckBox checkboxScanMovies = new JCheckBox("scanner");
@@ -91,18 +91,18 @@ public class FileKindSelection extends JPanel {
 		panelSeries.setLayout(null);
 		
 		JCheckBox checkBoxDetailedShearchSeries = new JCheckBox("Recherche approfondie");
-		checkBoxDetailedShearchSeries.setBounds(312, 41, 220, 23);
+		checkBoxDetailedShearchSeries.setBounds(352, 41, 180, 23);
 		panelSeries.add(checkBoxDetailedShearchSeries);
 		
 		textFieldSeries = new JTextField();
 		textFieldSeries.setText("emplacement du dossier");
 		textFieldSeries.setForeground(SystemColor.controlShadow);
 		textFieldSeries.setColumns(10);
-		textFieldSeries.setBounds(10, 42, 170, 20);
+		textFieldSeries.setBounds(10, 42, 220, 20);
 		panelSeries.add(textFieldSeries);
 		
 		JButton buttonSeriesLoc = new JButton("...");
-		buttonSeriesLoc.setBounds(190, 41, 30, 23);
+		buttonSeriesLoc.setBounds(240, 41, 30, 23);
 		panelSeries.add(buttonSeriesLoc);
 		
 		JCheckBox checkBoxScanSeries = new JCheckBox("scanner");
@@ -117,18 +117,18 @@ public class FileKindSelection extends JPanel {
 		panelMusics.setLayout(null);
 		
 		JCheckBox checkBoxDetailedShearchMusics = new JCheckBox("Recherche approfondie");
-		checkBoxDetailedShearchMusics.setBounds(312, 41, 220, 23);
+		checkBoxDetailedShearchMusics.setBounds(352, 41, 180, 23);
 		panelMusics.add(checkBoxDetailedShearchMusics);
 		
 		textFieldMusic = new JTextField();
 		textFieldMusic.setText("emplacement du dossier");
 		textFieldMusic.setForeground(SystemColor.controlShadow);
 		textFieldMusic.setColumns(10);
-		textFieldMusic.setBounds(10, 42, 170, 20);
+		textFieldMusic.setBounds(10, 42, 220, 20);
 		panelMusics.add(textFieldMusic);
 		
 		JButton buttonMusicLoc = new JButton("...");
-		buttonMusicLoc.setBounds(190, 41, 30, 23);
+		buttonMusicLoc.setBounds(240, 41, 30, 23);
 		panelMusics.add(buttonMusicLoc);
 		
 		JCheckBox checkBoxScanMusic = new JCheckBox("scanner");
@@ -147,20 +147,20 @@ public class FileKindSelection extends JPanel {
 		panelUniqueLocation.add(checkboxUniqueLocation);
 		
 		JCheckBox checkBoxDetailedShearchUniqueLocation = new JCheckBox("Recherche approfondie");
-		checkBoxDetailedShearchUniqueLocation.setBounds(312, 41, 220, 23);
+		checkBoxDetailedShearchUniqueLocation.setBounds(352, 41, 180, 23);
 		panelUniqueLocation.add(checkBoxDetailedShearchUniqueLocation);
 		
 		textFieldUniqueLocation = new JTextField();
 		textFieldUniqueLocation.setEnabled(false);
 		textFieldUniqueLocation.setForeground(UIManager.getColor("Button.shadow"));
 		textFieldUniqueLocation.setText("emplacement du dossier");
-		textFieldUniqueLocation.setBounds(6, 42, 170, 20);
+		textFieldUniqueLocation.setBounds(6, 42, 224, 20);
 		panelUniqueLocation.add(textFieldUniqueLocation);
 		textFieldUniqueLocation.setColumns(10);
 		
 		JButton buttonUniqueLocationLoc = new JButton("...");
 		buttonUniqueLocationLoc.setEnabled(false);
-		buttonUniqueLocationLoc.setBounds(186, 41, 30, 23);
+		buttonUniqueLocationLoc.setBounds(240, 41, 30, 23);
 		panelUniqueLocation.add(buttonUniqueLocationLoc);
 
 	}

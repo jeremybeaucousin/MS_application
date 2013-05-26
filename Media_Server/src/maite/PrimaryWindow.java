@@ -86,38 +86,34 @@ public class PrimaryWindow {
 		lblSuperAplieServeur.setBounds(10, 12, 242, 14);
 		frame.getContentPane().add(lblSuperAplieServeur);
 		
-		JToggleButton toggleButton = new JToggleButton("");
-		toggleButton.setSelected(true);
-		toggleButton.setSelectedIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\Desktop\\flag\\United-Kingdom-flag-icon-selected.png"));
-		toggleButton.setIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\Desktop\\flag\\United-Kingdom-flag-icon.png"));
-		toggleButton.setBounds(538, 9, 30, 23);
-		frame.getContentPane().add(toggleButton);
+		JToggleButton englishButton = new JToggleButton("");
+		englishButton.setSelectedIcon(new ImageIcon(PrimaryWindow.class.getResource("/img/United-Kingdom-flag-icon-selected.png")));
+		englishButton.setIcon(new ImageIcon(PrimaryWindow.class.getResource("/img/United-Kingdom-flag-icon.png")));
+		englishButton.setBounds(538, 9, 30, 23);
+		frame.getContentPane().add(englishButton);
 		
-		JToggleButton toggleButton_1 = new JToggleButton("");
-		toggleButton_1.setSelectedIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\Desktop\\flag\\France-Flag-icon-selected.png"));
-		toggleButton_1.setIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\Desktop\\flag\\France-Flag-icon.png"));
-		toggleButton_1.setBounds(498, 9, 30, 23);
-		frame.getContentPane().add(toggleButton_1);
+		JToggleButton frenchButton = new JToggleButton("");
+		frenchButton.setSelectedIcon(new ImageIcon(PrimaryWindow.class.getResource("/img/France-Flag-icon-selected.png")));
+		frenchButton.setIcon(new ImageIcon(PrimaryWindow.class.getResource("/img/France-Flag-icon.png")));
+		frenchButton.setBounds(498, 9, 30, 23);
+		frame.getContentPane().add(frenchButton);
 		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setEnabled(false);
-		btnNewButton.setSelectedIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\Desktop\\flag\\Germany-Flag-icon-selected.png"));
-		btnNewButton.setIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\Desktop\\flag\\Germany-Flag-icon.png"));
-		btnNewButton.setBounds(458, 9, 30, 23);
-		frame.getContentPane().add(btnNewButton);
+		JToggleButton spanishButton = new JToggleButton("");
+		spanishButton.setSelectedIcon(new ImageIcon(PrimaryWindow.class.getResource("/img/Spain-Flag-icon-selected.png")));
+		spanishButton.setIcon(new ImageIcon(PrimaryWindow.class.getResource("/img/Spain-Flag-icon.png")));
+		spanishButton.setBounds(458, 9, 30, 23);
+		frame.getContentPane().add(spanishButton);
 		
-		JButton button = new JButton("");
-		button.setEnabled(false);
-		button.setSelectedIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\Desktop\\flag\\Spain-Flag-icon-selected.png"));
-		button.setIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\Desktop\\flag\\Spain-Flag-icon.png"));
-		button.setBounds(418, 9, 30, 23);
-		frame.getContentPane().add(button);
+		JToggleButton germanButton = new JToggleButton("");
+		germanButton.setSelectedIcon(new ImageIcon(PrimaryWindow.class.getResource("/img/Germany-Flag-icon-selected.png")));
+		germanButton.setIcon(new ImageIcon(PrimaryWindow.class.getResource("/img/Germany-Flag-icon.png")));
+		germanButton.setBounds(418, 9, 30, 23);
+		frame.getContentPane().add(germanButton);
 		
-		JButton button_1 = new JButton("");
-		button_1.setEnabled(false);
-		button_1.setSelectedIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\Desktop\\flag\\Italy-Flag-icon-selected.png"));
-		button_1.setIcon(new ImageIcon("C:\\Users\\Sett\u00E4n\\Desktop\\flag\\Italy-Flag-icon.png"));
-		button_1.setBounds(378, 9, 30, 23);
-		frame.getContentPane().add(button_1);
+		JToggleButton italianButton = new JToggleButton("");
+		italianButton.setIcon(new ImageIcon(PrimaryWindow.class.getResource("/img/Italy-Flag-icon.png")));
+		italianButton.setSelectedIcon(new ImageIcon(PrimaryWindow.class.getResource("/img/Italy-Flag-icon-selected.png")));
+		italianButton.setBounds(378, 9, 30, 23);
+		frame.getContentPane().add(italianButton);
 	}
 }

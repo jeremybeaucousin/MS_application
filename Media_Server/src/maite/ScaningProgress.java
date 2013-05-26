@@ -32,18 +32,19 @@ public class ScaningProgress extends JPanel {
 		setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		panel.setBounds(0, 0, 558, 356);
 		add(panel);
 		panel.setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Films", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(0, 0, 558, 90);
+		panel_1.setBounds(10, 0, 538, 90);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
 		JProgressBar progressBar = new JProgressBar();
-		progressBar.setBounds(248, 37, 300, 14);
+		progressBar.setBounds(228, 37, 300, 14);
 		panel_1.add(progressBar);
 		
 		JLabel lblScanEnCours = new JLabel("Scan en cours...");
@@ -55,12 +56,12 @@ public class ScaningProgress extends JPanel {
 		panel_1.add(lblTempsRestant);
 		
 		JLabel lblNewLabel = new JLabel("Recherche avanc\u00E9e");
-		lblNewLabel.setBounds(444, 62, 104, 14);
+		lblNewLabel.setBounds(418, 62, 120, 14);
 		panel_1.add(lblNewLabel);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(null, "S\u00E9ries", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(0, 90, 558, 90);
+		panel_2.setBounds(10, 90, 538, 90);
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -69,11 +70,11 @@ public class ScaningProgress extends JPanel {
 		panel_2.add(lblScanEnAttente);
 		
 		JProgressBar progressBar_1 = new JProgressBar();
-		progressBar_1.setBounds(248, 36, 300, 14);
+		progressBar_1.setBounds(228, 36, 300, 14);
 		panel_2.add(progressBar_1);
 		
 		JLabel label = new JLabel("Recherche avanc\u00E9e");
-		label.setBounds(444, 65, 104, 14);
+		label.setBounds(418, 65, 120, 14);
 		panel_2.add(label);
 		
 		JLabel label_1 = new JLabel("Temps restant :");
@@ -82,7 +83,7 @@ public class ScaningProgress extends JPanel {
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(null, "Musique", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.setBounds(0, 180, 558, 90);
+		panel_3.setBounds(10, 180, 538, 90);
 		panel.add(panel_3);
 		panel_3.setLayout(null);
 		
@@ -91,11 +92,11 @@ public class ScaningProgress extends JPanel {
 		panel_3.add(label_2);
 		
 		JProgressBar progressBar_2 = new JProgressBar();
-		progressBar_2.setBounds(248, 36, 300, 14);
+		progressBar_2.setBounds(228, 36, 300, 14);
 		panel_3.add(progressBar_2);
 		
 		JLabel label_3 = new JLabel("Recherche avanc\u00E9e");
-		label_3.setBounds(444, 65, 104, 14);
+		label_3.setBounds(418, 65, 120, 14);
 		panel_3.add(label_3);
 		
 		JLabel label_4 = new JLabel("Temps restant :");
@@ -103,15 +104,15 @@ public class ScaningProgress extends JPanel {
 		panel_3.add(label_4);
 		
 		JLabel lblTempsRestant_1 = new JLabel("Temps restant :");
-		lblTempsRestant_1.setBounds(198, 306, 86, 14);
+		lblTempsRestant_1.setBounds(198, 306, 119, 14);
 		panel.add(lblTempsRestant_1);
 		
 		JLabel lblTempscoul = new JLabel("Temps \u00E9coul\u00E9 :");
-		lblTempscoul.setBounds(10, 306, 93, 14);
+		lblTempscoul.setBounds(10, 306, 124, 14);
 		panel.add(lblTempscoul);
 		
 		JLabel lblNombreDeFichiers = new JLabel("Nombre de fichiers scann\u00E9s :");
-		lblNombreDeFichiers.setBounds(10, 331, 155, 14);
+		lblNombreDeFichiers.setBounds(10, 331, 170, 14);
 		panel.add(lblNombreDeFichiers);
 		
 		JProgressBar progressBar_3 = new JProgressBar();
@@ -119,7 +120,7 @@ public class ScaningProgress extends JPanel {
 		panel.add(progressBar_3);
 		
 		JLabel lblProgression = new JLabel("Progression :");
-		lblProgression.setBounds(10, 281, 93, 14);
+		lblProgression.setBounds(10, 281, 113, 14);
 		panel.add(lblProgression);
 
 	}
