@@ -31,97 +31,97 @@ public class ScaningProgress extends JPanel {
 		setBackground(Color.WHITE);
 		setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(0, 0, 558, 356);
-		add(panel);
-		panel.setLayout(null);
+		JPanel mainPanel = new JPanel();
+		mainPanel.setBackground(Color.WHITE);
+		mainPanel.setBounds(0, 0, 558, 356);
+		add(mainPanel);
+		mainPanel.setLayout(null);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "Films", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 0, 538, 90);
-		panel.add(panel_1);
-		panel_1.setLayout(null);
+		JPanel panelMovies = new JPanel();
+		panelMovies.setBorder(new TitledBorder(null, "Films", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelMovies.setBounds(10, 0, 538, 90);
+		mainPanel.add(panelMovies);
+		panelMovies.setLayout(null);
 		
-		JProgressBar progressBar = new JProgressBar();
-		progressBar.setBounds(228, 37, 300, 14);
-		panel_1.add(progressBar);
+		JProgressBar movieProgressBar = new JProgressBar();
+		movieProgressBar.setBounds(228, 37, 300, 14);
+		panelMovies.add(movieProgressBar);
 		
-		JLabel lblScanEnCours = new JLabel("Scan en cours...");
-		lblScanEnCours.setBounds(248, 12, 104, 14);
-		panel_1.add(lblScanEnCours);
+		JLabel movieScanState = new JLabel("Scan en cours...");
+		movieScanState.setBounds(248, 12, 104, 14);
+		panelMovies.add(movieScanState);
 		
-		JLabel lblTempsRestant = new JLabel("Temps restant :");
-		lblTempsRestant.setBounds(10, 37, 104, 14);
-		panel_1.add(lblTempsRestant);
+		JLabel movieLibelleTimeLeft = new JLabel("Temps restant :");
+		movieLibelleTimeLeft.setBounds(10, 37, 104, 14);
+		panelMovies.add(movieLibelleTimeLeft);
 		
-		JLabel lblNewLabel = new JLabel("Recherche avanc\u00E9e");
-		lblNewLabel.setBounds(418, 62, 120, 14);
-		panel_1.add(lblNewLabel);
+		JLabel movieLibelleDetailedSearch = new JLabel("Recherche avanc\u00E9e");
+		movieLibelleDetailedSearch.setBounds(418, 62, 120, 14);
+		panelMovies.add(movieLibelleDetailedSearch);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(null, "S\u00E9ries", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(10, 90, 538, 90);
-		panel.add(panel_2);
-		panel_2.setLayout(null);
+		JPanel panelSeries = new JPanel();
+		panelSeries.setBorder(new TitledBorder(null, "S\u00E9ries", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelSeries.setBounds(10, 90, 538, 90);
+		mainPanel.add(panelSeries);
+		panelSeries.setLayout(null);
 		
-		JLabel lblScanEnAttente = new JLabel("Scan en attente");
-		lblScanEnAttente.setBounds(248, 11, 104, 14);
-		panel_2.add(lblScanEnAttente);
+		JLabel seriesScanState = new JLabel("Scan en attente");
+		seriesScanState.setBounds(248, 11, 104, 14);
+		panelSeries.add(seriesScanState);
 		
-		JProgressBar progressBar_1 = new JProgressBar();
-		progressBar_1.setBounds(228, 36, 300, 14);
-		panel_2.add(progressBar_1);
+		JProgressBar seriesProgressBar = new JProgressBar();
+		seriesProgressBar.setBounds(228, 36, 300, 14);
+		panelSeries.add(seriesProgressBar);
 		
-		JLabel label = new JLabel("Recherche avanc\u00E9e");
-		label.setBounds(418, 65, 120, 14);
-		panel_2.add(label);
+		JLabel seriesLibelleDetailedSearch = new JLabel("Recherche avanc\u00E9e");
+		seriesLibelleDetailedSearch.setBounds(418, 65, 120, 14);
+		panelSeries.add(seriesLibelleDetailedSearch);
 		
-		JLabel label_1 = new JLabel("Temps restant :");
-		label_1.setBounds(10, 36, 104, 14);
-		panel_2.add(label_1);
+		JLabel seriesLibelleTimeLeft = new JLabel("Temps restant :");
+		seriesLibelleTimeLeft.setBounds(10, 36, 104, 14);
+		panelSeries.add(seriesLibelleTimeLeft);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(null, "Musique", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.setBounds(10, 180, 538, 90);
-		panel.add(panel_3);
-		panel_3.setLayout(null);
+		JPanel panelMusic = new JPanel();
+		panelMusic.setBorder(new TitledBorder(null, "Musique", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelMusic.setBounds(10, 180, 538, 90);
+		mainPanel.add(panelMusic);
+		panelMusic.setLayout(null);
 		
-		JLabel label_2 = new JLabel("Scan en attente");
-		label_2.setBounds(248, 11, 104, 14);
-		panel_3.add(label_2);
+		JLabel musicScanState = new JLabel("Scan en attente");
+		musicScanState.setBounds(248, 11, 104, 14);
+		panelMusic.add(musicScanState);
 		
-		JProgressBar progressBar_2 = new JProgressBar();
-		progressBar_2.setBounds(228, 36, 300, 14);
-		panel_3.add(progressBar_2);
+		JProgressBar musicProgressBar = new JProgressBar();
+		musicProgressBar.setBounds(228, 36, 300, 14);
+		panelMusic.add(musicProgressBar);
 		
-		JLabel label_3 = new JLabel("Recherche avanc\u00E9e");
-		label_3.setBounds(418, 65, 120, 14);
-		panel_3.add(label_3);
+		JLabel musicLibelleDetailedSearch = new JLabel("Recherche avanc\u00E9e");
+		musicLibelleDetailedSearch.setBounds(418, 65, 120, 14);
+		panelMusic.add(musicLibelleDetailedSearch);
 		
-		JLabel label_4 = new JLabel("Temps restant :");
-		label_4.setBounds(10, 36, 104, 14);
-		panel_3.add(label_4);
+		JLabel musicLibelleTimeLeft = new JLabel("Temps restant :");
+		musicLibelleTimeLeft.setBounds(10, 36, 104, 14);
+		panelMusic.add(musicLibelleTimeLeft);
 		
-		JLabel lblTempsRestant_1 = new JLabel("Temps restant :");
-		lblTempsRestant_1.setBounds(198, 306, 119, 14);
-		panel.add(lblTempsRestant_1);
+		JLabel generalTimeLeft = new JLabel("Temps restant :");
+		generalTimeLeft.setBounds(198, 306, 119, 14);
+		mainPanel.add(generalTimeLeft);
 		
-		JLabel lblTempscoul = new JLabel("Temps \u00E9coul\u00E9 :");
-		lblTempscoul.setBounds(10, 306, 124, 14);
-		panel.add(lblTempscoul);
+		JLabel generalTimeElapsed = new JLabel("Temps \u00E9coul\u00E9 :");
+		generalTimeElapsed.setBounds(10, 306, 124, 14);
+		mainPanel.add(generalTimeElapsed);
 		
-		JLabel lblNombreDeFichiers = new JLabel("Nombre de fichiers scann\u00E9s :");
-		lblNombreDeFichiers.setBounds(10, 331, 170, 14);
-		panel.add(lblNombreDeFichiers);
+		JLabel generalNumberOfFileText = new JLabel("Nombre de fichiers scann\u00E9s :");
+		generalNumberOfFileText.setBounds(10, 331, 170, 14);
+		mainPanel.add(generalNumberOfFileText);
 		
-		JProgressBar progressBar_3 = new JProgressBar();
-		progressBar_3.setBounds(198, 281, 350, 14);
-		panel.add(progressBar_3);
+		JProgressBar generalProgressBar = new JProgressBar();
+		generalProgressBar.setBounds(198, 281, 350, 14);
+		mainPanel.add(generalProgressBar);
 		
-		JLabel lblProgression = new JLabel("Progression :");
-		lblProgression.setBounds(10, 281, 113, 14);
-		panel.add(lblProgression);
+		JLabel genaralProgressText = new JLabel("Progression :");
+		genaralProgressText.setBounds(10, 281, 113, 14);
+		mainPanel.add(genaralProgressText);
 
 	}
 }
