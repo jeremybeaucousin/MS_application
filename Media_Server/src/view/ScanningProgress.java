@@ -23,6 +23,7 @@ import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import model.Document;
@@ -33,7 +34,10 @@ import model.apis.TheMovieDB;
 
 public final class ScanningProgress extends WindowContent {
 	private TreeMap<String, JLabel> results;
-
+	
+	private ArrayList<File> videoFileList;
+	
+	private JProgressBar generalProgressBar;
 	public ScanningProgress(MainWindow mainWindow, FileKindSelectionParameters fileKindSelectionParameters) {
 		super(mainWindow);
 		this.results = new TreeMap<String, JLabel>();
@@ -148,7 +152,7 @@ public final class ScanningProgress extends WindowContent {
 		genaralProgressText.setBounds(10, 281, 113, 14);
 		mainPanel.add(genaralProgressText);
 		
-		JProgressBar generalProgressBar = new JProgressBar();
+		this.generalProgressBar = new JProgressBar();
 		generalProgressBar.setBounds(198, 281, 350, 14);
 		mainPanel.add(generalProgressBar);
 		
@@ -165,20 +169,12 @@ public final class ScanningProgress extends WindowContent {
 		mainPanel.add(generalNumberOfFileText);
 		
 		// TODO define content
-		ArrayList<File> videoFileList = Document.FolderScannerVideo(fileKindSelectionParameters.getVideoFileChosen());
-//
-//		generalProgressBar.setMinimum(0);
-//		generalProgressBar.setMaximum(videoFileList.size());
-//		generalProgressBar.setValue(0);
-//		System.out.println(videoFileList.size());
-//		for(int ii = 0 ; ii < videoFileList.size(); ii++) {
-//			Movie movie = new Movie(videoFileList.get(ii).getName(), videoFileList.get(ii).getAbsolutePath());
-//			Integer responseMovie = TheMovieDB.searchMovieStudying(movie);
-//			System.out.println(new DecimalFormat("###.##").format(new Double(ii)/videoFileList.size()*100) + "%");
-//			System.out.println(ii);
-//			generalProgressBar.setValue(ii);
-//			generalProgressBar.setStringPainted(true);
-//		}
+		this.videoFileList = Document.FolderScannerVideo(fileKindSelectionParameters.getVideoFileChosen());
+
+		this.generalProgressBar.setMinimum(0);
+		this.generalProgressBar.setMaximum(videoFileList.size());
+		this.generalProgressBar.setValue(0);
+		this.generalProgressBar.setStringPainted(true);
 		
 //		this.results.put("Video_Selected", new JLabel("Video Selected : " + fileKindSelectionParameters.isVideoSelected()));
 //		this.results.get("Video_Selected").setBounds(10, 36, 200, 14);
@@ -193,6 +189,20 @@ public final class ScanningProgress extends WindowContent {
 //		this.add(this.results.get("Music_Selected"));
 	}
 	
+	public void startScan() {
+		for(int ii = 0 ; ii < videoFileList.size(); ii++) {
+			Movie movie = new Movie(videoFileList.get(ii).getName(), videoFileList.get(ii).getAbsolutePath());
+			try {
+				Integer responseMovie = TheMovieDB.searchMovieStudying(movie);
+			} catch (JSONException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(new DecimalFormat("###.##").format(new Double(ii)/videoFileList.size()*100) + "%");
+			System.out.println(ii);
+			this.generalProgressBar.setValue(ii);
+		}
+	}
 	public void setFileKindSelectionParameters(FileKindSelectionParameters fileKindSelectionParameters) {
 		// TODO set content depending on the previous screen when this one has been instanced
 		this.results.get("Video_Selected").setText("Video Selected : " + fileKindSelectionParameters.isVideoSelected());
