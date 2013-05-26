@@ -96,7 +96,7 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 	private FileKindSelection fileKindSelection;
 	
 	/** screen : scanning file depending on the selected value  **/
-	private ScanningProgress searchingOnSelectedValue;
+	private ScanningProgress scanningProgress;
 	
 	public MainWindow() throws IOException {
 		super();
@@ -139,11 +139,7 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 		
 		// main panel
 		this.panelBase = this.fileKindSelection;
-		this.panelBase.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		this.panelBase.setBackground(Color.WHITE);
-		this.panelBase.setBounds(10, 37, 558, 356);
 		this.getContentPane().add(this.panelBase);
-		this.panelBase.setLayout(null);
 		
 		this.canceledButton =  new JButton(this.canceledButtonTexts.get(WindowContent.getDefaultlanguage()));
 		this.componentsWithText.put(this.canceledButton, this.canceledButtonTexts);
@@ -187,19 +183,20 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 		return previousButton;
 	}
 
+	public FileKindSelection getFileKindSelection() {
+		return this.fileKindSelection;
+	}
 	
-	public ScanningProgress getSearchingOnSelectedValue() {
-		return searchingOnSelectedValue;
+	public ScanningProgress getScanningProgress() {
+		return this.scanningProgress;
 	}
 
-	public void setSearchingOnSelectedValue(
-			ScanningProgress searchingOnSelectedValue) {
-		this.searchingOnSelectedValue = searchingOnSelectedValue;
+	public void setScanningProgress(ScanningProgress scanningProgress) {
+		this.scanningProgress = scanningProgress;
 	}
 	
 
 	public void replaceContent(JComponent oldContent, JComponent newContent) {
-		// TODO create Méthode
 		this.getContentPane().remove(oldContent);
 		this.getContentPane().add(newContent);
 		WindowContent.revalidateContent(this.getContentPane());
@@ -213,8 +210,8 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 		} else if(source.equals(this.nextButton)) {
 			this.navigation.get(this.navigator.previousIndex()).getNextScreen(); 
 		} else if(source.equals(this.previousButton)) {
-			this.navigator.previous();
 			this.navigation.get(this.navigator.previousIndex()).getPreviousScreen(); 
+			this.navigator.previous();
 		} else if(source.equals(this.frenchButton)) {
 			this.englishButton.setSelected(false);
 			WindowContent.setCurrentLanguage(FR);

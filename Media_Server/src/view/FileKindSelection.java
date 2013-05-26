@@ -29,6 +29,7 @@ import javax.swing.Popup;
 import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -155,7 +156,9 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	public FileKindSelection(MainWindow mainWindow) throws IOException {
 		super(mainWindow);
 		
+		this.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		this.setBackground(Color.WHITE);
+		this.setBounds(10, 37, 558, 356);
 		this.setLayout(null);
 		
 		this.folderChooser.setDialogTitle(this.folderChooserTexts.get(EN));
@@ -184,7 +187,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		JPanel form = new JPanel();
 		form.setBorder(null);
 		form.setBounds(1, 59, 556, 296);
-		add(form);
+		this.add(form);
 		form.setLayout(null);
 		
 		// Movie Panel
@@ -431,19 +434,19 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	
 	@Override
 	public void getNextScreen() {
-		this.getMainWindow().getPreviousButton().setEnabled(true);
 		FileKindSelectionParameters fileKindSelectionParameters = this.sendFileKindSelectionParameters();
 		String errorMessage = this.ValidateForm();
 		if(StringUtil.isEmpty(errorMessage)) {
-			if(this.getMainWindow().getSearchingOnSelectedValue() == null) {
+			this.getMainWindow().getPreviousButton().setEnabled(true);
+			if(this.getMainWindow().getScanningProgress() == null) {
 				ScanningProgress scanningProgress = new ScanningProgress(this.getMainWindow(), fileKindSelectionParameters);
-				this.getMainWindow().setSearchingOnSelectedValue(scanningProgress);
+				this.getMainWindow().setScanningProgress(scanningProgress);
 				this.getMainWindow().getNavigator().add(scanningProgress);
 			} else {
 				this.getMainWindow().getNavigator().next();
-				this.getMainWindow().getSearchingOnSelectedValue().setFileKindSelectionParameters(fileKindSelectionParameters);
+				//this.getMainWindow().getScanningProgress().setFileKindSelectionParameters(fileKindSelectionParameters);
 			}
-			this.getMainWindow().replaceContent(this, this.getMainWindow().getSearchingOnSelectedValue());
+			this.getMainWindow().replaceContent(this, this.getMainWindow().getScanningProgress());
 		} else {
 			this.openErrorMessage(errorMessage);
 		}
@@ -451,9 +454,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 
 	@Override
 	public void getPreviousScreen() {
-		this.getMainWindow().getPreviousButton().setEnabled(false);
-		this.getMainWindow().replaceContent(this.getMainWindow().getSearchingOnSelectedValue(), this);
-		
+
 	}
 
 	@Override
