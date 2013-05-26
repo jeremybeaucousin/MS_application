@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
@@ -21,7 +22,13 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import model.Document;
+import model.Movie;
+import model.apis.ImdbApi;
+import model.apis.TheMovieDB;
 
 
 public final class ScanningProgress extends WindowContent {
@@ -159,13 +166,20 @@ public final class ScanningProgress extends WindowContent {
 		
 		// TODO define content
 		ArrayList<File> videoFileList = Document.FolderScannerVideo(fileKindSelectionParameters.getVideoFileChosen());
-
-		generalProgressBar.setMinimum(0);
-		generalProgressBar.setMaximum(1000000);
-		for(int ii = 0 ; ii < 1000000; ii++) {
-			generalProgressBar.setValue(ii);
-			generalProgressBar.setStringPainted(true);
-		}
+//
+//		generalProgressBar.setMinimum(0);
+//		generalProgressBar.setMaximum(videoFileList.size());
+//		generalProgressBar.setValue(0);
+//		System.out.println(videoFileList.size());
+//		for(int ii = 0 ; ii < videoFileList.size(); ii++) {
+//			Movie movie = new Movie(videoFileList.get(ii).getName(), videoFileList.get(ii).getAbsolutePath());
+//			Integer responseMovie = TheMovieDB.searchMovieStudying(movie);
+//			System.out.println(new DecimalFormat("###.##").format(new Double(ii)/videoFileList.size()*100) + "%");
+//			System.out.println(ii);
+//			generalProgressBar.setValue(ii);
+//			generalProgressBar.setStringPainted(true);
+//		}
+		
 //		this.results.put("Video_Selected", new JLabel("Video Selected : " + fileKindSelectionParameters.isVideoSelected()));
 //		this.results.get("Video_Selected").setBounds(10, 36, 200, 14);
 //		this.add(this.results.get("Video_Selected"));
