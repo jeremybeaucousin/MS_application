@@ -179,6 +179,22 @@ public final class ScanningProgress extends WindowContent {
 	}
 
 	@Override
+	public void setToItalian() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void setToGerman() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void setToSpanish() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
 	public void setToFrench() {
 		// TODO Auto-generated method stub
 		

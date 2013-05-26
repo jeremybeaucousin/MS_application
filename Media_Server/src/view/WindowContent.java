@@ -11,6 +11,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 import javax.swing.border.TitledBorder;
 
 import util.ConstantString;
@@ -24,6 +25,9 @@ public abstract class WindowContent extends JPanel implements WindowContentActio
 	
 	/** Is the current language of the application **/
 	private static String currentLanguage = defaultLanguage;
+	
+	/** Is the current language selected Button **/
+	private static JToggleButton currentButtonLanguage;
 	
 	public void setComponentsWithText(
 			HashMap<Object, HashMap<String, String>> componentsWithText) {
@@ -62,6 +66,14 @@ public abstract class WindowContent extends JPanel implements WindowContentActio
 		return defaultLanguage;
 	}
 
+	public static JToggleButton getCurrentButtonLanguage() {
+		return currentButtonLanguage;
+	}
+	
+	public static void setCurrentButtonLanguage(JToggleButton currentButtonLanguage) {
+		WindowContent.currentButtonLanguage = currentButtonLanguage;
+	}
+	
 	public static String getCurrentLanguage() {
 		return currentLanguage;
 	}

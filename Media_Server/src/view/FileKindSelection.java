@@ -180,7 +180,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.getComponentsWithText().put(introducingText, this.DescriptionTexts);
 		introducingText.setBackground(Color.WHITE);
 		introducingText.setForeground(Color.BLACK);
-		introducingText.setBounds(10, 11, 538, 37);
+		introducingText.setBounds(10, 11, 538, 35);
 		introducingPanel.add(introducingText);
 		
 		// Main Panel
@@ -203,7 +203,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.checkboxScanMovies = new JCheckBox(this.scanCheckboxTexts.get(WindowContent.getDefaultlanguage()));
 		this.getComponentsWithText().put(this.checkboxScanMovies, this.scanCheckboxTexts);
 		this.checkboxScanMovies.setSelected(true);
-		this.checkboxScanMovies.setBounds(10, 12, 97, 23);
+		this.checkboxScanMovies.setBounds(10, 17, 97, 23);
 		this.checkboxScanMovies.addActionListener(this);
 		panelMovies.add(this.checkboxScanMovies);
 		
@@ -212,18 +212,18 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.getComponentsWithText().put(this.moviesLocation, this.locationsTexts);
 		this.moviesLocation.setForeground(SystemColor.controlShadow);
 		this.moviesLocation.setColumns(10);
-		this.moviesLocation.setBounds(10, 42, 170, 20);
+		this.moviesLocation.setBounds(10, 42, 220, 20);
 		this.moviesLocation.addFocusListener(this);
 		panelMovies.add(this.moviesLocation);
 		
 		this.buttonMoviesFolderSelection = new JButton("...");
-		this.buttonMoviesFolderSelection.setBounds(190, 41, 30, 23);
+		this.buttonMoviesFolderSelection.setBounds(240, 41, 30, 23);
 		this.buttonMoviesFolderSelection.addActionListener(this);
 		panelMovies.add(this.buttonMoviesFolderSelection);
 		
 		this.checkboxDetailedShearchMovies = new JCheckBox(this.checkboxDetailedShearchTexts.get(WindowContent.getDefaultlanguage()));
 		this.getComponentsWithText().put(this.checkboxDetailedShearchMovies, this.checkboxDetailedShearchTexts);
-		this.checkboxDetailedShearchMovies.setBounds(395, 41, 137, 23);
+		this.checkboxDetailedShearchMovies.setBounds(352, 41, 180, 23);
 		panelMovies.add(this.checkboxDetailedShearchMovies);
 		
 		// Serie Panel
@@ -239,7 +239,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.checkBoxScanSeries = new JCheckBox(this.scanCheckboxTexts.get(WindowContent.getDefaultlanguage()));
 		this.getComponentsWithText().put(this.checkBoxScanSeries, this.scanCheckboxTexts);
 		this.checkBoxScanSeries.setSelected(true);
-		this.checkBoxScanSeries.setBounds(10, 12, 97, 23);
+		this.checkBoxScanSeries.setBounds(10, 18, 97, 23);
 		this.checkBoxScanSeries.addActionListener(this);
 		panelSeries.add(this.checkBoxScanSeries);
 		
@@ -248,19 +248,19 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.getComponentsWithText().put(this.seriesLocation, this.locationsTexts);
 		this.seriesLocation.setForeground(SystemColor.controlShadow);
 		this.seriesLocation.setColumns(10);
-		this.seriesLocation.setBounds(10, 42, 170, 20);
+		this.seriesLocation.setBounds(10, 42, 220, 20);
 		this.seriesLocation.addFocusListener(this);
 		panelSeries.add(this.seriesLocation);
 		
 		
 		this.buttonSeriesFolderLocation = new JButton("...");
-		this.buttonSeriesFolderLocation.setBounds(190, 41, 30, 23);
+		this.buttonSeriesFolderLocation.setBounds(240, 41, 30, 23);
 		this.buttonSeriesFolderLocation.addActionListener(this);
 		panelSeries.add(this.buttonSeriesFolderLocation);
 		
 		 checkBoxDetailedShearchSeries = new JCheckBox(this.checkboxDetailedShearchTexts.get(WindowContent.getDefaultlanguage()));
 		this.getComponentsWithText().put(checkBoxDetailedShearchSeries, this.checkboxDetailedShearchTexts);
-		checkBoxDetailedShearchSeries.setBounds(395, 41, 137, 23);
+		checkBoxDetailedShearchSeries.setBounds(352, 41, 180, 23);
 		panelSeries.add(checkBoxDetailedShearchSeries);
 		
 		// Music Panel
@@ -276,7 +276,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.checkBoxScanMusic = new JCheckBox(this.scanCheckboxTexts.get(WindowContent.getDefaultlanguage()));
 		this.getComponentsWithText().put(this.checkBoxScanMusic, this.scanCheckboxTexts);
 		this.checkBoxScanMusic.setSelected(true);
-		this.checkBoxScanMusic.setBounds(10, 12, 97, 23);
+		this.checkBoxScanMusic.setBounds(10, 17, 97, 23);
 		this.checkBoxScanMusic.addActionListener(this);
 		panelMusics.add(this.checkBoxScanMusic);
 		
@@ -285,18 +285,18 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.getComponentsWithText().put(this.musicLocation, this.locationsTexts);
 		this.musicLocation.setForeground(SystemColor.controlShadow);
 		this.musicLocation.setColumns(10);
-		this.musicLocation.setBounds(10, 42, 170, 20);
+		this.musicLocation.setBounds(10, 42, 220, 20);
 		this.musicLocation.addFocusListener(this);
 		panelMusics.add(this.musicLocation);
 		
 		this.buttonMusicFolderLocation = new JButton("...");
-		this.buttonMusicFolderLocation.setBounds(190, 41, 30, 23);
+		this.buttonMusicFolderLocation.setBounds(240, 41, 30, 23);
 		this.buttonMusicFolderLocation.addActionListener(this);
 		panelMusics.add(this.buttonMusicFolderLocation);
 		
 		this.checkBoxDetailedShearchMusics = new JCheckBox(this.checkboxDetailedShearchTexts.get(WindowContent.getDefaultlanguage()));
 		this.getComponentsWithText().put(this.checkBoxDetailedShearchMusics, this.checkboxDetailedShearchTexts);
-		this.checkBoxDetailedShearchMusics.setBounds(395, 41, 137, 23);
+		this.checkBoxDetailedShearchMusics.setBounds(352, 41, 180, 23);
 		panelMusics.add(this.checkBoxDetailedShearchMusics);
 		
 		// Unique location Panel
@@ -308,7 +308,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		
 		this.checkboxUniqueLocation = new JCheckBox(this.checkboxUniqueLocationTexts.get(WindowContent.getDefaultlanguage()));
 		this.getComponentsWithText().put(this.checkboxUniqueLocation, this.checkboxUniqueLocationTexts);
-		this.checkboxUniqueLocation.setBounds(6, 7, 131, 23);
+		this.checkboxUniqueLocation.setBounds(6, 12, 131, 23);
 		this.checkboxUniqueLocation.addActionListener(this);
 		panelUniqueLocation.add(this.checkboxUniqueLocation);
 		
@@ -317,21 +317,21 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.uniqueLocation.setForeground(UIManager.getColor("Button.shadow"));
 		this.uniqueLocation.setText(this.locationsTexts.get(WindowContent.getDefaultlanguage()));
 		this.getComponentsWithText().put(this.uniqueLocation, this.locationsTexts);
-		this.uniqueLocation.setBounds(6, 42, 170, 20);
+		this.uniqueLocation.setBounds(6, 42, 224, 20);
 		this.uniqueLocation.setColumns(10);
 		this.uniqueLocation.addFocusListener(this);
 		panelUniqueLocation.add(this.uniqueLocation);
 		
 		this.buttonUniqueFolderLocationLocation = new JButton("...");
 		this.buttonUniqueFolderLocationLocation.setEnabled(false);
-		this.buttonUniqueFolderLocationLocation.setBounds(186, 41, 30, 23);
+		this.buttonUniqueFolderLocationLocation.setBounds(240, 41, 30, 23);
 		this.buttonUniqueFolderLocationLocation.addActionListener(this);
 		panelUniqueLocation.add(this.buttonUniqueFolderLocationLocation);
 		
 		this.checkBoxDetailedShearchUniqueLocation = new JCheckBox(this.checkboxDetailedShearchTexts.get(WindowContent.getDefaultlanguage()));
 		this.getComponentsWithText().put(this.checkBoxDetailedShearchUniqueLocation, this.checkboxDetailedShearchTexts);
 		this.checkBoxDetailedShearchUniqueLocation.setEnabled(false);
-		this.checkBoxDetailedShearchUniqueLocation.setBounds(395, 41, 137, 23);
+		this.checkBoxDetailedShearchUniqueLocation.setBounds(352, 41, 180, 23);
 		panelUniqueLocation.add(this.checkBoxDetailedShearchUniqueLocation);
 	}
 	/**
@@ -457,6 +457,31 @@ public final class FileKindSelection extends WindowContent implements ActionList
 
 	}
 
+	@Override
+	public void setToItalian() {
+		WindowContent.changeTextInAnotherLanguage(this.getComponentsWithText(), IT);
+		this.folderChooser.setLocale(Locale.ITALIAN);
+		this.folderChooser.updateUI();
+		this.revalidatePanelWithTitle();
+		
+	}
+	@Override
+	public void setToGerman() {
+		WindowContent.changeTextInAnotherLanguage(this.getComponentsWithText(), DE);
+		this.folderChooser.setLocale(Locale.GERMAN);
+		this.folderChooser.updateUI();
+		this.revalidatePanelWithTitle();
+		
+	}
+	@Override
+	public void setToSpanish() {
+		WindowContent.changeTextInAnotherLanguage(this.getComponentsWithText(), ES);
+		this.folderChooser.setLocale(Locale.ENGLISH);
+		this.folderChooser.updateUI();
+		this.revalidatePanelWithTitle();
+		
+	}
+	
 	@Override
 	public void setToFrench() {
 		WindowContent.changeTextInAnotherLanguage(this.getComponentsWithText(), FR);

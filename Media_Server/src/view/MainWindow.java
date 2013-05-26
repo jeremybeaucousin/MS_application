@@ -8,12 +8,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ListIterator;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,11 +27,8 @@ import javax.swing.border.MatteBorder;
 
 public class MainWindow extends JFrame implements ActionListener, ConstantView {
 	// BUTTONS //
-	/** Button use to change Language in French **/
-	private JToggleButton frenchButton;
-	
-	/** Button use to change Language in English **/
-	private JToggleButton englishButton;
+	/** Button use to change Languages **/
+	private JToggleButton italianButton, germanButton, spanishButton, frenchButton, englishButton ;
 	
 	/** Button use to quit the application **/
 	private JButton canceledButton;
@@ -119,20 +119,45 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 		lblSuperAplieServeur.setBounds(10, 12, 242, 14);
 		getContentPane().add(lblSuperAplieServeur);
 		
+		
+		this.italianButton = new JToggleButton("");
+		this.italianButton.setIcon(new ImageIcon(MainWindow.class.getResource("/img/Italy-Flag-icon.png")));
+		this.italianButton.setSelectedIcon(new ImageIcon(MainWindow.class.getResource("/img/Italy-Flag-icon-selected.png")));
+		this.italianButton.setBounds(378, 9, 30, 23);
+		this.italianButton.addActionListener(this);
+		this.getContentPane().add(italianButton);
+		
+		this.germanButton = new JToggleButton("");
+		this.germanButton.setIcon(new ImageIcon(MainWindow.class.getResource("/img/Germany-Flag-icon.png")));
+		this.germanButton.setSelectedIcon(new ImageIcon(MainWindow.class.getResource("/img/Germany-Flag-icon-selected.png")));
+		this.germanButton.setBounds(418, 9, 30, 23);
+		this.germanButton.addActionListener(this);
+		this.getContentPane().add(germanButton);
+		
+		this.spanishButton = new JToggleButton("");
+		this.spanishButton.setIcon(new ImageIcon(MainWindow.class.getResource("/img/Spain-Flag-icon.png")));
+		this.spanishButton.setSelectedIcon(new ImageIcon(MainWindow.class.getResource("/img/Spain-Flag-icon-selected.png")));
+		this.spanishButton.setBounds(458, 9, 30, 23);
+		this.spanishButton.addActionListener(this);
+		this.getContentPane().add(spanishButton);
+
 		this.frenchButton = new JToggleButton("");
-		this.frenchButton.setSelectedIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResource("img/france_flag_32.png"))));
-		this.frenchButton.setIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResource("img/france_flag_32.png"))));
-		this.frenchButton.setBounds(478, 9, 40, 23);
+		this.frenchButton.setIcon(new ImageIcon(MainWindow.class.getResource("/img/France-Flag-icon.png")));
+		this.frenchButton.setSelectedIcon(new ImageIcon(MainWindow.class.getResource("/img/France-Flag-icon-selected.png")));
+		this.frenchButton.setBounds(498, 9, 30, 23);
 		this.frenchButton.addActionListener(this);
 		this.getContentPane().add(this.frenchButton);
 		
 		this.englishButton = new JToggleButton("");
 		this.englishButton.setSelected(true);
-		this.englishButton.setSelectedIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResource("img/United-Kingdom-flag.png"))));
-		this.englishButton.setIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResource("img/United-Kingdom-flag.png"))));
-		this.englishButton.setBounds(528, 9, 40, 23);
+		this.englishButton.setIcon(new ImageIcon(MainWindow.class.getResource("/img/United-Kingdom-flag-icon.png")));
+		this.englishButton.setSelectedIcon(new ImageIcon(MainWindow.class.getResource("/img/United-Kingdom-flag-icon-selected.png")));
+		this.englishButton.setBounds(538, 9, 30, 23);
 		this.englishButton.addActionListener(this);
 		this.getContentPane().add(this.englishButton);
+		
+		// initialize first selected Button //
+		WindowContent.setCurrentButtonLanguage(this.englishButton);
 		
 		this.fileKindSelection = new FileKindSelection(this);
 		this.navigator.add(this.fileKindSelection);
@@ -205,23 +230,40 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-		if(source.equals(this.canceledButton)) {
-			this.dispose();
-		} else if(source.equals(this.nextButton)) {
-			this.navigation.get(this.navigator.previousIndex()).getNextScreen(); 
-		} else if(source.equals(this.previousButton)) {
-			this.navigation.get(this.navigator.previousIndex()).getPreviousScreen(); 
-			this.navigator.previous();
-		} else if(source.equals(this.frenchButton)) {
-			this.englishButton.setSelected(false);
-			WindowContent.setCurrentLanguage(FR);
-			WindowContent.changeTextInAnotherLanguage(this.componentsWithText, FR);
-			this.navigation.get(this.navigator.previousIndex()).setToFrench();
-		} else if(source.equals(this.englishButton)) {
-			this.frenchButton.setSelected(false);
-			WindowContent.setCurrentLanguage(EN);
-			WindowContent.changeTextInAnotherLanguage(this.componentsWithText, EN);
-			this.navigation.get(this.navigator.previousIndex()).setToEnglish();
-		} 
+		if(source instanceof JButton) {
+			if(source.equals(this.canceledButton)) {
+				this.dispose();
+			} else if(source.equals(this.nextButton)) {
+				this.navigation.get(this.navigator.previousIndex()).getNextScreen(); 
+			} else if(source.equals(this.previousButton)) {
+				this.navigation.get(this.navigator.previousIndex()).getPreviousScreen(); 
+				this.navigator.previous();
+			}
+		} else if(source instanceof JToggleButton) {
+			WindowContent.getCurrentButtonLanguage().setSelected(false);
+			((JToggleButton) source).setSelected(true);
+			WindowContent.setCurrentButtonLanguage((JToggleButton) source);
+			if(source.equals(this.italianButton)) {
+				WindowContent.setCurrentLanguage(IT);
+				WindowContent.changeTextInAnotherLanguage(this.componentsWithText, IT);
+				this.navigation.get(this.navigator.previousIndex()).setToItalian();
+			} else if(source.equals(this.germanButton)) {
+				WindowContent.setCurrentLanguage(DE);
+				WindowContent.changeTextInAnotherLanguage(this.componentsWithText, DE);
+				this.navigation.get(this.navigator.previousIndex()).setToGerman();
+			} else if(source.equals(this.spanishButton)) {
+				WindowContent.setCurrentLanguage(ES);
+				WindowContent.changeTextInAnotherLanguage(this.componentsWithText, ES);
+				this.navigation.get(this.navigator.previousIndex()).setToSpanish();
+			} else if(source.equals(this.frenchButton)) {
+				WindowContent.setCurrentLanguage(FR);
+				WindowContent.changeTextInAnotherLanguage(this.componentsWithText, FR);
+				this.navigation.get(this.navigator.previousIndex()).setToFrench();
+			} else if(source.equals(this.englishButton)) {
+				WindowContent.setCurrentLanguage(EN);
+				WindowContent.changeTextInAnotherLanguage(this.componentsWithText, EN);
+				this.navigation.get(this.navigator.previousIndex()).setToEnglish();
+			} 
+		}
 	}
 }
