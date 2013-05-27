@@ -1,5 +1,6 @@
 package controller;
 import java.awt.FlowLayout;
+import java.awt.LayoutManager;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JProgressBar;
 import javax.swing.WindowConstants;
 
 import model.base.HSQLInteraction;
@@ -46,6 +48,21 @@ public class Main {
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
 		
+//		JFrame frame = new JFrame();
+//		frame.setLayout(new FlowLayout());
+//		frame.setLocationRelativeTo(null);
+//		frame.setSize(200, 200);
+//		JProgressBar progressBar = new JProgressBar();
+//		progressBar.setMaximum(0);
+//		progressBar.setMaximum(150000000);
+//		progressBar.setStringPainted(true);
+//		frame.add(progressBar);
+//		frame.setVisible(true);
+//
+//		for(int ii = 0; ii <= 150000000; ii++) {
+//			progressBar.setValue(ii);
+//		}
+
 		final MainWindow mainWindow = new MainWindow();
 	
 		

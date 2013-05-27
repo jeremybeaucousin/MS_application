@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -17,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.MatteBorder;
@@ -37,7 +40,11 @@ public final class ScanningProgress extends WindowContent {
 	
 	private ArrayList<File> videoFileList;
 	
+	// TODO 
 	private JProgressBar generalProgressBar;
+
+	private JPanel mainPanel;
+	
 	public ScanningProgress(MainWindow mainWindow, FileKindSelectionParameters fileKindSelectionParameters) {
 		super(mainWindow);
 		this.results = new TreeMap<String, JLabel>();
@@ -48,7 +55,7 @@ public final class ScanningProgress extends WindowContent {
 		this.setLayout(null);
 		
 		// Main Panel
-		JPanel mainPanel = new JPanel();
+		this.mainPanel = new JPanel();
 		mainPanel.setBackground(Color.WHITE);
 		mainPanel.setBounds(1, 1, 556, 354);
 		this.add(mainPanel);
@@ -154,6 +161,12 @@ public final class ScanningProgress extends WindowContent {
 		
 		this.generalProgressBar = new JProgressBar();
 		generalProgressBar.setBounds(198, 281, 350, 14);
+		
+		this.generalProgressBar.setMinimum(0);
+		this.generalProgressBar.setMaximum(15000);
+		this.generalProgressBar.setValue(0);
+		this.generalProgressBar.setStringPainted(true);
+		
 		mainPanel.add(generalProgressBar);
 		
 		JLabel generalTimeElapsed = new JLabel("Temps \u00E9coul\u00E9 :");
@@ -169,12 +182,33 @@ public final class ScanningProgress extends WindowContent {
 		mainPanel.add(generalNumberOfFileText);
 		
 		// TODO define content
-		this.videoFileList = Document.FolderScannerVideo(fileKindSelectionParameters.getVideoFileChosen());
+		//this.videoFileList = Document.FolderScannerVideo(fileKindSelectionParameters.getVideoFileChosen());
 
-		this.generalProgressBar.setMinimum(0);
-		this.generalProgressBar.setMaximum(videoFileList.size());
-		this.generalProgressBar.setValue(0);
-		this.generalProgressBar.setStringPainted(true);
+//		SwingUtilities.invokeLater(new Runnable() {
+//		      public void run() {
+//		    	  startScan();
+//		      }
+//		  });
+//		this.generalProgressBar.setMinimum(0);
+//		this.generalProgressBar.setMaximum(1500000);
+//		this.generalProgressBar.setValue(0);
+//		this.generalProgressBar.setStringPainted(true);
+//		new Thread(new Runnable() { 
+//			public void run() {
+//			  SwingUtilities.invokeLater(new Runnable() {
+//			      public void run() {
+//			    	  for(int ii = 0 ; ii <= 1500000; ii++) {
+//			  			System.out.println(ii);
+//			  			generalProgressBar.setValue(ii);
+//			  			System.out.println(generalProgressBar.getValue());
+//			  			//this.generalProgressBar.setString("Loading " + ii + "...");
+//			  			generalProgressBar.repaint();
+//			  		}
+//			      }
+//			  });
+//			}
+//		}).start();
+		//tread.start();
 		
 //		this.results.put("Video_Selected", new JLabel("Video Selected : " + fileKindSelectionParameters.isVideoSelected()));
 //		this.results.get("Video_Selected").setBounds(10, 36, 200, 14);
@@ -189,20 +223,26 @@ public final class ScanningProgress extends WindowContent {
 //		this.add(this.results.get("Music_Selected"));
 	}
 	
-	public void startScan() {
-		for(int ii = 0 ; ii < videoFileList.size(); ii++) {
-			Movie movie = new Movie(videoFileList.get(ii).getName(), videoFileList.get(ii).getAbsolutePath());
-			try {
-				Integer responseMovie = TheMovieDB.searchMovieStudying(movie);
-			} catch (JSONException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println(new DecimalFormat("###.##").format(new Double(ii)/videoFileList.size()*100) + "%");
-			System.out.println(ii);
-			this.generalProgressBar.setValue(ii);
-		}
-	}
+//	public void startScan() {
+//		for(int ii = 0 ; ii <= 15000; ii++) {
+//			this.generalProgressBar.setValue(ii);
+//			//this.generalProgressBar.setString("Loading " + ii + "...");
+//			this.generalProgressBar.update(getGraphics());
+//		}
+////		for(int ii = 0 ; ii < videoFileList.size(); ii++) {
+////			Movie movie = new Movie(videoFileList.get(ii).getName(), videoFileList.get(ii).getAbsolutePath());
+////			try {
+////				Integer responseMovie = TheMovieDB.searchMovieStudying(movie);
+////			} catch (JSONException | IOException e) {
+////				// TODO Auto-generated catch block
+////				e.printStackTrace();
+////			}
+////			System.out.println(new DecimalFormat("###.##").format(new Double(ii)/videoFileList.size()*100) + "%");
+////			System.out.println(ii);
+////			this.generalProgressBar.setValue(ii);
+////		}
+//	}
+	
 	public void setFileKindSelectionParameters(FileKindSelectionParameters fileKindSelectionParameters) {
 		// TODO set content depending on the previous screen when this one has been instanced
 		this.results.get("Video_Selected").setText("Video Selected : " + fileKindSelectionParameters.isVideoSelected());
