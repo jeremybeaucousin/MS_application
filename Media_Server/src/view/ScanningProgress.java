@@ -64,8 +64,9 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
     	private Integer musicProgressScan = 0;
     	
     	private Integer globalProgressScan = 0;
-    	
+
     	Task(ScanningProgress scanningProgress) {
+    		super();
     		this.scanningProgress = scanningProgress;
     	}
     	
@@ -102,12 +103,15 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
                 progress = calcul.intValue();
                 this.globalProgressScan++;
                 if(this.moviesProgressScan < 100) {
+                	this.firePropertyChange("moviesProgressScan", this.moviesProgressScan, this.moviesProgressScan + 1);
                 	this.moviesProgressScan++;
                 }
                 if(this.moviesProgressScan >= 100 && this.seriesProgressScan < 100) {
+                	this.firePropertyChange("seriesProgressScan", this.seriesProgressScan, this.seriesProgressScan + 1);
                 	this.seriesProgressScan++;
                 }
                 if(this.moviesProgressScan >= 100 && this.seriesProgressScan >= 100 && this.musicProgressScan < 100) {
+                	this.firePropertyChange("musicProgressScan", this.musicProgressScan, this.musicProgressScan + 1);
                 	this.musicProgressScan++;
                 }
                 this.setProgress(progress);
@@ -132,10 +136,14 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 		if ("progress".equals(evt.getPropertyName())) {
             int progress = (Integer) evt.getNewValue();
             this.generalProgressBar.setValue(progress);
-            this.movieProgressBar.setValue(this.generalTask.getVideoProgressScan());
-            this.seriesProgressBar.setValue(this.generalTask.getSeriesProgressScan());
-            this.musicProgressBar.setValue(this.generalTask.getMusicProgressScan());
             //taskOutput.append(String.format("Completed %d%% of task.\n", progress));
+        } 
+		if ("moviesProgressScan".equals(evt.getPropertyName())) {
+            this.movieProgressBar.setValue(this.generalTask.getVideoProgressScan());
+        } else if ("seriesProgressScan".equals(evt.getPropertyName())) {
+            this.seriesProgressBar.setValue(this.generalTask.getSeriesProgressScan());
+        } else if ("musicProgressScan".equals(evt.getPropertyName())) {
+            this.musicProgressBar.setValue(this.generalTask.getMusicProgressScan());
         }
 	}
 	
