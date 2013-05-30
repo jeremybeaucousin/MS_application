@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -13,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.TreeMap;
 
 import javax.swing.JButton;
@@ -20,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.MatteBorder;
@@ -35,15 +38,106 @@ import model.apis.ImdbApi;
 import model.apis.TheMovieDB;
 
 
-public final class ScanningProgress extends WindowContent {
+public final class ScanningProgress extends WindowContent implements PropertyChangeListener{
 	private TreeMap<String, JLabel> results;
 	
 	private ArrayList<File> videoFileList;
 	
 	// TODO 
+	private JProgressBar movieProgressBar;
+	
+	private JProgressBar seriesProgressBar;
+	
 	private JProgressBar generalProgressBar;
+	
+	private JProgressBar musicProgressBar;
 
-	private JPanel mainPanel;
+	private Task generalTask;
+	 
+	class Task extends SwingWorker<Void, Void> {
+    	private ScanningProgress scanningProgress;
+    	
+    	private Integer moviesProgressScan = 0;
+    	
+    	private Integer seriesProgressScan = 0;
+    	
+    	private Integer musicProgressScan = 0;
+    	
+    	private Integer globalProgressScan = 0;
+    	
+    	Task(ScanningProgress scanningProgress) {
+    		this.scanningProgress = scanningProgress;
+    	}
+    	
+    	int getVideoProgressScan() {
+    		return this.moviesProgressScan;
+    	}
+    	
+    	int getSeriesProgressScan() {
+    		return this.seriesProgressScan;
+    	}
+    	
+    	int getMusicProgressScan() {
+    		return this.musicProgressScan;
+    	}
+    	
+    	int getGlobalProgressScan() {
+    		return this.globalProgressScan;
+    	}
+    	
+        @Override
+        public Void doInBackground() {
+        	System.out.println("test");
+            Random random = new Random();
+            int progress = 0;
+            //Initialize progress property.
+            this.setProgress(0);
+            while (progress < 100) {
+                //Sleep for up to one second.
+                try {
+                    Thread.sleep(random.nextInt(1000));
+                } catch (InterruptedException ignore) {}
+                //Make random progress.
+                Float calcul = ((this.globalProgressScan.floatValue()/300) * 100);
+                progress = calcul.intValue();
+                this.globalProgressScan++;
+                if(this.moviesProgressScan < 100) {
+                	this.moviesProgressScan++;
+                }
+                if(this.moviesProgressScan >= 100 && this.seriesProgressScan < 100) {
+                	this.seriesProgressScan++;
+                }
+                if(this.moviesProgressScan >= 100 && this.seriesProgressScan >= 100 && this.musicProgressScan < 100) {
+                	this.musicProgressScan++;
+                }
+                this.setProgress(progress);
+            }
+            return null;
+        }
+ 
+        /*
+         * Executed in event dispatch thread
+         */
+        public void done() {
+            Toolkit.getDefaultToolkit().beep();
+//	            startButton.setEnabled(true);
+//	            taskOutput.append("Done!\n");
+        }
+    }
+	    
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		System.out.println(evt);
+		System.out.println(this.generalTask.getVideoProgressScan());
+		if ("progress".equals(evt.getPropertyName())) {
+            int progress = (Integer) evt.getNewValue();
+            this.generalProgressBar.setValue(progress);
+            this.movieProgressBar.setValue(this.generalTask.getVideoProgressScan());
+            this.seriesProgressBar.setValue(this.generalTask.getSeriesProgressScan());
+            this.musicProgressBar.setValue(this.generalTask.getMusicProgressScan());
+            //taskOutput.append(String.format("Completed %d%% of task.\n", progress));
+        }
+	}
 	
 	public ScanningProgress(MainWindow mainWindow, FileKindSelectionParameters fileKindSelectionParameters) {
 		super(mainWindow);
@@ -53,9 +147,10 @@ public final class ScanningProgress extends WindowContent {
 		this.setBackground(Color.WHITE);
 		this.setBounds(10, 37, 558, 356);
 		this.setLayout(null);
+		this.setOpaque(true);
 		
 		// Main Panel
-		this.mainPanel = new JPanel();
+		JPanel mainPanel = new JPanel();
 		mainPanel.setBackground(Color.WHITE);
 		mainPanel.setBounds(1, 1, 556, 354);
 		this.add(mainPanel);
@@ -77,8 +172,9 @@ public final class ScanningProgress extends WindowContent {
 		movieLibelleTimeLeft.setBounds(10, 37, 104, 14);
 		panelMovies.add(movieLibelleTimeLeft);
 		
-		JProgressBar movieProgressBar = new JProgressBar();
-		movieProgressBar.setBounds(228, 37, 300, 14);
+		this.movieProgressBar = new JProgressBar();
+		this.movieProgressBar.setBounds(228, 37, 300, 14);
+		this.movieProgressBar.setIndeterminate(false);
 		panelMovies.add(movieProgressBar);
 		
 		JLabel movieLibelleDetailedSearch = new JLabel("Recherche avanc\u00E9e");
@@ -108,9 +204,10 @@ public final class ScanningProgress extends WindowContent {
 		seriesLibelleTimeLeft.setBounds(10, 36, 104, 14);
 		panelSeries.add(seriesLibelleTimeLeft);
 		
-		JProgressBar seriesProgressBar = new JProgressBar();
-		seriesProgressBar.setBounds(228, 36, 300, 14);
-		panelSeries.add(seriesProgressBar);
+		this.seriesProgressBar = new JProgressBar();
+		this.seriesProgressBar.setBounds(228, 36, 300, 14);
+		this.seriesProgressBar.setIndeterminate(false);
+		panelSeries.add(this.seriesProgressBar);
 		
 		JLabel seriesLibelleDetailedSearch = new JLabel("Recherche avanc\u00E9e");
 		seriesLibelleDetailedSearch.setBounds(418, 65, 120, 14);
@@ -139,9 +236,10 @@ public final class ScanningProgress extends WindowContent {
 		musicLibelleTimeLeft.setBounds(10, 36, 104, 14);
 		panelMusic.add(musicLibelleTimeLeft);
 		
-		JProgressBar musicProgressBar = new JProgressBar();
-		musicProgressBar.setBounds(228, 36, 300, 14);
-		panelMusic.add(musicProgressBar);
+		this.musicProgressBar = new JProgressBar();
+		this.musicProgressBar.setBounds(228, 36, 300, 14);
+		this.musicProgressBar.setIndeterminate(false);
+		panelMusic.add(this.musicProgressBar);
 		
 		JLabel musicLibelleDetailedSearch = new JLabel("Recherche avanc\u00E9e");
 		musicLibelleDetailedSearch.setBounds(418, 65, 120, 14);
@@ -160,10 +258,11 @@ public final class ScanningProgress extends WindowContent {
 		mainPanel.add(genaralProgressText);
 		
 		this.generalProgressBar = new JProgressBar();
-		generalProgressBar.setBounds(198, 281, 350, 14);
+		this.generalProgressBar.setBounds(198, 281, 350, 14);
+		this.generalProgressBar.setIndeterminate(false);
 		
 		this.generalProgressBar.setMinimum(0);
-		this.generalProgressBar.setMaximum(15000);
+		this.generalProgressBar.setMaximum(100);
 		this.generalProgressBar.setValue(0);
 		this.generalProgressBar.setStringPainted(true);
 		
@@ -181,34 +280,10 @@ public final class ScanningProgress extends WindowContent {
 		generalNumberOfFileText.setBounds(10, 331, 170, 14);
 		mainPanel.add(generalNumberOfFileText);
 		
-		// TODO define content
-		//this.videoFileList = Document.FolderScannerVideo(fileKindSelectionParameters.getVideoFileChosen());
-
-//		SwingUtilities.invokeLater(new Runnable() {
-//		      public void run() {
-//		    	  startScan();
-//		      }
-//		  });
-//		this.generalProgressBar.setMinimum(0);
-//		this.generalProgressBar.setMaximum(1500000);
-//		this.generalProgressBar.setValue(0);
-//		this.generalProgressBar.setStringPainted(true);
-//		new Thread(new Runnable() { 
-//			public void run() {
-//			  SwingUtilities.invokeLater(new Runnable() {
-//			      public void run() {
-//			    	  for(int ii = 0 ; ii <= 1500000; ii++) {
-//			  			System.out.println(ii);
-//			  			generalProgressBar.setValue(ii);
-//			  			System.out.println(generalProgressBar.getValue());
-//			  			//this.generalProgressBar.setString("Loading " + ii + "...");
-//			  			generalProgressBar.repaint();
-//			  		}
-//			      }
-//			  });
-//			}
-//		}).start();
-		//tread.start();
+		this.generalTask = new Task(this);
+		generalTask.addPropertyChangeListener(this);
+		generalTask.execute();
+		
 		
 //		this.results.put("Video_Selected", new JLabel("Video Selected : " + fileKindSelectionParameters.isVideoSelected()));
 //		this.results.get("Video_Selected").setBounds(10, 36, 200, 14);
@@ -222,26 +297,6 @@ public final class ScanningProgress extends WindowContent {
 //		this.results.get("Music_Selected").setBounds(10, 96, 200, 14);
 //		this.add(this.results.get("Music_Selected"));
 	}
-	
-//	public void startScan() {
-//		for(int ii = 0 ; ii <= 15000; ii++) {
-//			this.generalProgressBar.setValue(ii);
-//			//this.generalProgressBar.setString("Loading " + ii + "...");
-//			this.generalProgressBar.update(getGraphics());
-//		}
-////		for(int ii = 0 ; ii < videoFileList.size(); ii++) {
-////			Movie movie = new Movie(videoFileList.get(ii).getName(), videoFileList.get(ii).getAbsolutePath());
-////			try {
-////				Integer responseMovie = TheMovieDB.searchMovieStudying(movie);
-////			} catch (JSONException | IOException e) {
-////				// TODO Auto-generated catch block
-////				e.printStackTrace();
-////			}
-////			System.out.println(new DecimalFormat("###.##").format(new Double(ii)/videoFileList.size()*100) + "%");
-////			System.out.println(ii);
-////			this.generalProgressBar.setValue(ii);
-////		}
-//	}
 	
 	public void setFileKindSelectionParameters(FileKindSelectionParameters fileKindSelectionParameters) {
 		// TODO set content depending on the previous screen when this one has been instanced

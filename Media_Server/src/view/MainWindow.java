@@ -132,7 +132,7 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 		this.componentsWithText.put(lblSuperAplieServeur, this.TitleTexts);
 		lblSuperAplieServeur.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblSuperAplieServeur.setBounds(10, 12, 242, 14);
-		getContentPane().add(lblSuperAplieServeur);
+		this.getContentPane().add(lblSuperAplieServeur);
 		
 		
 		this.italianButton = new JToggleButton("");
