@@ -70,22 +70,6 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
     		this.scanningProgress = scanningProgress;
     	}
     	
-    	int getVideoProgressScan() {
-    		return this.moviesProgressScan;
-    	}
-    	
-    	int getSeriesProgressScan() {
-    		return this.seriesProgressScan;
-    	}
-    	
-    	int getMusicProgressScan() {
-    		return this.musicProgressScan;
-    	}
-    	
-    	int getGlobalProgressScan() {
-    		return this.globalProgressScan;
-    	}
-    	
         @Override
         public Void doInBackground() {
         	System.out.println("test");
@@ -131,19 +115,16 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 	    
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		System.out.println(evt);
-		System.out.println(this.generalTask.getVideoProgressScan());
 		if ("progress".equals(evt.getPropertyName())) {
-            int progress = (Integer) evt.getNewValue();
-            this.generalProgressBar.setValue(progress);
+            this.generalProgressBar.setValue((Integer) evt.getNewValue());
             //taskOutput.append(String.format("Completed %d%% of task.\n", progress));
         } 
 		if ("moviesProgressScan".equals(evt.getPropertyName())) {
-            this.movieProgressBar.setValue(this.generalTask.getVideoProgressScan());
+            this.movieProgressBar.setValue((Integer) evt.getNewValue());
         } else if ("seriesProgressScan".equals(evt.getPropertyName())) {
-            this.seriesProgressBar.setValue(this.generalTask.getSeriesProgressScan());
+            this.seriesProgressBar.setValue((Integer) evt.getNewValue());
         } else if ("musicProgressScan".equals(evt.getPropertyName())) {
-            this.musicProgressBar.setValue(this.generalTask.getMusicProgressScan());
+            this.musicProgressBar.setValue((Integer) evt.getNewValue());
         }
 	}
 	
