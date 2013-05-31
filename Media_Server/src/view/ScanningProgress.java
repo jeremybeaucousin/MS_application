@@ -14,11 +14,14 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.TreeMap;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
@@ -39,6 +42,26 @@ import model.apis.TheMovieDB;
 
 
 public final class ScanningProgress extends WindowContent implements PropertyChangeListener{
+	private final HashMap<String, String> confirmationMessageTitle = new HashMap<String, String>() {
+		{
+			put(IT, "TODO");
+			put(DE, "TODO");
+			put(ES, "TODO");
+			put(FR, "Attention");
+			put(EN, "Warning");
+		}			
+	};
+	
+	private final HashMap<String, String> confirmationMessage = new HashMap<String, String>() {
+		{
+			put(IT, "TODO");
+			put(DE, "TODO");
+			put(ES, "TODO");
+			put(FR, "Si vous arretez le scan en cours vous perdrez les données traités.");
+			put(EN, "If you stop the scanning you will loose the data processed.");
+		}			
+	};
+	
 	private TreeMap<String, JLabel> results;
 	
 	private ArrayList<File> videoFileList;
@@ -46,7 +69,7 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 	// TODO 
 	private JProgressBar movieProgressBar, seriesProgressBar, musicProgressBar, generalProgressBar;
 
-	JPanel panelMovies, panelSeries, panelMusic;
+	private JPanel panelMovies, panelSeries, panelMusic;
 	
 	private Task generalTask;
 	 
@@ -62,15 +85,14 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
     	
         @Override
         public Void doInBackground() {
-        	System.out.println("test");
             Random random = new Random();
             int progress = 0;
             //Initialize progress property.
             this.setProgress(0);
-            while (progress < 100) {
+            while (progress < 100 && !isCancelled()) {
                 //Sleep for up to one second.
                 try {
-                    Thread.sleep(random.nextInt(1000));
+                    Thread.sleep(random.nextInt(100));
                 } catch (InterruptedException ignore) {}
                 //Make random progress.
                 Float calcul = ((this.globalProgressScan.floatValue()/300) * 100);
@@ -97,7 +119,12 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
          * Executed in event dispatch thread
          */
         public void done() {
-            Toolkit.getDefaultToolkit().beep();
+        	if(!this.isCancelled()) {
+            	this.scanningProgress.getMainWindow().getCancelButton().setEnabled(false);
+            	this.scanningProgress.getMainWindow().getPreviousButton().setEnabled(false);
+            	this.scanningProgress.getMainWindow().getNextButton().setEnabled(true);
+                Toolkit.getDefaultToolkit().beep();
+        	}
 //	            startButton.setEnabled(true);
 //	            taskOutput.append("Done!\n");
         }
@@ -139,7 +166,7 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 		this.panelMovies = new JPanel();
 		TitledBorder panelMoviesTitle = new TitledBorder(null, "Films", TitledBorder.LEADING, TitledBorder.TOP, null, null);
 		this.panelMovies.setBorder(panelMoviesTitle);
-		this.panelMovies.setBounds(10, 0, 538, 90);
+		this.panelMovies.setBounds(10, 11, 538, 85);
 		mainPanel.add(this.panelMovies);
 		this.panelMovies.setLayout(null);
 
@@ -164,7 +191,7 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 		this.panelSeries = new JPanel();
 		TitledBorder panelSeriesTitle = new TitledBorder(null, "S\u00E9ries", TitledBorder.LEADING, TitledBorder.TOP, null, null);
 		this.panelSeries.setBorder(panelSeriesTitle);
-		this.panelSeries.setBounds(10, 90, 538, 90);
+		this.panelSeries.setBounds(10, 96, 538, 85);
 		mainPanel.add(this.panelSeries);
 		this.panelSeries.setLayout(null);
 		
@@ -189,7 +216,7 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 		this.panelMusic = new JPanel();
 		TitledBorder panelMusicTitle = new TitledBorder(null, "Musique", TitledBorder.LEADING, TitledBorder.TOP, null, null);
 		this.panelMusic.setBorder(panelMusicTitle);
-		this.panelMusic.setBounds(10, 180, 538, 90);
+		this.panelMusic.setBounds(10, 181, 538, 85);
 		mainPanel.add(this.panelMusic);
 		this.panelMusic.setLayout(null);
 		
@@ -240,11 +267,6 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 		
 		this.validContentDependingOnParameters(fileKindSelectionParameters);
 		
-		this.generalTask = new Task(this);
-		generalTask.addPropertyChangeListener(this);
-		generalTask.execute();
-		
-		
 //		this.results.put("Video_Selected", new JLabel("Video Selected : " + fileKindSelectionParameters.isVideoSelected()));
 //		this.results.get("Video_Selected").setBounds(10, 36, 200, 14);
 //		this.add(this.results.get("Video_Selected"));
@@ -258,6 +280,9 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 //		this.add(this.results.get("Music_Selected"));
 	}
 	
+	public Task getGeneralTask() {
+		return this.generalTask;
+	}
 	private void setPanelComponentsColor(JPanel panel, SystemColor color) {
 		((TitledBorder) panel.getBorder()).setTitleColor(color);
 		for(Component component : panel.getComponents()) {
@@ -282,6 +307,17 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 		} else {
 			setPanelComponentsColor(this.panelMusic, null);
 		}
+		this.movieProgressBar.setValue(0);
+		this.seriesProgressBar.setValue(0);
+		this.musicProgressBar.setValue(0);
+		this.generalProgressBar.setValue(0);
+		this.generalTask = new Task(this);
+		this.generalTask.addPropertyChangeListener(this);
+		this.generalTask.execute();
+	}
+	
+	public Boolean stopProcess() {
+		return JOptionPane.showConfirmDialog(this, this.confirmationMessage.get(this.getCurrentLanguage()), this.confirmationMessageTitle.get(this.getCurrentLanguage()), JOptionPane.INFORMATION_MESSAGE) == JFileChooser.APPROVE_OPTION;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -308,6 +344,7 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 	@Override
 	public void getPreviousScreen() {
 		this.getMainWindow().getPreviousButton().setEnabled(false);
+		this.getMainWindow().getNextButton().setEnabled(true);
 		this.getMainWindow().replaceContent(this, this.getMainWindow().getFileKindSelection());
 		
 	}

@@ -477,6 +477,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		String errorMessage = this.ValidateForm();
 		if(StringUtil.isEmpty(errorMessage)) {
 			this.getMainWindow().getPreviousButton().setEnabled(true);
+			this.getMainWindow().getNextButton().setEnabled(false);
 			if(this.getMainWindow().getScanningProgress() == null) {
 				ScanningProgress scanningProgress = new ScanningProgress(this.getMainWindow(), fileKindSelectionParameters);
 				this.getMainWindow().setScanningProgress(scanningProgress);

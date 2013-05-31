@@ -18,8 +18,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.border.MatteBorder;
@@ -31,16 +33,7 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 	private JToggleButton italianButton, germanButton, spanishButton, frenchButton, englishButton ;
 	
 	/** Button use to quit the application **/
-	private JButton canceledButton;
-	
-	/** Button use to return to the previous screen **/
-	private JButton previousButton;
-	
-	/** Button use to go to the next screen **/
-	private JButton nextButton;
-	
-	/** Button use to when the database is fill **/
-	private JButton finishButton;
+	private JButton canceledButton, previousButton, nextButton, finishButton;
 	
 	// textes //
 	/** Contains all components which have text displayed on screen **/
@@ -97,9 +90,6 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 	};
 	
 	// navigation //
-	/** Main content. Its this content which change while navigation between screens **/
-	private JPanel panelBase;
-	
 	/** Contain all the different screen, adding one by one during navigation **/
 	private ArrayList<WindowContent> navigation;
 	
@@ -178,8 +168,7 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 		this.navigator.add(this.fileKindSelection);
 		
 		// main panel
-		this.panelBase = this.fileKindSelection;
-		this.getContentPane().add(this.panelBase);
+		this.getContentPane().add(this.fileKindSelection);
 		
 		this.canceledButton =  new JButton(this.canceledButtonTexts.get(WindowContent.getDefaultlanguage()));
 		this.componentsWithText.put(this.canceledButton, this.canceledButtonTexts);
@@ -222,6 +211,14 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 	public JButton getPreviousButton() {
 		return previousButton;
 	}
+	
+	public JButton getNextButton() {
+		return nextButton;
+	}
+	
+	public JButton getCancelButton() {
+		return canceledButton;
+	}
 
 	public FileKindSelection getFileKindSelection() {
 		return this.fileKindSelection;
@@ -236,7 +233,7 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 	}
 	
 
-	public void replaceContent(JComponent oldContent, JComponent newContent) {
+	public void replaceContent(JPanel oldContent, JPanel newContent) {
 		this.getContentPane().remove(oldContent);
 		this.getContentPane().add(newContent);
 		WindowContent.revalidateContent(this.getContentPane());
@@ -247,12 +244,28 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 		Object source = e.getSource();
 		if(source instanceof JButton) {
 			if(source.equals(this.canceledButton)) {
-				this.dispose();
+				if(this.getContentPane().isAncestorOf(this.scanningProgress)) {
+					if (this.scanningProgress.stopProcess()) {
+						this.scanningProgress.getGeneralTask().cancel(true);
+						System.out.println("cancelled " + this.scanningProgress.getGeneralTask().isCancelled());
+						this.dispose();
+					}
+				} else {
+					this.dispose();
+				}
 			} else if(source.equals(this.nextButton)) {
 				this.navigation.get(this.navigator.previousIndex()).getNextScreen(); 
 			} else if(source.equals(this.previousButton)) {
-				this.navigation.get(this.navigator.previousIndex()).getPreviousScreen(); 
-				this.navigator.previous();
+				if(this.getContentPane().isAncestorOf(this.scanningProgress)) {
+					if (this.scanningProgress.stopProcess()) {
+						this.scanningProgress.getGeneralTask().cancel(true);
+						this.navigation.get(this.navigator.previousIndex()).getPreviousScreen(); 
+						this.navigator.previous();
+					}
+				} else {
+					this.navigation.get(this.navigator.previousIndex()).getPreviousScreen(); 
+					this.navigator.previous();
+				}
 			}
 		} else if(source instanceof JToggleButton) {
 			WindowContent.getCurrentButtonLanguage().setSelected(false);
