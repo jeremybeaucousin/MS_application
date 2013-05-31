@@ -483,7 +483,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 				this.getMainWindow().getNavigator().add(scanningProgress);
 			} else {
 				this.getMainWindow().getNavigator().next();
-				// TODO this.getMainWindow().getScanningProgress().setFileKindSelectionParameters(fileKindSelectionParameters);
+				this.getMainWindow().getScanningProgress().validContentDependingOnParameters(fileKindSelectionParameters);
 			}
 			this.getMainWindow().replaceContent(this, this.getMainWindow().getScanningProgress());
 		} else {

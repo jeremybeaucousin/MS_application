@@ -44,26 +44,16 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 	private ArrayList<File> videoFileList;
 	
 	// TODO 
-	private JProgressBar movieProgressBar;
-	
-	private JProgressBar seriesProgressBar;
-	
-	private JProgressBar generalProgressBar;
-	
-	private JProgressBar musicProgressBar;
+	private JProgressBar movieProgressBar, seriesProgressBar, musicProgressBar, generalProgressBar;
 
+	JPanel panelMovies, panelSeries, panelMusic;
+	
 	private Task generalTask;
 	 
 	class Task extends SwingWorker<Void, Void> {
     	private ScanningProgress scanningProgress;
     	
-    	private Integer moviesProgressScan = 0;
-    	
-    	private Integer seriesProgressScan = 0;
-    	
-    	private Integer musicProgressScan = 0;
-    	
-    	private Integer globalProgressScan = 0;
+    	private Integer moviesProgressScan = 0, seriesProgressScan = 0, musicProgressScan = 0, globalProgressScan = 0;
 
     	Task(ScanningProgress scanningProgress) {
     		super();
@@ -146,100 +136,79 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 		mainPanel.setLayout(null);
 		
 		// Movie Panel
-		JPanel panelMovies = new JPanel();
+		this.panelMovies = new JPanel();
 		TitledBorder panelMoviesTitle = new TitledBorder(null, "Films", TitledBorder.LEADING, TitledBorder.TOP, null, null);
-		panelMovies.setBorder(panelMoviesTitle);
-		panelMovies.setBounds(10, 0, 538, 90);
-		mainPanel.add(panelMovies);
-		panelMovies.setLayout(null);
+		this.panelMovies.setBorder(panelMoviesTitle);
+		this.panelMovies.setBounds(10, 0, 538, 90);
+		mainPanel.add(this.panelMovies);
+		this.panelMovies.setLayout(null);
 
 		JLabel movieScanState = new JLabel("Scan en cours...");
 		movieScanState.setBounds(248, 12, 104, 14);
-		panelMovies.add(movieScanState);
+		this.panelMovies.add(movieScanState);
 		
 		JLabel movieLibelleTimeLeft = new JLabel("Temps restant :");
 		movieLibelleTimeLeft.setBounds(10, 37, 104, 14);
-		panelMovies.add(movieLibelleTimeLeft);
+		this.panelMovies.add(movieLibelleTimeLeft);
 		
 		this.movieProgressBar = new JProgressBar();
 		this.movieProgressBar.setBounds(228, 37, 300, 14);
 		this.movieProgressBar.setIndeterminate(false);
-		panelMovies.add(movieProgressBar);
+		this.panelMovies.add(movieProgressBar);
 		
 		JLabel movieLibelleDetailedSearch = new JLabel("Recherche avanc\u00E9e");
 		movieLibelleDetailedSearch.setBounds(418, 62, 120, 14);
-		panelMovies.add(movieLibelleDetailedSearch);
-		
-		if(!fileKindSelectionParameters.isVideoSelected()) {
-			panelMoviesTitle.setTitleColor(SystemColor.controlShadow);
-			for(Component component : panelMovies.getComponents()) {
-				component.setForeground(SystemColor.controlShadow);
-			}
-		}
+		this.panelMovies.add(movieLibelleDetailedSearch);
 		
 		// Series Panel
-		JPanel panelSeries = new JPanel();
+		this.panelSeries = new JPanel();
 		TitledBorder panelSeriesTitle = new TitledBorder(null, "S\u00E9ries", TitledBorder.LEADING, TitledBorder.TOP, null, null);
-		panelSeries.setBorder(panelSeriesTitle);
-		panelSeries.setBounds(10, 90, 538, 90);
-		mainPanel.add(panelSeries);
-		panelSeries.setLayout(null);
+		this.panelSeries.setBorder(panelSeriesTitle);
+		this.panelSeries.setBounds(10, 90, 538, 90);
+		mainPanel.add(this.panelSeries);
+		this.panelSeries.setLayout(null);
 		
 		JLabel seriesScanState = new JLabel("Scan en attente");
 		seriesScanState.setBounds(248, 11, 104, 14);
-		panelSeries.add(seriesScanState);
+		this.panelSeries.add(seriesScanState);
 		
 		JLabel seriesLibelleTimeLeft = new JLabel("Temps restant :");
 		seriesLibelleTimeLeft.setBounds(10, 36, 104, 14);
-		panelSeries.add(seriesLibelleTimeLeft);
+		this.panelSeries.add(seriesLibelleTimeLeft);
 		
 		this.seriesProgressBar = new JProgressBar();
 		this.seriesProgressBar.setBounds(228, 36, 300, 14);
 		this.seriesProgressBar.setIndeterminate(false);
-		panelSeries.add(this.seriesProgressBar);
+		this.panelSeries.add(this.seriesProgressBar);
 		
 		JLabel seriesLibelleDetailedSearch = new JLabel("Recherche avanc\u00E9e");
 		seriesLibelleDetailedSearch.setBounds(418, 65, 120, 14);
-		panelSeries.add(seriesLibelleDetailedSearch);
+		this.panelSeries.add(seriesLibelleDetailedSearch);
 		
-		if(!fileKindSelectionParameters.isSerieSelected()) {
-			panelSeriesTitle.setTitleColor(SystemColor.controlShadow);
-			for(Component component : panelSeries.getComponents()) {
-				component.setForeground(SystemColor.controlShadow);
-			}
-		}
-
 		// panelMusic
-		JPanel panelMusic = new JPanel();
+		this.panelMusic = new JPanel();
 		TitledBorder panelMusicTitle = new TitledBorder(null, "Musique", TitledBorder.LEADING, TitledBorder.TOP, null, null);
-		panelMusic.setBorder(panelMusicTitle);
-		panelMusic.setBounds(10, 180, 538, 90);
-		mainPanel.add(panelMusic);
-		panelMusic.setLayout(null);
+		this.panelMusic.setBorder(panelMusicTitle);
+		this.panelMusic.setBounds(10, 180, 538, 90);
+		mainPanel.add(this.panelMusic);
+		this.panelMusic.setLayout(null);
 		
 		JLabel musicScanState = new JLabel("Scan en attente");
 		musicScanState.setBounds(248, 11, 104, 14);
-		panelMusic.add(musicScanState);
+		this.panelMusic.add(musicScanState);
 		
 		JLabel musicLibelleTimeLeft = new JLabel("Temps restant :");
 		musicLibelleTimeLeft.setBounds(10, 36, 104, 14);
-		panelMusic.add(musicLibelleTimeLeft);
+		this.panelMusic.add(musicLibelleTimeLeft);
 		
 		this.musicProgressBar = new JProgressBar();
 		this.musicProgressBar.setBounds(228, 36, 300, 14);
 		this.musicProgressBar.setIndeterminate(false);
-		panelMusic.add(this.musicProgressBar);
+		this.panelMusic.add(this.musicProgressBar);
 		
 		JLabel musicLibelleDetailedSearch = new JLabel("Recherche avanc\u00E9e");
 		musicLibelleDetailedSearch.setBounds(418, 65, 120, 14);
-		panelMusic.add(musicLibelleDetailedSearch);
-		
-		if(!fileKindSelectionParameters.isMusicSelected()) {
-			panelMusicTitle.setTitleColor(SystemColor.controlShadow);
-			for(Component component : panelMusic.getComponents()) {
-				component.setForeground(SystemColor.controlShadow);
-			}
-		}
+		this.panelMusic.add(musicLibelleDetailedSearch);
 		
 		// General Statistic
 		JLabel genaralProgressText = new JLabel("Progression :");
@@ -269,6 +238,8 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 		generalNumberOfFileText.setBounds(10, 331, 170, 14);
 		mainPanel.add(generalNumberOfFileText);
 		
+		this.validContentDependingOnParameters(fileKindSelectionParameters);
+		
 		this.generalTask = new Task(this);
 		generalTask.addPropertyChangeListener(this);
 		generalTask.execute();
@@ -287,14 +258,30 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 //		this.add(this.results.get("Music_Selected"));
 	}
 	
-	public void setFileKindSelectionParameters(FileKindSelectionParameters fileKindSelectionParameters) {
-		// TODO set content depending on the previous screen when this one has been instanced
-		this.results.get("Video_Selected").setText("Video Selected : " + fileKindSelectionParameters.isVideoSelected());
-		this.results.get("Serie_Selected").setText("Serie Selected : " + fileKindSelectionParameters.isSerieSelected());
-		this.results.get("Music_Selected").setText("Music Selected : " + fileKindSelectionParameters.isMusicSelected());
-		this.invalidate(); 
-		this.validate();
-		this.repaint();
+	private void setPanelComponentsColor(JPanel panel, SystemColor color) {
+		((TitledBorder) panel.getBorder()).setTitleColor(color);
+		for(Component component : panel.getComponents()) {
+			if(!(component instanceof JProgressBar)) {
+				component.setForeground(color);
+			}					
+		}
+	}
+	public void validContentDependingOnParameters(FileKindSelectionParameters fileKindSelectionParameters) {
+		if(!fileKindSelectionParameters.isVideoSelected()) {
+			setPanelComponentsColor(this.panelMovies, SystemColor.controlShadow);
+		} else {
+			setPanelComponentsColor(this.panelMovies, null);
+		}
+		if(!fileKindSelectionParameters.isSerieSelected()) {
+			setPanelComponentsColor(this.panelSeries, SystemColor.controlShadow);
+		} else {
+			setPanelComponentsColor(this.panelSeries, null);
+		}
+		if(!fileKindSelectionParameters.isMusicSelected()) {
+			setPanelComponentsColor(this.panelMusic, SystemColor.controlShadow);
+		} else {
+			setPanelComponentsColor(this.panelMusic, null);
+		}
 	}
 	
 	public void actionPerformed(ActionEvent e) {
