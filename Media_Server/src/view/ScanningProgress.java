@@ -4,23 +4,120 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.TreeMap;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public final class ScanningProgress extends WindowContent {
+import model.Document;
+import model.Movie;
+import model.apis.ImdbApi;
+import model.apis.TheMovieDB;
+
+
+public final class ScanningProgress extends WindowContent implements PropertyChangeListener{
 	private TreeMap<String, JLabel> results;
+	
+	private ArrayList<File> videoFileList;
+	
+	// TODO 
+	private JProgressBar movieProgressBar, seriesProgressBar, musicProgressBar, generalProgressBar;
 
+	JPanel panelMovies, panelSeries, panelMusic;
+	
+	private Task generalTask;
+	 
+	class Task extends SwingWorker<Void, Void> {
+    	private ScanningProgress scanningProgress;
+    	
+    	private Integer moviesProgressScan = 0, seriesProgressScan = 0, musicProgressScan = 0, globalProgressScan = 0;
+
+    	Task(ScanningProgress scanningProgress) {
+    		super();
+    		this.scanningProgress = scanningProgress;
+    	}
+    	
+        @Override
+        public Void doInBackground() {
+        	System.out.println("test");
+            Random random = new Random();
+            int progress = 0;
+            //Initialize progress property.
+            this.setProgress(0);
+            while (progress < 100) {
+                //Sleep for up to one second.
+                try {
+                    Thread.sleep(random.nextInt(1000));
+                } catch (InterruptedException ignore) {}
+                //Make random progress.
+                Float calcul = ((this.globalProgressScan.floatValue()/300) * 100);
+                progress = calcul.intValue();
+                this.globalProgressScan++;
+                if(this.moviesProgressScan < 100) {
+                	this.firePropertyChange("moviesProgressScan", this.moviesProgressScan, this.moviesProgressScan + 1);
+                	this.moviesProgressScan++;
+                }
+                if(this.moviesProgressScan >= 100 && this.seriesProgressScan < 100) {
+                	this.firePropertyChange("seriesProgressScan", this.seriesProgressScan, this.seriesProgressScan + 1);
+                	this.seriesProgressScan++;
+                }
+                if(this.moviesProgressScan >= 100 && this.seriesProgressScan >= 100 && this.musicProgressScan < 100) {
+                	this.firePropertyChange("musicProgressScan", this.musicProgressScan, this.musicProgressScan + 1);
+                	this.musicProgressScan++;
+                }
+                this.setProgress(progress);
+            }
+            return null;
+        }
+ 
+        /*
+         * Executed in event dispatch thread
+         */
+        public void done() {
+            Toolkit.getDefaultToolkit().beep();
+//	            startButton.setEnabled(true);
+//	            taskOutput.append("Done!\n");
+        }
+    }
+	    
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		if ("progress".equals(evt.getPropertyName())) {
+            this.generalProgressBar.setValue((Integer) evt.getNewValue());
+            //taskOutput.append(String.format("Completed %d%% of task.\n", progress));
+        } 
+		if ("moviesProgressScan".equals(evt.getPropertyName())) {
+            this.movieProgressBar.setValue((Integer) evt.getNewValue());
+        } else if ("seriesProgressScan".equals(evt.getPropertyName())) {
+            this.seriesProgressBar.setValue((Integer) evt.getNewValue());
+        } else if ("musicProgressScan".equals(evt.getPropertyName())) {
+            this.musicProgressBar.setValue((Integer) evt.getNewValue());
+        }
+	}
+	
 	public ScanningProgress(MainWindow mainWindow, FileKindSelectionParameters fileKindSelectionParameters) {
 		super(mainWindow);
 		this.results = new TreeMap<String, JLabel>();
@@ -29,105 +126,125 @@ public final class ScanningProgress extends WindowContent {
 		this.setBackground(Color.WHITE);
 		this.setBounds(10, 37, 558, 356);
 		this.setLayout(null);
+		this.setOpaque(true);
 		
+		// Main Panel
 		JPanel mainPanel = new JPanel();
+		mainPanel.setBackground(Color.WHITE);
 		mainPanel.setBounds(1, 1, 556, 354);
 		this.add(mainPanel);
 		mainPanel.setLayout(null);
 		
-		JPanel panelMovies = new JPanel();
-		panelMovies.setBorder(new TitledBorder(null, "Films", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelMovies.setBounds(0, 0, 558, 90);
-		mainPanel.add(panelMovies);
-		panelMovies.setLayout(null);
+		// Movie Panel
+		this.panelMovies = new JPanel();
+		TitledBorder panelMoviesTitle = new TitledBorder(null, "Films", TitledBorder.LEADING, TitledBorder.TOP, null, null);
+		this.panelMovies.setBorder(panelMoviesTitle);
+		this.panelMovies.setBounds(10, 0, 538, 90);
+		mainPanel.add(this.panelMovies);
+		this.panelMovies.setLayout(null);
+
+		JLabel movieScanState = new JLabel("Scan en cours...");
+		movieScanState.setBounds(248, 12, 104, 14);
+		this.panelMovies.add(movieScanState);
 		
-		JProgressBar progressBar = new JProgressBar();
-		progressBar.setBounds(248, 37, 300, 14);
-		panelMovies.add(progressBar);
+		JLabel movieLibelleTimeLeft = new JLabel("Temps restant :");
+		movieLibelleTimeLeft.setBounds(10, 37, 104, 14);
+		this.panelMovies.add(movieLibelleTimeLeft);
 		
-		JLabel lblScanEnCours = new JLabel("Scan en cours...");
-		lblScanEnCours.setBounds(248, 12, 104, 14);
-		panelMovies.add(lblScanEnCours);
+		this.movieProgressBar = new JProgressBar();
+		this.movieProgressBar.setBounds(228, 37, 300, 14);
+		this.movieProgressBar.setIndeterminate(false);
+		this.panelMovies.add(movieProgressBar);
 		
-		JLabel lblTempsRestant = new JLabel("Temps restant :");
-		lblTempsRestant.setBounds(10, 37, 104, 14);
-		panelMovies.add(lblTempsRestant);
+		JLabel movieLibelleDetailedSearch = new JLabel("Recherche avanc\u00E9e");
+		movieLibelleDetailedSearch.setBounds(418, 62, 120, 14);
+		this.panelMovies.add(movieLibelleDetailedSearch);
 		
-		JLabel lblNewLabel = new JLabel("Recherche avanc\u00E9e");
-		lblNewLabel.setBounds(444, 62, 104, 14);
-		panelMovies.add(lblNewLabel);
+		// Series Panel
+		this.panelSeries = new JPanel();
+		TitledBorder panelSeriesTitle = new TitledBorder(null, "S\u00E9ries", TitledBorder.LEADING, TitledBorder.TOP, null, null);
+		this.panelSeries.setBorder(panelSeriesTitle);
+		this.panelSeries.setBounds(10, 90, 538, 90);
+		mainPanel.add(this.panelSeries);
+		this.panelSeries.setLayout(null);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(null, "S\u00E9ries", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(0, 90, 558, 90);
-		mainPanel.add(panel_2);
-		panel_2.setLayout(null);
+		JLabel seriesScanState = new JLabel("Scan en attente");
+		seriesScanState.setBounds(248, 11, 104, 14);
+		this.panelSeries.add(seriesScanState);
 		
-		JLabel lblScanEnAttente = new JLabel("Scan en attente");
-		lblScanEnAttente.setBounds(248, 11, 104, 14);
-		panel_2.add(lblScanEnAttente);
+		JLabel seriesLibelleTimeLeft = new JLabel("Temps restant :");
+		seriesLibelleTimeLeft.setBounds(10, 36, 104, 14);
+		this.panelSeries.add(seriesLibelleTimeLeft);
 		
-		JProgressBar progressBar_1 = new JProgressBar();
-		progressBar_1.setBounds(248, 36, 300, 14);
-		panel_2.add(progressBar_1);
+		this.seriesProgressBar = new JProgressBar();
+		this.seriesProgressBar.setBounds(228, 36, 300, 14);
+		this.seriesProgressBar.setIndeterminate(false);
+		this.panelSeries.add(this.seriesProgressBar);
 		
-		JLabel label = new JLabel("Recherche avanc\u00E9e");
-		label.setBounds(444, 65, 104, 14);
-		panel_2.add(label);
+		JLabel seriesLibelleDetailedSearch = new JLabel("Recherche avanc\u00E9e");
+		seriesLibelleDetailedSearch.setBounds(418, 65, 120, 14);
+		this.panelSeries.add(seriesLibelleDetailedSearch);
 		
-		JLabel label_1 = new JLabel("Temps restant :");
-		label_1.setBounds(10, 36, 104, 14);
-		panel_2.add(label_1);
+		// panelMusic
+		this.panelMusic = new JPanel();
+		TitledBorder panelMusicTitle = new TitledBorder(null, "Musique", TitledBorder.LEADING, TitledBorder.TOP, null, null);
+		this.panelMusic.setBorder(panelMusicTitle);
+		this.panelMusic.setBounds(10, 180, 538, 90);
+		mainPanel.add(this.panelMusic);
+		this.panelMusic.setLayout(null);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(null, "Musique", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.setBounds(0, 180, 558, 90);
-		mainPanel.add(panel_3);
-		panel_3.setLayout(null);
+		JLabel musicScanState = new JLabel("Scan en attente");
+		musicScanState.setBounds(248, 11, 104, 14);
+		this.panelMusic.add(musicScanState);
 		
-		JLabel label_2 = new JLabel("Scan en attente");
-		label_2.setBounds(248, 11, 104, 14);
-		panel_3.add(label_2);
+		JLabel musicLibelleTimeLeft = new JLabel("Temps restant :");
+		musicLibelleTimeLeft.setBounds(10, 36, 104, 14);
+		this.panelMusic.add(musicLibelleTimeLeft);
 		
-		JProgressBar progressBar_2 = new JProgressBar();
-		progressBar_2.setBounds(248, 36, 300, 14);
-		panel_3.add(progressBar_2);
+		this.musicProgressBar = new JProgressBar();
+		this.musicProgressBar.setBounds(228, 36, 300, 14);
+		this.musicProgressBar.setIndeterminate(false);
+		this.panelMusic.add(this.musicProgressBar);
 		
-		JLabel label_3 = new JLabel("Recherche avanc\u00E9e");
-		label_3.setBounds(444, 65, 104, 14);
-		panel_3.add(label_3);
+		JLabel musicLibelleDetailedSearch = new JLabel("Recherche avanc\u00E9e");
+		musicLibelleDetailedSearch.setBounds(418, 65, 120, 14);
+		this.panelMusic.add(musicLibelleDetailedSearch);
 		
-		JLabel label_4 = new JLabel("Temps restant :");
-		label_4.setBounds(10, 36, 104, 14);
-		panel_3.add(label_4);
+		// General Statistic
+		JLabel genaralProgressText = new JLabel("Progression :");
+		genaralProgressText.setBounds(10, 281, 113, 14);
+		mainPanel.add(genaralProgressText);
 		
-		JLabel lblTempsRestant_1 = new JLabel("Temps restant :");
-		lblTempsRestant_1.setBounds(198, 306, 86, 14);
-		mainPanel.add(lblTempsRestant_1);
+		this.generalProgressBar = new JProgressBar();
+		this.generalProgressBar.setBounds(198, 281, 350, 14);
+		this.generalProgressBar.setIndeterminate(false);
 		
-		JLabel lblTempscoul = new JLabel("Temps \u00E9coul\u00E9 :");
-		lblTempscoul.setBounds(10, 306, 93, 14);
-		mainPanel.add(lblTempscoul);
+		this.generalProgressBar.setMinimum(0);
+		this.generalProgressBar.setMaximum(100);
+		this.generalProgressBar.setValue(0);
+		this.generalProgressBar.setStringPainted(true);
 		
-		JLabel lblNombreDeFichiers = new JLabel("Nombre de fichiers scann\u00E9s :");
-		lblNombreDeFichiers.setBounds(10, 331, 155, 14);
-		mainPanel.add(lblNombreDeFichiers);
+		mainPanel.add(generalProgressBar);
 		
-		JProgressBar progressBar_3 = new JProgressBar();
-		progressBar_3.setBounds(198, 281, 350, 14);
-		mainPanel.add(progressBar_3);
+		JLabel generalTimeElapsed = new JLabel("Temps \u00E9coul\u00E9 :");
+		generalTimeElapsed.setBounds(10, 306, 124, 14);
+		mainPanel.add(generalTimeElapsed);
+
+		JLabel generalTimeLeft = new JLabel("Temps restant :");
+		generalTimeLeft.setBounds(198, 306, 119, 14);
+		mainPanel.add(generalTimeLeft);
 		
-		JLabel lblProgression = new JLabel("Progression :");
-		lblProgression.setBounds(10, 281, 93, 14);
-		mainPanel.add(lblProgression);
+		JLabel generalNumberOfFileText = new JLabel("Nombre de fichiers scann\u00E9s :");
+		generalNumberOfFileText.setBounds(10, 331, 170, 14);
+		mainPanel.add(generalNumberOfFileText);
+		
+		this.validContentDependingOnParameters(fileKindSelectionParameters);
+		
+		this.generalTask = new Task(this);
+		generalTask.addPropertyChangeListener(this);
+		generalTask.execute();
 		
 		
-//		this.setBackground(Color.WHITE);
-//		this.setLayout(null);
-//		this.setBounds(0, 0, 558, 356);
-//		this.setLayout(null);
-//		
-//		
 //		this.results.put("Video_Selected", new JLabel("Video Selected : " + fileKindSelectionParameters.isVideoSelected()));
 //		this.results.get("Video_Selected").setBounds(10, 36, 200, 14);
 //		this.add(this.results.get("Video_Selected"));
@@ -141,14 +258,31 @@ public final class ScanningProgress extends WindowContent {
 //		this.add(this.results.get("Music_Selected"));
 	}
 	
-//	public void setFileKindSelectionParameters(FileKindSelectionParameters fileKindSelectionParameters) {
-//		this.results.get("Video_Selected").setText("Video Selected : " + fileKindSelectionParameters.isVideoSelected());
-//		this.results.get("Serie_Selected").setText("Serie Selected : " + fileKindSelectionParameters.isSerieSelected());
-//		this.results.get("Music_Selected").setText("Music Selected : " + fileKindSelectionParameters.isMusicSelected());
-//		this.invalidate(); 
-//		this.validate();
-//		this.repaint();
-//	}
+	private void setPanelComponentsColor(JPanel panel, SystemColor color) {
+		((TitledBorder) panel.getBorder()).setTitleColor(color);
+		for(Component component : panel.getComponents()) {
+			if(!(component instanceof JProgressBar)) {
+				component.setForeground(color);
+			}					
+		}
+	}
+	public void validContentDependingOnParameters(FileKindSelectionParameters fileKindSelectionParameters) {
+		if(!fileKindSelectionParameters.isVideoSelected()) {
+			setPanelComponentsColor(this.panelMovies, SystemColor.controlShadow);
+		} else {
+			setPanelComponentsColor(this.panelMovies, null);
+		}
+		if(!fileKindSelectionParameters.isSerieSelected()) {
+			setPanelComponentsColor(this.panelSeries, SystemColor.controlShadow);
+		} else {
+			setPanelComponentsColor(this.panelSeries, null);
+		}
+		if(!fileKindSelectionParameters.isMusicSelected()) {
+			setPanelComponentsColor(this.panelMusic, SystemColor.controlShadow);
+		} else {
+			setPanelComponentsColor(this.panelMusic, null);
+		}
+	}
 	
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
