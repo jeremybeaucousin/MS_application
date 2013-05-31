@@ -20,6 +20,9 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JEditorPane;
 import javax.swing.border.LineBorder;
 import javax.swing.JProgressBar;
+import javax.swing.ImageIcon;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
 public class ResultsPanel extends JPanel {
 
@@ -36,35 +39,37 @@ public class ResultsPanel extends JPanel {
 		add(panel);
 		panel.setLayout(null);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "Films", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(0, 0, 558, 90);
-		panel.add(panel_1);
-		panel_1.setLayout(null);
+		JPanel panelMessage = new JPanel();
+		panelMessage.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelMessage.setBackground(Color.WHITE);
+		panelMessage.setBounds(177, 11, 371, 334);
+		panel.add(panelMessage);
+		panelMessage.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Recherche avanc\u00E9e");
-		lblNewLabel.setBounds(444, 62, 104, 14);
-		panel_1.add(lblNewLabel);
+		JLabel lblSuccesfullScan = new JLabel("Votre scan s'est effectu\u00E9 avec succ\u00E8s !");
+		lblSuccesfullScan.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblSuccesfullScan.setBounds(10, 85, 358, 38);
+		panelMessage.add(lblSuccesfullScan);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(null, "S\u00E9ries", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(0, 90, 558, 90);
-		panel.add(panel_2);
-		panel_2.setLayout(null);
+		JLabel lblClicNext = new JLabel("Cliquez sur Terminer pour lancer l'application.");
+		lblClicNext.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblClicNext.setBounds(10, 298, 358, 25);
+		panelMessage.add(lblClicNext);
 		
-		JLabel label = new JLabel("Recherche avanc\u00E9e");
-		label.setBounds(444, 65, 104, 14);
-		panel_2.add(label);
+		JLabel labelImage = new JLabel("");
+		labelImage.setIcon(new ImageIcon(ResultsPanel.class.getResource("/img/multimedia-icone.png")));
+		labelImage.setBounds(10, 11, 130, 124);
+		panel.add(labelImage);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(null, "Musique", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.setBounds(0, 180, 558, 90);
-		panel.add(panel_3);
-		panel_3.setLayout(null);
+		JPanel panelStatistics = new JPanel();
+		panelStatistics.setBounds(10, 136, 157, 209);
+		panel.add(panelStatistics);
+		panelStatistics.setLayout(null);
 		
-		JLabel label_3 = new JLabel("Recherche avanc\u00E9e");
-		label_3.setBounds(444, 65, 104, 14);
-		panel_3.add(label_3);
+		JList listStatistics = new JList();
+		listStatistics.setEnabled(false);
+		listStatistics.setBounds(10, 11, 137, 187);
+		panelStatistics.add(listStatistics);
 
 	}
 }

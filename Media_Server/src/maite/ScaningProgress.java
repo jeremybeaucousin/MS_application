@@ -39,7 +39,7 @@ public class ScaningProgress extends JPanel {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Films", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 0, 538, 90);
+		panel_1.setBounds(10, 11, 538, 85);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -61,7 +61,7 @@ public class ScaningProgress extends JPanel {
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(null, "S\u00E9ries", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(10, 90, 538, 90);
+		panel_2.setBounds(10, 96, 538, 85);
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -83,7 +83,7 @@ public class ScaningProgress extends JPanel {
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(null, "Musique", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.setBounds(10, 180, 538, 90);
+		panel_3.setBounds(10, 181, 538, 85);
 		panel.add(panel_3);
 		panel_3.setLayout(null);
 		
