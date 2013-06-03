@@ -1,27 +1,14 @@
 package controller;
-import java.awt.FlowLayout;
-import java.awt.LayoutManager;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
+import java.nio.file.DirectoryStream.Filter;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JProgressBar;
-import javax.swing.WindowConstants;
 
-import model.base.HSQLInteraction;
-
-import org.apache.commons.io.IOUtils;
-import org.hsqldb.server.Server;
+import model.Video;
 
 import view.MainWindow;
 
@@ -49,6 +36,18 @@ public class Main {
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
 		
+		File test = new File("D:/Users/jbeaucousin/Documents/musique");
+		test.list(new FilenameFilter() {
+			
+			@Override
+			public boolean accept(File dir, String name) {
+				if(dir.isDirectory() && !Video.isVideoExtensionType(name.substring(name.lastIndexOf(".") + 1))) {
+					return false;
+				} else {
+					return true;
+				}
+			}
+		});
 //		JFrame frame = new JFrame();
 //		frame.setLayout(new FlowLayout());
 //		frame.setLocationRelativeTo(null);

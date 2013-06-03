@@ -2,43 +2,25 @@ package view;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.TreeMap;
 
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
-import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
-import javax.swing.border.Border;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import model.Document;
-import model.Movie;
-import model.apis.ImdbApi;
-import model.apis.TheMovieDB;
 
 
 public final class ScanningProgress extends WindowContent implements PropertyChangeListener{
@@ -61,6 +43,9 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 			put(EN, "If you stop the scanning you will loose the data processed.");
 		}			
 	};
+	
+	private final static String PROGRESS = "progress", MOVIES_PROGRESS_SCAN = "moviesprogressscan", 
+			SERIES_PROGRESS_SCAN = "seriesProgressScan", MUSIC_PROGRESS_SCAN = "musicProgressScan";
 	
 	private TreeMap<String, JLabel> results;
 	
@@ -99,15 +84,15 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
                 progress = calcul.intValue();
                 this.globalProgressScan++;
                 if(this.moviesProgressScan < 100) {
-                	this.firePropertyChange("moviesProgressScan", this.moviesProgressScan, this.moviesProgressScan + 1);
+                	this.firePropertyChange(MOVIES_PROGRESS_SCAN, this.moviesProgressScan, this.moviesProgressScan + 1);
                 	this.moviesProgressScan++;
                 }
                 if(this.moviesProgressScan >= 100 && this.seriesProgressScan < 100) {
-                	this.firePropertyChange("seriesProgressScan", this.seriesProgressScan, this.seriesProgressScan + 1);
+                	this.firePropertyChange(SERIES_PROGRESS_SCAN, this.seriesProgressScan, this.seriesProgressScan + 1);
                 	this.seriesProgressScan++;
                 }
                 if(this.moviesProgressScan >= 100 && this.seriesProgressScan >= 100 && this.musicProgressScan < 100) {
-                	this.firePropertyChange("musicProgressScan", this.musicProgressScan, this.musicProgressScan + 1);
+                	this.firePropertyChange(MUSIC_PROGRESS_SCAN, this.musicProgressScan, this.musicProgressScan + 1);
                 	this.musicProgressScan++;
                 }
                 this.setProgress(progress);
@@ -132,15 +117,15 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 	    
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		if ("progress".equals(evt.getPropertyName())) {
+		if (PROGRESS.equals(evt.getPropertyName())) {
             this.generalProgressBar.setValue((Integer) evt.getNewValue());
             //taskOutput.append(String.format("Completed %d%% of task.\n", progress));
         } 
-		if ("moviesProgressScan".equals(evt.getPropertyName())) {
+		if (MOVIES_PROGRESS_SCAN.equals(evt.getPropertyName())) {
             this.movieProgressBar.setValue((Integer) evt.getNewValue());
-        } else if ("seriesProgressScan".equals(evt.getPropertyName())) {
+        } else if (SERIES_PROGRESS_SCAN.equals(evt.getPropertyName())) {
             this.seriesProgressBar.setValue((Integer) evt.getNewValue());
-        } else if ("musicProgressScan".equals(evt.getPropertyName())) {
+        } else if (MUSIC_PROGRESS_SCAN.equals(evt.getPropertyName())) {
             this.musicProgressBar.setValue((Integer) evt.getNewValue());
         }
 	}
@@ -266,23 +251,12 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 		mainPanel.add(generalNumberOfFileText);
 		
 		this.validContentDependingOnParameters(fileKindSelectionParameters);
-		
-//		this.results.put("Video_Selected", new JLabel("Video Selected : " + fileKindSelectionParameters.isVideoSelected()));
-//		this.results.get("Video_Selected").setBounds(10, 36, 200, 14);
-//		this.add(this.results.get("Video_Selected"));
-//		
-//		this.results.put("Serie_Selected", new JLabel("Serie Selected : " + fileKindSelectionParameters.isSerieSelected()));
-//		this.results.get("Serie_Selected").setBounds(10, 66, 200, 14);
-//		this.add(this.results.get("Serie_Selected"));
-//		
-//		this.results.put("Music_Selected", new JLabel("Music Selected : " + fileKindSelectionParameters.isMusicSelected()));
-//		this.results.get("Music_Selected").setBounds(10, 96, 200, 14);
-//		this.add(this.results.get("Music_Selected"));
 	}
 	
 	public Task getGeneralTask() {
 		return this.generalTask;
 	}
+	
 	private void setPanelComponentsColor(JPanel panel, SystemColor color) {
 		((TitledBorder) panel.getBorder()).setTitleColor(color);
 		for(Component component : panel.getComponents()) {
@@ -291,6 +265,7 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 			}					
 		}
 	}
+	
 	public void validContentDependingOnParameters(FileKindSelectionParameters fileKindSelectionParameters) {
 		if(!fileKindSelectionParameters.isVideoSelected()) {
 			setPanelComponentsColor(this.panelMovies, SystemColor.controlShadow);
@@ -317,24 +292,9 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 	}
 	
 	public Boolean stopProcess() {
-		return JOptionPane.showConfirmDialog(this, this.confirmationMessage.get(this.getCurrentLanguage()), this.confirmationMessageTitle.get(this.getCurrentLanguage()), JOptionPane.INFORMATION_MESSAGE) == JFileChooser.APPROVE_OPTION;
+		return JOptionPane.showConfirmDialog(this, this.confirmationMessage.get(WindowContent.getCurrentLanguage()), this.confirmationMessageTitle.get(WindowContent.getCurrentLanguage()), JOptionPane.INFORMATION_MESSAGE) == JFileChooser.APPROVE_OPTION;
 	}
 	
-	public void actionPerformed(ActionEvent e) {
-		Object source = e.getSource();
-		
-		Component cancelButton = this.getComponent(3);
-		Component previousButton = this.getComponent(4);
-		Component nextStepButton = this.getComponent(5);
-		if(source == cancelButton){
-			this.getMainWindow().dispose();
-		} else if(source == nextStepButton){
-			System.out.println("suivant");
-		} else if(source == previousButton){
-			//this.mainWindow.getSearchingOnSelectedParam();
-		}
-	}
-
 	@Override
 	public void getNextScreen() {
 		// TODO Auto-generated method stub
