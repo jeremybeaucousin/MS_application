@@ -63,7 +63,7 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
     	
     	private Integer moviesProgressScan = 0, seriesProgressScan = 0, musicProgressScan = 0, globalProgressScan = 0;
 
-    	Task(ScanningProgress scanningProgress) {
+    	Task(ScanningProgress scanningProgress, File videoFileChosen, File seriesFileChosen, File musicFileChosen) {
     		super();
     		this.scanningProgress = scanningProgress;
     	}
@@ -286,7 +286,8 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 		this.seriesProgressBar.setValue(0);
 		this.musicProgressBar.setValue(0);
 		this.generalProgressBar.setValue(0);
-		this.generalTask = new Task(this);
+		
+		this.generalTask = new Task(this, fileKindSelectionParameters.getVideoFileChosen(), fileKindSelectionParameters.getSeriesFileChosen(), fileKindSelectionParameters.getMusicFileChosen());
 		this.generalTask.addPropertyChangeListener(this);
 		this.generalTask.execute();
 	}
