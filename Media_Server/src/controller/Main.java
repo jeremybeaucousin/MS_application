@@ -1,16 +1,20 @@
 package controller;
+import java.awt.Color;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.DirectoryStream.Filter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.EnumSet;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 
 import model.Video;
 
+import util.CopyOfConstantString;
+import util.StringUtils;
 import view.MainWindow;
 
 
@@ -37,6 +41,8 @@ public class Main {
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
 		
+		String test6 = CopyOfConstantString.AMPERSAND.getText();
+
 		FileFilter filefilter = new FileFilter() {
 			
 			@Override
@@ -78,7 +84,7 @@ public class Main {
 //			progressBar.setValue(ii);
 //		}
 
-		final MainWindow mainWindow = new MainWindow();
+		//final MainWindow mainWindow = new MainWindow();
 	
 		
 		// TODO Exemple Select

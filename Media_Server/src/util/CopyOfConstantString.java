@@ -35,9 +35,23 @@ public enum CopyOfConstantString {
 	 SQUAREBRACKET_CLOSING("]"),
 	 AMPERSAND("&");
 	
-	private final String value;
+	private final String text;
+	
+	public final static Hashtable<String, List<String>> SURROUDER_CHARACTER = new Hashtable<String, List<String>>() {
+		{
+			put(BRACE.text,Arrays.asList(BRACE_OPENING.text, BRACE_CLOSING.text));
+			put(PARENTHESIS.text,Arrays.asList(PARENTHESIS_OPENING.text, PARENTHESIS_CLOSING.text));
+			put(SQUAREBRACKET.text,Arrays.asList(SQUAREBRACKET_OPENING.text, SQUAREBRACKET_CLOSING.text));
+		}
+	};
 	
 	private CopyOfConstantString(String value) {
-		this.value = value;
+		this.text = value;
 	}
+
+	public String getText() {
+		return text;
+	}
+	
+	
 }
