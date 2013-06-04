@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
 
 import model.Video;
 
@@ -36,6 +37,20 @@ public class Main {
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
 		
+		FileFilter filefilter = new FileFilter() {
+			
+			@Override
+			public String getDescription() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public boolean accept(File f) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		};
 		File test = new File("D:/Users/jbeaucousin/Documents/musique");
 		test.list(new FilenameFilter() {
 			
