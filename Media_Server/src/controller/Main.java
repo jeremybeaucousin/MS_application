@@ -41,7 +41,7 @@ public class Main {
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
 		
-		String test6 = CopyOfConstantString.AMPERSAND.getText();
+		String test6 = CopyOfConstantString.AMPERSAND.getStringValue();
 
 		FileFilter filefilter = new FileFilter() {
 			
