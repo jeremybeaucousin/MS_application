@@ -30,10 +30,7 @@ import javax.swing.border.TitledBorder;
 import org.hsqldb.lib.StringUtil;
 
 import util.ConstantString;
-
-import com.mysql.jdbc.StringUtils;
-
-
+import util.StringUtils;
 
 public final class FileKindSelection extends WindowContent implements ActionListener, FocusListener {
 	// Buttons AND Checkboxes and TextField //
@@ -441,10 +438,10 @@ public final class FileKindSelection extends WindowContent implements ActionList
 			if(this.checkboxScanMovies.isSelected()) {
 				message = this.ValidatePanel(this.moviesLocation, message);
 			}
-			if(this.checkBoxScanSeries.isSelected() && StringUtils.isEmptyOrWhitespaceOnly(message)) {
+			if(this.checkBoxScanSeries.isSelected() && com.mysql.jdbc.StringUtils.isEmptyOrWhitespaceOnly(message)) {
 				message = this.ValidatePanel(this.seriesLocation, message);
 			}
-			if(this.checkBoxScanMusic.isSelected() && StringUtils.isEmptyOrWhitespaceOnly(message)) {
+			if(this.checkBoxScanMusic.isSelected() && com.mysql.jdbc.StringUtils.isEmptyOrWhitespaceOnly(message)) {
 				message = this.ValidatePanel(this.musicLocation, message);
 			}
 		}
@@ -452,10 +449,10 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	}
 	
 	private String ValidatePanel(JTextField textField, String message) {
-		if(((locationsTexts.get(WindowContent.getCurrentLanguage()).equals(textField.getText()) || StringUtils.isEmptyOrWhitespaceOnly(textField.getText()))) || !Files.exists(Paths.get(textField.getText()))) {
+		if(((locationsTexts.get(WindowContent.getCurrentLanguage()).equals(textField.getText()) || com.mysql.jdbc.StringUtils.isEmptyOrWhitespaceOnly(textField.getText()))) || !Files.exists(Paths.get(textField.getText()))) {
 			message = this.pathIsEmptyOrInvalidError.get(WindowContent.getCurrentLanguage());
 			textField.requestFocusInWindow();
-			textField.setText(ConstantString.EMPTY);
+			textField.setText(StringUtils.EMPTY);
 		}
 		return message;
 	}
@@ -603,7 +600,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		Object source = e.getSource();
 		if(source instanceof JTextField) {
 			JTextField folderChosenField = (JTextField) source;
-			if(folderChosenField.getText().equals(ConstantString.EMPTY)) {
+			if(folderChosenField.getText().equals(StringUtils.EMPTY)) {
 				folderChosenField.setText(this.getComponentsWithText().get(source).get(WindowContent.getCurrentLanguage()));
 				folderChosenField.setForeground(SystemColor.controlShadow);
 			} else {
@@ -611,7 +608,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 				if(!Files.exists(path)) {
 					this.openErrorMessage(this.invalidPathError.get(WindowContent.getCurrentLanguage()));
 					folderChosenField.requestFocusInWindow();
-					folderChosenField.setText(ConstantString.EMPTY);
+					folderChosenField.setText(StringUtils.EMPTY);
 				} 
 			}
 		}

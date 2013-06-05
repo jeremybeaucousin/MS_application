@@ -1,4 +1,4 @@
-package base;
+package model.base;
 
 public interface MediaTable {
 	public String 

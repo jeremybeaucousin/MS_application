@@ -84,7 +84,7 @@ public class Main {
 //			progressBar.setValue(ii);
 //		}
 
-		//final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow();
 	
 		
 		// TODO Exemple Select

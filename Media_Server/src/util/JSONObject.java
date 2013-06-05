@@ -80,7 +80,7 @@ public class JSONObject extends org.json.JSONObject{
 					String key = keyset.getString(ii);
 					Object value = this.get(key);
 					if(value == JSONObject.NULL) {
-						ObjectMap.put(key, ConstantString.EMPTY);
+						ObjectMap.put(key, StringUtils.EMPTY);
 					} else if(isJSONObject(value)) {
 						ObjectMap.put(key, new util.JSONObject(this.getJSONObject(key), jsonArrayToArray(this.getJSONObject(key).names())).jsonToHachtable());
 					} else if(value instanceof String) {

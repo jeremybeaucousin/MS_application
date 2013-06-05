@@ -15,6 +15,7 @@ import javax.swing.JToggleButton;
 import javax.swing.border.TitledBorder;
 
 import util.ConstantString;
+import util.StringUtils;
 
 
 public abstract class WindowContent extends JPanel implements WindowContentAction, ConstantView {
@@ -99,7 +100,7 @@ public abstract class WindowContent extends JPanel implements WindowContentActio
 			} else if(component instanceof TitledBorder) {
 				((TitledBorder) component).setTitle(componentsWithText.get(component).get(language));
 			} else if(component instanceof JTextField) {
-				if(componentsWithText.get(component).containsValue(((JTextField) component).getText()) || ((JTextField) component).getText().equals(ConstantString.EMPTY)) {
+				if(componentsWithText.get(component).containsValue(((JTextField) component).getText()) || ((JTextField) component).getText().equals(StringUtils.EMPTY)) {
 					((JTextField) component).setText(componentsWithText.get(component).get(language));
 				}
 			} else if(component instanceof JFileChooser) {

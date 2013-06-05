@@ -102,7 +102,7 @@ public static Object searchMovie(String movieName) throws JSONException, IOExcep
 		StringBuffer wordAddedFromThemovieName = new StringBuffer();
 		boolean MovieFound = true;
 		while (matcher.find() && MovieFound) {
-			wordAddedFromThemovieName.append(matcher.group() + ConstantString.SPACE);
+			wordAddedFromThemovieName.append(matcher.group() + StringUtils.SPACE);
 			Object returnMovie = searchMovie(wordAddedFromThemovieName.toString());
 			System.out.println("nom Modifié :" + wordAddedFromThemovieName.toString());
 			if(returnMovie instanceof JSONArray) {

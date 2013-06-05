@@ -91,13 +91,13 @@ public class TheMovieDB implements ConstantString {
 	public static ArrayList<Integer> searchWordByWord(Document movie) throws JSONException, IOException {
 		// TODO attantion au mot avec des entier dedans
 		ArrayList<Integer> moviesFound = new ArrayList<Integer>();
-		String allCharacters = LOWER_CASE_CHARACTERS + UPPER_CASE_CHARACTERS;
+		String allCharacters = StringUtils.LOWER_CASE_CHARACTERS + StringUtils.UPPER_CASE_CHARACTERS;
 		Pattern pattern = Pattern.compile("([" + allCharacters + "]+)");
 		Matcher matcher = pattern.matcher(movie.getDocumentName());
 		StringBuffer wordAddedFromThemovieName = new StringBuffer();
 		boolean MovieFound = true;
 		while (matcher.find() && MovieFound) {
-			wordAddedFromThemovieName.append(matcher.group() + ConstantString.SPACE);
+			wordAddedFromThemovieName.append(matcher.group() + StringUtils.SPACE);
 			int movieId = TheMovieDB.searchMovie(wordAddedFromThemovieName.toString());
 			System.out.println("nom Modifié :" + wordAddedFromThemovieName.toString());
 			if(movieId > -1) {

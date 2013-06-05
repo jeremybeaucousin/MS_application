@@ -8,11 +8,9 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.mysql.jdbc.StringUtils;
+import util.StringUtils;
 
-import util.ConstantString;
-
-public abstract class Document implements ConstantString {
+public abstract class Document {
 	/* Attributes */
 	private String documentName;
 	private String extension;
@@ -21,7 +19,7 @@ public abstract class Document implements ConstantString {
 	/* Constructors */
 	public Document(String documentName, String documentPath) {
 		this.extension = Document.getExtension(documentName);
-		if(StringUtils.isEmptyOrWhitespaceOnly(this.extension)) {
+		if(com.mysql.jdbc.StringUtils.isEmptyOrWhitespaceOnly(this.extension)) {
 			this.documentName = documentName;
 		} else {
 			this.documentName = Document.getDocumentName(documentName);
@@ -50,13 +48,13 @@ public abstract class Document implements ConstantString {
 	 * @return name of the movie without special caracters.
 	 */
 	public void deleteSpecialsCaracters() {
-		this.documentName = this.documentName.replaceAll("([\\.,-,_,°])", SPACE);
+		this.documentName = this.documentName.replaceAll("([\\.,-,_,°])", StringUtils.SPACE);
 		this.supresseMutlipleSpace();
 	}
 
 	public void insertSpaceBeforeCollapseUpperCaseOrInt() {
-		String allCharacters = LOWER_CASE_CHARACTERS + UPPER_CASE_CHARACTERS;
-		Pattern pattern = Pattern.compile("[" + allCharacters + "][1-9][" + allCharacters + "]|[" + LOWER_CASE_CHARACTERS + "][" + UPPER_CASE_CHARACTERS + "]|[" + allCharacters + "][1-9]|[1-9][" + allCharacters + "]");
+		String allCharacters = StringUtils.LOWER_CASE_CHARACTERS + StringUtils.UPPER_CASE_CHARACTERS;
+		Pattern pattern = Pattern.compile("[" + allCharacters + "][1-9][" + allCharacters + "]|[" + StringUtils.LOWER_CASE_CHARACTERS + "][" + StringUtils.UPPER_CASE_CHARACTERS + "]|[" + allCharacters + "][1-9]|[1-9][" + allCharacters + "]");
 		Matcher matcher = pattern.matcher(this.documentName);
 		while (matcher.find()) {
 			String elementToSplit = matcher.group();
@@ -64,23 +62,23 @@ public abstract class Document implements ConstantString {
 			String secondElement = elementToSplit.substring(1,2);
 			if(matcher.group().length() > 2) {
 				String thirdElement = elementToSplit.substring(2);
-				this.documentName = this.documentName.replace(elementToSplit, firstElement + SPACE + secondElement + SPACE + thirdElement);
+				this.documentName = this.documentName.replace(elementToSplit, firstElement + StringUtils.SPACE + secondElement + StringUtils.SPACE + thirdElement);
 			} else {
-				this.documentName = this.documentName.replace(elementToSplit, firstElement + SPACE + secondElement);
+				this.documentName = this.documentName.replace(elementToSplit, firstElement + StringUtils.SPACE + secondElement);
 			}
 			
 		}
 	}
 	
 	private void supresseMutlipleSpace() {
-		this.documentName = this.documentName.replaceAll("(\\s+)", SPACE);
+		this.documentName = this.documentName.replaceAll("(\\s+)", StringUtils.SPACE);
 	}
 
 	private static String identifySurrondPart(String surroundPart) {
 		String partKind = new String();
-		Set<String> surroundCharacterKeys = SURROUDER_CHARACTER.keySet();
+		Set<String> surroundCharacterKeys = StringUtils.SURROUDER_CHARACTER.keySet();
 		for(String key : surroundCharacterKeys){
-			if(SURROUDER_CHARACTER.get(key).contains(surroundPart)) {
+			if(StringUtils.SURROUDER_CHARACTER.get(key).contains(surroundPart)) {
 				partKind = key;
 			}
 		}
@@ -89,9 +87,9 @@ public abstract class Document implements ConstantString {
 	
 	private static Boolean isOpeningSurrondPart(String surroundPart) {
 		Boolean isOpeningPart = false;
-		Set<String> surroundCharacterKeys = SURROUDER_CHARACTER.keySet();
+		Set<String> surroundCharacterKeys = StringUtils.SURROUDER_CHARACTER.keySet();
 		for(String key : surroundCharacterKeys){
-			if(SURROUDER_CHARACTER.get(key).contains(surroundPart) && SURROUDER_CHARACTER.get(key).get(0).equals(surroundPart)) {
+			if(StringUtils.SURROUDER_CHARACTER.get(key).contains(surroundPart) && StringUtils.SURROUDER_CHARACTER.get(key).get(0).equals(surroundPart)) {
 				isOpeningPart = true;
 			}
 		}
@@ -100,9 +98,9 @@ public abstract class Document implements ConstantString {
 	
 	private static Boolean isClosingSurrondPart(String surroundPart) {
 		Boolean isClosingPart = false;
-		Set<String> surroundCharacterKeys = SURROUDER_CHARACTER.keySet();
+		Set<String> surroundCharacterKeys = StringUtils.SURROUDER_CHARACTER.keySet();
 		for(String key : surroundCharacterKeys){
-			if(SURROUDER_CHARACTER.get(key).contains(surroundPart) && SURROUDER_CHARACTER.get(key).get(1).equals(surroundPart)) {
+			if(StringUtils.SURROUDER_CHARACTER.get(key).contains(surroundPart) && StringUtils.SURROUDER_CHARACTER.get(key).get(1).equals(surroundPart)) {
 				isClosingPart = true;
 			}
 		}
@@ -122,8 +120,8 @@ public abstract class Document implements ConstantString {
 				closingPartLastsIndex.put(matcher.end(), identifySurrondPart(matcher.group()));
 			}
 		}
-		containerMap.put(OPENING_PARTS, openingPartIndex);
-		containerMap.put(CLOSING_PARTS, closingPartLastsIndex);
+		containerMap.put(StringUtils.OPENING_PARTS, openingPartIndex);
+		containerMap.put(StringUtils.CLOSING_PARTS, closingPartLastsIndex);
 		
 		return containerMap;
 	}
@@ -131,8 +129,8 @@ public abstract class Document implements ConstantString {
 	public void deleteSurroudParts() {
 		Map<String, Map<Integer, String>> extractResult = extractSurroudParts(this.documentName);
 
-		Map<Integer, String> openingPartIndex = extractResult.get(OPENING_PARTS);
-		Map<Integer, String> closingPartIndex = extractResult.get(CLOSING_PARTS);
+		Map<Integer, String> openingPartIndex = extractResult.get(StringUtils.OPENING_PARTS);
+		Map<Integer, String> closingPartIndex = extractResult.get(StringUtils.CLOSING_PARTS);
 		
 		Map<Integer, Integer> IndexToExtract = new TreeMap<Integer, Integer>();
 		ArrayList<String> stringToExtract = new ArrayList<String>();
@@ -177,11 +175,11 @@ public abstract class Document implements ConstantString {
 			}
 		}
 		for(int ii = 0; ii < stringToExtract.size(); ii++) {
-			this.documentName = this.documentName.replace(stringToExtract.get(ii), EMPTY);
+			this.documentName = this.documentName.replace(stringToExtract.get(ii), StringUtils.EMPTY);
 		}
 		
 		if(!openingPartIndex.isEmpty() || !closingPartIndex.isEmpty()) {
-			this.documentName = this.documentName.replaceAll("([\\(,\\),\\[,\\],\\{,\\}])", EMPTY);
+			this.documentName = this.documentName.replaceAll("([\\(,\\),\\[,\\],\\{,\\}])", StringUtils.EMPTY);
 		}
 		
 		this.supresseMutlipleSpace();
