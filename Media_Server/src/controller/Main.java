@@ -3,10 +3,13 @@ import java.awt.Color;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.ObjectInputStream.GetField;
 import java.nio.file.DirectoryStream.Filter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
@@ -41,6 +44,8 @@ public class Main {
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
 		
+		ResourceBundle res = ResourceBundle.getBundle("texts/TitreBouton", Locale.getDefault()); 
+		System.out.println(res.getString("titre1"));
 		String test6 = CopyOfConstantString.AMPERSAND.getStringValue();
 
 		FileFilter filefilter = new FileFilter() {
@@ -84,7 +89,7 @@ public class Main {
 //			progressBar.setValue(ii);
 //		}
 
-		final MainWindow mainWindow = new MainWindow();
+		//final MainWindow mainWindow = new MainWindow();
 	
 		
 		// TODO Exemple Select
