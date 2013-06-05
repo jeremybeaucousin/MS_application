@@ -29,7 +29,6 @@ import javax.swing.border.TitledBorder;
 
 import org.hsqldb.lib.StringUtil;
 
-import util.ConstantString;
 import util.StringUtils;
 
 public final class FileKindSelection extends WindowContent implements ActionListener, FocusListener {

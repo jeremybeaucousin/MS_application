@@ -14,7 +14,6 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.border.TitledBorder;
 
-import util.ConstantString;
 import util.StringUtils;
 
 

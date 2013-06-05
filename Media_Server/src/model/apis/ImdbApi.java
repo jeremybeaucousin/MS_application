@@ -16,7 +16,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONTokener;
 
-import util.ConstantString;
 import util.JSONObject;
 import util.StringUtils;
 

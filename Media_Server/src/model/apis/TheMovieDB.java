@@ -14,11 +14,10 @@ import model.Document;
 import org.json.JSONException;
 import org.json.JSONTokener;
 
-import util.ConstantString;
 import util.JSONObject;
 import util.StringUtils;
 
-public class TheMovieDB implements ConstantString {
+public class TheMovieDB {
 	private static String api_key = "api_key=1acc7c1593ee8145d2d390f1d419a573";
 	private static String theMovieDBURL = "http://api.themoviedb.org/3";
 	
