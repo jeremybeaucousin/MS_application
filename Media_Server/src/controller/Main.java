@@ -1,6 +1,7 @@
 package controller;
 import java.awt.Color;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.ObjectInputStream.GetField;
@@ -9,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import javax.swing.JFileChooser;
@@ -48,6 +50,11 @@ public class Main {
 		System.out.println(res.getString("titre1"));
 		String test6 = CopyOfConstantString.AMPERSAND.getStringValue();
 
+		Properties p = new Properties();
+		p.loadFromXML(ClassLoader.getSystemClassLoader().getResourceAsStream("texts/TitreBouton_fr_FR.properties.xml"));
+		p.list(System.out);
+		System.out.println(p.get("titres1"));
+		
 		FileFilter filefilter = new FileFilter() {
 			
 			@Override
