@@ -1,5 +1,7 @@
 <!-- Fichier : i18n.properties.xml -->
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="titres1">titre</entry>
+	<comment>Test data for Main.java</comment>
+	<entry key="fr">titre</entry>
+	<entry key="en">title</entry>
 </properties>
