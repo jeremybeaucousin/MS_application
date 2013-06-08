@@ -32,7 +32,7 @@ import javax.swing.border.TitledBorder;
 import org.hsqldb.lib.StringUtil;
 
 import util.StringUtils;
-// FIXME Remplacer la valeur par défaut par la valeur courrante
+// FIXME Géstion des erreurs WindowContent.getLanguage
 public final class FileKindSelection extends WindowContent implements ActionListener, FocusListener {
 	
 	JEditorPane introducingText = new JEditorPane();
@@ -103,7 +103,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	public FileKindSelection(MainWindow mainWindow) throws IOException {
 		super(mainWindow);
 		
-		ResourceBundle resourceBundle = ResourceBundle.getBundle("texts/FileKindSelection", Locale.ENGLISH);
+		ResourceBundle resourceBundle = ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getLanguage());
 		
 		this.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		this.setBackground(Color.WHITE);
@@ -113,7 +113,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.folderChooser.setDialogTitle(resourceBundle.getString(this.folderChooserKey));
 		this.folderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		this.folderChooser.setAcceptAllFileFilterUsed(false);
-		this.folderChooser.setLocale(Locale.ENGLISH);
+		this.folderChooser.setLocale(WindowContent.getLanguage());
 		this.folderChooser.updateUI();
 		
 		JPanel introducingPanel = new JPanel();
@@ -324,7 +324,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	private String ValidateForm() {
 		String message = new String();
 		if(!this.checkboxScanMovies.isSelected() && !this.checkBoxScanSeries.isSelected() && !this.checkBoxScanMusic.isSelected()) {
-			message = ResourceBundle.getBundle("texts/FileKindSelection", Locale.ENGLISH).getString(this.notAnyMediaCheckedErrorKey);
+			message = ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getLanguage()).getString(this.notAnyMediaCheckedErrorKey);
 		} else if(this.checkboxUniqueLocation.isSelected()) {
 			message = this.ValidatePanel(this.uniqueLocation, message);
 		} else {
@@ -342,8 +342,8 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	}
 	
 	private String ValidatePanel(JTextField textField, String message) {
-		if(((ResourceBundle.getBundle("texts/FileKindSelection", Locale.ENGLISH).getString(this.locationsKey).equals(textField.getText()) || com.mysql.jdbc.StringUtils.isEmptyOrWhitespaceOnly(textField.getText()))) || !Files.exists(Paths.get(textField.getText()))) {
-			message = ResourceBundle.getBundle("texts/FileKindSelection", Locale.ENGLISH).getString(this.pathIsEmptyOrInvalidErrorKey);
+		if(((ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getLanguage()).getString(this.locationsKey).equals(textField.getText()) || com.mysql.jdbc.StringUtils.isEmptyOrWhitespaceOnly(textField.getText()))) || !Files.exists(Paths.get(textField.getText()))) {
+			message = ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getLanguage()).getString(this.pathIsEmptyOrInvalidErrorKey);
 			textField.requestFocusInWindow();
 			textField.setText(StringUtils.EMPTY);
 		}
@@ -351,7 +351,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	}
 	
 	private void openErrorMessage(String errorMessage) {
-		JOptionPane.showMessageDialog(this, errorMessage, ResourceBundle.getBundle("texts/FileKindSelection", Locale.ENGLISH).getString(this.errorMessageTitleKey), JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(this, errorMessage, ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getLanguage()).getString(this.errorMessageTitleKey), JOptionPane.ERROR_MESSAGE);
 	}
 	
 	@Override
@@ -399,7 +399,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	@Override
 	public void setToSpanish() {
 		WindowContent.changeTextInAnotherLanguage2(this.componentsWithText, ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getEsp()));
-		this.folderChooser.setLocale(Locale.ENGLISH);
+		this.folderChooser.setLocale(WindowContent.getEsp());
 		this.folderChooser.updateUI();
 		this.revalidatePanelWithTitle();
 		
@@ -481,7 +481,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	public void focusGained(FocusEvent e) {
 		Object source = e.getSource();
 		if(source instanceof JTextField) {
-			String defaultText = ResourceBundle.getBundle("texts/FileKindSelection", Locale.ENGLISH).getString(this.componentsWithText.get(source)); 
+			String defaultText = ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getLanguage()).getString(this.componentsWithText.get(source)); 
 			if(defaultText.equals(((JTextField) source).getText())) {
 				((JTextField) source).setText("");
 				((JTextField) source).setForeground(null);
@@ -495,12 +495,12 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		if(source instanceof JTextField) {
 			JTextField folderChosenField = (JTextField) source;
 			if(folderChosenField.getText().equals(StringUtils.EMPTY)) {
-				folderChosenField.setText(ResourceBundle.getBundle("texts/FileKindSelection", Locale.ENGLISH).getString(this.componentsWithText.get(source)));
+				folderChosenField.setText(ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getLanguage()).getString(this.componentsWithText.get(source)));
 				folderChosenField.setForeground(SystemColor.controlShadow);
 			} else {
 				Path path = Paths.get(folderChosenField.getText());
 				if(!Files.exists(path)) {
-					this.openErrorMessage(ResourceBundle.getBundle("texts/FileKindSelection", Locale.ENGLISH).getString(this.invalidPathErrorKey));
+					this.openErrorMessage(ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getLanguage()).getString(this.invalidPathErrorKey));
 					folderChosenField.requestFocusInWindow();
 					folderChosenField.setText(StringUtils.EMPTY);
 				} 

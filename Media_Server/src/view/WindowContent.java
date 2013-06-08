@@ -29,6 +29,8 @@ public abstract class WindowContent extends JPanel implements WindowContentActio
 	/** Is the default language of the application **/
 	private final static String defaultLanguage = EN;
 	
+	private static Locale language = Locale.ENGLISH;
+	
 	/** Is the current language of the application **/
 	private static String currentLanguage = defaultLanguage;
 	
@@ -74,6 +76,14 @@ public abstract class WindowContent extends JPanel implements WindowContentActio
 
 	public static String getDefaultlanguage() {
 		return defaultLanguage;
+	}
+
+	public static Locale getLanguage() {
+		return language;
+	}
+
+	public static void setLanguage(Locale language) {
+		WindowContent.language = language;
 	}
 
 	public static JToggleButton getCurrentButtonLanguage() {

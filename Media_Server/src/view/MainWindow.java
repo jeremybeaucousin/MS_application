@@ -64,7 +64,7 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 		super();
 		this.navigation = new ArrayList<WindowContent>();
 		this.navigator = navigation.listIterator();
-		ResourceBundle resourceBundle = ResourceBundle.getBundle("texts/MainWindow", Locale.ENGLISH);
+		ResourceBundle resourceBundle = ResourceBundle.getBundle("texts/MainWindow", WindowContent.getLanguage());
 //		Double screenWidth = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 //		Double screenHeight = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 		
@@ -225,22 +225,27 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 			WindowContent.setCurrentButtonLanguage((JToggleButton) source);
 			if(source.equals(this.italianButton)) {
 				WindowContent.setCurrentLanguage(IT);
+				WindowContent.setLanguage(Locale.ITALIAN);
 				WindowContent.changeTextInAnotherLanguage2(this.componentsWithText, ResourceBundle.getBundle("texts/MainWindow", Locale.ITALIAN));
 				this.navigation.get(this.navigator.previousIndex()).setToItalian();
 			} else if(source.equals(this.germanButton)) {
 				WindowContent.setCurrentLanguage(DE);
+				WindowContent.setLanguage(Locale.GERMAN);
 				WindowContent.changeTextInAnotherLanguage2(this.componentsWithText, ResourceBundle.getBundle("texts/MainWindow", Locale.GERMAN));
 				this.navigation.get(this.navigator.previousIndex()).setToGerman();
 			} else if(source.equals(this.spanishButton)) {
 				WindowContent.setCurrentLanguage(ES);
+				WindowContent.setLanguage(WindowContent.getEsp());
 				WindowContent.changeTextInAnotherLanguage2(this.componentsWithText, ResourceBundle.getBundle("texts/MainWindow", WindowContent.getEsp()));
 				this.navigation.get(this.navigator.previousIndex()).setToSpanish();
 			} else if(source.equals(this.frenchButton)) {
 				WindowContent.setCurrentLanguage(FR);
+				WindowContent.setLanguage(Locale.FRENCH);
 				WindowContent.changeTextInAnotherLanguage2(this.componentsWithText, ResourceBundle.getBundle("texts/MainWindow", Locale.FRENCH));
 				this.navigation.get(this.navigator.previousIndex()).setToFrench();
 			} else if(source.equals(this.englishButton)) {
 				WindowContent.setCurrentLanguage(EN);
+				WindowContent.setLanguage(Locale.ENGLISH);
 				WindowContent.changeTextInAnotherLanguage2(this.componentsWithText, ResourceBundle.getBundle("texts/MainWindow", Locale.ENGLISH));
 				this.navigation.get(this.navigator.previousIndex()).setToEnglish();
 			} 
