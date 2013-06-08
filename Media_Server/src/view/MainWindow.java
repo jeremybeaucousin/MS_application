@@ -1,13 +1,18 @@
 package view;
 
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ListIterator;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,64 +24,28 @@ import javax.swing.JToggleButton;
 
 public class MainWindow extends JFrame implements ActionListener, ConstantView {
 	// BUTTONS //
+	JLabel lblSuperAplieServeur = new JLabel();
+	
 	/** Button use to change Languages **/
 	private JToggleButton italianButton, germanButton, spanishButton, frenchButton, englishButton ;
 	
 	/** Button use to quit the application **/
-	private JButton canceledButton, previousButton, nextButton, finishButton;
+	private JButton canceledButton = new JButton(), previousButton = new JButton(), nextButton = new JButton(), finishButton = new JButton();
 	
 	// textes //
 	/** Contains all components which have text displayed on screen **/
-	private HashMap<Object, HashMap<String, String>> componentsWithText = new HashMap<Object, HashMap<String, String>>();
+	private final ResourceBundle mainWindowTexts = ResourceBundle.getBundle("texts/MainWindow");
+			
+	private final String previousButtonKey = "previousButton", nextButtonKey = "nextButton", finishButtonKey = "finishButton", canceledButtonKey = "canceledButton", TitleKey = "Title";
 	
-	private final HashMap<String, String> TitleTexts = new HashMap<String, String>() {
+	private HashMap<Component, String> componentsWithText = new HashMap<Component, String>() {
 		{
-			put(IT, "Super applicazione di server multimedia");
-			put(DE, "TODO");
-			put(ES, "Súper aplicación de servidor multimedia");
-			put(FR, "Super application de serveur multimédia");
-			put(EN, "Super multimedia server application");
-		}			
-	};
-
-	private final HashMap<String, String> canceledButtonTexts = new HashMap<String, String>() {
-		{
-			put(IT, "Annula");
-			put(DE, "TODO");
-			put(ES, "Cancelar");
-			put(FR, "Annuler");
-			put(EN, "Cancel");
-		}			
-	};
-	
-	private final HashMap<String, String> previousButtonTexts = new HashMap<String, String>() {
-		{
-			put(IT, "Indietro");
-			put(DE, "TODO");
-			put(ES, "Atrás");
-			put(FR, "Précédent");
-			put(EN, "Previous");
-		}			
-	};
-	
-	private final HashMap<String, String> nextButtonTexts = new HashMap<String, String>() {
-		{
-			put(IT, "Avanti");
-			put(DE, "TODO");
-			put(ES, "Siguiente");
-			put(FR, "Suivant");
-			put(EN, "Next");
-		}			
-	};
-	
-	private final HashMap<String, String> finishButtonTexts = new HashMap<String, String>() {
-		{
-			put(IT, "Termina");
-			put(DE, "TODO");
-			put(ES, "Aceptar");
-			put(FR, "Terminer");
-			put(EN, "Finish");
-		}			
+			put(lblSuperAplieServeur, TitleKey);
+			put(canceledButton, canceledButtonKey);
+			put(previousButton, previousButtonKey);
+			put(nextButton, nextButtonKey);
+			put(finishButton, finishButtonKey);
+		}
 	};
 	
 	// navigation //
@@ -108,8 +77,8 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 		this.getContentPane().setLayout(null);
 		this.setLocationRelativeTo(null);
 		
-		JLabel lblSuperAplieServeur = new JLabel(this.TitleTexts.get(WindowContent.getDefaultlanguage()));
-		this.componentsWithText.put(lblSuperAplieServeur, this.TitleTexts);
+		this.lblSuperAplieServeur.setText(this.mainWindowTexts.getString(this.TitleKey));
+		this.componentsWithText.put(lblSuperAplieServeur, this.TitleKey);
 		lblSuperAplieServeur.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblSuperAplieServeur.setBounds(10, 12, 242, 14);
 		this.getContentPane().add(lblSuperAplieServeur);
@@ -160,27 +129,23 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 		// main panel
 		this.getContentPane().add(this.fileKindSelection);
 		
-		this.canceledButton =  new JButton(this.canceledButtonTexts.get(WindowContent.getDefaultlanguage()));
-		this.componentsWithText.put(this.canceledButton, this.canceledButtonTexts);
+		this.canceledButton.setText(this.mainWindowTexts.getString(this.canceledButtonKey));
 		this.canceledButton.setBounds(10, 414, 89, 23);
 		this.canceledButton.addActionListener(this);
 		this.getContentPane().add(this.canceledButton);
 		
-		this.previousButton = new JButton(this.previousButtonTexts.get(WindowContent.getDefaultlanguage()));
-		this.componentsWithText.put(this.previousButton, this.previousButtonTexts);
+		this.previousButton.setText(this.mainWindowTexts.getString(this.previousButtonKey));
 		this.previousButton.setEnabled(false);
 		this.previousButton.setBounds(281, 414, 89, 23);
 		this.previousButton.addActionListener(this);
 		this.getContentPane().add(this.previousButton);
 		
-		this.nextButton =  new JButton(this.nextButtonTexts.get(WindowContent.getDefaultlanguage()));
-		this.componentsWithText.put(this.nextButton, this.nextButtonTexts);
+		this.nextButton.setText(this.mainWindowTexts.getString(this.nextButtonKey));
 		this.nextButton.setBounds(380, 414, 89, 23);
 		this.nextButton.addActionListener(this);
 		this.getContentPane().add(this.nextButton);
 		
-		this.finishButton = new JButton(this.finishButtonTexts.get(WindowContent.getDefaultlanguage()));
-		this.componentsWithText.put(this.finishButton, this.finishButtonTexts);
+		this.finishButton.setText(this.mainWindowTexts.getString(this.finishButtonKey));
 		this.finishButton.setEnabled(false);
 		this.finishButton.setBounds(479, 414, 89, 23);
 		this.finishButton.addActionListener(this);
@@ -237,7 +202,6 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 				if(this.getContentPane().isAncestorOf(this.scanningProgress)) {
 					if (this.scanningProgress.stopProcess()) {
 						this.scanningProgress.getGeneralTask().cancel(true);
-						System.out.println("cancelled " + this.scanningProgress.getGeneralTask().isCancelled());
 						this.dispose();
 					}
 				} else {
@@ -263,23 +227,23 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 			WindowContent.setCurrentButtonLanguage((JToggleButton) source);
 			if(source.equals(this.italianButton)) {
 				WindowContent.setCurrentLanguage(IT);
-				WindowContent.changeTextInAnotherLanguage(this.componentsWithText, IT);
+				WindowContent.changeTextInAnotherLanguage2(this.componentsWithText, ResourceBundle.getBundle("texts/MainWindow", Locale.ITALIAN));
 				this.navigation.get(this.navigator.previousIndex()).setToItalian();
 			} else if(source.equals(this.germanButton)) {
 				WindowContent.setCurrentLanguage(DE);
-				WindowContent.changeTextInAnotherLanguage(this.componentsWithText, DE);
+				WindowContent.changeTextInAnotherLanguage2(this.componentsWithText, ResourceBundle.getBundle("texts/MainWindow", Locale.GERMAN));
 				this.navigation.get(this.navigator.previousIndex()).setToGerman();
 			} else if(source.equals(this.spanishButton)) {
 				WindowContent.setCurrentLanguage(ES);
-				WindowContent.changeTextInAnotherLanguage(this.componentsWithText, ES);
+				WindowContent.changeTextInAnotherLanguage2(this.componentsWithText, ResourceBundle.getBundle("texts/MainWindow", WindowContent.getEsp()));
 				this.navigation.get(this.navigator.previousIndex()).setToSpanish();
 			} else if(source.equals(this.frenchButton)) {
 				WindowContent.setCurrentLanguage(FR);
-				WindowContent.changeTextInAnotherLanguage(this.componentsWithText, FR);
+				WindowContent.changeTextInAnotherLanguage2(this.componentsWithText, ResourceBundle.getBundle("texts/MainWindow", Locale.FRENCH));
 				this.navigation.get(this.navigator.previousIndex()).setToFrench();
 			} else if(source.equals(this.englishButton)) {
 				WindowContent.setCurrentLanguage(EN);
-				WindowContent.changeTextInAnotherLanguage(this.componentsWithText, EN);
+				WindowContent.changeTextInAnotherLanguage2(this.componentsWithText, ResourceBundle.getBundle("texts/MainWindow", Locale.ENGLISH));
 				this.navigation.get(this.navigator.previousIndex()).setToEnglish();
 			} 
 		}

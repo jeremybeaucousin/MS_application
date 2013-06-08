@@ -9,6 +9,7 @@ import java.nio.file.DirectoryStream.Filter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -45,17 +46,8 @@ public class Main {
 		chooser.setDialogTitle("Sélectionner votre dossier de vidéo");
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
-		
-		ResourceBundle res = ResourceBundle.getBundle("texts/TitreBouton", Locale.ENGLISH); 
-		System.out.println(res.getString("titre1"));
-		String test6 = CopyOfConstantString.AMPERSAND.getStringValue();
-		
-		System.out.println(res.getLocale());
-		
-		Properties p = new Properties();
-		p.loadFromXML(ClassLoader.getSystemClassLoader().getResourceAsStream("texts/TitreBouton.properties.xml"));
-		p.list(System.out);
-		System.out.println(p.get("titres1"));
+		Locale esp = new Locale("es", "Spain");
+		ResourceBundle res = ResourceBundle.getBundle("texts/MainWindow", esp);
 		
 		FileFilter filefilter = new FileFilter() {
 			
@@ -98,7 +90,7 @@ public class Main {
 //			progressBar.setValue(ii);
 //		}
 
-		//final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow();
 	
 		
 		// TODO Exemple Select
