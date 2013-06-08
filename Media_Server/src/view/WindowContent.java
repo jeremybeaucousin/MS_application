@@ -118,7 +118,7 @@ public abstract class WindowContent extends JPanel implements WindowContentActio
 		}
 	}
 	
-	public static void changeTextInAnotherLanguage2(HashMap<Component, String> componentsWithText, ResourceBundle texts) {
+	public static void changeTextInAnotherLanguage2(HashMap<Object, String> componentsWithText, ResourceBundle texts) {
 		for(Object component : componentsWithText.keySet()) {
 			if(component instanceof JLabel) {
 				((JLabel) component).setText(texts.getString(componentsWithText.get(component)));

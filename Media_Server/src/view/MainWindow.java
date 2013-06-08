@@ -33,12 +33,10 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 	private JButton canceledButton = new JButton(), previousButton = new JButton(), nextButton = new JButton(), finishButton = new JButton();
 	
 	// textes //
-	/** Contains all components which have text displayed on screen **/
-	private final ResourceBundle mainWindowTexts = ResourceBundle.getBundle("texts/MainWindow");
-			
+	/** Contains all components keys **/
 	private final String previousButtonKey = "previousButton", nextButtonKey = "nextButton", finishButtonKey = "finishButton", canceledButtonKey = "canceledButton", TitleKey = "Title";
 	
-	private HashMap<Component, String> componentsWithText = new HashMap<Component, String>() {
+	private HashMap<Object, String> componentsWithText = new HashMap<Object, String>() {
 		{
 			put(lblSuperAplieServeur, TitleKey);
 			put(canceledButton, canceledButtonKey);
@@ -66,7 +64,7 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 		super();
 		this.navigation = new ArrayList<WindowContent>();
 		this.navigator = navigation.listIterator();
-		
+		ResourceBundle resourceBundle = ResourceBundle.getBundle("texts/MainWindow", Locale.ENGLISH);
 //		Double screenWidth = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 //		Double screenHeight = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 		
@@ -77,7 +75,7 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 		this.getContentPane().setLayout(null);
 		this.setLocationRelativeTo(null);
 		
-		this.lblSuperAplieServeur.setText(this.mainWindowTexts.getString(this.TitleKey));
+		this.lblSuperAplieServeur.setText(resourceBundle.getString(this.TitleKey));
 		this.componentsWithText.put(lblSuperAplieServeur, this.TitleKey);
 		lblSuperAplieServeur.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblSuperAplieServeur.setBounds(10, 12, 242, 14);
@@ -129,23 +127,23 @@ public class MainWindow extends JFrame implements ActionListener, ConstantView {
 		// main panel
 		this.getContentPane().add(this.fileKindSelection);
 		
-		this.canceledButton.setText(this.mainWindowTexts.getString(this.canceledButtonKey));
+		this.canceledButton.setText(resourceBundle.getString(this.canceledButtonKey));
 		this.canceledButton.setBounds(10, 414, 89, 23);
 		this.canceledButton.addActionListener(this);
 		this.getContentPane().add(this.canceledButton);
 		
-		this.previousButton.setText(this.mainWindowTexts.getString(this.previousButtonKey));
+		this.previousButton.setText(resourceBundle.getString(this.previousButtonKey));
 		this.previousButton.setEnabled(false);
 		this.previousButton.setBounds(281, 414, 89, 23);
 		this.previousButton.addActionListener(this);
 		this.getContentPane().add(this.previousButton);
 		
-		this.nextButton.setText(this.mainWindowTexts.getString(this.nextButtonKey));
+		this.nextButton.setText(resourceBundle.getString(this.nextButtonKey));
 		this.nextButton.setBounds(380, 414, 89, 23);
 		this.nextButton.addActionListener(this);
 		this.getContentPane().add(this.nextButton);
 		
-		this.finishButton.setText(this.mainWindowTexts.getString(this.finishButtonKey));
+		this.finishButton.setText(resourceBundle.getString(this.finishButtonKey));
 		this.finishButton.setEnabled(false);
 		this.finishButton.setBounds(479, 414, 89, 23);
 		this.finishButton.addActionListener(this);
