@@ -23,9 +23,9 @@ import javax.swing.JToggleButton;
 
 
 public class MainWindow extends JFrame implements ActionListener, ConstantView {
-	// BUTTONS //
 	JLabel lblSuperAplieServeur = new JLabel();
 	
+	// BUTTONS //
 	/** Button use to change Languages **/
 	private JToggleButton italianButton, germanButton, spanishButton, frenchButton, englishButton ;
 	
