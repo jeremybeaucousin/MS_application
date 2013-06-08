@@ -342,8 +342,9 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	}
 	
 	private String ValidatePanel(JTextField textField, String message) {
-		if(((ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getLanguage()).getString(this.locationsKey).equals(textField.getText()) || com.mysql.jdbc.StringUtils.isEmptyOrWhitespaceOnly(textField.getText()))) || !Files.exists(Paths.get(textField.getText()))) {
-			message = ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getLanguage()).getString(this.pathIsEmptyOrInvalidErrorKey);
+		ResourceBundle resourceBundle = ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getLanguage());
+		if(((resourceBundle.getString(this.locationsKey).equals(textField.getText()) || com.mysql.jdbc.StringUtils.isEmptyOrWhitespaceOnly(textField.getText()))) || !Files.exists(Paths.get(textField.getText()))) {
+			message = resourceBundle.getString(this.pathIsEmptyOrInvalidErrorKey);
 			textField.requestFocusInWindow();
 			textField.setText(StringUtils.EMPTY);
 		}
