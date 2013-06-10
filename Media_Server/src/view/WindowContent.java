@@ -26,15 +26,10 @@ public abstract class WindowContent extends JPanel implements WindowContentActio
 	
 	private final static Locale esp = new Locale("es", "ES");
 	
-	/** Is the default language of the application **/
-	private final static String defaultLanguage = EN;
-	
 	private static Locale language = Locale.ENGLISH;
 	
-	/** Is the current language of the application **/
-	private static String currentLanguage = defaultLanguage;
-	
-	/** Is the current language selected Button **/
+	private ResourceBundle texts;
+
 	private static JToggleButton currentButtonLanguage;
 	
 	public void setComponentsWithText(
@@ -74,9 +69,9 @@ public abstract class WindowContent extends JPanel implements WindowContentActio
 		return esp;
 	}
 
-	public static String getDefaultlanguage() {
-		return defaultLanguage;
-	}
+//	public static String getDefaultlanguage() {
+//		return defaultLanguage;
+//	}
 
 	public static Locale getLanguage() {
 		return language;
@@ -84,6 +79,14 @@ public abstract class WindowContent extends JPanel implements WindowContentActio
 
 	public static void setLanguage(Locale language) {
 		WindowContent.language = language;
+	}
+
+	public ResourceBundle getTexts() {
+		return texts;
+	}
+
+	public void setTexts(ResourceBundle texts) {
+		this.texts = texts;
 	}
 
 	public static JToggleButton getCurrentButtonLanguage() {
@@ -94,41 +97,11 @@ public abstract class WindowContent extends JPanel implements WindowContentActio
 		WindowContent.currentButtonLanguage = currentButtonLanguage;
 	}
 	
-	public static String getCurrentLanguage() {
-		return currentLanguage;
-	}
-
-	public static void setCurrentLanguage(String currentLanguage) {
-		WindowContent.currentLanguage = currentLanguage;
-	}
-	
 	public HashMap<Object, HashMap<String, String>> getComponentsWithText() {
 		return componentsWithText;
 	}
 	
-	public static void changeTextInAnotherLanguage(HashMap<Object, HashMap<String, String>> componentsWithText, String language) {
-		for(Object component : componentsWithText.keySet()) {
-			if(component instanceof JLabel) {
-				((JLabel) component).setText(componentsWithText.get(component).get(language));
-			} else if(component instanceof JButton) {
-				((JButton) component).setText(componentsWithText.get(component).get(language));
-			} else if(component instanceof JCheckBox) {
-				((JCheckBox) component).setText(componentsWithText.get(component).get(language));
-			} else if(component instanceof JEditorPane) {
-				((JEditorPane) component).setText(componentsWithText.get(component).get(language));
-			} else if(component instanceof TitledBorder) {
-				((TitledBorder) component).setTitle(componentsWithText.get(component).get(language));
-			} else if(component instanceof JTextField) {
-				if(componentsWithText.get(component).containsValue(((JTextField) component).getText()) || ((JTextField) component).getText().equals(StringUtils.EMPTY)) {
-					((JTextField) component).setText(componentsWithText.get(component).get(language));
-				}
-			} else if(component instanceof JFileChooser) {
-				((JFileChooser) component).setDialogTitle(componentsWithText.get(component).get(language));
-			}
-		}
-	}
-	
-	public static void changeTextInAnotherLanguage2(HashMap<Object, String> componentsWithText, ResourceBundle texts) {
+	public static void changeTextInAnotherLanguage(HashMap<Object, String> componentsWithText, ResourceBundle texts) {
 		for(Object component : componentsWithText.keySet()) {
 			if(component instanceof JLabel) {
 				((JLabel) component).setText(texts.getString(componentsWithText.get(component)));
@@ -141,11 +114,35 @@ public abstract class WindowContent extends JPanel implements WindowContentActio
 			} else if(component instanceof TitledBorder) {
 				((TitledBorder) component).setTitle(texts.getString(componentsWithText.get(component)));
 			} else if(component instanceof JTextField) {
-				//if(componentsWithText.get(component).containsValue(((JTextField) component).getText()) || ((JTextField) component).getText().equals(StringUtils.EMPTY)) {
+				if(texts.getString(componentsWithText.get(component)).equals(((JTextField) component).getText()) || ((JTextField) component).getText().equals(StringUtils.EMPTY)) {
 					((JTextField) component).setText(texts.getString(componentsWithText.get(component)));
-				//}
+				}
 			} else if(component instanceof JFileChooser) {
 				((JFileChooser) component).setDialogTitle(texts.getString(componentsWithText.get(component)));
+			}
+		}
+	}
+	
+	public void changeTextInAnotherLanguage(HashMap<Object, String> componentsWithText) {
+		ResourceBundle oldTexts = this.texts;
+		this.texts = ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getLanguage());
+		for(Object component : componentsWithText.keySet()) {
+			if(component instanceof JLabel) {
+				((JLabel) component).setText(this.texts.getString(componentsWithText.get(component)));
+			} else if(component instanceof JButton) {
+				((JButton) component).setText(this.texts.getString(componentsWithText.get(component)));
+			} else if(component instanceof JCheckBox) {
+				((JCheckBox) component).setText(this.texts.getString(componentsWithText.get(component)));
+			} else if(component instanceof JEditorPane) {
+				((JEditorPane) component).setText(this.texts.getString(componentsWithText.get(component)));
+			} else if(component instanceof TitledBorder) {
+				((TitledBorder) component).setTitle(this.texts.getString(componentsWithText.get(component)));
+			} else if(component instanceof JTextField) {
+				if(oldTexts.getString(componentsWithText.get(component)).equals(((JTextField) component).getText()) || ((JTextField) component).getText().equals(StringUtils.EMPTY)) {
+					((JTextField) component).setText(this.texts.getString(componentsWithText.get(component)));
+				}
+			} else if(component instanceof JFileChooser) {
+				((JFileChooser) component).setDialogTitle(this.texts.getString(componentsWithText.get(component)));
 			}
 		}
 	}

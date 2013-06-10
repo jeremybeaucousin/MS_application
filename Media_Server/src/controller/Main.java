@@ -49,6 +49,9 @@ public class Main {
 		Locale esp = new Locale("es", "Spain");
 		ResourceBundle res = ResourceBundle.getBundle("texts/MainWindow", esp);
 		
+//		ResourceBundle bundle = ResourceBundle.getBundle("texts/MainWindow");
+//		bundle.getString(key);
+		
 		FileFilter filefilter = new FileFilter() {
 			
 			@Override

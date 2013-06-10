@@ -293,7 +293,7 @@ public final class ScanningProgress extends WindowContent implements PropertyCha
 	}
 	
 	public Boolean stopProcess() {
-		return JOptionPane.showConfirmDialog(this, this.confirmationMessage.get(WindowContent.getCurrentLanguage()), this.confirmationMessageTitle.get(WindowContent.getCurrentLanguage()), JOptionPane.INFORMATION_MESSAGE) == JFileChooser.APPROVE_OPTION;
+		return JOptionPane.showConfirmDialog(this, this.confirmationMessage.get(EN), this.confirmationMessageTitle.get(EN), JOptionPane.INFORMATION_MESSAGE) == JFileChooser.APPROVE_OPTION;
 	}
 	
 	@Override

@@ -82,7 +82,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 			put(seriesLocation, locationsKey);
 			put(checkBoxDetailedShearchSeries, checkboxDetailedShearchKey);
 			put(musicPanelTitle, musicPanelTitleKey);
-			put(checkBoxScanSeries, scanCheckboxKey);
+			put(checkBoxScanMusic, scanCheckboxKey);
 			put(musicLocation, locationsKey);
 			put(checkBoxDetailedShearchMusics, checkboxDetailedShearchKey);
 			put(checkboxUniqueLocation, scanCheckboxKey);
@@ -103,14 +103,13 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	public FileKindSelection(MainWindow mainWindow) throws IOException {
 		super(mainWindow);
 		
-		ResourceBundle resourceBundle = ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getLanguage());
-		
+		this.setTexts(ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getLanguage()));
 		this.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		this.setBackground(Color.WHITE);
 		this.setBounds(10, 37, 558, 356);
 		this.setLayout(null);
 		
-		this.folderChooser.setDialogTitle(resourceBundle.getString(this.folderChooserKey));
+		this.folderChooser.setDialogTitle(this.getTexts().getString(this.folderChooserKey));
 		this.folderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		this.folderChooser.setAcceptAllFileFilterUsed(false);
 		this.folderChooser.setLocale(WindowContent.getLanguage());
@@ -123,7 +122,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.add(introducingPanel);
 		introducingPanel.setLayout(null);
 		
-		this.introducingText.setText(resourceBundle.getString(this.DescriptionKey));
+		this.introducingText.setText(this.getTexts().getString(this.DescriptionKey));
 		this.introducingText.setBackground(Color.WHITE);
 		this.introducingText.setForeground(Color.BLACK);
 		this.introducingText.setBounds(10, 11, 538, 35);
@@ -137,19 +136,19 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		form.setLayout(null);
 		
 		// Movie Panel
-		this.moviePanelTitle.setTitle(resourceBundle.getString(this.moviePanelTitleKey));
+		this.moviePanelTitle.setTitle(this.getTexts().getString(this.moviePanelTitleKey));
 		this.panelMovies.setBorder(this.moviePanelTitle);
 		this.panelMovies.setBounds(10, 0, 538, 71);
 		form.add(this.panelMovies);
 		this.panelMovies.setLayout(null);
 		
-		this.checkboxScanMovies.setText(resourceBundle.getString(this.scanCheckboxKey));
+		this.checkboxScanMovies.setText(this.getTexts().getString(this.scanCheckboxKey));
 		this.checkboxScanMovies.setSelected(true);
 		this.checkboxScanMovies.setBounds(10, 17, 97, 23);
 		this.checkboxScanMovies.addActionListener(this);
 		this.panelMovies.add(this.checkboxScanMovies);
 		
-		this.moviesLocation.setText(resourceBundle.getString(this.locationsKey));
+		this.moviesLocation.setText(this.getTexts().getString(this.locationsKey));
 		this.moviesLocation.setForeground(SystemColor.controlShadow);
 		this.moviesLocation.setColumns(10);
 		this.moviesLocation.setBounds(10, 42, 220, 20);
@@ -161,25 +160,24 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.buttonMoviesFolderSelection.addActionListener(this);
 		this.panelMovies.add(this.buttonMoviesFolderSelection);
 		
-		this.checkboxDetailedShearchMovies.setText(resourceBundle.getString(this.checkboxDetailedShearchKey));
+		this.checkboxDetailedShearchMovies.setText(this.getTexts().getString(this.checkboxDetailedShearchKey));
 		this.checkboxDetailedShearchMovies.setBounds(352, 41, 180, 23);
 		this.panelMovies.add(this.checkboxDetailedShearchMovies);
 		
 		// Serie Panel
-		this.seriesPanelTitle.setTitle(resourceBundle.getString(this.seriesPanelTitleKey));
+		this.seriesPanelTitle.setTitle(this.getTexts().getString(this.seriesPanelTitleKey));
 		this.panelSeries.setBorder(seriesPanelTitle);
 		this.panelSeries.setBounds(10, 70, 538, 71);
 		form.add(this.panelSeries);
 		this.panelSeries.setLayout(null);
 		
-		this.checkBoxScanSeries = new JCheckBox();
-		this.checkBoxScanSeries.setText(resourceBundle.getString(this.scanCheckboxKey));
+		this.checkBoxScanSeries.setText(this.getTexts().getString(this.scanCheckboxKey));
 		this.checkBoxScanSeries.setSelected(true);
 		this.checkBoxScanSeries.setBounds(10, 18, 97, 23);
 		this.checkBoxScanSeries.addActionListener(this);
 		this.panelSeries.add(this.checkBoxScanSeries);
 		
-		this.seriesLocation.setText(resourceBundle.getString(this.locationsKey));
+		this.seriesLocation.setText(this.getTexts().getString(this.locationsKey));
 		this.seriesLocation.setForeground(SystemColor.controlShadow);
 		this.seriesLocation.setColumns(10);
 		this.seriesLocation.setBounds(10, 42, 220, 20);
@@ -192,24 +190,24 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.buttonSeriesFolderLocation.addActionListener(this);
 		this.panelSeries.add(this.buttonSeriesFolderLocation);
 
-		this.checkBoxDetailedShearchSeries.setText(resourceBundle.getString(this.checkboxDetailedShearchKey));
+		this.checkBoxDetailedShearchSeries.setText(this.getTexts().getString(this.checkboxDetailedShearchKey));
 		this.checkBoxDetailedShearchSeries.setBounds(352, 41, 180, 23);
 		this.panelSeries.add(this.checkBoxDetailedShearchSeries);
 		
 		// Music Panel
-		this.musicPanelTitle.setTitle(resourceBundle.getString(this.musicPanelTitleKey));
+		this.musicPanelTitle.setTitle(this.getTexts().getString(this.musicPanelTitleKey));
 		this.panelMusics.setBorder(this.musicPanelTitle);
 		this.panelMusics.setBounds(10, 141, 538, 71);
 		form.add(this.panelMusics);
 		this.panelMusics.setLayout(null);
 		
-		this.checkBoxScanMusic.setText(resourceBundle.getString(this.scanCheckboxKey));
+		this.checkBoxScanMusic.setText(this.getTexts().getString(this.scanCheckboxKey));
 		this.checkBoxScanMusic.setSelected(true);
 		this.checkBoxScanMusic.setBounds(10, 17, 97, 23);
 		this.checkBoxScanMusic.addActionListener(this);
 		this.panelMusics.add(this.checkBoxScanMusic);
 		
-		this.musicLocation.setText(resourceBundle.getString(this.locationsKey));
+		this.musicLocation.setText(this.getTexts().getString(this.locationsKey));
 		this.musicLocation.setForeground(SystemColor.controlShadow);
 		this.musicLocation.setColumns(10);
 		this.musicLocation.setBounds(10, 42, 220, 20);
@@ -221,7 +219,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.buttonMusicFolderLocation.addActionListener(this);
 		this.panelMusics.add(this.buttonMusicFolderLocation);
 		
-		this.checkBoxDetailedShearchMusics.setText(resourceBundle.getString(this.checkboxDetailedShearchKey));
+		this.checkBoxDetailedShearchMusics.setText(this.getTexts().getString(this.checkboxDetailedShearchKey));
 		this.checkBoxDetailedShearchMusics.setBounds(352, 41, 180, 23);
 		this.panelMusics.add(this.checkBoxDetailedShearchMusics);
 		
@@ -232,14 +230,14 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		form.add(panelUniqueLocation);
 		panelUniqueLocation.setLayout(null);
 		
-		this.checkboxUniqueLocation.setText(resourceBundle.getString(this.checkboxUniqueLocationKey));
+		this.checkboxUniqueLocation.setText(this.getTexts().getString(this.checkboxUniqueLocationKey));
 		this.checkboxUniqueLocation.setBounds(6, 12, 131, 23);
 		this.checkboxUniqueLocation.addActionListener(this);
 		panelUniqueLocation.add(this.checkboxUniqueLocation);
 		
 		this.uniqueLocation.setEnabled(false);
 		this.uniqueLocation.setForeground(UIManager.getColor("Button.shadow"));
-		this.uniqueLocation.setText(resourceBundle.getString(this.locationsKey));
+		this.uniqueLocation.setText(this.getTexts().getString(this.locationsKey));
 		this.uniqueLocation.setBounds(6, 42, 224, 20);
 		this.uniqueLocation.setColumns(10);
 		this.uniqueLocation.addFocusListener(this);
@@ -251,7 +249,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		this.buttonUniqueFolderLocationLocation.addActionListener(this);
 		panelUniqueLocation.add(this.buttonUniqueFolderLocationLocation);
 		
-		this.checkBoxDetailedShearchUniqueLocation.setText(resourceBundle.getString(this.checkboxDetailedShearchKey));
+		this.checkBoxDetailedShearchUniqueLocation.setText(this.getTexts().getString(this.checkboxDetailedShearchKey));
 		this.checkBoxDetailedShearchUniqueLocation.setEnabled(false);
 		this.checkBoxDetailedShearchUniqueLocation.setBounds(352, 41, 180, 23);
 		panelUniqueLocation.add(this.checkBoxDetailedShearchUniqueLocation);
@@ -324,7 +322,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	private String ValidateForm() {
 		String message = new String();
 		if(!this.checkboxScanMovies.isSelected() && !this.checkBoxScanSeries.isSelected() && !this.checkBoxScanMusic.isSelected()) {
-			message = ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getLanguage()).getString(this.notAnyMediaCheckedErrorKey);
+			message = this.getTexts().getString(this.notAnyMediaCheckedErrorKey);
 		} else if(this.checkboxUniqueLocation.isSelected()) {
 			message = this.ValidatePanel(this.uniqueLocation, message);
 		} else {
@@ -342,9 +340,8 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	}
 	
 	private String ValidatePanel(JTextField textField, String message) {
-		ResourceBundle resourceBundle = ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getLanguage());
-		if(((resourceBundle.getString(this.locationsKey).equals(textField.getText()) || com.mysql.jdbc.StringUtils.isEmptyOrWhitespaceOnly(textField.getText()))) || !Files.exists(Paths.get(textField.getText()))) {
-			message = resourceBundle.getString(this.pathIsEmptyOrInvalidErrorKey);
+		if(((this.getTexts().getString(this.locationsKey).equals(textField.getText()) || com.mysql.jdbc.StringUtils.isEmptyOrWhitespaceOnly(textField.getText()))) || !Files.exists(Paths.get(textField.getText()))) {
+			message = this.getTexts().getString(this.pathIsEmptyOrInvalidErrorKey);
 			textField.requestFocusInWindow();
 			textField.setText(StringUtils.EMPTY);
 		}
@@ -352,7 +349,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	}
 	
 	private void openErrorMessage(String errorMessage) {
-		JOptionPane.showMessageDialog(this, errorMessage, ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getLanguage()).getString(this.errorMessageTitleKey), JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(this, errorMessage, this.getTexts().getString(this.errorMessageTitleKey), JOptionPane.ERROR_MESSAGE);
 	}
 	
 	@Override
@@ -383,7 +380,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 
 	@Override
 	public void setToItalian() {
-		WindowContent.changeTextInAnotherLanguage2(this.componentsWithText, ResourceBundle.getBundle("texts/FileKindSelection", Locale.ITALIAN));
+		this.changeTextInAnotherLanguage(this.componentsWithText);
 		this.folderChooser.setLocale(Locale.ITALIAN);
 		this.folderChooser.updateUI();
 		this.revalidatePanelWithTitle();
@@ -391,7 +388,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	}
 	@Override
 	public void setToGerman() {
-		WindowContent.changeTextInAnotherLanguage2(this.componentsWithText, ResourceBundle.getBundle("texts/FileKindSelection", Locale.GERMAN));
+		this.changeTextInAnotherLanguage(this.componentsWithText);
 		this.folderChooser.setLocale(Locale.GERMAN);
 		this.folderChooser.updateUI();
 		this.revalidatePanelWithTitle();
@@ -399,7 +396,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	}
 	@Override
 	public void setToSpanish() {
-		WindowContent.changeTextInAnotherLanguage2(this.componentsWithText, ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getEsp()));
+		this.changeTextInAnotherLanguage(this.componentsWithText);
 		this.folderChooser.setLocale(WindowContent.getEsp());
 		this.folderChooser.updateUI();
 		this.revalidatePanelWithTitle();
@@ -408,7 +405,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	
 	@Override
 	public void setToFrench() {
-		WindowContent.changeTextInAnotherLanguage2(this.componentsWithText, ResourceBundle.getBundle("texts/FileKindSelection", Locale.FRENCH));
+		this.changeTextInAnotherLanguage(this.componentsWithText);
 		this.folderChooser.setLocale(Locale.FRENCH);
 		this.folderChooser.updateUI();
 		this.revalidatePanelWithTitle();
@@ -416,7 +413,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 
 	@Override
 	public void setToEnglish() {
-		WindowContent.changeTextInAnotherLanguage2(this.componentsWithText, ResourceBundle.getBundle("texts/FileKindSelection", Locale.ENGLISH));
+		this.changeTextInAnotherLanguage(this.componentsWithText);
 		this.folderChooser.setLocale(Locale.ENGLISH);
 		this.folderChooser.updateUI();
 		this.revalidatePanelWithTitle();
@@ -482,7 +479,7 @@ public final class FileKindSelection extends WindowContent implements ActionList
 	public void focusGained(FocusEvent e) {
 		Object source = e.getSource();
 		if(source instanceof JTextField) {
-			String defaultText = ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getLanguage()).getString(this.componentsWithText.get(source)); 
+			String defaultText = this.getTexts().getString(this.componentsWithText.get(source)); 
 			if(defaultText.equals(((JTextField) source).getText())) {
 				((JTextField) source).setText("");
 				((JTextField) source).setForeground(null);
@@ -496,12 +493,12 @@ public final class FileKindSelection extends WindowContent implements ActionList
 		if(source instanceof JTextField) {
 			JTextField folderChosenField = (JTextField) source;
 			if(folderChosenField.getText().equals(StringUtils.EMPTY)) {
-				folderChosenField.setText(ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getLanguage()).getString(this.componentsWithText.get(source)));
+				folderChosenField.setText(this.getTexts().getString(this.componentsWithText.get(source)));
 				folderChosenField.setForeground(SystemColor.controlShadow);
 			} else {
 				Path path = Paths.get(folderChosenField.getText());
 				if(!Files.exists(path)) {
-					this.openErrorMessage(ResourceBundle.getBundle("texts/FileKindSelection", WindowContent.getLanguage()).getString(this.invalidPathErrorKey));
+					this.openErrorMessage(this.getTexts().getString(this.invalidPathErrorKey));
 					folderChosenField.requestFocusInWindow();
 					folderChosenField.setText(StringUtils.EMPTY);
 				} 
